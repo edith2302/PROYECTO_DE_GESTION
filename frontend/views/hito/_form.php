@@ -30,7 +30,6 @@ use yii\jui\DatePicker;
 
 
     <?= $form->field($model, 'hora_habilitacion')->textInput(); ?>
-
     
     <?= $form->field($model, 'fecha_limite')->widget(
             DatePicker::className(), [
