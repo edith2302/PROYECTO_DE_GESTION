@@ -40,10 +40,11 @@ class Hito extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'nombre', 'descripcion', 'fecha_habilitacion', 'hora_habilitacion', 'fecha_limite', 'hora_limite', 'tipo_hito', 'porcentaje_nota', 'id_rubrica', 'id_profe_asignatura'], 'required'],
-            [['id', 'tipo_hito', 'porcentaje_nota', 'id_rubrica', 'id_profe_asignatura'], 'integer'],
+            [['id', 'porcentaje_nota', 'id_rubrica', 'id_profe_asignatura'], 'integer'],
             [['fecha_habilitacion', 'hora_habilitacion', 'fecha_limite', 'hora_limite'], 'safe'],
             [['nombre'], 'string', 'max' => 100],
-            [['descripcion'], 'string', 'max' => 300],
+            [['descripcion'], 'string', 'max' => 1000],
+            [['tipo_hito'], 'string', 'max' => 50],
             [['id'], 'unique'],
             [['id_rubrica'], 'exist', 'skipOnError' => true, 'targetClass' => Rubrica::className(), 'targetAttribute' => ['id_rubrica' => 'id']],
             [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => ProfesorAsignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
@@ -58,14 +59,14 @@ class Hito extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
-            'descripcion' => 'Descripcion',
-            'fecha_habilitacion' => 'Fecha Habilitacion',
-            'hora_habilitacion' => 'Hora Habilitacion',
-            'fecha_limite' => 'Fecha Limite',
-            'hora_limite' => 'Hora Limite',
+            'descripcion' => 'Descripción',
+            'fecha_habilitacion' => 'Fecha Habilitación',
+            'hora_habilitacion' => 'Hora Habilitación',
+            'fecha_limite' => 'Fecha Límite',
+            'hora_limite' => 'Hora Límite',
             'tipo_hito' => 'Tipo Hito',
             'porcentaje_nota' => 'Porcentaje Nota',
-            'id_rubrica' => 'Id Rubrica',
+            'id_rubrica' => 'Id Rúbrica',
             'id_profe_asignatura' => 'Id Profe Asignatura',
         ];
     }
