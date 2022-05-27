@@ -10,7 +10,7 @@ use app\models\Administrador;
 /* @var $searchModel app\models\AdministradorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Administradors';
+$this->title = 'Administradores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="administrador-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Administrador', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Administrador', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

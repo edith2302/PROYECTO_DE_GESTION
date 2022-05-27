@@ -57,13 +57,13 @@ class Proyecto extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
-            'descripcion' => 'Descripcion',
-            'num_integrantes' => 'Num Integrantes',
+            'descripcion' => 'Descripción',
+            'num_integrantes' => 'Integrantes',
             'tipo' => 'Tipo',
-            'area' => 'Area',
+            'area' => 'Área',
             'estado' => 'Estado',
             'disponibilidad' => 'Disponibilidad',
-            'id_profe_guia' => 'Id Profe Guia',
+            'id_profe_guia' => 'Id Profe Guía',
             'id_autor' => 'Id Autor',
         ];
     }

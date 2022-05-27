@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Hito */
@@ -16,21 +17,55 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fecha_habilitacion')->textInput() ?>
+    <?= $form->field($model, 'fecha_habilitacion')->widget(
+            DatePicker::className(), [
+                'inline' => false,
+                'language'=>'es',
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-mm-yyyy'
+                ]
+        ]);?>
 
-    <?= $form->field($model, 'hora_habilitacion')->textInput() ?>
+    <div class="col-md">
+        <?= $form->field($model, 'hora_habilitacion')->textInput(['type' => 'time']) ?>
+    </div>
 
-    <?= $form->field($model, 'fecha_limite')->textInput() ?>
+    <?= $form->field($model, 'fecha_limite')->widget(
+            DatePicker::className(), [
+                'inline' => false,
+                'language'=>'es',
+                'clientOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd-mm-yyyy'
+                ]
+        ]);?>
 
-    <?= $form->field($model, 'hora_limite')->textInput() ?>
+    <div class="col-md">
+        <?= $form->field($model, 'hora_limite')->textInput(['type' => 'time']) ?>
+    </div>
 
-    <?= $form->field($model, 'tipo_hito')->textInput() ?>
+    <div class="col-md">
+            <?php
+            echo $form->field($model, 'tipo_hito')->dropDownList(
+                [
+                    '0' => 'Informe',
+                    '1' => 'Presentación',
+                    '2' => 'Defesa de proyecto',
+                    '3' => 'Informe final',
+                ],
+                ['prompt' => 'Selección tipo de hito']
+            );
+            ?>
+    </div>
 
     <?= $form->field($model, 'porcentaje_nota')->textInput() ?>
 
-    <?= $form->field($model, 'id_rubrica')->textInput() ?>
+    
 
-    <?= $form->field($model, 'id_profe_asignatura')->textInput() ?>
+    <div class="form-group">
+        <?= Html::submitButton('Agregar rubrica', ['class' => 'btn btn-primary']) ?>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

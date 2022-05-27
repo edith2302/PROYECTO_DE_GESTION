@@ -16,13 +16,54 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'num_integrantes')->textInput() ?>
+    
+    <div class="col-md">
+            <?php
+            echo $form->field($model, 'num_integrantes')->dropDownList(
+                [
+                    '1' => '1',
+                    '2' => '2',
+                ],
+                ['prompt' => 'Cantidad integrantes']
+            );
+            ?>
+    </div>
 
-    <?= $form->field($model, 'tipo')->textInput() ?>
+    <div class="col-md">
+            <?php
+            echo $form->field($model, 'tipo')->dropDownList(
+                [
+                    '1' => 'Desarrollo',
+                    '2' => 'Investigación',
+                ],
+                ['prompt' => 'Selección de tipo']
+            );
+            ?>
+    </div>
 
-    <?= $form->field($model, 'area')->textInput() ?>
+    <div class="col-md">
+            <?php
+            echo $form->field($model, 'area')->dropDownList(
+                [
+                    '1' => 'Inteligencia Artificial',
+                    '2' => 'Sistemas de información',
+                ],
+                ['prompt' => 'Selección de área']
+            );
+            ?>
+    </div>
 
-    <?= $form->field($model, 'estado')->textInput() ?>
+    <div class="col-md">
+            <?php
+            echo $form->field($model, 'estado')->dropDownList(
+                [
+                    '1' => 'Aprobado',
+                    '2' => 'Rechazado',
+                ],
+                ['prompt' => 'Cambiar estado']
+            );
+            ?>
+    </div>
 
     <?= $form->field($model, 'disponibilidad')->textInput() ?>
 

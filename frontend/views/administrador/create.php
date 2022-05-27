@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Administrador */
 
-$this->title = 'Create Administrador';
-$this->params['breadcrumbs'][] = ['label' => 'Administradors', 'url' => ['index']];
+$this->title = 'Agregar Administrador';
+$this->params['breadcrumbs'][] = ['label' => 'Administradores', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="administrador-create">

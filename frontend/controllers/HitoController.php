@@ -68,6 +68,7 @@ class HitoController extends Controller
     public function actionCreate()
     {
         $model = new Hito();
+        $model->id_profe_asignatura = Yii::app()->user->getId();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {

@@ -47,7 +47,7 @@ class Evaluarproyecto extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_prof_icinf' => 'Id Prof Icinf',
+            'id_prof_icinf' => 'Id Profesor Icinf',
             'id_proyecto' => 'Id Proyecto',
             'nota' => 'Nota',
             'comentarios' => 'Comentarios',

@@ -44,7 +44,7 @@ class Profesoricinf extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'area' => 'Area',
+            'area' => 'Área',
             'id_usuario' => 'Id Usuario',
         ];
     }

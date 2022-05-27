@@ -57,14 +57,14 @@ class Hito extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
-            'descripcion' => 'Descripcion',
-            'fecha_habilitacion' => 'Fecha Habilitacion',
-            'hora_habilitacion' => 'Hora Habilitacion',
-            'fecha_limite' => 'Fecha Limite',
-            'hora_limite' => 'Hora Limite',
+            'descripcion' => 'Descripción',
+            'fecha_habilitacion' => 'Fecha Habilitación',
+            'hora_habilitacion' => 'Hora Habilitación',
+            'fecha_limite' => 'Fecha Límite',
+            'hora_limite' => 'Hora Límite',
             'tipo_hito' => 'Tipo Hito',
             'porcentaje_nota' => 'Porcentaje Nota',
-            'id_rubrica' => 'Id Rubrica',
+            'id_rubrica' => 'Id Rúbrica',
             'id_profe_asignatura' => 'Id Profe Asignatura',
         ];
     }
