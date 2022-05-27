@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\CursoEstudiante;
-use app\models\CursoEstudianteSearch;
+use app\models\Cursoestudiante;
+use app\models\CursoestudianteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CursoEstudianteController implements the CRUD actions for CursoEstudiante model.
+ * CursoestudianteController implements the CRUD actions for Cursoestudiante model.
  */
-class CursoEstudianteController extends Controller
+class CursoestudianteController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class CursoEstudianteController extends Controller
     }
 
     /**
-     * Lists all CursoEstudiante models.
+     * Lists all Cursoestudiante models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new CursoEstudianteSearch();
+        $searchModel = new CursoestudianteSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class CursoEstudianteController extends Controller
     }
 
     /**
-     * Displays a single CursoEstudiante model.
+     * Displays a single Cursoestudiante model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class CursoEstudianteController extends Controller
     }
 
     /**
-     * Creates a new CursoEstudiante model.
+     * Creates a new Cursoestudiante model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new CursoEstudiante();
+        $model = new Cursoestudiante();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class CursoEstudianteController extends Controller
     }
 
     /**
-     * Updates an existing CursoEstudiante model.
+     * Updates an existing Cursoestudiante model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class CursoEstudianteController extends Controller
     }
 
     /**
-     * Deletes an existing CursoEstudiante model.
+     * Deletes an existing Cursoestudiante model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class CursoEstudianteController extends Controller
     }
 
     /**
-     * Finds the CursoEstudiante model based on its primary key value.
+     * Finds the Cursoestudiante model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return CursoEstudiante the loaded model
+     * @return Cursoestudiante the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CursoEstudiante::findOne(['id' => $id])) !== null) {
+        if (($model = Cursoestudiante::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

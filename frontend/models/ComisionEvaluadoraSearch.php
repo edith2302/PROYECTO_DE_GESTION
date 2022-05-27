@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\ComisionEvaluadora;
+use app\models\Comisionevaluadora;
 
 /**
- * ComisionEvaluadoraSearch represents the model behind the search form of `app\models\ComisionEvaluadora`.
+ * ComisionevaluadoraSearch represents the model behind the search form of `app\models\Comisionevaluadora`.
  */
-class ComisionEvaluadoraSearch extends ComisionEvaluadora
+class ComisionevaluadoraSearch extends Comisionevaluadora
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class ComisionEvaluadoraSearch extends ComisionEvaluadora
      */
     public function search($params)
     {
-        $query = ComisionEvaluadora::find();
+        $query = Comisionevaluadora::find();
 
         // add conditions that should always apply here
 

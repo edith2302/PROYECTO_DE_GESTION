@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use app\models\Curso;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CursoSearch */
@@ -32,10 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'año',
             'semestre',
-            'id_admin',
+            'id_administrador',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, \app\models\Curso $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Curso $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\EvaluarProyecto;
-use app\models\EvaluarProyectoSearch;
+use app\models\Evaluarproyecto;
+use app\models\EvaluarproyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EvaluarProyectoController implements the CRUD actions for EvaluarProyecto model.
+ * EvaluarproyectoController implements the CRUD actions for Evaluarproyecto model.
  */
-class EvaluarProyectoController extends Controller
+class EvaluarproyectoController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class EvaluarProyectoController extends Controller
     }
 
     /**
-     * Lists all EvaluarProyecto models.
+     * Lists all Evaluarproyecto models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new EvaluarProyectoSearch();
+        $searchModel = new EvaluarproyectoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class EvaluarProyectoController extends Controller
     }
 
     /**
-     * Displays a single EvaluarProyecto model.
+     * Displays a single Evaluarproyecto model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class EvaluarProyectoController extends Controller
     }
 
     /**
-     * Creates a new EvaluarProyecto model.
+     * Creates a new Evaluarproyecto model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new EvaluarProyecto();
+        $model = new Evaluarproyecto();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class EvaluarProyectoController extends Controller
     }
 
     /**
-     * Updates an existing EvaluarProyecto model.
+     * Updates an existing Evaluarproyecto model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class EvaluarProyectoController extends Controller
     }
 
     /**
-     * Deletes an existing EvaluarProyecto model.
+     * Deletes an existing Evaluarproyecto model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class EvaluarProyectoController extends Controller
     }
 
     /**
-     * Finds the EvaluarProyecto model based on its primary key value.
+     * Finds the Evaluarproyecto model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return EvaluarProyecto the loaded model
+     * @return Evaluarproyecto the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = EvaluarProyecto::findOne(['id' => $id])) !== null) {
+        if (($model = Evaluarproyecto::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

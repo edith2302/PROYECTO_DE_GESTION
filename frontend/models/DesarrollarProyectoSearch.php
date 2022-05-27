@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\DesarrollarProyecto;
+use app\models\Desarrollarproyecto;
 
 /**
- * DesarrollarProyectoSearch represents the model behind the search form of `app\models\DesarrollarProyecto`.
+ * DesarrollarproyectoSearch represents the model behind the search form of `app\models\Desarrollarproyecto`.
  */
-class DesarrollarProyectoSearch extends DesarrollarProyecto
+class DesarrollarproyectoSearch extends Desarrollarproyecto
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class DesarrollarProyectoSearch extends DesarrollarProyecto
      */
     public function search($params)
     {
-        $query = DesarrollarProyecto::find();
+        $query = Desarrollarproyecto::find();
 
         // add conditions that should always apply here
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace frontend\controllers;
+
 use app\models\Rubrica;
 use app\models\RubricaSearch;
 use yii\web\Controller;

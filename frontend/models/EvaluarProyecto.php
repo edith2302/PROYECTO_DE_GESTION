@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "evaluar_proyecto".
+ * This is the model class for table "evaluarproyecto".
  *
  * @property int $id
  * @property int $id_prof_icinf
@@ -13,17 +13,17 @@ use Yii;
  * @property int $nota
  * @property string $comentarios
  *
- * @property ProfesorIcinf $profIcinf
+ * @property Profesoricinf $profIcinf
  * @property Proyecto $proyecto
  */
-class EvaluarProyecto extends \yii\db\ActiveRecord
+class Evaluarproyecto extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'evaluar_proyecto';
+        return 'evaluarproyecto';
     }
 
     /**
@@ -32,11 +32,10 @@ class EvaluarProyecto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_prof_icinf', 'id_proyecto', 'nota', 'comentarios'], 'required'],
-            [['id', 'id_prof_icinf', 'id_proyecto', 'nota'], 'integer'],
-            [['comentarios'], 'string', 'max' => 1000],
-            [['id'], 'unique'],
-            [['id_prof_icinf'], 'exist', 'skipOnError' => true, 'targetClass' => ProfesorIcinf::className(), 'targetAttribute' => ['id_prof_icinf' => 'id']],
+            [['id_prof_icinf', 'id_proyecto', 'nota', 'comentarios'], 'required'],
+            [['id_prof_icinf', 'id_proyecto', 'nota'], 'integer'],
+            [['comentarios'], 'string', 'max' => 2000],
+            [['id_prof_icinf'], 'exist', 'skipOnError' => true, 'targetClass' => Profesoricinf::className(), 'targetAttribute' => ['id_prof_icinf' => 'id']],
             [['id_proyecto'], 'exist', 'skipOnError' => true, 'targetClass' => Proyecto::className(), 'targetAttribute' => ['id_proyecto' => 'id']],
         ];
     }
@@ -62,7 +61,7 @@ class EvaluarProyecto extends \yii\db\ActiveRecord
      */
     public function getProfIcinf()
     {
-        return $this->hasOne(ProfesorIcinf::className(), ['id' => 'id_prof_icinf']);
+        return $this->hasOne(Profesoricinf::className(), ['id' => 'id_prof_icinf']);
     }
 
     /**

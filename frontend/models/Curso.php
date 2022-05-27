@@ -11,11 +11,11 @@ use Yii;
  * @property string $nombre
  * @property int $año
  * @property int $semestre
- * @property int $id_admin
+ * @property int $id_administrador
  *
  * @property Administrador $administrador
- * @property CursoEstudiante[] $cursoEstudiantes
- * @property GestionarCurso[] $gestionarCursos
+ * @property Cursoestudiante[] $cursoestudiantes
+ * @property Gestionarcurso[] $gestionarcursos
  */
 class Curso extends \yii\db\ActiveRecord
 {
@@ -33,9 +33,10 @@ class Curso extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'año', 'semestre', 'id_admin'], 'required'],
-            [['año', 'semestre', 'id_admin'], 'integer'],
+            [['nombre', 'año', 'semestre', 'id_administrador'], 'required'],
+            [['año', 'semestre', 'id_administrador'], 'integer'],
             [['nombre'], 'string', 'max' => 100],
+            [['id_administrador'], 'exist', 'skipOnError' => true, 'targetClass' => Administrador::className(), 'targetAttribute' => ['id_administrador' => 'id']],
         ];
     }
 
@@ -49,7 +50,7 @@ class Curso extends \yii\db\ActiveRecord
             'nombre' => 'Nombre',
             'año' => 'Año',
             'semestre' => 'Semestre',
-            'id_admin' => 'Id Admin',
+            'id_administrador' => 'Id Administrador',
         ];
     }
 
@@ -60,26 +61,26 @@ class Curso extends \yii\db\ActiveRecord
      */
     public function getAdministrador()
     {
-        return $this->hasOne(Administrador::className(), ['id' => 'id_admin']);
+        return $this->hasOne(Administrador::className(), ['id' => 'id_administrador']);
     }
 
     /**
-     * Gets query for [[CursoEstudiantes]].
+     * Gets query for [[Cursoestudiantes]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCursoEstudiantes()
+    public function getCursoestudiantes()
     {
-        return $this->hasMany(CursoEstudiante::className(), ['id_curso' => 'id']);
+        return $this->hasMany(Cursoestudiante::className(), ['id_curso' => 'id']);
     }
 
     /**
-     * Gets query for [[GestionarCursos]].
+     * Gets query for [[Gestionarcursos]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGestionarCursos()
+    public function getGestionarcursos()
     {
-        return $this->hasMany(GestionarCurso::className(), ['id_curso' => 'id']);
+        return $this->hasMany(Gestionarcurso::className(), ['id_curso' => 'id']);
     }
 }

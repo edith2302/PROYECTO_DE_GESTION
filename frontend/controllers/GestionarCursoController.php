@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\GestionarCurso;
-use app\models\GestionarCursoSearch;
+use app\models\Gestionarcurso;
+use app\models\GestionarcursoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * GestionarCursoController implements the CRUD actions for GestionarCurso model.
+ * GestionarcursoController implements the CRUD actions for Gestionarcurso model.
  */
-class GestionarCursoController extends Controller
+class GestionarcursoController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class GestionarCursoController extends Controller
     }
 
     /**
-     * Lists all GestionarCurso models.
+     * Lists all Gestionarcurso models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new GestionarCursoSearch();
+        $searchModel = new GestionarcursoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class GestionarCursoController extends Controller
     }
 
     /**
-     * Displays a single GestionarCurso model.
+     * Displays a single Gestionarcurso model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class GestionarCursoController extends Controller
     }
 
     /**
-     * Creates a new GestionarCurso model.
+     * Creates a new Gestionarcurso model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new GestionarCurso();
+        $model = new Gestionarcurso();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class GestionarCursoController extends Controller
     }
 
     /**
-     * Updates an existing GestionarCurso model.
+     * Updates an existing Gestionarcurso model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class GestionarCursoController extends Controller
     }
 
     /**
-     * Deletes an existing GestionarCurso model.
+     * Deletes an existing Gestionarcurso model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class GestionarCursoController extends Controller
     }
 
     /**
-     * Finds the GestionarCurso model based on its primary key value.
+     * Finds the Gestionarcurso model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return GestionarCurso the loaded model
+     * @return Gestionarcurso the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = GestionarCurso::findOne(['id' => $id])) !== null) {
+        if (($model = Gestionarcurso::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

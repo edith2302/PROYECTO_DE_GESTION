@@ -8,12 +8,12 @@ use Yii;
  * This is the model class for table "rubrica".
  *
  * @property int $id
- * @property string $descripción
+ * @property int $descripción
  * @property int $escala
  * @property int $id_profe_asignatura
  *
  * @property Hito[] $hitos
- * @property ProfesorAsignatura $profeAsignatura
+ * @property Profesorasignatura $profeAsignatura
  */
 class Rubrica extends \yii\db\ActiveRecord
 {
@@ -31,11 +31,9 @@ class Rubrica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'descripción', 'escala', 'id_profe_asignatura'], 'required'],
-            [['id', 'escala', 'id_profe_asignatura'], 'integer'],
-            [['descripción'], 'string', 'max' => 300],
-            [['id'], 'unique'],
-            [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => ProfesorAsignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
+            [['descripción', 'escala', 'id_profe_asignatura'], 'required'],
+            [['descripción', 'escala', 'id_profe_asignatura'], 'integer'],
+            [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorasignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
         ];
     }
 
@@ -69,6 +67,6 @@ class Rubrica extends \yii\db\ActiveRecord
      */
     public function getProfeAsignatura()
     {
-        return $this->hasOne(ProfesorAsignatura::className(), ['id' => 'id_profe_asignatura']);
+        return $this->hasOne(Profesorasignatura::className(), ['id' => 'id_profe_asignatura']);
     }
 }

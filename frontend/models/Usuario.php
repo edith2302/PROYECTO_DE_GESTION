@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "usuario".
  *
  * @property int $id_usuario
+ * @property string $rut
  * @property string|null $telefono
  * @property string|null $telefono_alternativo
  * @property string $nombre
@@ -25,18 +26,26 @@ use Yii;
  *
  * @property Adjunto[] $adjuntos
  * @property AdjuntosResolucionSolicitud[] $adjuntosResolucionSolicituds
+ * @property Administrador[] $administradors
  * @property AlumnoInscripcion[] $alumnoInscripcions
  * @property AlumnoPreinscripcion[] $alumnoPreinscripcions
+ * @property Comisionevaluadora[] $comisionevaluadoras
  * @property Documento[] $documentos
  * @property EmailFirma $emailFirma
+ * @property Estudiante[] $estudiantes
  * @property ForoRespuestaComentario[] $foroRespuestaComentarios
  * @property ForoTemaRespuesta[] $foroTemaRespuestas
  * @property ForoTemaUltimaVisita[] $foroTemaUltimaVisitas
  * @property ForoTema[] $foroTemas
  * @property Inscripcion[] $inscripcions
  * @property Inscripcion[] $inscripcions0
+ * @property Jefaturacarrera[] $jefaturacarreras
  * @property Noticia[] $noticias
  * @property Preinscripcion[] $preinscripcions
+ * @property Profesorasignatura[] $profesorasignaturas
+ * @property Profesorguia[] $profesorguias
+ * @property Profesoricinf[] $profesoricinfs
+ * @property Proyecto[] $proyectos
  * @property Solicitud[] $solicituds
  * @property ForoTema[] $temas
  */
@@ -56,8 +65,9 @@ class Usuario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'username', 'dv', 'password', 'plan'], 'required'],
+            [['rut', 'nombre', 'username', 'dv', 'password', 'plan'], 'required'],
             [['plan', 'habilitado_adt', 'habilitado_practica', 'habilitado_ici'], 'integer'],
+            [['rut'], 'string', 'max' => 20],
             [['telefono', 'telefono_alternativo', 'username', 'password', 'apellido', 'email', 'email_alternativo'], 'string', 'max' => 200],
             [['nombre'], 'string', 'max' => 300],
             [['dv'], 'string', 'max' => 1],
@@ -73,6 +83,7 @@ class Usuario extends \yii\db\ActiveRecord
     {
         return [
             'id_usuario' => 'Id Usuario',
+            'rut' => 'Rut',
             'telefono' => 'Telefono',
             'telefono_alternativo' => 'Telefono Alternativo',
             'nombre' => 'Nombre',
@@ -111,6 +122,16 @@ class Usuario extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Administradors]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdministradors()
+    {
+        return $this->hasMany(Administrador::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
      * Gets query for [[AlumnoInscripcions]].
      *
      * @return \yii\db\ActiveQuery
@@ -131,6 +152,16 @@ class Usuario extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Comisionevaluadoras]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComisionevaluadoras()
+    {
+        return $this->hasMany(Comisionevaluadora::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
      * Gets query for [[Documentos]].
      *
      * @return \yii\db\ActiveQuery
@@ -148,6 +179,16 @@ class Usuario extends \yii\db\ActiveRecord
     public function getEmailFirma()
     {
         return $this->hasOne(EmailFirma::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Estudiantes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstudiantes()
+    {
+        return $this->hasMany(Estudiante::className(), ['id_usuario' => 'id_usuario']);
     }
 
     /**
@@ -211,6 +252,16 @@ class Usuario extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Jefaturacarreras]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJefaturacarreras()
+    {
+        return $this->hasMany(Jefaturacarrera::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
      * Gets query for [[Noticias]].
      *
      * @return \yii\db\ActiveQuery
@@ -228,6 +279,46 @@ class Usuario extends \yii\db\ActiveRecord
     public function getPreinscripcions()
     {
         return $this->hasMany(Preinscripcion::className(), ['id_preinscripcion' => 'id_preinscripcion'])->viaTable('alumno_preinscripcion', ['id_alumno' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Profesorasignaturas]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfesorasignaturas()
+    {
+        return $this->hasMany(Profesorasignatura::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Profesorguias]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfesorguias()
+    {
+        return $this->hasMany(Profesorguia::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Profesoricinfs]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfesoricinfs()
+    {
+        return $this->hasMany(Profesoricinf::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Proyectos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProyectos()
+    {
+        return $this->hasMany(Proyecto::className(), ['id_autor' => 'id_usuario']);
     }
 
     /**

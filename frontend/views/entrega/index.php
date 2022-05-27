@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use app\models\Entrega;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EntregaSearch */
@@ -29,15 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'nombre',
-            'descripcion',
             'evidencia',
             'fecha_entrega',
+            'hora_entrega',
+            'comentarios',
             //'id_proyecto',
             //'id_hito',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, \app\models\Entrega $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Entrega $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

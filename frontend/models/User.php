@@ -17,9 +17,8 @@ use Yii;
  * @property int $created_at
  * @property int $updated_at
  * @property string|null $verification_token
- * @property int|null $rol
  *
- * @property RolUsuario[] $rolUsuarios
+ * @property Rolusuario[] $rolusuarios
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -38,7 +37,7 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at', 'rol'], 'integer'],
+            [['status', 'created_at', 'updated_at'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
@@ -63,17 +62,16 @@ class User extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'verification_token' => 'Verification Token',
-            'rol' => 'Rol',
         ];
     }
 
     /**
-     * Gets query for [[RolUsuarios]].
+     * Gets query for [[Rolusuarios]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getRolUsuarios()
+    public function getRolusuarios()
     {
-        return $this->hasMany(RolUsuario::className(), ['id_usuario' => 'id']);
+        return $this->hasMany(Rolusuario::className(), ['id_user' => 'id']);
     }
 }

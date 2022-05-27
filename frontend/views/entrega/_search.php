@@ -17,13 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'nombre') ?>
-
-    <?= $form->field($model, 'descripcion') ?>
-
     <?= $form->field($model, 'evidencia') ?>
 
     <?= $form->field($model, 'fecha_entrega') ?>
+
+    <?= $form->field($model, 'hora_entrega') ?>
+
+    <?= $form->field($model, 'comentarios') ?>
 
     <?php // echo $form->field($model, 'id_proyecto') ?>
 

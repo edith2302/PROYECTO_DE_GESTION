@@ -12,14 +12,14 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'descripción')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'descripción')->textInput() ?>
 
     <?= $form->field($model, 'escala')->textInput() ?>
 
     <?= $form->field($model, 'id_profe_asignatura')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

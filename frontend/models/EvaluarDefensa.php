@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "evaluar_defensa".
+ * This is the model class for table "evaluardefensa".
  *
  * @property int $id
  * @property int $id_comision
@@ -13,17 +13,17 @@ use Yii;
  * @property int $nota
  * @property string $comentarios
  *
- * @property ComisionEvaluadora $comision
- * @property DefensaProyecto $defensa
+ * @property Comisionevaluadora $comision
+ * @property Defensaproyecto $defensa
  */
-class EvaluarDefensa extends \yii\db\ActiveRecord
+class Evaluardefensa extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'evaluar_defensa';
+        return 'evaluardefensa';
     }
 
     /**
@@ -32,12 +32,11 @@ class EvaluarDefensa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_comision', 'id_defensa', 'nota', 'comentarios'], 'required'],
-            [['id', 'id_comision', 'id_defensa', 'nota'], 'integer'],
-            [['comentarios'], 'string', 'max' => 1000],
-            [['id'], 'unique'],
-            [['id_comision'], 'exist', 'skipOnError' => true, 'targetClass' => ComisionEvaluadora::className(), 'targetAttribute' => ['id_comision' => 'id']],
-            [['id_defensa'], 'exist', 'skipOnError' => true, 'targetClass' => DefensaProyecto::className(), 'targetAttribute' => ['id_defensa' => 'id']],
+            [['id_comision', 'id_defensa', 'nota', 'comentarios'], 'required'],
+            [['id_comision', 'id_defensa', 'nota'], 'integer'],
+            [['comentarios'], 'string', 'max' => 2000],
+            [['id_comision'], 'exist', 'skipOnError' => true, 'targetClass' => Comisionevaluadora::className(), 'targetAttribute' => ['id_comision' => 'id']],
+            [['id_defensa'], 'exist', 'skipOnError' => true, 'targetClass' => Defensaproyecto::className(), 'targetAttribute' => ['id_defensa' => 'id']],
         ];
     }
 
@@ -62,7 +61,7 @@ class EvaluarDefensa extends \yii\db\ActiveRecord
      */
     public function getComision()
     {
-        return $this->hasOne(ComisionEvaluadora::className(), ['id' => 'id_comision']);
+        return $this->hasOne(Comisionevaluadora::className(), ['id' => 'id_comision']);
     }
 
     /**
@@ -72,6 +71,6 @@ class EvaluarDefensa extends \yii\db\ActiveRecord
      */
     public function getDefensa()
     {
-        return $this->hasOne(DefensaProyecto::className(), ['id' => 'id_defensa']);
+        return $this->hasOne(Defensaproyecto::className(), ['id' => 'id_defensa']);
     }
 }

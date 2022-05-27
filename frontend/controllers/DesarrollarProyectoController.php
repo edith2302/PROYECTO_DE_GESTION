@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\DesarrollarProyecto;
-use app\models\DesarrollarProyectoSearch;
+use app\models\Desarrollarproyecto;
+use app\models\DesarrollarproyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DesarrollarProyectoController implements the CRUD actions for DesarrollarProyecto model.
+ * DesarrollarproyectoController implements the CRUD actions for Desarrollarproyecto model.
  */
-class DesarrollarProyectoController extends Controller
+class DesarrollarproyectoController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class DesarrollarProyectoController extends Controller
     }
 
     /**
-     * Lists all DesarrollarProyecto models.
+     * Lists all Desarrollarproyecto models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new DesarrollarProyectoSearch();
+        $searchModel = new DesarrollarproyectoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class DesarrollarProyectoController extends Controller
     }
 
     /**
-     * Displays a single DesarrollarProyecto model.
+     * Displays a single Desarrollarproyecto model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class DesarrollarProyectoController extends Controller
     }
 
     /**
-     * Creates a new DesarrollarProyecto model.
+     * Creates a new Desarrollarproyecto model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new DesarrollarProyecto();
+        $model = new Desarrollarproyecto();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class DesarrollarProyectoController extends Controller
     }
 
     /**
-     * Updates an existing DesarrollarProyecto model.
+     * Updates an existing Desarrollarproyecto model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class DesarrollarProyectoController extends Controller
     }
 
     /**
-     * Deletes an existing DesarrollarProyecto model.
+     * Deletes an existing Desarrollarproyecto model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class DesarrollarProyectoController extends Controller
     }
 
     /**
-     * Finds the DesarrollarProyecto model based on its primary key value.
+     * Finds the Desarrollarproyecto model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return DesarrollarProyecto the loaded model
+     * @return Desarrollarproyecto the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DesarrollarProyecto::findOne(['id' => $id])) !== null) {
+        if (($model = Desarrollarproyecto::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

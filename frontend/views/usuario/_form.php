@@ -12,6 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'rut')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'telefono')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'telefono_alternativo')->textInput(['maxlength' => true]) ?>
@@ -41,7 +43,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'habilitado_ici')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

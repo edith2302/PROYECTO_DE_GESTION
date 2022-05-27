@@ -11,19 +11,18 @@ use Yii;
  * @property string $nombre
  * @property string $descripcion
  * @property int $num_integrantes
- * @property string $tipo
- * @property string $area
- * @property string $estado
- * @property string $disponibilidad
- * @property int|null $id_profe_guia
+ * @property int $tipo
+ * @property int $area
+ * @property int $estado
+ * @property int $disponibilidad
+ * @property int $id_profe_guia
  * @property int $id_autor
  *
  * @property Usuario $autor
- * @property DefensaProyecto[] $defensaProyectos
- * @property DesarrollarProyecto[] $desarrollarProyectos
+ * @property Defensaproyecto[] $defensaproyectos
  * @property Entrega[] $entregas
- * @property EvaluarProyecto[] $evaluarProyectos
- * @property ProfesorGuia $profeGuia
+ * @property Evaluarproyecto[] $evaluarproyectos
+ * @property Profesorguia $profeGuia
  */
 class Proyecto extends \yii\db\ActiveRecord
 {
@@ -41,16 +40,12 @@ class Proyecto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'nombre', 'descripcion', 'num_integrantes', 'tipo', 'area', 'estado', 'disponibilidad', 'id_autor'], 'required'],
-            [['id', 'num_integrantes', 'id_profe_guia', 'id_autor'], 'integer'],
-            ['num_integrantes', 'compare', 'compareValue' => 2, 'operator' => '<='],
-            ['num_integrantes', 'compare', 'compareValue' => 0, 'operator' => '>'],
-            [['nombre', 'tipo', 'area', 'estado'], 'string', 'max' => 200],
-            [['descripcion'], 'string', 'max' => 300],
-            [['disponibilidad'], 'string', 'max' => 50],
-            [['id'], 'unique'],
-            [['id_profe_guia'], 'exist', 'skipOnError' => true, 'targetClass' => ProfesorGuia::className(), 'targetAttribute' => ['id_profe_guia' => 'id']],
-            [['id_autor'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_autor' => 'id']],
+            [['nombre', 'descripcion', 'num_integrantes', 'tipo', 'area', 'estado', 'disponibilidad', 'id_profe_guia', 'id_autor'], 'required'],
+            [['num_integrantes', 'tipo', 'area', 'estado', 'disponibilidad', 'id_profe_guia', 'id_autor'], 'integer'],
+            [['nombre'], 'string', 'max' => 300],
+            [['descripcion'], 'string', 'max' => 2000],
+            [['id_profe_guia'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorguia::className(), 'targetAttribute' => ['id_profe_guia' => 'id']],
+            [['id_autor'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_autor' => 'id_usuario']],
         ];
     }
 
@@ -80,27 +75,17 @@ class Proyecto extends \yii\db\ActiveRecord
      */
     public function getAutor()
     {
-        return $this->hasOne(Usuario::className(), ['id' => 'id_autor']);
+        return $this->hasOne(Usuario::className(), ['id_usuario' => 'id_autor']);
     }
 
     /**
-     * Gets query for [[DefensaProyectos]].
+     * Gets query for [[Defensaproyectos]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getDefensaProyectos()
+    public function getDefensaproyectos()
     {
-        return $this->hasMany(DefensaProyecto::className(), ['id_proyecto' => 'id']);
-    }
-
-    /**
-     * Gets query for [[DesarrollarProyectos]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDesarrollarProyectos()
-    {
-        return $this->hasMany(DesarrollarProyecto::className(), ['id_proyecto' => 'id']);
+        return $this->hasMany(Defensaproyecto::className(), ['id_proyecto' => 'id']);
     }
 
     /**
@@ -114,13 +99,13 @@ class Proyecto extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[EvaluarProyectos]].
+     * Gets query for [[Evaluarproyectos]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getEvaluarProyectos()
+    public function getEvaluarproyectos()
     {
-        return $this->hasMany(EvaluarProyecto::className(), ['id_proyecto' => 'id']);
+        return $this->hasMany(Evaluarproyecto::className(), ['id_proyecto' => 'id']);
     }
 
     /**
@@ -130,6 +115,6 @@ class Proyecto extends \yii\db\ActiveRecord
      */
     public function getProfeGuia()
     {
-        return $this->hasOne(ProfesorGuia::className(), ['id' => 'id_profe_guia']);
+        return $this->hasOne(Profesorguia::className(), ['id' => 'id_profe_guia']);
     }
 }

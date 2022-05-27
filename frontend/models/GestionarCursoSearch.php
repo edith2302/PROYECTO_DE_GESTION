@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\GestionarCurso;
+use app\models\Gestionarcurso;
 
 /**
- * GestionarCursoSearch represents the model behind the search form of `app\models\GestionarCurso`.
+ * GestionarcursoSearch represents the model behind the search form of `app\models\Gestionarcurso`.
  */
-class GestionarCursoSearch extends GestionarCurso
+class GestionarcursoSearch extends Gestionarcurso
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class GestionarCursoSearch extends GestionarCurso
      */
     public function search($params)
     {
-        $query = GestionarCurso::find();
+        $query = Gestionarcurso::find();
 
         // add conditions that should always apply here
 

@@ -17,8 +17,8 @@ class ProyectoSearch extends Proyecto
     public function rules()
     {
         return [
-            [['id', 'num_integrantes', 'id_profe_guia', 'id_autor'], 'integer'],
-            [['nombre', 'descripcion', 'tipo', 'area', 'estado', 'disponibilidad'], 'safe'],
+            [['id', 'num_integrantes', 'tipo', 'area', 'estado', 'disponibilidad', 'id_profe_guia', 'id_autor'], 'integer'],
+            [['nombre', 'descripcion'], 'safe'],
         ];
     }
 
@@ -60,16 +60,16 @@ class ProyectoSearch extends Proyecto
         $query->andFilterWhere([
             'id' => $this->id,
             'num_integrantes' => $this->num_integrantes,
+            'tipo' => $this->tipo,
+            'area' => $this->area,
+            'estado' => $this->estado,
+            'disponibilidad' => $this->disponibilidad,
             'id_profe_guia' => $this->id_profe_guia,
             'id_autor' => $this->id_autor,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion])
-            ->andFilterWhere(['like', 'tipo', $this->tipo])
-            ->andFilterWhere(['like', 'area', $this->area])
-            ->andFilterWhere(['like', 'estado', $this->estado])
-            ->andFilterWhere(['like', 'disponibilidad', $this->disponibilidad]);
+            ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
 
         return $dataProvider;
     }

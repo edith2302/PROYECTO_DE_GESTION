@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property int $id_usuario
  *
- * @property Curso $id0
+ * @property Curso[] $cursos
  * @property Usuario $usuario
  */
 class Administrador extends \yii\db\ActiveRecord
@@ -31,8 +31,7 @@ class Administrador extends \yii\db\ActiveRecord
         return [
             [['id_usuario'], 'required'],
             [['id_usuario'], 'integer'],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id']],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Curso::className(), 'targetAttribute' => ['id' => 'id_admin']],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
         ];
     }
 
@@ -48,13 +47,13 @@ class Administrador extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Id0]].
+     * Gets query for [[Cursos]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getId0()
+    public function getCursos()
     {
-        return $this->hasOne(Curso::className(), ['id_admin' => 'id']);
+        return $this->hasMany(Curso::className(), ['id_administrador' => 'id']);
     }
 
     /**
@@ -64,6 +63,6 @@ class Administrador extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuario::className(), ['id' => 'id_usuario']);
+        return $this->hasOne(Usuario::className(), ['id_usuario' => 'id_usuario']);
     }
 }

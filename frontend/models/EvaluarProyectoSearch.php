@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\EvaluarProyecto;
+use app\models\Evaluarproyecto;
 
 /**
- * EvaluarProyectoSearch represents the model behind the search form of `app\models\EvaluarProyecto`.
+ * EvaluarproyectoSearch represents the model behind the search form of `app\models\Evaluarproyecto`.
  */
-class EvaluarProyectoSearch extends EvaluarProyecto
+class EvaluarproyectoSearch extends Evaluarproyecto
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class EvaluarProyectoSearch extends EvaluarProyecto
      */
     public function search($params)
     {
-        $query = EvaluarProyecto::find();
+        $query = Evaluarproyecto::find();
 
         // add conditions that should always apply here
 

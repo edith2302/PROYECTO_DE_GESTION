@@ -5,23 +5,22 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "desarrollar_proyecto".
+ * This is the model class for table "desarrollarproyecto".
  *
  * @property int $id
  * @property int $id_proyecto
  * @property int $id_estudiante
  *
  * @property Estudiante $estudiante
- * @property Proyecto $proyecto
  */
-class DesarrollarProyecto extends \yii\db\ActiveRecord
+class Desarrollarproyecto extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'desarrollar_proyecto';
+        return 'desarrollarproyecto';
     }
 
     /**
@@ -32,7 +31,6 @@ class DesarrollarProyecto extends \yii\db\ActiveRecord
         return [
             [['id_proyecto', 'id_estudiante'], 'required'],
             [['id_proyecto', 'id_estudiante'], 'integer'],
-            [['id_proyecto'], 'exist', 'skipOnError' => true, 'targetClass' => Proyecto::className(), 'targetAttribute' => ['id_proyecto' => 'id']],
             [['id_estudiante'], 'exist', 'skipOnError' => true, 'targetClass' => Estudiante::className(), 'targetAttribute' => ['id_estudiante' => 'id']],
         ];
     }
@@ -57,15 +55,5 @@ class DesarrollarProyecto extends \yii\db\ActiveRecord
     public function getEstudiante()
     {
         return $this->hasOne(Estudiante::className(), ['id' => 'id_estudiante']);
-    }
-
-    /**
-     * Gets query for [[Proyecto]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProyecto()
-    {
-        return $this->hasOne(Proyecto::className(), ['id' => 'id_proyecto']);
     }
 }

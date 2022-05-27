@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\DefensaProyecto;
-use app\models\DefensaProyectoSearch;
+use app\models\Defensaproyecto;
+use app\models\DefensaproyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DefensaProyectoController implements the CRUD actions for DefensaProyecto model.
+ * DefensaproyectoController implements the CRUD actions for Defensaproyecto model.
  */
-class DefensaProyectoController extends Controller
+class DefensaproyectoController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class DefensaProyectoController extends Controller
     }
 
     /**
-     * Lists all DefensaProyecto models.
+     * Lists all Defensaproyecto models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new DefensaProyectoSearch();
+        $searchModel = new DefensaproyectoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class DefensaProyectoController extends Controller
     }
 
     /**
-     * Displays a single DefensaProyecto model.
+     * Displays a single Defensaproyecto model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class DefensaProyectoController extends Controller
     }
 
     /**
-     * Creates a new DefensaProyecto model.
+     * Creates a new Defensaproyecto model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new DefensaProyecto();
+        $model = new Defensaproyecto();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class DefensaProyectoController extends Controller
     }
 
     /**
-     * Updates an existing DefensaProyecto model.
+     * Updates an existing Defensaproyecto model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class DefensaProyectoController extends Controller
     }
 
     /**
-     * Deletes an existing DefensaProyecto model.
+     * Deletes an existing Defensaproyecto model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class DefensaProyectoController extends Controller
     }
 
     /**
-     * Finds the DefensaProyecto model based on its primary key value.
+     * Finds the Defensaproyecto model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return DefensaProyecto the loaded model
+     * @return Defensaproyecto the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DefensaProyecto::findOne(['id' => $id])) !== null) {
+        if (($model = Defensaproyecto::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

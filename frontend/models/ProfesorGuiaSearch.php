@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\ProfesorGuia;
+use app\models\Profesorguia;
 
 /**
- * ProfesorGuiaSearch represents the model behind the search form of `app\models\ProfesorGuia`.
+ * ProfesorguiaSearch represents the model behind the search form of `app\models\Profesorguia`.
  */
-class ProfesorGuiaSearch extends ProfesorGuia
+class ProfesorguiaSearch extends Profesorguia
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class ProfesorGuiaSearch extends ProfesorGuia
      */
     public function search($params)
     {
-        $query = ProfesorGuia::find();
+        $query = Profesorguia::find();
 
         // add conditions that should always apply here
 

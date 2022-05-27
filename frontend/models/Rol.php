@@ -11,7 +11,7 @@ use Yii;
  * @property string $nombre
  * @property string $descripcion
  *
- * @property RolUsuario[] $rolUsuarios
+ * @property Rolusuario[] $rolusuarios
  */
 class Rol extends \yii\db\ActiveRecord
 {
@@ -29,11 +29,9 @@ class Rol extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'nombre', 'descripcion'], 'required'],
-            [['id'], 'integer'],
-            [['nombre'], 'string', 'max' => 50],
-            [['descripcion'], 'string', 'max' => 300],
-            [['id'], 'unique'],
+            [['nombre', 'descripcion'], 'required'],
+            [['nombre'], 'string', 'max' => 100],
+            [['descripcion'], 'string', 'max' => 2000],
         ];
     }
 
@@ -50,12 +48,12 @@ class Rol extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[RolUsuarios]].
+     * Gets query for [[Rolusuarios]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getRolUsuarios()
+    public function getRolusuarios()
     {
-        return $this->hasMany(RolUsuario::className(), ['id_rol' => 'id']);
+        return $this->hasMany(Rolusuario::className(), ['id_rol' => 'id']);
     }
 }

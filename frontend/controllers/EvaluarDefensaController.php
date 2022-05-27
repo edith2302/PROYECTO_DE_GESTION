@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\EvaluarDefensa;
-use app\models\EvaluarDefensaSearch;
+use app\models\Evaluardefensa;
+use app\models\EvaluardefensaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EvaluarDefensaController implements the CRUD actions for EvaluarDefensa model.
+ * EvaluardefensaController implements the CRUD actions for Evaluardefensa model.
  */
-class EvaluarDefensaController extends Controller
+class EvaluardefensaController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class EvaluarDefensaController extends Controller
     }
 
     /**
-     * Lists all EvaluarDefensa models.
+     * Lists all Evaluardefensa models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new EvaluarDefensaSearch();
+        $searchModel = new EvaluardefensaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class EvaluarDefensaController extends Controller
     }
 
     /**
-     * Displays a single EvaluarDefensa model.
+     * Displays a single Evaluardefensa model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class EvaluarDefensaController extends Controller
     }
 
     /**
-     * Creates a new EvaluarDefensa model.
+     * Creates a new Evaluardefensa model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new EvaluarDefensa();
+        $model = new Evaluardefensa();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class EvaluarDefensaController extends Controller
     }
 
     /**
-     * Updates an existing EvaluarDefensa model.
+     * Updates an existing Evaluardefensa model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class EvaluarDefensaController extends Controller
     }
 
     /**
-     * Deletes an existing EvaluarDefensa model.
+     * Deletes an existing Evaluardefensa model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class EvaluarDefensaController extends Controller
     }
 
     /**
-     * Finds the EvaluarDefensa model based on its primary key value.
+     * Finds the Evaluardefensa model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return EvaluarDefensa the loaded model
+     * @return Evaluardefensa the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = EvaluarDefensa::findOne(['id' => $id])) !== null) {
+        if (($model = Evaluardefensa::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

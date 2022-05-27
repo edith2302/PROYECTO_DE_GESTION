@@ -20,7 +20,7 @@ use Yii;
  * @property int $id_profe_asignatura
  *
  * @property Entrega[] $entregas
- * @property ProfesorAsignatura $profeAsignatura
+ * @property Profesorasignatura $profeAsignatura
  * @property Rubrica $rubrica
  */
 class Hito extends \yii\db\ActiveRecord
@@ -39,15 +39,13 @@ class Hito extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'nombre', 'descripcion', 'fecha_habilitacion', 'hora_habilitacion', 'fecha_limite', 'hora_limite', 'tipo_hito', 'porcentaje_nota', 'id_rubrica', 'id_profe_asignatura'], 'required'],
-            [['id', 'porcentaje_nota', 'id_rubrica', 'id_profe_asignatura'], 'integer'],
+            [['nombre', 'descripcion', 'fecha_habilitacion', 'hora_habilitacion', 'fecha_limite', 'hora_limite', 'tipo_hito', 'porcentaje_nota', 'id_rubrica', 'id_profe_asignatura'], 'required'],
             [['fecha_habilitacion', 'hora_habilitacion', 'fecha_limite', 'hora_limite'], 'safe'],
+            [['tipo_hito', 'porcentaje_nota', 'id_rubrica', 'id_profe_asignatura'], 'integer'],
             [['nombre'], 'string', 'max' => 100],
-            [['descripcion'], 'string', 'max' => 1000],
-            [['tipo_hito'], 'string', 'max' => 50],
-            [['id'], 'unique'],
+            [['descripcion'], 'string', 'max' => 2000],
             [['id_rubrica'], 'exist', 'skipOnError' => true, 'targetClass' => Rubrica::className(), 'targetAttribute' => ['id_rubrica' => 'id']],
-            [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => ProfesorAsignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
+            [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorasignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
         ];
     }
 
@@ -59,14 +57,14 @@ class Hito extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
-            'descripcion' => 'Descripción',
-            'fecha_habilitacion' => 'Fecha Habilitación',
-            'hora_habilitacion' => 'Hora Habilitación',
-            'fecha_limite' => 'Fecha Límite',
-            'hora_limite' => 'Hora Límite',
+            'descripcion' => 'Descripcion',
+            'fecha_habilitacion' => 'Fecha Habilitacion',
+            'hora_habilitacion' => 'Hora Habilitacion',
+            'fecha_limite' => 'Fecha Limite',
+            'hora_limite' => 'Hora Limite',
             'tipo_hito' => 'Tipo Hito',
             'porcentaje_nota' => 'Porcentaje Nota',
-            'id_rubrica' => 'Id Rúbrica',
+            'id_rubrica' => 'Id Rubrica',
             'id_profe_asignatura' => 'Id Profe Asignatura',
         ];
     }
@@ -88,7 +86,7 @@ class Hito extends \yii\db\ActiveRecord
      */
     public function getProfeAsignatura()
     {
-        return $this->hasOne(ProfesorAsignatura::className(), ['id' => 'id_profe_asignatura']);
+        return $this->hasOne(Profesorasignatura::className(), ['id' => 'id_profe_asignatura']);
     }
 
     /**

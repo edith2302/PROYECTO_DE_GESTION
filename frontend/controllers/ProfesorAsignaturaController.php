@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\ProfesorAsignatura;
-use app\models\ProfesorAsignaturaSearch;
+use app\models\Profesorasignatura;
+use app\models\ProfesorasignaturaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProfesorAsignaturaController implements the CRUD actions for ProfesorAsignatura model.
+ * ProfesorasignaturaController implements the CRUD actions for Profesorasignatura model.
  */
-class ProfesorAsignaturaController extends Controller
+class ProfesorasignaturaController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class ProfesorAsignaturaController extends Controller
     }
 
     /**
-     * Lists all ProfesorAsignatura models.
+     * Lists all Profesorasignatura models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ProfesorAsignaturaSearch();
+        $searchModel = new ProfesorasignaturaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class ProfesorAsignaturaController extends Controller
     }
 
     /**
-     * Displays a single ProfesorAsignatura model.
+     * Displays a single Profesorasignatura model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class ProfesorAsignaturaController extends Controller
     }
 
     /**
-     * Creates a new ProfesorAsignatura model.
+     * Creates a new Profesorasignatura model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new ProfesorAsignatura();
+        $model = new Profesorasignatura();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class ProfesorAsignaturaController extends Controller
     }
 
     /**
-     * Updates an existing ProfesorAsignatura model.
+     * Updates an existing Profesorasignatura model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class ProfesorAsignaturaController extends Controller
     }
 
     /**
-     * Deletes an existing ProfesorAsignatura model.
+     * Deletes an existing Profesorasignatura model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class ProfesorAsignaturaController extends Controller
     }
 
     /**
-     * Finds the ProfesorAsignatura model based on its primary key value.
+     * Finds the Profesorasignatura model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return ProfesorAsignatura the loaded model
+     * @return Profesorasignatura the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ProfesorAsignatura::findOne(['id' => $id])) !== null) {
+        if (($model = Profesorasignatura::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

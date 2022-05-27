@@ -49,14 +49,14 @@ class UsuarioController extends Controller
 
     /**
      * Displays a single Usuario model.
-     * @param int $id
+     * @param int $id_usuario Id Usuario
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id_usuario)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id_usuario),
         ]);
     }
 
@@ -71,7 +71,7 @@ class UsuarioController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id_usuario' => $model->id_usuario]);
             }
         } else {
             $model->loadDefaultValues();
@@ -85,16 +85,16 @@ class UsuarioController extends Controller
     /**
      * Updates an existing Usuario model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
+     * @param int $id_usuario Id Usuario
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id_usuario)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id_usuario);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id_usuario' => $model->id_usuario]);
         }
 
         return $this->render('update', [
@@ -105,13 +105,13 @@ class UsuarioController extends Controller
     /**
      * Deletes an existing Usuario model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
+     * @param int $id_usuario Id Usuario
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id_usuario)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id_usuario)->delete();
 
         return $this->redirect(['index']);
     }
@@ -119,13 +119,13 @@ class UsuarioController extends Controller
     /**
      * Finds the Usuario model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
+     * @param int $id_usuario Id Usuario
      * @return Usuario the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id_usuario)
     {
-        if (($model = Usuario::findOne(['id' => $id])) !== null) {
+        if (($model = Usuario::findOne(['id_usuario' => $id_usuario])) !== null) {
             return $model;
         }
 

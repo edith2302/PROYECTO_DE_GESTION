@@ -17,12 +17,38 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use app\models\FormUpload;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+    public function actionUpload()
+    {
+     
+        $model = new FormUpload;
+        $msg = null;
+     
+        if ($model->load(Yii::$app->request->post())){
+            $model->file = UploadedFile::getInstances($model, 'file');
+   
+            if ($model->file && $model->validate()) {
+                foreach ($model->file as $file) {
+                    $file->saveAs('archivos/' . $file->baseName . '.' . $file->extension);
+                    $msg = "<p><strong class='label label-info'>Enhorabuena, subida realizada con éxito</strong></p>";
+                }
+            }
+        }
+        return $this->render("upload", ["model" => $model, "msg" => $msg]);
+    }
+
+
+
+
+
+
     /**
      * {@inheritdoc}
      */

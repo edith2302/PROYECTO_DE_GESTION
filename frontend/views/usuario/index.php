@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use app\models\Usuario;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuarioSearch */
@@ -17,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Agregar Usuario', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Usuario', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,11 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            'id_usuario',
+            'rut',
             'telefono',
             'telefono_alternativo',
             'nombre',
-            'username',
+            //'username',
             //'dv',
             //'password',
             //'apellido',
@@ -45,8 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'habilitado_ici',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, \app\models\Usuario $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
+                'urlCreator' => function ($action, Usuario $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id_usuario' => $model->id_usuario]);
                  }
             ],
         ],

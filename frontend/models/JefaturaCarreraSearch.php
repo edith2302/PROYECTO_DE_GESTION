@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\JefaturaCarrera;
+use app\models\Jefaturacarrera;
 
 /**
- * JefaturaCarreraSearch represents the model behind the search form of `app\models\JefaturaCarrera`.
+ * JefaturacarreraSearch represents the model behind the search form of `app\models\Jefaturacarrera`.
  */
-class JefaturaCarreraSearch extends JefaturaCarrera
+class JefaturacarreraSearch extends Jefaturacarrera
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class JefaturaCarreraSearch extends JefaturaCarrera
      */
     public function search($params)
     {
-        $query = JefaturaCarrera::find();
+        $query = Jefaturacarrera::find();
 
         // add conditions that should always apply here
 

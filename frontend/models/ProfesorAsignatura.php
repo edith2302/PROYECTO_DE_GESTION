@@ -5,24 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "profesor_asignatura".
+ * This is the model class for table "profesorasignatura".
  *
  * @property int $id
  * @property int $id_usuario
  *
- * @property GestionarCurso[] $gestionarCursos
+ * @property Gestionarcurso[] $gestionarcursos
  * @property Hito[] $hitos
  * @property Rubrica[] $rubricas
  * @property Usuario $usuario
  */
-class ProfesorAsignatura extends \yii\db\ActiveRecord
+class Profesorasignatura extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'profesor_asignatura';
+        return 'profesorasignatura';
     }
 
     /**
@@ -31,10 +31,9 @@ class ProfesorAsignatura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_usuario'], 'required'],
-            [['id', 'id_usuario'], 'integer'],
-            [['id'], 'unique'],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id']],
+            [['id_usuario'], 'required'],
+            [['id_usuario'], 'integer'],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
         ];
     }
 
@@ -50,13 +49,13 @@ class ProfesorAsignatura extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[GestionarCursos]].
+     * Gets query for [[Gestionarcursos]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGestionarCursos()
+    public function getGestionarcursos()
     {
-        return $this->hasMany(GestionarCurso::className(), ['id_profesor' => 'id']);
+        return $this->hasMany(Gestionarcurso::className(), ['id_profesor' => 'id']);
     }
 
     /**
@@ -86,6 +85,6 @@ class ProfesorAsignatura extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuario::className(), ['id' => 'id_usuario']);
+        return $this->hasOne(Usuario::className(), ['id_usuario' => 'id_usuario']);
     }
 }

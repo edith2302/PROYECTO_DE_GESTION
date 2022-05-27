@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\EvaluarDefensa;
+use app\models\Evaluardefensa;
 
 /**
- * EvaluarDefensaSearch represents the model behind the search form of `app\models\EvaluarDefensa`.
+ * EvaluardefensaSearch represents the model behind the search form of `app\models\Evaluardefensa`.
  */
-class EvaluarDefensaSearch extends EvaluarDefensa
+class EvaluardefensaSearch extends Evaluardefensa
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class EvaluarDefensaSearch extends EvaluarDefensa
      */
     public function search($params)
     {
-        $query = EvaluarDefensa::find();
+        $query = Evaluardefensa::find();
 
         // add conditions that should always apply here
 

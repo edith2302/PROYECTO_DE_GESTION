@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use app\models\Rubrica;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\RubricaSearch */
@@ -17,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Agregar Rubrica', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Rubrica', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -34,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_profe_asignatura',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, \app\models\Rubrica $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Rubrica $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

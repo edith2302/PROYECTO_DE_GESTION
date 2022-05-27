@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\ComisionEvaluadora;
-use app\models\ComisionEvaluadoraSearch;
+use app\models\Comisionevaluadora;
+use app\models\ComisionevaluadoraSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ComisionEvaluadoraController implements the CRUD actions for ComisionEvaluadora model.
+ * ComisionevaluadoraController implements the CRUD actions for Comisionevaluadora model.
  */
-class ComisionEvaluadoraController extends Controller
+class ComisionevaluadoraController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class ComisionEvaluadoraController extends Controller
     }
 
     /**
-     * Lists all ComisionEvaluadora models.
+     * Lists all Comisionevaluadora models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ComisionEvaluadoraSearch();
+        $searchModel = new ComisionevaluadoraSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class ComisionEvaluadoraController extends Controller
     }
 
     /**
-     * Displays a single ComisionEvaluadora model.
+     * Displays a single Comisionevaluadora model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class ComisionEvaluadoraController extends Controller
     }
 
     /**
-     * Creates a new ComisionEvaluadora model.
+     * Creates a new Comisionevaluadora model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new ComisionEvaluadora();
+        $model = new Comisionevaluadora();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class ComisionEvaluadoraController extends Controller
     }
 
     /**
-     * Updates an existing ComisionEvaluadora model.
+     * Updates an existing Comisionevaluadora model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class ComisionEvaluadoraController extends Controller
     }
 
     /**
-     * Deletes an existing ComisionEvaluadora model.
+     * Deletes an existing Comisionevaluadora model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class ComisionEvaluadoraController extends Controller
     }
 
     /**
-     * Finds the ComisionEvaluadora model based on its primary key value.
+     * Finds the Comisionevaluadora model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return ComisionEvaluadora the loaded model
+     * @return Comisionevaluadora the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ComisionEvaluadora::findOne(['id' => $id])) !== null) {
+        if (($model = Comisionevaluadora::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

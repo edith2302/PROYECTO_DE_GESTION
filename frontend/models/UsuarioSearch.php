@@ -17,8 +17,8 @@ class UsuarioSearch extends Usuario
     public function rules()
     {
         return [
-            [['id', 'plan', 'habilitado_adt', 'habilitado_practica', 'habilitado_ici'], 'integer'],
-            [['telefono', 'telefono_alternativo', 'nombre', 'username', 'dv', 'password', 'apellido', 'email', 'email_alternativo', 'direccion'], 'safe'],
+            [['id_usuario', 'plan', 'habilitado_adt', 'habilitado_practica', 'habilitado_ici'], 'integer'],
+            [['rut', 'telefono', 'telefono_alternativo', 'nombre', 'username', 'dv', 'password', 'apellido', 'email', 'email_alternativo', 'direccion'], 'safe'],
         ];
     }
 
@@ -58,14 +58,15 @@ class UsuarioSearch extends Usuario
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id_usuario' => $this->id_usuario,
             'plan' => $this->plan,
             'habilitado_adt' => $this->habilitado_adt,
             'habilitado_practica' => $this->habilitado_practica,
             'habilitado_ici' => $this->habilitado_ici,
         ]);
 
-        $query->andFilterWhere(['like', 'telefono', $this->telefono])
+        $query->andFilterWhere(['like', 'rut', $this->rut])
+            ->andFilterWhere(['like', 'telefono', $this->telefono])
             ->andFilterWhere(['like', 'telefono_alternativo', $this->telefono_alternativo])
             ->andFilterWhere(['like', 'nombre', $this->nombre])
             ->andFilterWhere(['like', 'username', $this->username])

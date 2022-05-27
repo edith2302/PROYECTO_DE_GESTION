@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\RolUsuario;
+use app\models\Rolusuario;
 
 /**
- * RolUsuarioSearch represents the model behind the search form of `app\models\RolUsuario`.
+ * RolusuarioSearch represents the model behind the search form of `app\models\Rolusuario`.
  */
-class RolUsuarioSearch extends RolUsuario
+class RolusuarioSearch extends Rolusuario
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,7 @@ class RolUsuarioSearch extends RolUsuario
     public function rules()
     {
         return [
-            [['id', 'id_usuario', 'id_rol'], 'integer'],
+            [['id', 'id_user', 'id_rol'], 'integer'],
         ];
     }
 
@@ -39,7 +39,7 @@ class RolUsuarioSearch extends RolUsuario
      */
     public function search($params)
     {
-        $query = RolUsuario::find();
+        $query = Rolusuario::find();
 
         // add conditions that should always apply here
 
@@ -58,7 +58,7 @@ class RolUsuarioSearch extends RolUsuario
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_usuario' => $this->id_usuario,
+            'id_user' => $this->id_user,
             'id_rol' => $this->id_rol,
         ]);
 

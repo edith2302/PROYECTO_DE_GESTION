@@ -5,24 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "defensa_proyecto".
+ * This is the model class for table "defensaproyecto".
  *
  * @property int $id
  * @property string $nombre
  * @property string $fecha
  * @property int $id_proyecto
  *
- * @property EvaluarDefensa[] $evaluarDefensas
+ * @property Evaluardefensa[] $evaluardefensas
  * @property Proyecto $proyecto
  */
-class DefensaProyecto extends \yii\db\ActiveRecord
+class Defensaproyecto extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'defensa_proyecto';
+        return 'defensaproyecto';
     }
 
     /**
@@ -34,7 +34,7 @@ class DefensaProyecto extends \yii\db\ActiveRecord
             [['nombre', 'fecha', 'id_proyecto'], 'required'],
             [['fecha'], 'safe'],
             [['id_proyecto'], 'integer'],
-            [['nombre'], 'string', 'max' => 300],
+            [['nombre'], 'string', 'max' => 100],
             [['id_proyecto'], 'exist', 'skipOnError' => true, 'targetClass' => Proyecto::className(), 'targetAttribute' => ['id_proyecto' => 'id']],
         ];
     }
@@ -53,13 +53,13 @@ class DefensaProyecto extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[EvaluarDefensas]].
+     * Gets query for [[Evaluardefensas]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getEvaluarDefensas()
+    public function getEvaluardefensas()
     {
-        return $this->hasMany(EvaluarDefensa::className(), ['id_defensa' => 'id']);
+        return $this->hasMany(Evaluardefensa::className(), ['id_defensa' => 'id']);
     }
 
     /**

@@ -18,7 +18,7 @@ class EntregaSearch extends Entrega
     {
         return [
             [['id', 'id_proyecto', 'id_hito'], 'integer'],
-            [['nombre', 'descripcion', 'evidencia', 'fecha_entrega'], 'safe'],
+            [['evidencia', 'fecha_entrega', 'hora_entrega', 'comentarios'], 'safe'],
         ];
     }
 
@@ -60,13 +60,13 @@ class EntregaSearch extends Entrega
         $query->andFilterWhere([
             'id' => $this->id,
             'fecha_entrega' => $this->fecha_entrega,
+            'hora_entrega' => $this->hora_entrega,
             'id_proyecto' => $this->id_proyecto,
             'id_hito' => $this->id_hito,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion])
-            ->andFilterWhere(['like', 'evidencia', $this->evidencia]);
+        $query->andFilterWhere(['like', 'evidencia', $this->evidencia])
+            ->andFilterWhere(['like', 'comentarios', $this->comentarios]);
 
         return $dataProvider;
     }

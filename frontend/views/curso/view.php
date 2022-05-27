@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'año',
             'semestre',
-            'id_admin',
+            'id_administrador',
         ],
     ]) ?>
 

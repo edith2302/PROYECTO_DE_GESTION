@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\JefaturaCarrera;
-use app\models\JefaturaCarreraSearch;
+use app\models\Jefaturacarrera;
+use app\models\JefaturacarreraSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * JefaturaCarreraController implements the CRUD actions for JefaturaCarrera model.
+ * JefaturacarreraController implements the CRUD actions for Jefaturacarrera model.
  */
-class JefaturaCarreraController extends Controller
+class JefaturacarreraController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class JefaturaCarreraController extends Controller
     }
 
     /**
-     * Lists all JefaturaCarrera models.
+     * Lists all Jefaturacarrera models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new JefaturaCarreraSearch();
+        $searchModel = new JefaturacarreraSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class JefaturaCarreraController extends Controller
     }
 
     /**
-     * Displays a single JefaturaCarrera model.
+     * Displays a single Jefaturacarrera model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class JefaturaCarreraController extends Controller
     }
 
     /**
-     * Creates a new JefaturaCarrera model.
+     * Creates a new Jefaturacarrera model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new JefaturaCarrera();
+        $model = new Jefaturacarrera();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class JefaturaCarreraController extends Controller
     }
 
     /**
-     * Updates an existing JefaturaCarrera model.
+     * Updates an existing Jefaturacarrera model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class JefaturaCarreraController extends Controller
     }
 
     /**
-     * Deletes an existing JefaturaCarrera model.
+     * Deletes an existing Jefaturacarrera model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class JefaturaCarreraController extends Controller
     }
 
     /**
-     * Finds the JefaturaCarrera model based on its primary key value.
+     * Finds the Jefaturacarrera model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return JefaturaCarrera the loaded model
+     * @return Jefaturacarrera the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = JefaturaCarrera::findOne(['id' => $id])) !== null) {
+        if (($model = Jefaturacarrera::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

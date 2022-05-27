@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Rubrica */
 
-$this->title = 'Agregar Rubrica';
+$this->title = 'Create Rubrica';
 $this->params['breadcrumbs'][] = ['label' => 'Rubricas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

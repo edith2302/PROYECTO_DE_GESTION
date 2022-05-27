@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use app\models\Proyecto;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ProyectoSearch */
@@ -17,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Agregar Proyecto', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Proyecto', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -33,14 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion',
             'num_integrantes',
             'tipo',
-            'area',
-            'estado',
-            'disponibilidad',
-            'id_profe_guia',
-            'id_autor',
+            //'area',
+            //'estado',
+            //'disponibilidad',
+            //'id_profe_guia',
+            //'id_autor',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, app\models\Proyecto $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Proyecto $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

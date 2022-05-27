@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\CursoEstudiante;
+use app\models\Cursoestudiante;
 
 /**
- * CursoEstudianteSearch represents the model behind the search form of `app\models\CursoEstudiante`.
+ * CursoestudianteSearch represents the model behind the search form of `app\models\Cursoestudiante`.
  */
-class CursoEstudianteSearch extends CursoEstudiante
+class CursoestudianteSearch extends Cursoestudiante
 {
     /**
      * {@inheritdoc}
@@ -39,7 +39,7 @@ class CursoEstudianteSearch extends CursoEstudiante
      */
     public function search($params)
     {
-        $query = CursoEstudiante::find();
+        $query = Cursoestudiante::find();
 
         // add conditions that should always apply here
 

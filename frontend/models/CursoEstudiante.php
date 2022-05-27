@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "curso_estudiante".
+ * This is the model class for table "cursoestudiante".
  *
  * @property int $id
  * @property int $id_curso
@@ -14,14 +14,14 @@ use Yii;
  * @property Curso $curso
  * @property Estudiante $estudiante
  */
-class CursoEstudiante extends \yii\db\ActiveRecord
+class Cursoestudiante extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'curso_estudiante';
+        return 'cursoestudiante';
     }
 
     /**

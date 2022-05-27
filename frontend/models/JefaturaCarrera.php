@@ -5,21 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "jefatura_carrera".
+ * This is the model class for table "jefaturacarrera".
  *
  * @property int $id
  * @property int $id_usuario
  *
  * @property Usuario $usuario
  */
-class JefaturaCarrera extends \yii\db\ActiveRecord
+class Jefaturacarrera extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'jefatura_carrera';
+        return 'jefaturacarrera';
     }
 
     /**
@@ -28,10 +28,9 @@ class JefaturaCarrera extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_usuario'], 'required'],
-            [['id', 'id_usuario'], 'integer'],
-            [['id'], 'unique'],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id']],
+            [['id_usuario'], 'required'],
+            [['id_usuario'], 'integer'],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
         ];
     }
 
@@ -53,6 +52,6 @@ class JefaturaCarrera extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuario::className(), ['id' => 'id_usuario']);
+        return $this->hasOne(Usuario::className(), ['id_usuario' => 'id_usuario']);
     }
 }

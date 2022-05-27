@@ -17,8 +17,7 @@ class RubricaSearch extends Rubrica
     public function rules()
     {
         return [
-            [['id', 'escala', 'id_profe_asignatura'], 'integer'],
-            [['descripción'], 'safe'],
+            [['id', 'descripción', 'escala', 'id_profe_asignatura'], 'integer'],
         ];
     }
 
@@ -59,11 +58,10 @@ class RubricaSearch extends Rubrica
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'descripción' => $this->descripción,
             'escala' => $this->escala,
             'id_profe_asignatura' => $this->id_profe_asignatura,
         ]);
-
-        $query->andFilterWhere(['like', 'descripción', $this->descripción]);
 
         return $dataProvider;
     }

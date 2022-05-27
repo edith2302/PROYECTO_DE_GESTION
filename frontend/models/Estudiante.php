@@ -10,8 +10,8 @@ use Yii;
  * @property int $id
  * @property int $id_usuario
  *
- * @property CursoEstudiante[] $cursoEstudiantes
- * @property DesarrollarProyecto[] $desarrollarProyectos
+ * @property Cursoestudiante[] $cursoestudiantes
+ * @property Desarrollarproyecto[] $desarrollarproyectos
  * @property Usuario $usuario
  */
 class Estudiante extends \yii\db\ActiveRecord
@@ -30,10 +30,9 @@ class Estudiante extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_usuario'], 'required'],
-            [['id', 'id_usuario'], 'integer'],
-            [['id'], 'unique'],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id']],
+            [['id_usuario'], 'required'],
+            [['id_usuario'], 'integer'],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
         ];
     }
 
@@ -49,23 +48,23 @@ class Estudiante extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[CursoEstudiantes]].
+     * Gets query for [[Cursoestudiantes]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCursoEstudiantes()
+    public function getCursoestudiantes()
     {
-        return $this->hasMany(CursoEstudiante::className(), ['id_estudiante' => 'id']);
+        return $this->hasMany(Cursoestudiante::className(), ['id_estudiante' => 'id']);
     }
 
     /**
-     * Gets query for [[DesarrollarProyectos]].
+     * Gets query for [[Desarrollarproyectos]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getDesarrollarProyectos()
+    public function getDesarrollarproyectos()
     {
-        return $this->hasMany(DesarrollarProyecto::className(), ['id_estudiante' => 'id']);
+        return $this->hasMany(Desarrollarproyecto::className(), ['id_estudiante' => 'id']);
     }
 
     /**
@@ -75,6 +74,6 @@ class Estudiante extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuario::className(), ['id' => 'id_usuario']);
+        return $this->hasOne(Usuario::className(), ['id_usuario' => 'id_usuario']);
     }
 }

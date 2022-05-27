@@ -5,23 +5,23 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "rol_usuario".
+ * This is the model class for table "rolusuario".
  *
  * @property int $id
- * @property int $id_usuario
+ * @property int $id_user
  * @property int $id_rol
  *
  * @property Rol $rol
- * @property User $usuario
+ * @property User $user
  */
-class RolUsuario extends \yii\db\ActiveRecord
+class Rolusuario extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'rol_usuario';
+        return 'rolusuario';
     }
 
     /**
@@ -30,11 +30,10 @@ class RolUsuario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_usuario', 'id_rol'], 'required'],
-            [['id', 'id_usuario', 'id_rol'], 'integer'],
-            [['id'], 'unique'],
+            [['id_user', 'id_rol'], 'required'],
+            [['id_user', 'id_rol'], 'integer'],
             [['id_rol'], 'exist', 'skipOnError' => true, 'targetClass' => Rol::className(), 'targetAttribute' => ['id_rol' => 'id']],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_usuario' => 'id']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
 
@@ -45,7 +44,7 @@ class RolUsuario extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_usuario' => 'Id Usuario',
+            'id_user' => 'Id User',
             'id_rol' => 'Id Rol',
         ];
     }
@@ -61,12 +60,12 @@ class RolUsuario extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Usuario]].
+     * Gets query for [[User]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuario()
+    public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'id_usuario']);
+        return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
 }

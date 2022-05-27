@@ -5,22 +5,22 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "comision_evaluadora".
+ * This is the model class for table "comisionevaluadora".
  *
  * @property int $id
  * @property int $id_usuario
  *
- * @property EvaluarDefensa[] $evaluarDefensas
+ * @property Evaluardefensa[] $evaluardefensas
  * @property Usuario $usuario
  */
-class ComisionEvaluadora extends \yii\db\ActiveRecord
+class Comisionevaluadora extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'comision_evaluadora';
+        return 'comisionevaluadora';
     }
 
     /**
@@ -31,7 +31,7 @@ class ComisionEvaluadora extends \yii\db\ActiveRecord
         return [
             [['id_usuario'], 'required'],
             [['id_usuario'], 'integer'],
-            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id']],
+            [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
         ];
     }
 
@@ -47,13 +47,13 @@ class ComisionEvaluadora extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[EvaluarDefensas]].
+     * Gets query for [[Evaluardefensas]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getEvaluarDefensas()
+    public function getEvaluardefensas()
     {
-        return $this->hasMany(EvaluarDefensa::className(), ['id_comision' => 'id']);
+        return $this->hasMany(Evaluardefensa::className(), ['id_comision' => 'id']);
     }
 
     /**
@@ -63,6 +63,6 @@ class ComisionEvaluadora extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuario::className(), ['id' => 'id_usuario']);
+        return $this->hasOne(Usuario::className(), ['id_usuario' => 'id_usuario']);
     }
 }

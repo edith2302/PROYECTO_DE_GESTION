@@ -5,23 +5,23 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "gestionar_curso".
+ * This is the model class for table "gestionarcurso".
  *
  * @property int $id
  * @property int $id_curso
  * @property int $id_profesor
  *
  * @property Curso $curso
- * @property ProfesorAsignatura $profesor
+ * @property Profesorasignatura $profesor
  */
-class GestionarCurso extends \yii\db\ActiveRecord
+class Gestionarcurso extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'gestionar_curso';
+        return 'gestionarcurso';
     }
 
     /**
@@ -30,11 +30,10 @@ class GestionarCurso extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_curso', 'id_profesor'], 'required'],
-            [['id', 'id_curso', 'id_profesor'], 'integer'],
-            [['id'], 'unique'],
+            [['id_curso', 'id_profesor'], 'required'],
+            [['id_curso', 'id_profesor'], 'integer'],
             [['id_curso'], 'exist', 'skipOnError' => true, 'targetClass' => Curso::className(), 'targetAttribute' => ['id_curso' => 'id']],
-            [['id_profesor'], 'exist', 'skipOnError' => true, 'targetClass' => ProfesorAsignatura::className(), 'targetAttribute' => ['id_profesor' => 'id']],
+            [['id_profesor'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorasignatura::className(), 'targetAttribute' => ['id_profesor' => 'id']],
         ];
     }
 
@@ -67,6 +66,6 @@ class GestionarCurso extends \yii\db\ActiveRecord
      */
     public function getProfesor()
     {
-        return $this->hasOne(ProfesorAsignatura::className(), ['id' => 'id_profesor']);
+        return $this->hasOne(Profesorasignatura::className(), ['id' => 'id_profesor']);
     }
 }

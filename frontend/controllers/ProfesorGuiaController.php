@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\ProfesorGuia;
-use app\models\ProfesorGuiaSearch;
+use app\models\Profesorguia;
+use app\models\ProfesorguiaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProfesorGuiaController implements the CRUD actions for ProfesorGuia model.
+ * ProfesorguiaController implements the CRUD actions for Profesorguia model.
  */
-class ProfesorGuiaController extends Controller
+class ProfesorguiaController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class ProfesorGuiaController extends Controller
     }
 
     /**
-     * Lists all ProfesorGuia models.
+     * Lists all Profesorguia models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ProfesorGuiaSearch();
+        $searchModel = new ProfesorguiaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class ProfesorGuiaController extends Controller
     }
 
     /**
-     * Displays a single ProfesorGuia model.
+     * Displays a single Profesorguia model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class ProfesorGuiaController extends Controller
     }
 
     /**
-     * Creates a new ProfesorGuia model.
+     * Creates a new Profesorguia model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new ProfesorGuia();
+        $model = new Profesorguia();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class ProfesorGuiaController extends Controller
     }
 
     /**
-     * Updates an existing ProfesorGuia model.
+     * Updates an existing Profesorguia model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class ProfesorGuiaController extends Controller
     }
 
     /**
-     * Deletes an existing ProfesorGuia model.
+     * Deletes an existing Profesorguia model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class ProfesorGuiaController extends Controller
     }
 
     /**
-     * Finds the ProfesorGuia model based on its primary key value.
+     * Finds the Profesorguia model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return ProfesorGuia the loaded model
+     * @return Profesorguia the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ProfesorGuia::findOne(['id' => $id])) !== null) {
+        if (($model = Profesorguia::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
