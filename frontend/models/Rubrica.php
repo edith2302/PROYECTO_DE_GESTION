@@ -32,7 +32,8 @@ class Rubrica extends \yii\db\ActiveRecord
     {
         return [
             [['descripción', 'escala', 'id_profe_asignatura'], 'required'],
-            [['descripción', 'escala', 'id_profe_asignatura'], 'integer'],
+            [['escala', 'id_profe_asignatura'], 'integer'],
+            [['descripción'], 'string', 'max' => 500],
             [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorasignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
         ];
     }

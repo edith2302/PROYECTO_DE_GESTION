@@ -17,22 +17,28 @@ use yii\jui\DatePicker;
 
     <?= $form->field($model, 'descripcion')->textInput(['placeholder' => "Descripción del hito"],['maxlength' => true]) ?>
 
-    <div class="col-md">
-        <?= $form->field($model, 'fecha_habilitacion')->textInput(['type' => 'date']) ?>
+    <div class="body-content">
+        <div class="row">
+            <div class="col-lg-4">
+            <?= $form->field($model, 'fecha_habilitacion')->textInput(['type' => 'date']) ?>
+            </div>
+            <div class="col-lg-4">
+            <?= $form->field($model, 'hora_habilitacion')->textInput(['type' => 'time']) ?>
+            </div>
+        </div>
     </div>
-    <div class="col-md">
-        <?= $form->field($model, 'hora_habilitacion')->textInput(['type' => 'time']) ?>
+    <div class="body-content">
+        <div class="row">
+            <div class="col-lg-4">
+            <?= $form->field($model, 'fecha_limite')->textInput(['type' => 'date']) ?>
+            </div>
+            <div class="col-lg-4">
+            <?= $form->field($model, 'hora_limite')->textInput(['type' => 'time']) ?>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md">
-        <?= $form->field($model, 'fecha_limite')->textInput(['type' => 'date']) ?>
-    </div>
-
-    <div class="col-md">
-        <?= $form->field($model, 'hora_limite')->textInput(['type' => 'time']) ?>
-    </div>
-
-    <div class="col-md">
+    <div class="body-content">
             <?php
             echo $form->field($model, 'tipo_hito')->dropDownList(
                 [
@@ -47,8 +53,6 @@ use yii\jui\DatePicker;
     </div>
 
     <?= $form->field($model, 'porcentaje_nota')->textInput(['placeholder' => "100%"]) ?>
-
-    
 
     <div class="form-group">
         <?= Html::submitButton('Agregar rubrica', ['class' => 'btn btn-primary']) ?>
