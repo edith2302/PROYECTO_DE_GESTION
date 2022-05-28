@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Hito */
 
-$this->title = $model->id;
+$this->title = 'Hito '.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Hitos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -14,17 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="hito-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -42,5 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_profe_asignatura',
         ],
     ]) ?>
+    <p>
+        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Estás seguro de que deseas eliminar éste elemento?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
 
 </div>

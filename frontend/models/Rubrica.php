@@ -31,8 +31,9 @@ class Rubrica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['descripción', 'escala', 'id_profe_asignatura'], 'required'],
+            [['nombre','descripción', 'escala', 'id_profe_asignatura'], 'required'],
             [['escala', 'id_profe_asignatura'], 'integer'],
+            [['nombre'], 'string', 'max' => 100],
             [['descripción'], 'string', 'max' => 500],
             [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorasignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
         ];

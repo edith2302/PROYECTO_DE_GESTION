@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
+use app\models\Rubrica;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Hito */
@@ -54,12 +55,21 @@ use yii\jui\DatePicker;
 
     <?= $form->field($model, 'porcentaje_nota')->textInput(['placeholder' => "100%"]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Agregar rubrica', ['class' => 'btn btn-primary']) ?>
-    </div>
+    <div class="body-content">
+        <div class="row">
 
+            <div class="col-lg-4">
+                <?= $form->field($model, 'id_rubrica')->dropDownList(\yii\helpers\ArrayHelper::map(Rubrica::find()->all(),'id', 'nombre'),['prompt' => 'Seleccionar rubrica']);?>
+            </div>   
+
+            <div class="col-lg-4">
+                <?= Html::a('Agregar Rubrica', ['rubrica/create'], ['class' => 'btn btn-primary']) ?>
+            </div>
+        </div>
+    </div>
+    
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
