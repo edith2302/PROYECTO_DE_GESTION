@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Comisionevaluadora */
 
-$this->title = 'Update Comisionevaluadora: ' . $model->id;
+$this->title = 'Actualizar Comisión evaluadora: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Comisionevaluadoras', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

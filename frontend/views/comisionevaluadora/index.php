@@ -10,7 +10,7 @@ use app\models\Comisionevaluadora;
 /* @var $searchModel app\models\ComisionevaluadoraSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Comisionevaluadoras';
+$this->title = 'Comisión evaluadora';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comisionevaluadora-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Comisionevaluadora', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar profesor', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,14 +29,35 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'id_usuario',
+            //'id',
+            //'id_usuario',
+
             [
+                'attribute'=>'id',
+                'value'=>function ($model) { return $model->id; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'attribute'=>'id_usuario',
+                'value'=>function ($model) { return $model->id_usuario; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+            /*[
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Comisionevaluadora $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
-            ],
+            ],*/
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

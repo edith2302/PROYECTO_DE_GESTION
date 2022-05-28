@@ -41,8 +41,8 @@ class Comisionevaluadora extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'id_usuario' => 'Id Usuario',
+            'id' => 'Identificador comisión',
+            'id_usuario' => 'Código usuario',
         ];
     }
 

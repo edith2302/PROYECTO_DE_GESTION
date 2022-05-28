@@ -43,9 +43,9 @@ class Cursoestudiante extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'id_curso' => 'Id Curso',
-            'id_estudiante' => 'Id Estudiante',
+            'id' => 'Código lista de estudiantes',
+            'id_curso' => 'Código curso',
+            'id_estudiante' => 'Código estudiante',
         ];
     }
 
