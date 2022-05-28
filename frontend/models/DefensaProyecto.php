@@ -45,10 +45,10 @@ class Defensaproyecto extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'nombre' => 'Nombre',
-            'fecha' => 'Fecha',
-            'id_proyecto' => 'Id Proyecto',
+            'id' => 'Código defensa',
+            'nombre' => 'Nombre presentación',
+            'fecha' => 'Fecha presentación',
+            'id_proyecto' => 'Código del proyecto',
         ];
     }
 

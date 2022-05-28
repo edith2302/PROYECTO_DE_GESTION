@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Defensaproyecto */
 
-$this->title = 'Create Defensaproyecto';
-$this->params['breadcrumbs'][] = ['label' => 'Defensaproyectos', 'url' => ['index']];
+$this->title = 'Agregar defensa de proyecto';
+$this->params['breadcrumbs'][] = ['label' => 'Defensa de proyectos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="defensaproyecto-create">

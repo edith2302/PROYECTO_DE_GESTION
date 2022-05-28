@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Entrega */
 
-$this->title = 'Create Entrega';
+$this->title = 'Agregar entrega';
 $this->params['breadcrumbs'][] = ['label' => 'Entregas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

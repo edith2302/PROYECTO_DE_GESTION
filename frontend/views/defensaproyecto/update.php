@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Defensaproyecto */
 
-$this->title = 'Update Defensaproyecto: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Defensaproyectos', 'url' => ['index']];
+$this->title = 'Modificar defensa de proyecto: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Modificación defensa proyectos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

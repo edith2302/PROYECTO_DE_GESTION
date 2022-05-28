@@ -50,13 +50,13 @@ class Entrega extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'evidencia' => 'Evidencia',
-            'fecha_entrega' => 'Fecha Entrega',
-            'hora_entrega' => 'Hora Entrega',
+            'id' => 'Código entrega',
+            'evidencia' => 'Archivo adjunto',
+            'fecha_entrega' => 'Fecha entrega',
+            'hora_entrega' => 'Hora entrega',
             'comentarios' => 'Comentarios',
-            'id_proyecto' => 'Id Proyecto',
-            'id_hito' => 'Id Hito',
+            'id_proyecto' => 'Código del proyecto',
+            'id_hito' => 'Código hito',
         ];
     }
 
