@@ -72,10 +72,15 @@ AppAsset::register($this);
     </div>
 </main>
 
+
+
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="float-right"><?= Yii::powered() ?></p>
+
+        <p class="float-left"><img src="<?= Yii::$app->request->baseUrl.'/images/logo1.png'?> "width="30" height="40"> Universidad del Bio-Bio <?= date('Y') ?></p>
+        
+        <p class="float-right"><img src="<?= Yii::$app->request->baseUrl.'/images/logo2.png'?> "width="50" height="60"> Ingeniería Civil en Informática </p>
+        
     </div>
 </footer>
 
