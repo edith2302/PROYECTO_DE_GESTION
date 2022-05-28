@@ -17,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Hito', ['create'], ['class' => 'btn btn-success']) ?>
+    <p align="right">
+        <?= Html::a('Agregar Hito', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,15 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'nombre',
             'descripcion',
             'fecha_habilitacion',
             'hora_habilitacion',
-            //'fecha_limite',
-            //'hora_limite',
-            //'tipo_hito',
-            //'porcentaje_nota',
+            'fecha_limite',
+            'hora_limite',
+            'tipo_hito',
+            'porcentaje_nota',
             //'id_rubrica',
             //'id_profe_asignatura',
             [

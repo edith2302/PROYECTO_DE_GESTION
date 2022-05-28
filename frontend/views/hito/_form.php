@@ -13,33 +13,20 @@ use yii\jui\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nombre')->textInput(['placeholder' => "Nombre del hito"],['maxlength' => true] )?>
 
-    <?= $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'descripcion')->textInput(['placeholder' => "Descripción del hito"],['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fecha_habilitacion')->widget(
-            DatePicker::className(), [
-                'inline' => false,
-                'language'=>'es',
-                'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'dd-mm-yyyy'
-                ]
-        ]);?>
-
+    <div class="col-md">
+        <?= $form->field($model, 'fecha_habilitacion')->textInput(['type' => 'date']) ?>
+    </div>
     <div class="col-md">
         <?= $form->field($model, 'hora_habilitacion')->textInput(['type' => 'time']) ?>
     </div>
 
-    <?= $form->field($model, 'fecha_limite')->widget(
-            DatePicker::className(), [
-                'inline' => false,
-                'language'=>'es',
-                'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'dd-mm-yyyy'
-                ]
-        ]);?>
+    <div class="col-md">
+        <?= $form->field($model, 'fecha_limite')->textInput(['type' => 'date']) ?>
+    </div>
 
     <div class="col-md">
         <?= $form->field($model, 'hora_limite')->textInput(['type' => 'time']) ?>
@@ -59,7 +46,7 @@ use yii\jui\DatePicker;
             ?>
     </div>
 
-    <?= $form->field($model, 'porcentaje_nota')->textInput() ?>
+    <?= $form->field($model, 'porcentaje_nota')->textInput(['placeholder' => "100%"]) ?>
 
     
 
