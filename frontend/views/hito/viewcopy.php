@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id_profe_asignatura',
         ],
     ]) ?>
-    <p align="right">
+    <p align="center">
         <?= Html::a('Agregar entrega', ['site/upload'], ['class' => 'btn btn-primary']) ?>
        
         

@@ -37,7 +37,7 @@ class SiteController extends Controller
             if ($model->file && $model->validate()) {
                 foreach ($model->file as $file) {
                     $file->saveAs('archivos/' . $file->baseName . '.' . $file->extension);
-                    $msg = "<p><strong class='label label-info'>Enhorabuena, subida realizada con éxito</strong></p>";
+                    $msg = "<p><strong class='label label-info'>Entrega realizada con éxito</strong></p>";
                 }
             }
         }
