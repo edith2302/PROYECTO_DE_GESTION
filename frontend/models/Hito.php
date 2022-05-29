@@ -55,7 +55,7 @@ class Hito extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'Código hito',
             'nombre' => 'Nombre',
             'descripcion' => 'Descripción',
             'fecha_habilitacion' => 'Fecha Habilitación',
@@ -65,7 +65,7 @@ class Hito extends \yii\db\ActiveRecord
             'tipo_hito' => 'Tipo Hito',
             'porcentaje_nota' => 'Porcentaje Nota',
             'id_rubrica' => 'Rúbrica',
-            'id_profe_asignatura' => 'Profe Asignatura',
+            'id_profe_asignatura' => 'Profesor asignatura',
         ];
     }
 

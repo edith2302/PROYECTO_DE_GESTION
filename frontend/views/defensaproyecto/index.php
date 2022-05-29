@@ -17,9 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Agregar defensa de proyecto', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -53,6 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
+
+            
            [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Defensaproyecto $model, $key, $index, $column) {
@@ -62,5 +62,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+<p align="right">
+      <?= Html::a('Agregar defensa de proyecto', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 </div>

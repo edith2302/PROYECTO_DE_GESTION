@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
             
-            [
+            /*[
                 'attribute'=>'descripcion',
                 'value'=>function ($model) { return $model->descripcion; },
                 //'filter'=>false,
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],
+            ],*/
 
             
             [
@@ -124,6 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => ActionColumn::className(),
+                'template'=>'{view}',
                 'urlCreator' => function ($action, Hito $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }

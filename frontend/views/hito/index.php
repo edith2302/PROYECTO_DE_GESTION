@@ -17,13 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p align="right">
-        <?= Html::a('Agregar Hito', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <p align="right">
-        <?= Html::a('Hito', ['indexcopy'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
     
 
@@ -36,16 +30,100 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'nombre',
-            'descripcion',
-            'fecha_habilitacion',
-            'hora_habilitacion',
-            'fecha_limite',
-            'hora_limite',
-            'tipo_hito',
-            'porcentaje_nota',
+            //'nombre',
+            //'descripcion',
+            //'fecha_habilitacion',
+            //'hora_habilitacion',
+           // 'fecha_limite',
+           // 'hora_limite',
+            //'tipo_hito',
+            //'porcentaje_nota',
             //'id_rubrica',
             //'id_profe_asignatura',
+
+            [
+                'attribute'=>'nombre',
+                'value'=>function ($model) { return $model->nombre; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            /*[
+                'attribute'=>'descripcion',
+                'value'=>function ($model) { return $model->descripcion; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],*/
+
+            [
+                'attribute'=>'fecha_habilitacion',
+                'value'=>function ($model) { return $model->fecha_habilitacion; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'attribute'=>'hora_habilitacion',
+                'value'=>function ($model) { return $model->hora_habilitacion; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'attribute'=>'fecha_limite',
+                'value'=>function ($model) { return $model->fecha_limite; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'attribute'=>'hora_limite',
+                'value'=>function ($model) { return $model->hora_limite; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'attribute'=>'tipo_hito',
+                'value'=>function ($model) { return $model->tipo_hito; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'attribute'=>'porcentaje_nota',
+                'value'=>function ($model) { return $model->porcentaje_nota; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+
+
+
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Hito $model, $key, $index, $column) {
@@ -54,6 +132,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+
+    <p align="right">
+        <?= Html::a('Agregar Hito', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <p align="right">
+        <?= Html::a('Lista hitos', ['indexcopy'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 
 </div>

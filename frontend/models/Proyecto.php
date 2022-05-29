@@ -55,16 +55,16 @@ class Proyecto extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'Código proyecto',
             'nombre' => 'Nombre',
             'descripcion' => 'Descripción',
-            'num_integrantes' => 'Integrantes',
+            'num_integrantes' => 'N° Integrantes',
             'tipo' => 'Tipo',
             'area' => 'Área',
             'estado' => 'Estado',
             'disponibilidad' => 'Disponibilidad',
-            'id_profe_guia' => 'Id Profe Guía',
-            'id_autor' => 'Id Autor',
+            'id_profe_guia' => 'Código profesor guía',
+            'id_autor' => 'Código autor',
         ];
     }
 

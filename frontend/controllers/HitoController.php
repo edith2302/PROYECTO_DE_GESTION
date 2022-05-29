@@ -71,6 +71,13 @@ class HitoController extends Controller
         ]);
     }
 
+    public function actionViewcopy($id)
+    {
+        return $this->render('viewcopy', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
     
 
     /**
