@@ -21,6 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Agregar Hito', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <p align="right">
+        <?= Html::a('Hito', ['indexcopy'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([

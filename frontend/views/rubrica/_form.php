@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="rubrica-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    <?= $form->field($model, 'nombre')->textInput() ?>
     <?= $form->field($model, 'descripción')->textInput() ?>
 
     <?= $form->field($model, 'escala')->textInput() ?>
@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'id_profe_asignatura')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

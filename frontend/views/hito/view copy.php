@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'nombre',
             'descripcion',
             'fecha_habilitacion',
@@ -27,25 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'hora_limite',
             'tipo_hito',
             'porcentaje_nota',
-            'id_rubrica',
-            'id_profe_asignatura',
+            //'id_rubrica',
+            //'id_profe_asignatura',
         ],
     ]) ?>
     <p>
-        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '¿Estás seguro de que deseas eliminar éste elemento?',
-                'method' => 'post',
-            ],
-        ]) ?>
-
-
         <?= Html::a('Agregar entrega', ['site/upload'], ['class' => 'btn btn-primary']) ?>
        
-        
+        ]) ?>
     </p>
-    
 
 </div>

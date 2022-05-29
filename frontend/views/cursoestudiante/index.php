@@ -42,12 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
-            /*[
+            [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Cursoestudiante $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
-            ],*/
+            ],
         ],
     ]); ?>
 

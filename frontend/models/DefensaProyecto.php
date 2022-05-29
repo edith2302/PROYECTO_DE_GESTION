@@ -46,8 +46,8 @@ class Defensaproyecto extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'Código defensa',
-            'nombre' => 'Nombre presentación',
-            'fecha' => 'Fecha presentación',
+            'nombre' => 'Nombre proyecto',
+            'fecha' => 'Fecha defensa',
             'id_proyecto' => 'Código del proyecto',
         ];
     }

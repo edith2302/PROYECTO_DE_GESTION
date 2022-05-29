@@ -34,7 +34,7 @@ class Rubrica extends \yii\db\ActiveRecord
             [['nombre','descripción', 'escala', 'id_profe_asignatura'], 'required'],
             [['escala', 'id_profe_asignatura'], 'integer'],
             [['nombre'], 'string', 'max' => 100],
-            [['descripción'], 'string', 'max' => 500],
+            [['descripción'], 'string', 'max' => 1000],
             [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorasignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
         ];
     }
@@ -45,10 +45,11 @@ class Rubrica extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'Código rúbrica',
+            'nombre' => 'Nombre rúbrica',
             'descripción' => 'Descripción',
             'escala' => 'Escala',
-            'id_profe_asignatura' => 'Id Profe Asignatura',
+            'id_profe_asignatura' => 'Código profesor asignatura',
         ];
     }
 

@@ -47,6 +47,17 @@ class HitoController extends Controller
         ]);
     }
 
+    public function actionIndexcopy()
+    {
+        $searchModel = new HitoSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('indexcopy', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Hito model.
      * @param int $id ID
@@ -59,6 +70,8 @@ class HitoController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
+    
 
     /**
      * Creates a new Hito model.

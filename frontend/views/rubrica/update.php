@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Rubrica */
 
-$this->title = 'Update Rubrica: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Rubricas', 'url' => ['index']];
+$this->title = 'Modificar rúbrica: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Rúbricas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
