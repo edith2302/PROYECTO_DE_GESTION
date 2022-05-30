@@ -69,7 +69,10 @@ use app\models\Rubrica;
     </div>
     
     <div class="form-group">
+    <p align="right">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+
+    <p>
     </div>
 
     <?php ActiveForm::end(); ?>

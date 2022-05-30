@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_profe_asignatura',
         ],
     ]) ?>
-    <p>
+    <p align="right">
         <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',

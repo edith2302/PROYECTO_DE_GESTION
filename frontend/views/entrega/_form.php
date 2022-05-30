@@ -25,7 +25,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'id_hito')->textInput() ?>
 
     <div class="form-group">
+    <p align="right">
         <?= Html::submitButton('Guardar entrega', ['class' => 'btn btn-success']) ?>
+    <p>
     </div>
 
     <?php ActiveForm::end(); ?>
