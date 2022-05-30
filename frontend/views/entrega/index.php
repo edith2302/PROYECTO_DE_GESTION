@@ -36,6 +36,17 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id_hito',
 
             [
+
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ($model->evidencia != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model->evidencia, ['target' => '_blank']) : '';
+                    },
+                ],
+            ],
+            
+            /*[
                 'attribute'=>'evidencia',
                 'value'=>function ($model) { return $model->evidencia; },
                 //'filter'=>false,
@@ -43,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],
+            ],*/
 
 
             [
