@@ -7,7 +7,10 @@ use app\models\EntregaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use app\models\FormUpload;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
+use Yii;
 /**
  * EntregaController implements the CRUD actions for Entrega model.
  */
@@ -68,13 +71,27 @@ class EntregaController extends Controller
     public function actionCreate()
     {
         $model = new Entrega();
+        $model->fecha_entrega = date('Y-m-d');
+        $model->hora_entrega = date('H:i:s');;
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            if(UploadedFile::getInstance($model,'evidencia') != '') {
+
+                $pdfFile = UploadedFile::getInstance($model, 'evidencia');
+        
+                if (isset($pdfFile->size)) {
+                    $pdfFile->saveAs('archivos/' . $model->proyecto->nombre .'----'. $model->fecha_entrega .'----'. $model->hito->nombre .'.' . $pdfFile->extension);
+                }
+
+                $model->evidencia = 'archivos/' . $model->proyecto->nombre .'----'. $model->fecha_entrega .'----'. $model->hito->nombre .'.' . $pdfFile->extension;
+                $model->save(false);
+
             }
-        } else {
-            $model->loadDefaultValues();
+
+            $model->save(false);
+
+            return $this->redirect('../views/entrega');
         }
 
         return $this->render('create', [
@@ -92,6 +109,30 @@ class EntregaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        $model->fecha_entrega = date('Y-m-d');
+        $model->hora_entrega = date('H:i:s');;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            if(UploadedFile::getInstance($model,'evidencia') != '') {
+
+                $pdfFile = UploadedFile::getInstance($model, 'evidencia');
+        
+                if (isset($pdfFile->size)) {
+                    $pdfFile->saveAs('archivos/' . $model->proyecto->nombre .'----'. $model->fecha_entrega .'----'. $model->hito->nombre .'.' . $pdfFile->extension);
+                }
+
+                $model->evidencia = 'archivos/' . $model->proyecto->nombre .'----'. $model->fecha_entrega .'----'. $model->hito->nombre .'.' . $pdfFile->extension;
+                $model->save(false);
+
+            }
+
+            $model->save(false);
+
+            
+        }
+
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

@@ -37,7 +37,7 @@ class Entrega extends \yii\db\ActiveRecord
             [['evidencia', 'fecha_entrega', 'hora_entrega', 'comentarios', 'id_proyecto', 'id_hito'], 'required'],
             [['fecha_entrega', 'hora_entrega'], 'safe'],
             [['id_proyecto', 'id_hito'], 'integer'],
-            [['evidencia'], 'string', 'max' => 300],
+            [['evidencia'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf, txt, doc, rar, png, jpg, docx', 'maxSize' => 1024*1024*20],
             [['comentarios'], 'string', 'max' => 1000],
             [['id_hito'], 'exist', 'skipOnError' => true, 'targetClass' => Hito::className(), 'targetAttribute' => ['id_hito' => 'id']],
             [['id_proyecto'], 'exist', 'skipOnError' => true, 'targetClass' => Proyecto::className(), 'targetAttribute' => ['id_proyecto' => 'id']],

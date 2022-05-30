@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Usuario;
+use app\models\Profesorguia;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Proyecto */
@@ -67,9 +70,26 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'disponibilidad')->textInput() ?>
 
-    <?= $form->field($model, 'id_profe_guia')->textInput() ?>
 
-    <?= $form->field($model, 'id_autor')->textInput() ?>
+    <?= $form->field($model, 'id_profe_guia')->dropDownList(\yii\helpers\ArrayHelper::map(Usuario::find()->all(),'id', 'nombre'),['prompt' => 'Seleccionar profesor guía']);?>
+
+
+        <div class="col-md">
+            <?= $form->field($model, 'id_profe_guia')
+                ->dropDownList(
+                    ArrayHelper::map(
+                        Profesorguia::find()->all(),
+                        'id',
+                        function ($query) {
+                            return $query->usuario->nombre;
+                        },
+                        
+                    ),
+                    ['prompt' => 'Seleccione ptofesor guía'])?>
+         </div>
+      
+
+   
 
 
     
