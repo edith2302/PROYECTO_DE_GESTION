@@ -96,7 +96,7 @@ class HitoController extends Controller
         if ($this->request->isPost) {
             if ($model->load(Yii:: $app->request->post()) && $model->save()) {
 
-                Yii:: $app->session->setFlash('success','El hito ha sido creado con exito');
+                Yii:: $app->session->setFlash('success','El hito ha sido creado con éxito');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -121,7 +121,7 @@ class HitoController extends Controller
 
         if (Yii:: $app->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
-            Yii:: $app->session->setFlash('success','El hito ha sido modificado con exito');
+            Yii:: $app->session->setFlash('success','El Rol se ha modificado con éxito');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

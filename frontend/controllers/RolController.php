@@ -7,6 +7,8 @@ use app\models\RolSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
+use yii2mod\alert\Alert;
 
 /**
  * RolController implements the CRUD actions for Rol model.
@@ -71,6 +73,7 @@ class RolController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+                Yii:: $app->session->setFlash('success','El Rol ha sido creado con éxito');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -94,6 +97,7 @@ class RolController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            Yii:: $app->session->setFlash('success','El Rol se ha modificado con éxito');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
