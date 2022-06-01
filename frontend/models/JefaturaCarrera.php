@@ -40,8 +40,8 @@ class Jefaturacarrera extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'id_usuario' => 'Id Usuario',
+            'id' => 'Código Jefatura de carrera',
+            'id_usuario' => 'Código usuario',
         ];
     }
 

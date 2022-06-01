@@ -43,9 +43,9 @@ class Profesoricinf extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'Código profesor ICINF',
             'area' => 'Área',
-            'id_usuario' => 'Id Usuario',
+            'id_usuario' => 'Código usuario',
         ];
     }
 

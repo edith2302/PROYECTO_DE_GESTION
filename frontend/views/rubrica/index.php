@@ -10,16 +10,14 @@ use app\models\Rubrica;
 /* @var $searchModel app\models\RubricaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Rubricas';
+$this->title = 'Lista de rúbricas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rubrica-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Agregar Rúbrica', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -46,8 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'attribute'=>'descripcion',
-                'value'=>function ($model) { return $model->descripcion; },
+                'attribute'=>'descripción',
+                'value'=>function ($model) { return $model->descripción; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
@@ -58,14 +56,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-           /* [
+            [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Rubrica $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
-            ],*/
+            ],
         ],
     ]); ?>
+
+   <p align="right">
+        <?= Html::a('Agregar Rúbrica', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
 
 
 </div>

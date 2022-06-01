@@ -43,12 +43,12 @@ use app\models\Rubrica;
             <?php
             echo $form->field($model, 'tipo_hito')->dropDownList(
                 [
-                    '0' => 'Informe',
+                    '0' => 'Informe (Avance)',
                     '1' => 'Presentación',
                     '2' => 'Defesa de proyecto',
                     '3' => 'Informe final',
                 ],
-                ['prompt' => 'Selección tipo de hito']
+                ['prompt' => 'Seleccionar tipo de hito']
             );
             ?>
     </div>
@@ -59,11 +59,11 @@ use app\models\Rubrica;
         <div class="row">
 
             <div class="col-lg-4">
-                <?= $form->field($model, 'id_rubrica')->dropDownList(\yii\helpers\ArrayHelper::map(Rubrica::find()->all(),'id', 'nombre'),['prompt' => 'Seleccionar rubrica']);?>
+                <?= $form->field($model, 'id_rubrica')->dropDownList(\yii\helpers\ArrayHelper::map(Rubrica::find()->all(),'id', 'nombre'),['prompt' => 'Seleccionar rúbrica']);?>
             </div>   
 
             <div class="col-lg-4">
-                <?= Html::a('Agregar Rubrica', ['rubrica/create'], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Agregar Rúbrica', ['rubrica/create'], ['class' => 'btn btn-primary']) ?>
             </div>
         </div>
     </div>

@@ -42,8 +42,8 @@ class Estudiante extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'id_usuario' => 'Id Usuario',
+            'id' => 'Código estudiante',
+            'id_usuario' => 'Código usuario',
         ];
     }
 

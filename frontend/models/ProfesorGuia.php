@@ -41,7 +41,7 @@ class Profesorguia extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'Código profesor guía',
             'id_usuario' => 'Id Usuario',
         ];
     }

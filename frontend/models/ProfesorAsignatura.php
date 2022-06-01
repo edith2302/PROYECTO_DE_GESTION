@@ -43,8 +43,8 @@ class Profesorasignatura extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'id_usuario' => 'Id Usuario',
+            'id' => 'Código profesor asignatura',
+            'id_usuario' => 'Código usuario',
         ];
     }
 

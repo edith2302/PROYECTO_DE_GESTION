@@ -7,6 +7,9 @@ use app\models\HitoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
+use yii2mod\alert\Alert;
+//use common\widgets\Alert;
 
 /**
  * HitoController implements the CRUD actions for Hito model.
@@ -91,7 +94,9 @@ class HitoController extends Controller
         //$model->id_profe_asignatura = Yii::app()->user->getId();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load(Yii:: $app->request->post()) && $model->save()) {
+
+                Yii:: $app->session->setFlash('success','El hito ha sido creado con exito');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -114,7 +119,9 @@ class HitoController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if (Yii:: $app->request->isPost && $model->load($this->request->post()) && $model->save()) {
+
+            Yii:: $app->session->setFlash('success','El hito ha sido modificado con exito');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

@@ -19,7 +19,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'id_profe_asignatura')->textInput() ?>
 
     <div class="form-group">
+    <p align="right">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+
+    <p>
     </div>
 
     <?php ActiveForm::end(); ?>
