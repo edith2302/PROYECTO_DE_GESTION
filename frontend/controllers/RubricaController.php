@@ -7,7 +7,7 @@ use app\models\RubricaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use Yii;
 /**
  * RubricaController implements the CRUD actions for Rubrica model.
  */
@@ -70,7 +70,9 @@ class RubricaController extends Controller
         $model = new Rubrica();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load(Yii:: $app->request->post()) && $model->save()) {
+
+                Yii:: $app->session->setFlash('success','La rúbrica ha sido creada con exito');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -93,7 +95,9 @@ class RubricaController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ( Yii:: $app->request->isPost && $model->load($this->request->post()) && $model->save()) {
+
+            Yii:: $app->session->setFlash('success','La  rúbrica ha sido modificada con exito');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
