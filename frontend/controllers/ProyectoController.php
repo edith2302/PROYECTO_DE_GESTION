@@ -7,6 +7,7 @@ use app\models\ProyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * ProyectoController implements the CRUD actions for Proyecto model.
@@ -47,6 +48,17 @@ class ProyectoController extends Controller
         ]);
     }
 
+    public function actionIndexcopy()
+    {
+        $searchModel = new ProyectoSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('indexcopy', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Proyecto model.
      * @param int $id ID
@@ -60,6 +72,14 @@ class ProyectoController extends Controller
         ]);
     }
 
+    public function actionViewcopy($id)
+    {
+        return $this->render('viewcopy', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+
     /**
      * Creates a new Proyecto model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -71,7 +91,9 @@ class ProyectoController extends Controller
         //$model->id_autor = Yii::app()->user->getId();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load(Yii:: $app->request->post()) && $model->save()) {
+
+                Yii:: $app->session->setFlash('success','La propuesta de proyecto ha sido agragada con éxito');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {

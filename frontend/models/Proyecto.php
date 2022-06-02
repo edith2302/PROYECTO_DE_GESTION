@@ -63,8 +63,8 @@ class Proyecto extends \yii\db\ActiveRecord
             'area' => 'Área',
             'estado' => 'Estado',
             'disponibilidad' => 'Disponibilidad',
-            'id_profe_guia' => 'Código profesor guía',
-            'id_autor' => 'Código autor',
+            'id_profe_guia' => 'Profesor guía',
+            'id_autor' => 'Autor',
         ];
     }
 

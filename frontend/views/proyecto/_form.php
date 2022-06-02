@@ -71,7 +71,7 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'disponibilidad')->textInput() ?>
 
 
-    <?= $form->field($model, 'id_profe_guia')->dropDownList(\yii\helpers\ArrayHelper::map(Usuario::find()->all(),'id', 'nombre'),['prompt' => 'Seleccionar profesor guía']);?>
+    
 
 
         <div class="col-md">
@@ -85,7 +85,7 @@ use yii\helpers\ArrayHelper;
                         },
                         
                     ),
-                    ['prompt' => 'Seleccione ptofesor guía'])?>
+                    ['prompt' => 'Seleccione profesor guía'])?>
          </div>
       
 
@@ -96,7 +96,7 @@ use yii\helpers\ArrayHelper;
     <div class="form-group">
 
     <p align="right">
-        <?= Html::submitButton('Subir propuesta', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
 
         <p>
     </div>

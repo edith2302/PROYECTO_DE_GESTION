@@ -87,20 +87,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
-
-            [
-                'attribute'=>'disponibilidad',
-                'value'=>function ($model) { return $model->disponibilidad; },
-                //'filter'=>false,
-                'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],
             [
                 'class' => ActionColumn::className(),
+                'template'=>'{view}',
                 'urlCreator' => function ($action, Proyecto $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
+                    $url ='index.php?r=proyecto%2Fviewcopy&id='.$model->id;
+                    return $url;
                  }
             ],
         ],
@@ -110,8 +102,5 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Agregar propuesta', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <p align="right">
-        <?= Html::a('Lista propuestas', ['indexcopy'], ['class' => 'btn btn-success']) ?>
-    </p>
 
 </div>
