@@ -1,91 +1,66 @@
 <?php
 
-/** @var \yii\web\View $this */
-/** @var string $content */
+/* @var $this \yii\web\View */
+/* @var $content string */
 
-//use common\widgets\Alert;
-use yii2mod\alert\Alert;
-use frontend\assets\AppAsset;
-use yii\bootstrap4\Breadcrumbs;
-use yii\bootstrap4\Html;
-use yii\bootstrap4\Nav;
-use yii\bootstrap4\NavBar;
+use yii\helpers\Html;
 
-AppAsset::register($this);
+
+if(Yii::$app->controller->action->id === 'login'){
+    echo $this->render(
+        'main-login',
+        ['content' => $cintent]
+    );
+}else{
+
+
+
+\hail812\adminlte3\assets\FontAwesomeAsset::register($this);
+\hail812\adminlte3\assets\AdminLteAsset::register($this);
+$this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
+
+$assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
+
+$publishedRes = Yii::$app->assetManager->publish('@vendor/hail812/yii2-adminlte3/src/web/js');
+$this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\hail812\adminlte3\assets\AdminLteAsset']);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
+<html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="d-flex flex-column h-100">
+<body class="hold-transition sidebar-mini">
 <?php $this->beginBody() ?>
 
-<header>
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'Anteproyecto de títulos',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'Subir', 'url' => ['/site/upload']],
-        ['label' => 'Consultas API', 'url' => ['/site/consultas-api']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav ml-auto'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
-</header>
+<div class="wrapper">
+    <!-- Navbar -->
+    <?= $this->render('navbar', ['assetDir' => $assetDir]) ?>
+    <!-- /.navbar -->
 
-<main role="main" class="flex-shrink-0">
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
-</main>
+    <!-- Main Sidebar Container -->
+    <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
 
+    <!-- Content Wrapper. Contains page content -->
+    <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
+    <!-- /.content-wrapper -->
 
+    <!-- Control Sidebar -->
+    <?= $this->render('control-sidebar') ?>
+    <!-- /.control-sidebar -->
 
-<footer class="footer mt-auto py-3 text-muted">
-    <div class="container">
-
-        <p class="float-left"><img src="<?= Yii::$app->request->baseUrl.'/images/logo1.png'?> "width="45" height="60"> Universidad del Bio-Bio <?= date('Y') ?></p>
-        
-        <p class="float-right"><img src="<?= Yii::$app->request->baseUrl.'/images/logo3.png'?> "width="180" height="60"> </p>
-        
-    </div>
-</footer>
+    <!-- Main Footer -->
+    <?= $this->render('footer') ?>
+</div>
 
 <?php $this->endBody() ?>
 </body>
 </html>
-<?php $this->endPage();
+<?php $this->endPage() ?>
+
+<?php }?>
