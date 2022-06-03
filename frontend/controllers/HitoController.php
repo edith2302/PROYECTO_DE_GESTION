@@ -50,12 +50,12 @@ class HitoController extends Controller
         ]);
     }
 
-    public function actionIndexcopy()
+    public function actionIndexestudiante()
     {
         $searchModel = new HitoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('indexcopy', [
+        return $this->render('indexestudiante', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -74,9 +74,9 @@ class HitoController extends Controller
         ]);
     }
 
-    public function actionViewcopy($id)
+    public function actionViewestudiante($id)
     {
-        return $this->render('viewcopy', [
+        return $this->render('viewestudiante', [
             'model' => $this->findModel($id),
         ]);
     }

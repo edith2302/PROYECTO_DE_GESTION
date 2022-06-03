@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 0px;text-align: center;'],
             ],
 
            /* [
@@ -108,10 +108,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p align="right">
         <?= Html::a('Agregar propuesta', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <p align="right">
-        <?= Html::a('Lista propuestas', ['indexcopy'], ['class' => 'btn btn-success']) ?>
     </p>
 
 </div>

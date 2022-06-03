@@ -91,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'template'=>'{view}',
                 'urlCreator' => function ($action, Proyecto $model, $key, $index, $column) {
-                    $url ='index.php?r=proyecto%2Fviewcopy&id='.$model->id;
+                    $url ='index.php?r=proyecto%2Fviewprofesor&id='.$model->id;
                     return $url;
                  }
             ],

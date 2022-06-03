@@ -34,15 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     
-    <p align="right">
-        <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '¿Está seguro/a de eliminar la propuesta de la lista?',
-                'method' => 'post',
-            ],
-        ]) ?>
+    <p align="center">
+    <?= Html::a('Inscribir propuesta', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
 </div>

@@ -54,8 +54,26 @@
                     [
                         'label' => 'Profesor asignatura',
                         'items' => [
-                            ['label' => 'Proyectos', 'iconStyle' => 'far'],
-                            /*[
+                            ['label' => 'Proyectos', 'url' => ['proyecto/index'], 'iconStyle' => 'far'],
+                            [
+                                'label' => 'Actividades',
+                                'iconStyle' => 'far',
+                                'items' => [
+                                    ['label' => 'Hitos', 'url' => ['hito/index'], 'iconStyle' => 'far'],
+                                    ['label' => 'Módulos', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
+                                   
+                                ]
+                            ],
+
+                        ]
+                    ],
+                    [
+                        'label' => 'Estudiante',
+                        'items' => [
+                            //['label' => 'Level2', 'iconStyle' => 'far'],
+                            ['label' => 'Proyectos', 'url' => ['proyecto/indexestudiante'], 'iconStyle' => 'far'],
+                            ['label' => 'Hitos', 'url' => ['hito/indexestudiante'], 'iconStyle' => 'far'],
+                           /* [
                                 'label' => 'Level2',
                                 'iconStyle' => 'far',
                                 'items' => [
@@ -64,39 +82,13 @@
                                     ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
                                 ]
                             ],*/
-                            ['label' => 'Level2', 'iconStyle' => 'far']
-                        ]
-                    ],
-                    [
-                        'label' => 'Estudiante',
-                        'items' => [
-                            ['label' => 'Level2', 'iconStyle' => 'far'],
-                            [
-                                'label' => 'Level2',
-                                'iconStyle' => 'far',
-                                'items' => [
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
-                                ]
-                            ],
-                            ['label' => 'Level2', 'iconStyle' => 'far']
+                            //['label' => 'Level2', 'iconStyle' => 'far']
                         ]
                     ],
                     [
                         'label' => 'Profesor ICINF',
                         'items' => [
-                            ['label' => 'Level2', 'iconStyle' => 'far'],
-                            [
-                                'label' => 'Level2',
-                                'iconStyle' => 'far',
-                                'items' => [
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
-                                ]
-                            ],
-                            ['label' => 'Level2', 'iconStyle' => 'far']
+                            ['label' => 'Proyectos', 'url' => ['proyecto/indexprofesor'], 'iconStyle' => 'far'],
                         ]
                     ],
                     [
