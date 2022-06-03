@@ -7,6 +7,10 @@ use app\models\ModuloSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\FormUpload;
+use app\models\UploadForm;
+use yii\web\UploadedFile;
+use Yii;
 
 /**
  * ModuloController implements the CRUD actions for Modulo model.
@@ -80,17 +84,35 @@ class ModuloController extends Controller
     {
         $model = new Modulo();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            if(UploadedFile::getInstance($model,'archivo') != '') {
+
+                $pdfFile = UploadedFile::getInstance($model, 'archivo');
+        
+                if (isset($pdfFile->size)) {
+                    $pdfFile->saveAs('modulos/' . $pdfFile->name);
+                }
+
+                $model->archivo = 'modulos/' . $pdfFile->name;
+                $model->save(false);
+
             }
-        } else {
-            $model->loadDefaultValues();
+
+            $model->save(false);
+
+            return $this->redirect('../views/modulo');
         }
 
         return $this->render('create', [
             'model' => $model,
         ]);
+
+
+
+
+
+
     }
 
     /**
