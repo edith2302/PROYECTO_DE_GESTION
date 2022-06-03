@@ -1,7 +1,5 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.1.0
-    </div>
+        <p class="float-left"><img src="<?= Yii::$app->request->baseUrl.'/images/logo1.png'?> "width="45" height="60"> Universidad del Bio-Bio <?= date('Y') ?></p>
+        
+        <p class="float-right"><img src="<?= Yii::$app->request->baseUrl.'/images/logo3.png'?> "width="180" height="60"> </p>
 </footer>
