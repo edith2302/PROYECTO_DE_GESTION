@@ -2,20 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\Rubrica;
-use app\models\RubricaSearch;
+use app\models\Item;
+use app\models\ItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\Item;
-use app\models\Model;
-use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use Yii;
+
 /**
- * RubricaController implements the CRUD actions for Rubrica model.
+ * ItemController implements the CRUD actions for Item model.
  */
-class RubricaController extends Controller
+class ItemController extends Controller
 {
     /**
      * @inheritDoc
@@ -28,7 +24,7 @@ class RubricaController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST', 'GET'],
+                        'delete' => ['POST'],
                     ],
                 ],
             ]
@@ -36,13 +32,13 @@ class RubricaController extends Controller
     }
 
     /**
-     * Lists all Rubrica models.
+     * Lists all Item models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new RubricaSearch();
+        $searchModel = new ItemSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -52,7 +48,7 @@ class RubricaController extends Controller
     }
 
     /**
-     * Displays a single Rubrica model.
+     * Displays a single Item model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -65,58 +61,17 @@ class RubricaController extends Controller
     }
 
     /**
-     * Creates a new Rubrica model.
+     * Creates a new Item model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Rubrica();
-        $modelsItem = [new Item];
+        $model = new Item();
 
         if ($this->request->isPost) {
-            if ($model->load(Yii:: $app->request->post()) && $model->save()) {
-
-
-
-
-                $modelsItem = Model::createMultiple(Item::classname());
-                Model::loadMultiple($modelsItem, Yii::$app->request->post());
-
-                // validate all models
-                $valid = $model->validate();
-                $valid = Model::validateMultiple($modelsItem) && $valid;
-                
-                if ($valid) {
-                    $transaction = \Yii::$app->db->beginTransaction();
-                    try {
-                        if ($flag = $model->save(false)) {
-                            foreach ($modelsItem as $modelItem) 
-                            {
-                                $modelItem->id_rubrica = $model->id;
-                                if (! ($flag = $modelItem->save(false))) {
-                                    $transaction->rollBack();
-                                    break;
-                                }
-                            }
-                        }
-                        if ($flag) {
-                            $transaction->commit();
-                            return $this->redirect(['view', 'id' => $model->id]);
-                        }
-                    } catch (Exception $e) {
-                        $transaction->rollBack();
-                    }
-                }
-            
-
-                Yii:: $app->session->setFlash('success','La rúbrica ha sido creada con exito');
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
-            }else{
-                return $this->render('create', [
-                    'model' => $model,
-                    'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
-                ]);
             }
         } else {
             $model->loadDefaultValues();
@@ -128,7 +83,7 @@ class RubricaController extends Controller
     }
 
     /**
-     * Updates an existing Rubrica model.
+     * Updates an existing Item model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -138,9 +93,7 @@ class RubricaController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ( Yii:: $app->request->isPost && $model->load($this->request->post()) && $model->save()) {
-
-            Yii:: $app->session->setFlash('success','La  rúbrica ha sido modificada con exito');
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -150,7 +103,7 @@ class RubricaController extends Controller
     }
 
     /**
-     * Deletes an existing Rubrica model.
+     * Deletes an existing Item model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -164,15 +117,15 @@ class RubricaController extends Controller
     }
 
     /**
-     * Finds the Rubrica model based on its primary key value.
+     * Finds the Item model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Rubrica the loaded model
+     * @return Item the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Rubrica::findOne(['id' => $id])) !== null) {
+        if (($model = Item::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
