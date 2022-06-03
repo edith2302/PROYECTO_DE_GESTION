@@ -74,7 +74,7 @@ use yii\helpers\ArrayHelper;
     
 
 
-        <div class="col-md">
+    <div class="col-md">
             <?= $form->field($model, 'id_profe_guia')
                 ->dropDownList(
                     ArrayHelper::map(
@@ -86,20 +86,13 @@ use yii\helpers\ArrayHelper;
                         
                     ),
                     ['prompt' => 'Seleccione profesor guía'])?>
-         </div>
+    </div>
       
-
-   
-
-
-    
-    <div class="form-group">
 
     <p align="right">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
 
-        <p>
-    </div>
+    <p>
 
     <?php ActiveForm::end(); ?>
 

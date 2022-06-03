@@ -60,7 +60,7 @@
                                 'iconStyle' => 'far',
                                 'items' => [
                                     ['label' => 'Hitos', 'url' => ['hito/index'], 'iconStyle' => 'far'],
-                                    ['label' => 'Módulos', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
+                                    ['label' => 'Módulos', 'url' => ['modulo/index'], 'iconStyle' => 'far'],
                                    
                                 ]
                             ],
@@ -73,6 +73,7 @@
                             //['label' => 'Level2', 'iconStyle' => 'far'],
                             ['label' => 'Proyectos', 'url' => ['proyecto/indexestudiante'], 'iconStyle' => 'far'],
                             ['label' => 'Hitos', 'url' => ['hito/indexestudiante'], 'iconStyle' => 'far'],
+                            ['label' => 'Módulos', 'url' => ['modulo/indexestudiante'], 'iconStyle' => 'far'],
                            /* [
                                 'label' => 'Level2',
                                 'iconStyle' => 'far',
