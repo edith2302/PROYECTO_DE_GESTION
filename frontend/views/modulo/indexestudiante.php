@@ -25,16 +25,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'archivo',
-            'descripcion',
-            'id_profesor',
+            //'archivo',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Modulo $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ($model->archivo != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model->archivo, ['target' => '_blank']) : '';
+                    },
+                ],
             ],
+
+            'descripcion',
+
         ],
     ]); ?>
 
