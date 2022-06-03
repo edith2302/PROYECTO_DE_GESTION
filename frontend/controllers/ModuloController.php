@@ -83,6 +83,7 @@ class ModuloController extends Controller
     public function actionCreate()
     {
         $model = new Modulo();
+        $horaActual = date('H_i_s');
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -91,10 +92,10 @@ class ModuloController extends Controller
                 $pdfFile = UploadedFile::getInstance($model, 'archivo');
         
                 if (isset($pdfFile->size)) {
-                    $pdfFile->saveAs('modulos/' . $pdfFile->name);
+                    $pdfFile->saveAs('modulos/' . $horaActual.'_'.$pdfFile->name);
                 }
 
-                $model->archivo = 'modulos/' . $pdfFile->name;
+                $model->archivo = $horaActual.'_'.$pdfFile->name;
                 $model->save(false);
 
             }

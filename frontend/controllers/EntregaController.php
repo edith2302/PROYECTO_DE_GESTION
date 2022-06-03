@@ -72,7 +72,8 @@ class EntregaController extends Controller
     {
         $model = new Entrega();
         $model->fecha_entrega = date('Y-m-d');
-        $model->hora_entrega = date('H:i:s');;
+        $model->hora_entrega = date('H:i:s');
+        $horaActual = date('H_i_s');
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -81,10 +82,10 @@ class EntregaController extends Controller
                 $pdfFile = UploadedFile::getInstance($model, 'evidencia');
         
                 if (isset($pdfFile->size)) {
-                    $pdfFile->saveAs('archivos/' . $model->proyecto->nombre .'----'. $model->fecha_entrega .'----'. $model->hito->nombre .'.' . $pdfFile->extension);
+                    $pdfFile->saveAs('archivos/' . $model->proyecto->nombre.'_'.$model->hito->nombre .'_'.$model->fecha_entrega .'_'.$horaActual.'_' . $pdfFile->name);
                 }
 
-                $model->evidencia = 'archivos/' . $model->proyecto->nombre .'----'. $model->fecha_entrega .'----'. $model->hito->nombre .'.' . $pdfFile->extension;
+                $model->evidencia = $horaActual.'_'.$pdfFile->name;
                 $model->save(false);
 
             }
