@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Modulo */
 
-$this->title = 'Agregar Modulo';
-$this->params['breadcrumbs'][] = ['label' => 'Modulos', 'url' => ['index']];
+$this->title = 'Agregar Módulo';
+$this->params['breadcrumbs'][] = ['label' => 'Módulos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modulo-create">

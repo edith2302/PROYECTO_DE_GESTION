@@ -124,6 +124,7 @@ class RubricaController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'modelsItem'  => $modelsItem,
         ]);
     }
 

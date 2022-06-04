@@ -46,8 +46,8 @@ class Modulo extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'archivo' => 'Archivo',
-            'descripcion' => 'Descripcion',
-            'id_profesor' => 'Id Profesor',
+            'descripcion' => 'Descripción',
+            'id_profesor' => 'Profesor',
         ];
     }
 

@@ -10,7 +10,7 @@ use app\models\Modulo;
 /* @var $searchModel app\models\ModuloSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Modulos';
+$this->title = 'Módulos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modulo-index">
@@ -26,6 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'archivo',
+
+           
             [
 
                 'class' => 'yii\grid\ActionColumn',
@@ -37,8 +39,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
 
-            'descripcion',
+            //'descripcion',
 
+            [
+                'attribute'=>'descripcion',
+                'value'=>function ($model) { return $model->descripcion; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
         ],
     ]); ?>
 

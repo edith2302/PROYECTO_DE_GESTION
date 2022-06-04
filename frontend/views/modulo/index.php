@@ -10,7 +10,7 @@ use app\models\Modulo;
 /* @var $searchModel app\models\ModuloSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Modulos';
+$this->title = 'Módulos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modulo-index">
@@ -25,10 +25,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'archivo',
-            'descripcion',
-            'id_profesor',
+            //'id',
+            //'archivo',
+            //'descripcion',
+            //'id_profesor',
+
+            [
+                'attribute'=>'archivo',
+                'value'=>function ($model) { return $model->archivo; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'attribute'=>'descripcion',
+                'value'=>function ($model) { return $model->descripcion; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Modulo $model, $key, $index, $column) {
