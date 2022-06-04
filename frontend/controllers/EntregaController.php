@@ -50,6 +50,17 @@ class EntregaController extends Controller
         ]);
     }
 
+    public function actionEntregashito()
+    {
+        $searchModel = new EntregaSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('entregashito', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Entrega model.
      * @param int $id ID

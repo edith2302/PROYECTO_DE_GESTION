@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
 
 
-        <?= Html::a('Agregar entrega', ['site/upload'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Ver entregas', ['entrega/entregashito'], ['class' => 'btn btn-primary']) ?>
        
         
     </p>
