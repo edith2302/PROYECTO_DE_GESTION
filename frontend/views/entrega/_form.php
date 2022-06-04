@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'evidencia')->fileInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'comentarios')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'comentarios')->textarea(['maxlength' => true]) ?>
 
     
     <?= $form->field($model, 'id_proyecto')->dropDownList(\yii\helpers\ArrayHelper::map(Proyecto::find()->all(),'id', 'nombre'),['prompt' => 'Seleccionar proyecto']);?>

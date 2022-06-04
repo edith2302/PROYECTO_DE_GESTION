@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nota')->textInput() ?>
 
-    <?= $form->field($model, 'comentarios')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'comentarios')->textarea(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

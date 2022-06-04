@@ -40,7 +40,7 @@ class Proyecto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'descripcion', 'num_integrantes', 'tipo', 'area', 'estado', 'disponibilidad', 'id_profe_guia', 'id_autor'], 'required'],
+            [['nombre', 'descripcion', 'num_integrantes', 'tipo', 'area', 'estado', 'disponibilidad',  'id_autor'], 'required'],
             [['num_integrantes', 'tipo', 'area', 'estado', 'disponibilidad', 'id_profe_guia', 'id_autor'], 'integer'],
             [['nombre'], 'string', 'max' => 300],
             [['descripcion'], 'string', 'max' => 2000],

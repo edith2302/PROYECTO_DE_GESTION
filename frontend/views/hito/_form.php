@@ -16,7 +16,7 @@ use app\models\Rubrica;
 
     <?= $form->field($model, 'nombre')->textInput(['placeholder' => "Nombre del hito"],['maxlength' => true] )?>
 
-    <?= $form->field($model, 'descripcion')->textInput(['placeholder' => "Descripción del hito"],['maxlength' => true]) ?>
+    <?= $form->field($model, 'descripcion')->textarea(['placeholder' => "Descripción del hito"],['maxlength' => true]) ?>
 
     <div class="body-content">
         <div class="row">
@@ -53,7 +53,7 @@ use app\models\Rubrica;
             ?>
     </div>
 
-    <?= $form->field($model, 'porcentaje_nota')->textInput(['placeholder' => "100%"]) ?>
+    <?= $form->field($model, 'porcentaje_nota')->textInput(['placeholder' => "100"]) ?>
 
     <div class="body-content">
         <div class="row">

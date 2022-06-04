@@ -23,7 +23,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
 
     <div class="row">
     <div class="panel panel-default">
-        <div class="panel-heading"><h4><i class="glyphicon glyphicon-envelope"></i>Ítem</h4></div>
+        <div class="panel-heading"><h4><i class="glyphicon glyphicon-envelope"></i></h4></div>
         <div class="panel-body">
              <?php DynamicFormWidget::begin([
                 'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
@@ -61,7 +61,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                         ?>
                         <div class="row">
                             <div class="col-sm-6">
-                                <?= $form->field($modelItem, "[{$i}]descripcion")->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($modelItem, "[{$i}]descripcion")->textarea(['maxlength' => true]) ?>
                             </div>
                             <div class="col-sm-6">
                                 <?= $form->field($modelItem, "[{$i}]puntaje")->textInput(['maxlength' => true]) ?>

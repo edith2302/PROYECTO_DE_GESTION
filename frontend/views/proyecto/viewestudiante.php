@@ -34,8 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     
-    <p align="center">
+<p align="center">
     <?= Html::a('Inscribir propuesta', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
-
 </div>

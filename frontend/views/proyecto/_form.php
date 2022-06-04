@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'nombre')->textInput(['placeholder' => "Nombre del proyecto"],['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'descripcion')->textInput(['placeholder' => "Descripción del proyecto"],['maxlength' => true]) ?>
+    <?= $form->field($model, 'descripcion')->textarea(['placeholder' => "Descripción del proyecto"],['maxlength' => true]) ?>
 
     
     <div class="col-md">
