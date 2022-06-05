@@ -95,6 +95,13 @@ class ProyectoController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
+    public function actionViewestudianteproyinscrito($id)
+    {
+        return $this->render('viewestudianteproyinscrito', [
+            'model' => $this->findModel($id),
+        ]);
+    }
     
 
 

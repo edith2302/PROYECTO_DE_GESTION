@@ -27,14 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'tipo',
             'area',
             'estado',
-            //'disponibilidad',
+            'disponibilidad',//debe indicar que el estudiante ya lo ocupo
             'id_profe_guia',
             //'id_autor',
         ],
     ]) ?>
 
     
-<p align="center">
-    <?= Html::a('Inscribir propuesta', ['viewestudianteproyinscrito', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    </p>
+
 </div>

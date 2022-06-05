@@ -11,6 +11,7 @@ use app\models\Item;
 use app\models\Model;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+
 use Yii;
 /**
  * RubricaController implements the CRUD actions for Rubrica model.
