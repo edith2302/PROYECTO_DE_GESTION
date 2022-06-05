@@ -23,17 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
-            //'evidencia',
-            //'fecha_entrega',
-            //'hora_entrega',
-           // 'comentarios',
-            //'id_proyecto',
-            //'id_hito',
 
             [
 
@@ -41,25 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{link}',
                 'buttons' => [
                     'link' => function ($url, $model, $key) {
-                        return ($model->evidencia != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model->evidencia, ['target' => '_blank']) : '';
+                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model['evidencia'], ['target' => '_blank']) : '';
                     },
                 ],
             ],
-            
-            /*[
-                'attribute'=>'evidencia',
-                'value'=>function ($model) { return $model->evidencia; },
-                //'filter'=>false,
-                'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],*/
 
 
             [
                 'attribute'=>'fecha_entrega',
-                'value'=>function ($model) { return $model->fecha_entrega; },
+                'value'=>function ($model) { return $model['fecha_entrega']; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
@@ -69,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
   
             [
                 'attribute'=>'hora_entrega',
-                'value'=>function ($model) { return $model->hora_entrega; },
+                'value'=>function ($model) { return $model['hora_entrega']; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
@@ -77,14 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
             
-    
-            [
-                'class' => ActionColumn::className(),
-                'template'=>'{view}  {delete}',
-                'urlCreator' => function ($action, Entrega $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
         ],
     ]); ?>
 

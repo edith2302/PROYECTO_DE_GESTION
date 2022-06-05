@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\grid\ActionColumn;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Hito */
@@ -42,10 +44,54 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
 
 
-        <?= Html::a('Ver entregas', ['entrega/entregashito'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<a class="btn btn-primary" href="index.php?r=entrega/entregashito&id=' . $model->id . '">Ver Entregas</a>')?>
        
         
     </p>
     
 
 </div>
+
+<?= GridView::widget([
+        'dataProvider' => $modelhito,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+
+            [
+
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model['evidencia'], ['target' => '_blank']) : '';
+                    },
+                ],
+            ],
+
+
+            [
+                'attribute'=>'fecha_entrega',
+                'value'=>function ($model) { return $model['fecha_entrega']; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+  
+            [
+                'attribute'=>'hora_entrega',
+                'value'=>function ($model) { return $model['hora_entrega']; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+
+            
+        ],
+    ]); ?>
+

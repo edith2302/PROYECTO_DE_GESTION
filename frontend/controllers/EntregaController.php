@@ -52,22 +52,15 @@ class EntregaController extends Controller
         ]);
     }
     //se muestran todas las entregas por hito
-    public function actionEntregashito()
+    public function actionEntregashito($id)
     {
-        /*$model = new SqlDataProvider([
+        $model = new SqlDataProvider([
             'sql' => 'select * from entrega 
-            where fk_id_hito = ' . Yii::$app->user->identity->id,
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);*/
-        $searchModel = new EntregaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+            where id_hito = ' .$id,
+        ]);
 
         return $this->render('entregashito', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            //'dataProvider' => $model,
+            'dataProvider' => $model,
         ]);
     }
 
@@ -79,8 +72,13 @@ class EntregaController extends Controller
      */
     public function actionView($id)
     {
+        $modelhito = new SqlDataProvider([
+            'sql' => 'select * from entrega 
+            where id_hito = ' .$id,
+        ]);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'modelhito' => $modelhito,
         ]);
     }
 

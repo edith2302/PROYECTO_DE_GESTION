@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
 use yii2mod\alert\Alert;
+USE yii\data\SqlDataProvider;
 //use common\widgets\Alert;
 
 /**
@@ -69,9 +70,16 @@ class HitoController extends Controller
      */
     public function actionView($id)
     {
+        $modelhito = new SqlDataProvider([
+            'sql' => "select * from entrega 
+            where id_hito = ' $id'",
+        ]);
+        //return print_r( $modelhito);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'modelhito' => $modelhito,
         ]);
+    
     }
 
     public function actionViewestudiante($id)
