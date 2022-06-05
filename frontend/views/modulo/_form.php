@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'archivo')->fileInput(['maxlength' => true]) ?>
+    
 
     <?= $form->field($model, 'descripcion')->textarea(['maxlength' => true]) ?>
 
@@ -32,9 +32,16 @@ use yii\helpers\ArrayHelper;
                     ['prompt' => 'Seleccione profesor'])?>
     </div>
 
+    <?= $form->field($model, 'archivo')->fileInput(['maxlength' => true]) ?>
+   
     <div class="form-group">
+    <p align="right">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+
+    <p>
     </div>
+
+  
 
     <?php ActiveForm::end(); ?>
 

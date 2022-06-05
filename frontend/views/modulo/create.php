@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Modulo */
 
-$this->title = 'Agregar Módulo';
+$this->title = 'Agregar archivo al módulo';
 $this->params['breadcrumbs'][] = ['label' => 'Módulos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

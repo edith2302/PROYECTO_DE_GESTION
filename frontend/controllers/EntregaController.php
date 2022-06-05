@@ -11,6 +11,8 @@ use app\models\FormUpload;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
 use Yii;
+
+use yii\data\SqlDataProvider;
 /**
  * EntregaController implements the CRUD actions for Entrega model.
  */
@@ -49,15 +51,23 @@ class EntregaController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
+    //se muestran todas las entregas por hito
     public function actionEntregashito()
     {
+        /*$model = new SqlDataProvider([
+            'sql' => 'select * from entrega 
+            where fk_id_hito = ' . Yii::$app->user->identity->id,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);*/
         $searchModel = new EntregaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('entregashito', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            //'dataProvider' => $model,
         ]);
     }
 

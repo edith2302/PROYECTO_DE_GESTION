@@ -11,7 +11,12 @@ use yii\bootstrap4\NavBar;
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
+
+        <li class="nav-item">
+            <b class="nav-link"  style="color:black" style="font-size:100%"  href="#" role="button">Sistema de gestión</b>
+        </li>
     </ul>
+
       
 
 

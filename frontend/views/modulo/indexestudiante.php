@@ -10,7 +10,7 @@ use app\models\Modulo;
 /* @var $searchModel app\models\ModuloSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Módulos';
+$this->title = 'Documentos de apoyo';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modulo-index">
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'archivo',
 
            
-            [
+            /*[
 
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{link}',
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return ($model->archivo != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model->archivo, ['target' => '_blank']) : '';
                     },
                 ],
-            ],
+            ],*/
 
             //'descripcion',
 
@@ -49,6 +49,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ($model->archivo != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model->archivo, ['target' => '_blank']) : '';
+                    },
+                ],
             ],
         ],
     ]); ?>
