@@ -72,7 +72,7 @@ use yii\helpers\ArrayHelper;
 
 
     
-
+    <?= $form->field($model, 'id_autor')->textInput() ?>
 
     <div class="col-md">
             <?= $form->field($model, 'id_profe_guia')
