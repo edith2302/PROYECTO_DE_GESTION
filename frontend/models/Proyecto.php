@@ -13,9 +13,9 @@ use Yii;
  * @property int $num_integrantes
  * @property int $tipo
  * @property int $area
- * @property int $estado
+ * @property int|null $estado
  * @property int $disponibilidad
- * @property int $id_profe_guia
+ * @property int|null $id_profe_guia
  * @property int $id_autor
  *
  * @property Usuario $autor
@@ -40,7 +40,7 @@ class Proyecto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'descripcion', 'num_integrantes', 'tipo', 'area', 'estado', 'disponibilidad',  'id_autor'], 'required'],
+            [['nombre', 'descripcion', 'num_integrantes', 'tipo', 'area', 'disponibilidad', 'id_autor'], 'required'],
             [['num_integrantes', 'tipo', 'area', 'estado', 'disponibilidad', 'id_profe_guia', 'id_autor'], 'integer'],
             [['nombre'], 'string', 'max' => 300],
             [['descripcion'], 'string', 'max' => 2000],
@@ -55,16 +55,16 @@ class Proyecto extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'Código proyecto',
+            'id' => 'ID',
             'nombre' => 'Nombre',
-            'descripcion' => 'Descripción',
-            'num_integrantes' => 'N° Integrantes',
+            'descripcion' => 'Descripcion',
+            'num_integrantes' => 'Num Integrantes',
             'tipo' => 'Tipo',
-            'area' => 'Área',
+            'area' => 'Area',
             'estado' => 'Estado',
             'disponibilidad' => 'Disponibilidad',
-            'id_profe_guia' => 'Profesor guía',
-            'id_autor' => 'Autor',
+            'id_profe_guia' => 'Id Profe Guia',
+            'id_autor' => 'Id Autor',
         ];
     }
 

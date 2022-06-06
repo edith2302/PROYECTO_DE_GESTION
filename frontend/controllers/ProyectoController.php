@@ -7,6 +7,7 @@ use app\models\ProyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii2mod\alert\Alert;
 use Yii;
 
 /**
