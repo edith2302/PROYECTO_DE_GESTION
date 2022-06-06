@@ -17,7 +17,12 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'id_rol')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <p align="right">
+        
+
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+
+</p>
     </div>
 
     <?php ActiveForm::end(); ?>

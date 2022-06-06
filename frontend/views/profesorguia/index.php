@@ -10,16 +10,14 @@ use app\models\Profesorguia;
 /* @var $searchModel app\models\ProfesorguiaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Profesorguias';
+$this->title = 'Profesores guías';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profesorguia-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Profesorguia', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -40,5 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+
+<p align="right">
+        <?= Html::a('Agregar profesor guía', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 </div>

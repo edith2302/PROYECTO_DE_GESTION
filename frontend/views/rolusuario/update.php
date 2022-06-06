@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Rolusuario */
 
-$this->title = 'Update Rolusuario: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Rolusuarios', 'url' => ['index']];
+$this->title = 'Modificar rol usuario: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Rol usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Modificar';
 ?>
 <div class="rolusuario-update">
 

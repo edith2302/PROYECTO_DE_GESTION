@@ -10,16 +10,14 @@ use app\models\Profesoricinf;
 /* @var $searchModel app\models\ProfesoricinfSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Profesoricinfs';
+$this->title = 'Profesor ICINF';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="profesoricinf-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Profesoricinf', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -40,6 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-
-
+    
+<p align="right">
+        <?= Html::a('Agregar profesor', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>

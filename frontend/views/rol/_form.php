@@ -17,7 +17,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'descripcion')->textarea(['placeholder' => "Descripción del rol"],['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+
+    <p align="right">
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+
+</p>
     </div>
 
     <?php ActiveForm::end(); ?>

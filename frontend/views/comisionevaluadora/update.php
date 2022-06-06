@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Comisionevaluadora */
 
-$this->title = 'Actualizar Comisión evaluadora: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Comisionevaluadoras', 'url' => ['index']];
+$this->title = 'Actualizar datos profesor comisión: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Comisión evaluadora', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

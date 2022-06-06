@@ -10,17 +10,14 @@ use app\models\Jefaturacarrera;
 /* @var $searchModel app\models\JefaturacarreraSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Jefaturacarreras';
+$this->title = 'Jefatura carrera';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="jefaturacarrera-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Jefaturacarrera', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+  
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -39,6 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+
+<p align="right">
+        <?= Html::a('Agregar jefe/a de carrera', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 
 </div>

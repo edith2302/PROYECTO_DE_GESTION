@@ -17,9 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Usuario', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+   
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -29,11 +27,52 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_usuario',
-            'rut',
-            'telefono',
-            'telefono_alternativo',
-            'nombre',
+            //'id_usuario',
+            //'rut',
+            //'telefono',
+            //'telefono_alternativo',
+            //'nombre',
+
+
+            [
+                'attribute'=>'nombre',
+                'value'=>function ($model) { return $model->nombre; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'attribute'=>'rut',
+                'value'=>function ($model) { return $model->rut; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'attribute'=>'telefono',
+                'value'=>function ($model) { return $model->telefono; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'attribute'=>'telefono_alternativo',
+                'value'=>function ($model) { return $model->telefono_alternativo; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
             //'username',
             //'dv',
             //'password',
@@ -54,5 +93,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+
+<p align="right">
+    
+   <?= Html::a('Agregar usuario', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 </div>

@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Jefaturacarrera */
 
-$this->title = 'Create Jefaturacarrera';
-$this->params['breadcrumbs'][] = ['label' => 'Jefaturacarreras', 'url' => ['index']];
+$this->title = 'Agregar Jefe/a de carrera';
+$this->params['breadcrumbs'][] = ['label' => 'Jefatura carrera', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="jefaturacarrera-create">

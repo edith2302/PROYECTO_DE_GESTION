@@ -10,16 +10,14 @@ use app\models\Rol;
 /* @var $searchModel app\models\RolSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Rols';
+$this->title = 'Roles';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rol-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Rol', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -40,6 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+
+<p align="right">
+        <?= Html::a('Agregar rol', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 
 </div>

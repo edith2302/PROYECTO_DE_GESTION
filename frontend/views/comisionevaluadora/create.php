@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Comisionevaluadora */
 
 $this->title = 'Agregar profesor a comisión';
-$this->params['breadcrumbs'][] = ['label' => 'Comisionevaluadoras', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Comisión evaluadora', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comisionevaluadora-create">

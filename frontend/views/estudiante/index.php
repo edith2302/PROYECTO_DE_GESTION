@@ -10,16 +10,14 @@ use app\models\Estudiante;
 /* @var $searchModel app\models\EstudianteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Estudiantes';
+$this->title = 'Listado estudiantes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="estudiante-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Estudiante', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+   
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -40,5 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
+<p align="right">
+        <?= Html::a('Agregar estudiante', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 </div>

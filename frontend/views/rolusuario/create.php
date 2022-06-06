@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Rolusuario */
 
-$this->title = 'Create Rolusuario';
-$this->params['breadcrumbs'][] = ['label' => 'Rolusuarios', 'url' => ['index']];
+$this->title = 'Agregar rol usuario';
+$this->params['breadcrumbs'][] = ['label' => 'Rol usuarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rolusuario-create">
