@@ -5,6 +5,8 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use app\models\Hito;
+use yii\bootstrap\Modal;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\HitoSearch */
@@ -17,7 +19,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    
+    <p align="right">
+        <?= Html::button('Agregar Hito', ['value'=>Url ::to ('index.php?r= hito%2Fcreate&id=1'), 'class' => 'btn btn-success', 'id'=>'modalButton']) ?>
+    </p>
+
+    <?php
+      Modal::begin([
+
+         'header'=>'<h4>Hitos</h4>',
+          'id'=>'modal',
+          'size'=> 'modal-lg',
+      ]);
+
+      echo "<div id='modalContent'></div>";
+
+      Modal:: end();
+     ?>
 
     
 
@@ -137,8 +154,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <p align="right">
-        <?= Html::a('Agregar Hito', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
 </div>
