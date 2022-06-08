@@ -52,6 +52,8 @@ use yii\bootstrap4\NavBar;
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
+
+        <?= Html::a('Sign out', ['site/logout'], ['data-method' => 'post', 'class' => 'dropdown-item']) ?>
         
     </ul>
 </nav>

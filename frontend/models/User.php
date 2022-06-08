@@ -75,3 +75,4 @@ class User extends \yii\db\ActiveRecord
         return $this->hasMany(Rolusuario::className(), ['id_user' => 'id']);
     }
 }
+

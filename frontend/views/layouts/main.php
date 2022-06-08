@@ -9,7 +9,7 @@ use yii\helpers\Html;
 if(Yii::$app->controller->action->id === 'login'){
     echo $this->render(
         'main-login',
-        ['content' => $cintent]
+        ['content' => $content]
     );
 }else{
 

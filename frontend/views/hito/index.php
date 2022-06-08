@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use app\models\Hito;
-use yii\bootstrap\Modal;
+use yii\bootstrap4\Modal;
 
 
 /* @var $this yii\web\View */
@@ -17,24 +17,29 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hito-index">
 
+
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p align="right">
-        <?= Html::button('Agregar Hito', ['value'=>Url ::to ('index.php?r= hito%2Fcreate&id=1'), 'class' => 'btn btn-success', 'id'=>'modalButton']) ?>
+        <?= Html::button('Agregar Hito', ['value'=>Url ::to ('index.php?r= hito/create'), 'class' => 'btn btn-success', 'id'=>'modalButton']) ?>
     </p>
 
     <?php
-      Modal::begin([
+    Modal::begin([
+        'title' => '<h2>Hello world</h2>',
+        'toggleButton' => ['label' => 'click me'],
+    ]);
 
-         'header'=>'<h4>Hitos</h4>',
-          'id'=>'modal',
-          'size'=> 'modal-lg',
-      ]);
-
-      echo "<div id='modalContent'></div>";
-
-      Modal:: end();
+        echo 'hola'; ?>
+    <p></p>
+    <div align="center">
+    <iframe src="index.php?r=hito/create" width=100% height=550 frameborder=10 scrolling=auto></iframe>
+    </div>
+    <?php
+    Modal::end();
      ?>
+     
 
     
 
@@ -157,3 +162,5 @@ $this->params['breadcrumbs'][] = $this->title;
     
 
 </div>
+
+
