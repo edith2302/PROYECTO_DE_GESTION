@@ -35,20 +35,14 @@ use common\models\User;
  */
 class SiteController extends Controller
 {
-
-    private function actionUser(){
-
-     return $this->render("user");
-
-
+    public function actionUser(){
+        return $this->render("user");
     }
 
-    private function actionAdmin(){
+   public function actionAdmin(){
 
         return $this->render("admin");
-   
-   
-       }
+    }
 
     private function randKey($str='', $long=0)
     {
@@ -345,8 +339,16 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
+        /*$model = new LoginForm();
 
-        return $this->redirect('site/login');
+
+        return $this->render('login', [
+            //'model' => $model,
+        ]);*/
+    
+        return $this->redirect("site%2Flogin");
+      
+        //return $this->redirect('site/login');
     }
 
     /**
