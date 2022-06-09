@@ -26,12 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php
-    Modal::begin([
-        'title' => '<h2>Hello world</h2>',
-        'toggleButton' => ['label' => 'click me'],
+   Modal::begin([
+        'title' => '<h2>Hitos</h2>',
+        'toggleButton' => ['label' => 'Agregar hito'],
+        
     ]);
 
-        echo 'hola'; ?>
+        echo  "<div id='modalContent'></div>"; ?>
     <p></p>
     <div align="center">
     <iframe src="index.php?r=hito/create" width=100% height=550 frameborder=10 scrolling=auto></iframe>

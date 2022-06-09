@@ -53,7 +53,7 @@ use yii\bootstrap4\NavBar;
             </div>
         </li>
 
-        <?= Html::a('Sign out', ['site/logout'], ['data-method' => 'post', 'class' => 'dropdown-item']) ?>
+        <?= Html::a('Cerrar sesión', ['site/logout'], ['data-method' => 'post', 'class' => 'dropdown-item']) ?>
         
     </ul>
 </nav>

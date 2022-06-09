@@ -13,6 +13,20 @@ use yii\filters\VerbFilter;
  */
 class UserController extends Controller
 {
+
+    private function actionUser(){
+
+        return $this->render("user");
+   
+   
+       }
+   
+       private function actionAdmin(){
+   
+           return $this->render("admin");
+      
+      
+          }
     /**
      * @inheritDoc
      */
