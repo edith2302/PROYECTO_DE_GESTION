@@ -1,0 +1,63 @@
+.table-striped tbody tr:nth-of-type(2n+1) {
+    background-color: #e8e8e8!important;
+}
+.table-striped tbody tr:nth-of-type(2n) {
+    background-color: #f8f8f8!important;
+}
+
+.grid-view table.items:not(.admin-solicitudes) tbody tr:nth-of-type(2n)
+{
+    background-color: #f8f8f8!important;
+}
+.grid-view table.items:not(.admin-solicitudes) tbody tr:nth-of-type(2n+1)
+{
+    background-color: #e8e8e8!important;
+}
+
+.grid-view table.items:not(.admin-solicitudes) tbody tr:hover
+{
+    background: #FFE7B3!important;
+}
+
+.grid-view table.admin-solicitudes tbody tr.aceptada:hover
+{
+    background: greenyellow;
+}
+.grid-view table.admin-solicitudes tbody tr.rechazada:hover
+{
+    background: rgba(255, 0, 0, 0.4);
+}
+.grid-view table.admin-solicitudes tbody tr.parcial:hover
+{
+    background: yellow;
+}
+.grid-view table.admin-solicitudes tbody tr.pendiente:hover
+{
+    background: #d4f7ff;
+}
+.grid-view table.items thead .filters{
+    background-color: white;
+}
+
+.grid-view table.items th {
+    color: white;
+    background-color: #999;
+    text-align: center;
+    height: 46px;
+    font-size: 0.9em!important;
+}
+
+.grid-view table.items th a{
+    color: white!important;
+}
+
+.help-block{
+    color:#dc3545;
+    font-size: 80%;
+}
+input[aria-invalid='true'] {
+    border-color: #dc3545;
+}
+.desc{
+    content: "{Symbol for rocket}"!important;
+}

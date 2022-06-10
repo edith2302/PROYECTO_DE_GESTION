@@ -1,61 +1,41 @@
 <?php
-use yii\helpers\Html;
+
+/** @var yii\web\View $this */
+/** @var yii\bootstrap4\ActiveForm $form */
+/** @var \common\models\LoginForm $model */
+
+use yii\bootstrap4\Html;
+use yii\bootstrap4\ActiveForm;
+
+$this->title = 'Login';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="card">
-    <div class="card-body login-card-body">
-        <p class="login-box-msg">Iniciar sesión</p>
+<div class="site-login">
+    <h1><?= Html::encode($this->title) ?></h1>
 
-        <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
+    <p>Please fill out the following fields to login:</p>
 
-        <?= $form->field($model,'username', [
-            'options' => ['class' => 'form-group has-feedback'],
-            'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text"><span class="fas fa-envelope"></span></div></div>',
-            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-            'wrapperOptions' => ['class' => 'input-group mb-3']
-        ])
-            ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+    <div class="row">
+        <div class="col-lg-5">
+            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-        <?= $form->field($model, 'password', [
-            'options' => ['class' => 'form-group has-feedback'],
-            'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text"><span class="fas fa-lock"></span></div></div>',
-            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-            'wrapperOptions' => ['class' => 'input-group mb-3']
-        ])
-            ->label(false)
-            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
- <?php
-     echo "*Usar datos de intranet"
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-   
-?>
-<br></br>
-        <div class="row">
-            <div class="col-8">
-                <?= $form->field($model, 'rememberMe')->checkbox([
-                    'template' => '<div class="icheck-primary">{input}{label}</div>',
-                    'labelOptions' => [
-                        'class' => ''
-                    ],
-                    'uncheck' => null
-                ]) ?>
-            </div>
-            <div class="col-4">
-                <?= Html::submitButton('Ingresar', ['class' => 'btn btn-primary btn-block']) ?>
-            </div>
+                <?= $form->field($model, 'password')->passwordInput() ?>
+
+                <?= $form->field($model, 'rememberMe')->checkbox() ?>
+
+                <div style="color:#999;margin:1em 0">
+                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
+                    <br>
+                    Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
+                </div>
+
+                <div class="form-group">
+                    <?= Html::submitButton('Iniciar Sesión', ['class' => 'button primary', 'name' => 'login-button']) ?>
+                </div>
+
+            <?php ActiveForm::end(); ?>
         </div>
-
-        <?php \yii\bootstrap4\ActiveForm::end(); ?>
-
-        
-        <!-- /.social-auth-links -->
-
-        <p class="mb-1">
-            <a href="forgot-password.html">Recuperar contraseña</a>
-        </p>
-        <!--<p class="mb-0">
-            <a href="register.html" class="text-center">Register a new membership</a>
-        </p>-->
     </div>
-    <!-- /.login-card-body -->
 </div>

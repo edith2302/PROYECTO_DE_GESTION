@@ -1,0 +1,84 @@
+
+/* Tooltip styles */
+[data-tooltip] {
+    display: inline;
+    position: relative;
+}
+
+[data-tooltip]:hover {
+    /*color: white;*/
+    text-decoration: none;
+}
+
+[data-tooltip]:hover:after {
+    background: #111;
+    background: rgba(255, 255, 255, 1);
+    border-radius: .5em;
+    color: black;
+    width: 300px;
+    content: attr(data-tooltip);
+    display: block;
+    padding: .3em 1em;
+    position: absolute;
+    white-space: normal;
+    z-index: 98;
+    text-align: justify;
+    text-justify: inter-word;
+    min-height: 20px;
+}
+.cuadrante1[data-tooltip]:hover:after {
+    left: -20em;
+    top: 1.5em;
+    z-index: 200;
+}
+.cuadrante2[data-tooltip]:hover:after {
+    left: 0;
+    top: 1.5em;
+    z-index: 200;
+}
+
+.cuadrante3[data-tooltip]:hover:after {
+    left: 5em;
+    bottom: 2em;
+    z-index: 200;
+}
+.cuadrante4[data-tooltip]:hover:after {
+    left: -20em;
+    bottom: 1.5em;
+    z-index: 200;
+}
+
+[data-tooltip]:hover:before {
+    border: solid;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 200;
+}
+
+.cuadrante1[data-tooltip]:hover:before {
+    border-width: 0 .4em  .4em  .4em ;
+    bottom: -0.3em;
+    left: -1em;
+    z-index: 200;
+}
+.cuadrante2[data-tooltip]:hover:before {
+    border-width: 0 .4em  .4em  .4em ;
+    bottom: -0.3em;
+    left: 2em;
+    z-index: 200;
+}
+.cuadrante3[data-tooltip]:hover:before {
+    border-width:  .4em  .4em  0 .4em ;
+    bottom: 1.7em;
+    left: 6em;
+    z-index: 200;
+}
+.cuadrante4[data-tooltip]:hover:before {
+    border-width:  .4em  .4em  0 .4em ;
+    top: -0.3em;
+    left: -2em;
+    z-index: 200;
+}
+
+/* Fin Tooltip styles */

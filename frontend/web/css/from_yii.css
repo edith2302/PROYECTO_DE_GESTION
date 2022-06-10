@@ -1,0 +1,353 @@
+/*GRIDVIEW*/
+
+.grid-view-loading
+{
+	background:url(../images/from_yii/loading.gif) no-repeat;
+}
+
+.grid-view
+{
+	padding: 15px 0;
+}
+
+.grid-view table.items
+{
+	/*background: white;*/
+	border-collapse: collapse;
+	width: 100%;
+	border: 1px #D0E3EF solid;
+}
+
+.grid-view table.items th, .grid-view table.items td
+{
+/*	font-size: 0.9em;
+	border: 1px white solid;
+	padding: 0.3em;*/
+	
+	border-left: solid 1px #CCC;
+    border-top: solid 1px #CCC;
+    border-right: solid 1px #CCC;
+}
+
+.grid-view table.items th
+{
+	/*color: white;*/
+	/*background: url("../images/from_yii/bg.gif") repeat-x scroll left top white;*/
+	text-align: center;
+}
+
+.grid-view table.items th a
+{
+	/*color: #EEE;*/
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.grid-view table.items th a:hover
+{
+	/*color: #FFF;*/
+}
+
+.grid-view table.items th a.asc
+{
+	background:url(../images/from_yii/up.gif) right center no-repeat;
+	padding-right: 21px;
+}
+
+.grid-view table.items th a.desc
+{
+	background:url(../images/from_yii/down.gif) right center no-repeat;
+	padding-right: 21px;
+}
+
+.grid-view table.items tr.even
+{
+	background: #F8F8F8;
+}
+
+.grid-view table.items tr.odd
+{
+	background: #eaeaea;
+}
+
+.grid-view table.items tr.selected
+{
+	/*background: #BCE774;*/
+}
+
+.grid-view table.items tr:hover.selected
+{
+	/*background: #CCFF66;*/
+}
+
+.grid-view table.items tbody tr:hover
+{
+	    background: #FFF;
+    /*color: #FFF*/
+}
+
+.grid-view .link-column img
+{
+	border: 0;
+}
+
+.grid-view .button-column
+{
+	text-align: center;
+	width: 60px;
+}
+
+.grid-view .button-column img
+{
+	border: 0;
+}
+
+.grid-view .checkbox-column
+{
+	width: 15px;
+}
+
+.grid-view .summary
+{
+    margin: 1em 22px 5px 0px;
+    text-align: right;
+    color: #a3a7ab;
+    font-size: 14px;
+}
+
+.grid-view .pager
+{
+	margin: 5px 0 29px 0;
+	text-align: right;
+}
+
+.grid-view .empty
+{
+	font-style: italic;
+}
+
+.grid-view .filters input,
+.grid-view .filters select
+{
+	width: 100%;
+	border: 1px solid #ccc;
+}
+
+/*-----PAGER------*/
+
+
+/**
+ * CSS styles for CLinkPager.
+ *
+ * @author Qiang Xue <qiang.xue@gmail.com>
+ * @link http://www.yiiframework.com/
+ * @copyright 2008-2010 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ * @since 1.0
+ */
+
+ul.yiiPager
+{
+	font-size:11px;
+	border:0;
+	margin:0;
+	padding:0;
+	line-height:100%;
+	display:inline;
+}
+
+ul.yiiPager li
+{
+	display:inline;
+}
+
+ul.yiiPager a:link, ul.yiiPager a:visited
+{
+border: solid 2px #ff9900;
+    font-weight: bold;
+    color: #ff9900;
+    padding: 10px 16px;
+    text-decoration: none;
+    border-radius: 0.375em;
+}
+
+ul.yiiPager .page a
+{
+	font-weight:normal;
+}
+
+ul.yiiPager a:hover
+{
+	border:solid 2px #ff9900;
+	background-color: rgba(245, 106, 106, 0.05);
+}
+
+ul.yiiPager .selected a
+{
+    background: #ff9900;
+	color:#FFFFFF;
+	font-weight:bold;
+	zoom: 0.8;
+}
+
+ul.yiiPager .hidden a
+{
+	border: solid 2px #FFC164;
+	color: #FFC164;
+}
+
+/**
+ * Hide first and last buttons by default.
+ */
+ul.yiiPager .first,
+ul.yiiPager .last
+{
+	display:inline;
+}
+
+
+/*---YITAB----*/
+
+.yiiTab ul.tabs
+{
+    padding: 9px 0;
+    margin: 0;
+    border-bottom: 1px solid #CCC;
+    font: bold 12px Verdana, sans-serif;
+}
+
+.yiiTab ul.tabs li
+{
+    list-style: none;
+    margin: 0;
+    display: inline;
+}
+
+.yiiTab ul.tabs a
+{
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+    padding: 10px 0.7em;
+    margin: 0 0 0 3px;
+    border: 1px solid #CCC;
+    border-bottom: none;
+    background: #dedede;
+    text-decoration: none;
+	border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+@media screen and (max-width: 1680px) {
+		.yiiTab ul.tabs a{
+		
+			padding: 10px 0.7em;
+			margin: 0 0 0 0px;
+			border: 1px solid #CCC;
+			border-bottom: none;
+			background: #dedede;
+			text-decoration: none;
+			border-top-left-radius: 12px;
+			border-top-right-radius: 12px;
+			font-size: 10px;
+		
+		}
+
+}
+
+
+@media screen and (max-width: 900px) {
+		.yiiTab ul.tabs a{
+		
+			padding: 10px 0.7em;
+			margin: 0 0px 9px 0px;
+			border: 1px solid #CCC;
+			background: #dedede;
+			text-decoration: none;
+			border-radius: 12px;
+			border-top-right-radius: 12px;
+			display: inline-block;
+		
+		}
+
+}
+
+.yiiTab ul.tabs a:link
+{
+	color: #667;
+}
+
+.yiiTab ul.tabs a:visited
+{
+	color: #868686;
+}
+
+.yiiTab ul.tabs a:hover
+{
+    color: #000;
+	border-color: #9a9a9a;
+/*    background: #E6F2FF;
+    border-color: #227;*/
+}
+
+.yiiTab ul.tabs a.active
+{
+    background: white;
+    border-bottom: 1px solid white;
+}
+
+.yiiTab div.view
+{
+    border-left: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    padding: 8px;
+    margin: 0;
+	background-color:#FFF;
+}
+
+/*DETAIL VIEW*/
+
+table.detail-view .null
+{
+	color: pink;
+}
+
+table.detail-view
+{
+	background: white;
+	border-collapse: collapse;
+	width: 100%;
+	margin: 0;
+}
+
+table.detail-view th, table.detail-view td
+{
+	font-size: 0.9em;
+	border: 1px white solid;
+	padding: 0.3em 0.6em;
+	vertical-align: top;
+}
+
+table.detail-view th
+{
+	text-align: right;
+	width: 160px;
+}
+
+table.detail-view tr.odd
+{
+	background:#E8E8E8;
+}
+
+table.detail-view tr.even
+{
+	background:#F8F8F8;
+}
+
+table.detail-view tr.odd th
+{
+}
+
+table.detail-view tr.even th
+{
+}
