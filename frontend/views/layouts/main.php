@@ -198,7 +198,7 @@ Modal::end();
             <!-- Menu -->
             <nav id="menu">
                 <header class="major">
-                    <h2 id="sistema_name">Sistema de Administración de Escuelas</h2>
+                    <h2 id="sistema_name">Sistema gestión de Anteproyecto de título</h2>
                 </header>
                 <ul class="sidebar-items">
                     <li>
@@ -213,14 +213,14 @@ Modal::end();
                             <?= Html::a(' Registrarse',Url::to(['site/signup']),['class'=>'icon fa-sign-up']) ?>
                         </li>
                     <?php else: ?>
-                        <li>
+                        <!--li>
                             <span  class="opener"><span class="icon fa-user"> Ejemplo API</span></span>
                             <ul id="ejemplo-api">
                                 <li>
-                                    <?= Html::a('Consultas API', Url::to(['/site/consultas-api'])) ?>
+                                    <!?= Html::a('Consultas API', Url::to(['/site/consultas-api'])) ?>
                                 </li>
                             </ul>
-                        </li>
+                        </li>-->
                     <li>
                         <span  class="opener"><span class="icon fa-user"> Cuenta</span></span>
                         <ul id="cuenta">
@@ -230,172 +230,160 @@ Modal::end();
                         </ul>
                     </li>
 
+                     <!--menu profesor asignatura-->
+                  <?php if (!Yii::$app->user->isGuest):?> 
+                    <?php if (Yii::$app->user->identity->role == 1):?>
                     <li>
-                        <span  class="opener"><span class="icon fa-hand-o-up"> Inscripción Actividades</span></span>
-                        <ul id="incripciones">
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
+                        <ul id="proyecto">
 
                             <li>
-                                <?= Html::a('Inscribir Actividad', Url::to(['/inscripcion/index'])) ?>
+                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/index'])) ?>
                             </li>
 
-                            <li>
-                                <?= Html::a('Mis Actividades', Url::to(['/inscripcion/mis-inscripciones'])) ?>
-                            </li>
-
-                            <li>
-                                <?= Html::a('Nueva Actividad', Url::to(['/inscripcion/create'])) ?>
-                            </li>
-
-                            <li>
-                                <?= Html::a('Gestionar', Url::to(['/inscripcion/admin'])) ?>
-                            </li>
+                            
 
                         </ul>
                     </li>
-
+                   
                     <li>
-                        <span  class="opener"><span class="icon fa-plus"> Preinscripción Asignaturas</span></span>
-                        <ul id="preinscripcion">
-                            <li>
-                                <?= Html::a('Asignaturas locales', Url::to(['/ramo-local/index'])) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('Preinscribir Asignatura', Url::to(['/preinscripcion/index'])) ?>
-                            </li>
 
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Actividades</span></span>
+                        <ul id="hito">
                             <li>
-                                <?= Html::a('Mis Preinscripciones', Url::to(['/preinscripcion/mis-preinscripciones'])) ?>
+                                <?= Html::a('Hitos', Url::to(['/hito/index'])) ?>
                             </li>
-
                             <li>
-                                <?= Html::a('Nueva Preinscripción', Url::to(['/preinscripcion/create'])) ?>
-                            </li>
-
-                            <li>
-                                <?= Html::a('Gestionar', Url::to(['/preinscripcion/admin'])) ?>
+                                <?= Html::a('Módulos', Url::to(['/modulo/index'])) ?>
                             </li>
 
                         </ul>
+
                     </li>
+                    <?php endif ?>
+                    <?php endif ?>
 
+
+                     <!--menu Estudiante-->
+                    <?php if (!Yii::$app->user->isGuest) :?>
+                   <?php  if (Yii::$app->user->identity->role == 2) :?>
                     <li>
-                        <span  class="opener">
-                            <span class="icon fa-comments">
-                                Foro
-                            </span>
-                        </span>
-                        <ul id="foro-tema">
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
+                        <ul id="proyecto">
 
                             <li>
-                                <?= Html::a('Categorías de temas', Url::to(['/foro-categoria/index'])) ?>
+                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
                             </li>
 
-                            <li>
-                                <?= Html::a('Establecer orden de categorías', Url::to(['/foro-categoria/sort'])) ?>
-                            </li>
-
-                            <li>
-                                <?= Html::a('Nuevo Tema', Url::to(['/foro-tema/create'])) ?>
-                            </li>
-
-                            <li>
-                                <?= Html::a('Todos los Temas', Url::to(['/foro-tema/index'])) ?>
-                            </li>
-
-                            <li>
-                                <?= Html::a('Mis Temas', Url::to(['/foro-tema/mis-temas'])) ?>
-                            </li>
+                            
 
                         </ul>
                     </li>
-
                     <li>
-                        <span  class="opener"><span class="icon fa-check"> Solicitudes</span></span>
-                        <ul id="solicitud">
-
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Hitos</span></span>
+                        <ul id="hito">
                             <li>
-                                <?= Html::a('Nueva Solicitud', Url::to(['/solicitud/create'])) ?>
+                                <?= Html::a('Hitos', Url::to(['/hito/indexestudiante'])) ?>
                             </li>
-                            <li>
-                                <?= Html::a('Mis Solicitudes', Url::to(['/solicitud/index'])) ?>
-                            </li>
+                            
+                        </ul>
 
+                    </li>
+                    
+                    <li>
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Módulos</span></span>
+                        <ul id="modulo">
+                            
                             <li>
-                                <?= Html::a('Gestionar', Url::to(['/solicitud/admin'])) ?>
+                                <?= Html::a('Módulos', Url::to(['/modulo/indexestudiante'])) ?>
                             </li>
 
                         </ul>
-                    </li>
 
+                    </li>
+                    <?php endif ?>
+                    <?php endif ?>
+
+ <!--menu profesor ICINF-->
+                    <?php if (!Yii::$app->user->isGuest) :?>
+                   <?php  if (Yii::$app->user->identity->role == 3) :?>
                     <li>
-                        <span class="opener"><span class="icon fa-calendar-o"> Periodos</span></span>
-                        <ul id="periodos">
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
+                        <ul id="proyecto">
+
                             <li>
-                                <?= Html::a('¿Qué es un periodo?', Url::to(['/periodo/informacion'])) ?>
+                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
                             </li>
-                            <li>
-                                <?= Html::a('Ver Periodos', Url::to(['/periodo/index'])) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('Nuevo Periodo', Url::to(['/periodo/create'])) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('Gestionar', Url::to(['/periodo/admin'])) ?>
-                            </li>
+
+                            
 
                         </ul>
                     </li>
+                    
+                    <?php endif ?>
+                    <?php endif ?>
 
 
+                     <!--menu Comisión evaluadora-->
+                    <?php if (!Yii::$app->user->isGuest) :?>
+                   <?php  if (Yii::$app->user->identity->role == 4) :?>
                     <li>
-                        <span class="opener"><span class="icon fa-envelope-open-o"> Email</span></span>
-                        <ul id="periodos">
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
+                        <ul id="proyecto">
+
                             <li>
-                                <?= Html::a('Historial de enviados', Url::to(['/email/index'])) ?>
+                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
                             </li>
-                            <li>
-                                <?= Html::a('Enviar email', Url::to(['/email/enviar'])) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('Enviar email masivo', Url::to(['/email/enviar-masivo'])) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('Personalizar Firma', Url::to(['/email/firma'])) ?>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="opener"><span class="icon fa-id-card-o"> Cargos</span></span>
-                        <ul id="periodos">
-                            <li>
-                                <?= Html::a('Ver Cargos', Url::to(['/cargos/index'])) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('Nuevo Cargo', Url::to(['/cargos/create'])) ?>
-                            </li>
+
+                            
 
                         </ul>
                     </li>
+                    
+                    <?php endif ?>
+                    <?php endif ?>
 
+    <!--menu profesor guia-->
+                    <?php if (!Yii::$app->user->isGuest) :?>
+                   <?php  if (Yii::$app->user->identity->role == 5) :?>
                     <li>
-                        <span class="opener"><span class="icon fa-info"> Información del Sitio</span></span>
-                        <ul id="periodos">
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
+                        <ul id="proyecto">
+
                             <li>
-                                <?= Html::a('Página de Información', Url::to(['/informacion-sitio/index'])) ?>
+                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
                             </li>
-                            <li>
-                                <?= Html::a('Nueva Información', Url::to(['/informacion-sitio/create'])) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('Administrar Información', Url::to(['/informacion-sitio/admin'])) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('Cambiar Orden', Url::to(['/informacion-sitio/sort'])) ?>
-                            </li>
+
+                            
 
                         </ul>
                     </li>
+                    
+                    <?php endif ?>
+                    <?php endif ?>
+                  
+                <!--menu jefatura de carrera-->
+                <?php if (!Yii::$app->user->isGuest) :?>
+                   <?php  if (Yii::$app->user->identity->role == 6) :?>
+                    <li>
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
+                        <ul id="proyecto">
 
+                            <li>
+                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
+                            </li>
+
+                            
+
+                        </ul>
+                    </li>
+                    
+                    <?php endif ?>
+                    <?php endif ?>
+
+                  <!--menu admin-->
+                    <?php if (!Yii::$app->user->isGuest) :?>
+                   <?php  if (Yii::$app->user->identity->role == 0) :?>
                     <li>
                         <span class="opener"><span class="icon fa-users"> Usuarios y Roles</span></span>
                         <ul id="usuarios-roles">
@@ -405,48 +393,19 @@ Modal::end();
                             <li>
                                 <?= Html::a('Importar Usuario', Url::to(['/usuario/importar-ubb'])) ?>
                             </li>
-                            <!--
+                            
                             <li>
                                 <?= Html::a('Administrar Roles', Url::to(['/rol/index'])) ?>
                             </li>
 
-                            <li>
-                                <?= Html::a('Cambiar de Rol', Url::to(['/rol/cambio-rol'])) ?>
-                            </li>
-                            -->
+                            
+                            
                         </ul>
                     </li>
 
-                    <li>
-                        <span class="opener"><span class="icon fa-list-alt"> Mantenedores </span></span>
-                        <ul id="administracion">
-                            <li>
-                                <?= Html::a('Mantenedor de Documentos', Url::to(['/documento/admin'])) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('Mantenedor de Noticias', Url::to(['/noticia/admin'])) ?>
-                            </li>
-                            <li>
-                                <?= Html::a('Parámetros generales', Url::to(['/parametros-generales/index'])) ?>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <span class="opener"><span class="icon fa-play"> Videos Ayuda</span></span>
-                        <ul id="videos-ayuda">
-                            <li>
-                                <?= Html::a('Todos los videos', Url::to(['/video-ayuda/index'])) ?>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <?= Html::a(' Documentos', Url::to(['/documento/index']),['class'=>'icon fa-download']) ?>
-                    </li>
-                    <li>
-                        <?= Html::a(' Noticias', Url::to(['/noticia/index']),['class'=>'icon fa-newspaper-o']) ?>
-                    </li>
-                    <?php endif; ?>
+                    <?php endif ?>
+                    <?php endif ?>
+     <?php endif; ?>
 
                     <?php if (!Yii::$app->user->isGuest):?>
                         <li>
@@ -475,8 +434,8 @@ Modal::end();
             </section>
             <div class="footer" id="foot">
                 <img src="images/logo_ubb.png" width="235" height="70" alt="UBB">
-                <p class="copyright">Sistema de Administración de Escuelas</p>
-                <p class="copyright" title="Desarrollado por DDCTI y UDSW">Desarrollado por DDCTI y UDSW </p>
+                <!--p class="copyright">Sistema gestión de Anteproyecto de título</p>-->
+                <p class="copyright" title="Desarrollado por memoristas Edith Parra y Girleyn Molina ">Desarrollado por memoristas Edith Parra y Girleyn Molina </p>
             </div>
         </div>
 
