@@ -1,151 +1,342 @@
 <?php
+
 namespace app\models;
 
 use Yii;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
-
-{
-    
-    public $id;
-    public $username;
-    public $email;
-    public $password;
-    public $authKey;
-    public $accessToken;
-    public $activate;
-
-    public $role;
-
-    public static function isUserAdmin($id)
-    {
-       if (Users::findOne(['id' => $id, 'activate' => '1', 'role' => 2])){
-        return true;
-       } else {
-
-        return false;
-       }
-
-    }
-
-    public static function isUserSimple($id)
-    {
-       if (Users::findOne(['id' => $id, 'activate' => '1', 'role' => 1])){
-       return true;
-       } else {
-
-       return false;
-       }
-    }
-
-
+/**
+ * This is the model class for table "usuario".
+ *
+ * @property int $id_usuario
+ * @property string $rut
+ * @property string|null $telefono
+ * @property string|null $telefono_alternativo
+ * @property string $nombre
+ * @property string $username
+ * @property string $dv
+ * @property string $password
+ * @property string|null $apellido
+ * @property string|null $email
+ * @property string|null $email_alternativo
+ * @property int $plan
+ * @property string|null $direccion
+ * @property int|null $habilitado_adt
+ * @property int|null $habilitado_practica
+ * @property int|null $habilitado_ici
+ *
+ * @property Adjunto[] $adjuntos
+ * @property AdjuntosResolucionSolicitud[] $adjuntosResolucionSolicituds
+ * @property Administrador[] $administradors
+ * @property AlumnoInscripcion[] $alumnoInscripcions
+ * @property AlumnoPreinscripcion[] $alumnoPreinscripcions
+ * @property Comisionevaluadora[] $comisionevaluadoras
+ * @property Documento[] $documentos
+ * @property EmailFirma $emailFirma
+ * @property Estudiante[] $estudiantes
+ * @property ForoRespuestaComentario[] $foroRespuestaComentarios
+ * @property ForoTemaRespuesta[] $foroTemaRespuestas
+ * @property ForoTemaUltimaVisita[] $foroTemaUltimaVisitas
+ * @property ForoTema[] $foroTemas
+ * @property Inscripcion[] $inscripcions
+ * @property Inscripcion[] $inscripcions0
+ * @property Jefaturacarrera[] $jefaturacarreras
+ * @property Noticia[] $noticias
+ * @property Preinscripcion[] $preinscripcions
+ * @property Profesorasignatura[] $profesorasignaturas
+ * @property Profesorguia[] $profesorguias
+ * @property Profesoricinf[] $profesoricinfs
+ * @property Proyecto[] $proyectos
+ * @property Solicitud[] $solicituds
+ * @property ForoTema[] $temas
+ */
+class Usuario extends \yii\db\ActiveRecord{
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    
-    /* busca la identidad del usuario a través de su $id */
-
-    public static function findIdentity($id)
+    public static function tableName()
     {
-        
-        $user = Users::find()
-                ->where("activate=:activate", [":activate" => 1])
-                ->andWhere("id=:id", ["id" => $id])
-                ->one();
-        
-        return isset($user) ? new static($user) : null;
+        return 'usuario';
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    
-    /* Busca la identidad del usuario a través de su token de acceso */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public function rules()
     {
-        
-        $users = Users::find()
-                ->where("activate=:activate", [":activate" => 1])
-                ->andWhere("accessToken=:accessToken", [":accessToken" => $token])
-                ->all();
-        
-        foreach ($users as $user) {
-            if ($user->accessToken === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return [
+            [['rut', 'nombre', 'username', 'dv', 'password', 'plan'], 'required'],
+            [['plan', 'habilitado_adt', 'habilitado_practica', 'habilitado_ici'], 'integer'],
+            [['rut'], 'string', 'max' => 20],
+            [['telefono', 'telefono_alternativo', 'username', 'password', 'apellido', 'email', 'email_alternativo'], 'string', 'max' => 200],
+            [['nombre'], 'string', 'max' => 300],
+            [['dv'], 'string', 'max' => 1],
+            [['direccion'], 'string', 'max' => 2000],
+            [['username'], 'unique'],
+        ];
     }
 
     /**
-     * Finds user by username
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id_usuario' => 'Id Usuario',
+            'rut' => 'Rut',
+            'telefono' => 'Telefono',
+            'telefono_alternativo' => 'Telefono Alternativo',
+            'nombre' => 'Nombre',
+            'username' => 'Username',
+            'dv' => 'Dv',
+            'password' => 'Password',
+            'apellido' => 'Apellido',
+            'email' => 'Email',
+            'email_alternativo' => 'Email Alternativo',
+            'plan' => 'Plan',
+            'direccion' => 'Direccion',
+            'habilitado_adt' => 'Habilitado Adt',
+            'habilitado_practica' => 'Habilitado Practica',
+            'habilitado_ici' => 'Habilitado Ici',
+        ];
+    }
+
+    /**
+     * Gets query for [[Adjuntos]].
      *
-     * @param  string      $username
-     * @return static|null
+     * @return \yii\db\ActiveQuery
      */
-    
-    /* Busca la identidad del usuario a través del username */
-    public static function findByUsername($username)
+   /* public function getAdjuntos()
     {
-        $users = Users::find()
-                ->where("activate=:activate", ["activate" => 1])
-                ->andWhere("username=:username", [":username" => $username])
-                ->all();
-        
-        foreach ($users as $user) {
-            if (strcasecmp($user->username, $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return $this->hasMany(Adjunto::className(), ['creador' => 'id_usuario']);
     }
 
     /**
-     * @inheritdoc
-     */
-    
-    /* Regresa el id del usuario */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    
-    /* Regresa la clave de autenticación */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    
-    /* Valida la clave de autenticación */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
-    }
-
-    /**
-     * Validates password
+     * Gets query for [[AdjuntosResolucionSolicituds]].
      *
-     * @param  string  $password password to validate
-     * @return boolean if password provided is valid for current user
+     * @return \yii\db\ActiveQuery
      */
-    public function validatePassword($password)
+   /* public function getAdjuntosResolucionSolicituds()
     {
-        /* Valida el password */
-        if (crypt($password, $this->password) == $this->password) {
-            return $password === $password;
-        }
-        
-       
-        
+        return $this->hasMany(AdjuntosResolucionSolicitud::className(), ['creador' => 'id_usuario']);
     }
+
+    /**
+     * Gets query for [[Administradors]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getAdministradors()
+    {
+        return $this->hasMany(Administrador::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[AlumnoInscripcions]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getAlumnoInscripcions()
+    {
+        return $this->hasMany(AlumnoInscripcion::className(), ['id_alumno' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[AlumnoPreinscripcions]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getAlumnoPreinscripcions()
+    {
+        return $this->hasMany(AlumnoPreinscripcion::className(), ['id_alumno' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Comisionevaluadoras]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getComisionevaluadoras()
+    {
+        return $this->hasMany(Comisionevaluadora::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Documentos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getDocumentos()
+    {
+        return $this->hasMany(Documento::className(), ['creador' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[EmailFirma]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getEmailFirma()
+    {
+        return $this->hasOne(EmailFirma::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Estudiantes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getEstudiantes()
+    {
+        return $this->hasMany(Estudiante::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[ForoRespuestaComentarios]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getForoRespuestaComentarios()
+    {
+        return $this->hasMany(ForoRespuestaComentario::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[ForoTemaRespuestas]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getForoTemaRespuestas()
+    {
+        return $this->hasMany(ForoTemaRespuesta::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[ForoTemaUltimaVisitas]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+   /* public function getForoTemaUltimaVisitas()
+    {
+        return $this->hasMany(ForoTemaUltimaVisita::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[ForoTemas]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getForoTemas()
+    {
+        return $this->hasMany(ForoTema::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Inscripcions]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getInscripcions()
+    {
+        return $this->hasMany(Inscripcion::className(), ['creador' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Inscripcions0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getInscripcions0()
+    {
+        return $this->hasMany(Inscripcion::className(), ['id_inscripcion' => 'id_inscripcion'])->viaTable('alumno_inscripcion', ['id_alumno' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Jefaturacarreras]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getJefaturacarreras()
+    {
+        return $this->hasMany(Jefaturacarrera::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Noticias]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getNoticias()
+    {
+        return $this->hasMany(Noticia::className(), ['creador' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Preinscripcions]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getPreinscripcions()
+    {
+        return $this->hasMany(Preinscripcion::className(), ['id_preinscripcion' => 'id_preinscripcion'])->viaTable('alumno_preinscripcion', ['id_alumno' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Profesorasignaturas]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getProfesorasignaturas()
+    {
+        return $this->hasMany(Profesorasignatura::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Profesorguias]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getProfesorguias()
+    {
+        return $this->hasMany(Profesorguia::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Profesoricinfs]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getProfesoricinfs()
+    {
+        return $this->hasMany(Profesoricinf::className(), ['id_usuario' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Proyectos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getProyectos()
+    {
+        return $this->hasMany(Proyecto::className(), ['id_autor' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Solicituds]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getSolicituds()
+    {
+        return $this->hasMany(Solicitud::className(), ['id_alumno' => 'id_usuario']);
+    }
+
+    /**
+     * Gets query for [[Temas]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getTemas()
+    {
+        return $this->hasMany(ForoTema::className(), ['id_tema' => 'id_tema'])->viaTable('foro_tema_ultima_visita', ['id_usuario' => 'id_usuario']);
+    }*/
 }

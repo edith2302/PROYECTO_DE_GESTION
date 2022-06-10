@@ -31,8 +31,101 @@
         </div> -->
 
         <!-- Sidebar Menu -->
+        <!-- Sidebar Menu -->
         <nav class="mt-2">
             <?php
+            // menu de Profesor asignatura
+            if (!Yii::$app->user->isGuest) {
+                if (Yii::$app->user->identity->role == 1) {
+                    echo \hail812\adminlte\widgets\Menu::widget([
+                        'items' => [
+                            ['label' => 'Proyectos', 'url' => ['proyecto/index'], 'iconStyle' => 'far'],
+                            [
+                                'label' => 'Actividades',
+                                'iconStyle' => 'far',
+                                'items' => [
+                                    ['label' => 'Hitos', 'url' => ['hito/index'], 'iconStyle' => 'far'],
+                                    ['label' => 'Módulos', 'url' => ['modulo/index'], 'iconStyle' => 'far'],
+                                ]
+                            ]
+                        ]
+                    ]);
+                }
+                
+                
+                // menu de Estudiante
+                if (Yii::$app->user->identity->role == 2) {
+                    echo \hail812\adminlte\widgets\Menu::widget([
+                        'items' => [
+                            ['label' => 'Proyectos', 'url' => ['proyecto/indexestudiante'], 'iconStyle' => 'far'],
+                            ['label' => 'Hitos', 'url' => ['hito/indexestudiante'], 'iconStyle' => 'far'],
+                            ['label' => 'Módulos', 'url' => ['modulo/indexestudiante'], 'iconStyle' => 'far'],
+                        ]
+                    ]);
+                }
+                // menu de Profesor ICINF
+                if (Yii::$app->user->identity->role == 3 ) {
+                    echo \hail812\adminlte\widgets\Menu::widget([
+                        'items' => [
+                            
+                            ['label' => 'Proyectos', 'url' => ['proyecto/indexprofesor'], 'iconStyle' => 'far'],
+                        ],
+                            
+                    ]);
+                }
+
+                // menu de Comisión evaluadora
+                if (Yii::$app->user->identity->role == 4 ) {
+                    echo \hail812\adminlte\widgets\Menu::widget([
+                        'items' => [
+                            ['label' => 'Proyectos', 'url' => ['proyecto/indexprofesor'], 'iconStyle' => 'far'],
+                                
+                            ],
+                           
+                    ]);
+                }
+                // menu de Jefatura de carrera
+                if (Yii::$app->user->identity->role == 6) {
+                    echo \hail812\adminlte\widgets\Menu::widget([
+                        'items' => [
+                            ['label' => 'Proyectos', 'url' => ['proyecto/indexprofesor'], 'iconStyle' => 'far'],  
+                             
+                        ]
+                    ]);
+                }
+                //menu Profesor Guía
+                if (Yii::$app->user->identity->role == 5) {
+                    echo \hail812\adminlte\widgets\Menu::widget([
+                        'items' => [
+                            ['label' => 'Proyectos', 'url' => ['proyecto/indexestudiante'], 'iconStyle' => 'far'],
+                            ['label' => 'Hitos', 'url' => ['hito/indexestudiante'], 'iconStyle' => 'far'],
+                        ]  
+                    ]);
+                }
+            }
+
+            ?>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!--<nav class="mt-2">
+        <!?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
                    /* [
@@ -134,8 +227,8 @@
                 ],
             ]);
             ?>
-        </nav>
+        </nav>-->
         <!-- /.sidebar-menu -->
-    </div>
+    <!--</div>-->
     <!-- /.sidebar -->
-</aside>
+<!--</aside>-->

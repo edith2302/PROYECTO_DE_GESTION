@@ -239,9 +239,86 @@ class SiteController extends Controller
                        //y así establecer si tiene permisos o no
                        'matchCallback' => function ($rule, $action) {
                           //Llamada al método que comprueba si es un usuario simple
-                          return User::isUserSimple(Yii::$app->user->identity->id);
+                          return User::isUserProfesorAsignatura(Yii::$app->user->identity->id);
                       },
                    ],
+
+
+                   [
+                    //Los usuarios simples tienen permisos sobre las siguientes acciones
+                    'actions' => ['logout', 'user'],
+                    //Esta propiedad establece que tiene permisos
+                    'allow' => true,
+                    //Usuarios autenticados, el signo ? es para invitados
+                    'roles' => ['@'],
+                    //Este método nos permite crear un filtro sobre la identidad del usuario
+                    //y así establecer si tiene permisos o no
+                    'matchCallback' => function ($rule, $action) {
+                       //Llamada al método que comprueba si es un usuario simple
+                       return User::isUserEstudiante(Yii::$app->user->identity->id);
+                   },
+                ],
+
+                [
+                    //Los usuarios simples tienen permisos sobre las siguientes acciones
+                    'actions' => ['logout', 'user'],
+                    //Esta propiedad establece que tiene permisos
+                    'allow' => true,
+                    //Usuarios autenticados, el signo ? es para invitados
+                    'roles' => ['@'],
+                    //Este método nos permite crear un filtro sobre la identidad del usuario
+                    //y así establecer si tiene permisos o no
+                    'matchCallback' => function ($rule, $action) {
+                       //Llamada al método que comprueba si es un usuario simple
+                       return User::isUserProfesorICINF(Yii::$app->user->identity->id);
+                   },
+                ],
+
+                [
+                    //Los usuarios simples tienen permisos sobre las siguientes acciones
+                    'actions' => ['logout', 'user'],
+                    //Esta propiedad establece que tiene permisos
+                    'allow' => true,
+                    //Usuarios autenticados, el signo ? es para invitados
+                    'roles' => ['@'],
+                    //Este método nos permite crear un filtro sobre la identidad del usuario
+                    //y así establecer si tiene permisos o no
+                    'matchCallback' => function ($rule, $action) {
+                       //Llamada al método que comprueba si es un usuario simple
+                       return User::isUserComision(Yii::$app->user->identity->id);
+                   },
+                ],
+
+                [
+                    //Los usuarios simples tienen permisos sobre las siguientes acciones
+                    'actions' => ['logout', 'user'],
+                    //Esta propiedad establece que tiene permisos
+                    'allow' => true,
+                    //Usuarios autenticados, el signo ? es para invitados
+                    'roles' => ['@'],
+                    //Este método nos permite crear un filtro sobre la identidad del usuario
+                    //y así establecer si tiene permisos o no
+                    'matchCallback' => function ($rule, $action) {
+                       //Llamada al método que comprueba si es un usuario simple
+                       return User::isUserProfesorGuia(Yii::$app->user->identity->id);
+                   },
+                ],
+
+
+                [
+                    //Los usuarios simples tienen permisos sobre las siguientes acciones
+                    'actions' => ['logout', 'user'],
+                    //Esta propiedad establece que tiene permisos
+                    'allow' => true,
+                    //Usuarios autenticados, el signo ? es para invitados
+                    'roles' => ['@'],
+                    //Este método nos permite crear un filtro sobre la identidad del usuario
+                    //y así establecer si tiene permisos o no
+                    'matchCallback' => function ($rule, $action) {
+                       //Llamada al método que comprueba si es un usuario simple
+                       return User::isUserJefaturaCarrera(Yii::$app->user->identity->id);
+                   },
+                ],
                 ],
             ],
      //Controla el modo en que se accede a las acciones, en este ejemplo a la acción logout
@@ -346,7 +423,7 @@ class SiteController extends Controller
             //'model' => $model,
         ]);*/
     
-        return $this->redirect("site%2Flogin");
+        return $this->redirect("site/login");
       
         //return $this->redirect('site/login');
     }

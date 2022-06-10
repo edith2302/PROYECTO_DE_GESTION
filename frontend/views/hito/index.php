@@ -21,25 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    
     <p align="right">
-        <?= Html::button('Agregar Hito', ['value'=>Url ::to ('index.php?r= hito/create'), 'class' => 'btn btn-success', 'id'=>'modalButton']) ?>
+        <?= Html::a('Agregar hito', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php
-   Modal::begin([
-        'title' => '<h2>Hitos</h2>',
-        'toggleButton' => ['label' => 'Agregar hito'],
-        
-    ]);
-
-        echo  "<div id='modalContent'></div>"; ?>
-    <p></p>
-    <div align="center">
-    <iframe src="index.php?r=hito/create" width=100% height=550 frameborder=10 scrolling=auto></iframe>
-    </div>
-    <?php
-    Modal::end();
-     ?>
      
 
     

@@ -19,7 +19,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     public static function isUserAdmin($id)
     {
-       if (Users::findOne(['id' => $id, 'activate' => '1', 'role' => 2])){
+       if (Users::findOne(['id' => $id, 'activate' => '1', 'role' => 0])){
         return true;
        } else {
 
@@ -28,7 +28,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     }
 
-    public static function isUserSimple($id)
+    public static function isUserProfesorAsignatura($id)
     {
        if (Users::findOne(['id' => $id, 'activate' => '1', 'role' => 1])){
        return true;
@@ -36,6 +36,56 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
        return false;
        }
+    }
+
+    public static function isUserEstudiante($id)
+    {
+        if (Users::findOne(['id' => $id, 'activate' => '1', 'role' => 2])){
+            return true;
+        } else {
+
+            return false;
+        }
+
+    }
+
+    public static function isUserProfesorICINF($id)
+    {
+        if (Users::findOne(['id' => $id, 'activate' => '1',  'role' => 3])){
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+    public static function isUserComision($id)
+    {
+        if (Users::findOne(['id' => $id, 'activate' => '1',  'role' => 4])){
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    public static function isUserProfesorGuia($id)
+    {
+        if (Users::findOne(['id' => $id, 'activate' => '1',  'role' => 5])){
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    public static function isUserJefaturaCarrera($id)
+    {
+        if (Users::findOne(['id' => $id, 'activate' => '1',  'role' => 6])){
+            return true;
+        } else {
+
+            return false;
+        }
     }
     /**
      * @inheritdoc
