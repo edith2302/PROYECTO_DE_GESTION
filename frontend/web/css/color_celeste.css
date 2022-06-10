@@ -16,6 +16,6 @@ button,
 	
 ul.pagination li > .page.active,
 ul.pagination li.active > .page {
-    background-color: #179fc5;
+    background-color: #c51d17;
 	color: white;
 }

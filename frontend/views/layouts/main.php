@@ -124,12 +124,13 @@ Modal::end();
     <div id="main">
         <header id="header" class="headerburdeo">
             <div class="logo">
-                <img src='images/logo_sae.png' alt='Volver a ICI'>
+                <img src='images/logo3.png' alt='Volver a ICI'>
             </div>
-            <div class="logo2">
+            <!--div class="logo2">
                 <?= Html::a(Yii::$app->name, Url::to(['site/index'])) ?>
-            </div>
+            </div>-->
 
+        
             <div class="icons">
                 <?php if(!Yii::$app->user->isGuest):
                     echo Html::a('',['usuario/mi-perfil'],[
@@ -140,7 +141,9 @@ Modal::end();
                     ?>
 
                 <?php endif;?>
-                <div>
+
+                <div align="right">
+        
 
                     <?php if(!Yii::$app->user->isGuest):
                         $nombreUsuario = preg_split('/\s+/', Yii::$app->user->identity->username, -1, PREG_SPLIT_NO_EMPTY);
@@ -162,6 +165,7 @@ Modal::end();
                     </p>
                 </div>
             <?php endif;?>
+            
             </div>
         </header>
 
@@ -251,10 +255,10 @@ Modal::end();
                         <span  class="opener"><span class="icon fa-hand-o-up"> Actividades</span></span>
                         <ul id="hito">
                             <li>
-                                <?= Html::a('Hitos', Url::to(['/hito/index'])) ?>
+                                <?= Html::a('Gestión de hitos', Url::to(['/hito/index'])) ?>
                             </li>
                             <li>
-                                <?= Html::a('Módulos', Url::to(['/modulo/index'])) ?>
+                                <?= Html::a('Gestión de módulos', Url::to(['/modulo/index'])) ?>
                             </li>
 
                         </ul>
@@ -268,37 +272,37 @@ Modal::end();
                     <?php if (!Yii::$app->user->isGuest) :?>
                    <?php  if (Yii::$app->user->identity->role == 2) :?>
                     <li>
-                        <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
-                        <ul id="proyecto">
+                        <!--span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>-->
+                        <!--ul id="proyecto">-->
 
-                            <li>
+                            <!--li>-->
                                 <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
-                            </li>
+                            <!--/li>-->
 
                             
 
-                        </ul>
+                        <!--/ul>-->
                     </li>
                     <li>
-                        <span  class="opener"><span class="icon fa-hand-o-up"> Hitos</span></span>
-                        <ul id="hito">
-                            <li>
+                        <!--span  class="opener"><span class="icon fa-hand-o-up"> Hitos</span></span>-->
+                        <!--ul id="hito">-->
+                             <!--li>-->
                                 <?= Html::a('Hitos', Url::to(['/hito/indexestudiante'])) ?>
-                            </li>
+                           <!--li>-->
                             
-                        </ul>
+                        <!--/ul>-->
 
                     </li>
                     
                     <li>
-                        <span  class="opener"><span class="icon fa-hand-o-up"> Módulos</span></span>
-                        <ul id="modulo">
+                        <!--span  class="opener"><span class="icon fa-hand-o-up"> Módulos</span></span>-->
+                        <!--ul id="modulo">-->
                             
-                            <li>
+                             <!--li>-->
                                 <?= Html::a('Módulos', Url::to(['/modulo/indexestudiante'])) ?>
-                            </li>
+                             <!--li>-->
 
-                        </ul>
+                        <!--/ul>-->
 
                     </li>
                     <?php endif ?>
