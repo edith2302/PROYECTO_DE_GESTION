@@ -27,10 +27,45 @@ $this->params['breadcrumbs'][] = $this->title;
             'hora_habilitacion',
             'fecha_limite',
             'hora_limite',
-            'tipo_hito',
-            'porcentaje_nota',
-            'id_rubrica',
-            'id_profe_asignatura',
+           // 'tipo_hito',
+            [
+                'label'  => 'Tipo de hito',
+                'value'  => function ($model) {
+                    switch ($model->tipo_hito) {
+                        case 0:
+                            return "Informe (Avance)";
+                            break;
+                        case 1:
+                            return "Presentación";
+                            break;
+                        case 2:
+                             return "Defesa de proyecto";
+                                break;
+                        case 3:
+                         return "Informe final";
+                            break;
+                            
+                    }
+                },
+            ],
+            //'porcentaje_nota',
+            [
+                'label'  => 'Porcentaje nota',
+                'value'  => function ($model) {
+                    return $model->porcentaje_nota.'%';
+                },
+            ],
+            //'id_rubrica',
+
+            [
+                'label'  => 'Rúbrica',
+                'value'  => function ($model) {
+                    return $model->rubrica->nombre;
+                },
+            ],
+            //'id_profe_asignatura',
+
+
         ],
     ]) ?>
     <p align="right">

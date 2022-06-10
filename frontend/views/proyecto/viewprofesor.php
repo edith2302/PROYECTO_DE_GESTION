@@ -24,12 +24,85 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'descripcion',
             'num_integrantes',
-            'tipo',
-            'area',
-            'estado',
+            //'tipo',
+            [
+                'label'  => 'Tipo',
+                'value'  => function ($model) {
+                    switch ($model->tipo) {
+                        case 1:
+                            return "Desarrollo";
+                            break;
+                        case 2:
+                            return "Investigación";
+                            break;
+                        
+                    }
+                },
+            ],
+            
+            //'area',
+            [
+                'label'  => 'Área',
+                'value'  => function ($model) {
+                    switch ($model->area) {
+                        case 1:
+                            return "Inteligencia Artificial";
+                            break;
+                        case 2:
+                            return "Sistemas de información";
+                            break;
+                     case 3:
+                                return "Estructura de datos";
+                                break;
+                    }
+                },
+            ],
+            //'estado',
+            [
+                'label'  => 'Estado',
+                'value'  => function ($model) {
+                    switch ($model->estado) {
+                        case 1:
+                            return "Aprobado";
+                            break;
+                        case 2:
+                            return "Rechazado";
+                            break;
+                        
+                    }
+                },
+            ],
+
+            
             //'disponibilidad',
-            'id_profe_guia',
+            //'id_profe_guia',
+
+            [
+                'label'  => 'Profesor guía',
+                
+
+                'value'  => function ($model) {
+
+                    if ($model->id_profe_guia==null){
+                        return "Sin profesor Guía" ;
+                     }
+                   if ($model->id_profe_guia=!null){
+
+                      return  $model->profeGuia->usuario->nombre;
+                   }
+                   
+                },
+            ],
+
             //'id_autor',
+
+            [
+                'label'  => 'Autor',
+                'value'  => function ($model) {
+                    return $model->autor->nombre;
+                },
+            ],
+
         ],
     ]) ?>
 </div>

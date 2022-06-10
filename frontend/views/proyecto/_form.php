@@ -50,14 +50,29 @@ use yii\helpers\ArrayHelper;
                 [
                     '1' => 'Inteligencia Artificial',
                     '2' => 'Sistemas de información',
+                    '3' => 'Estructura de datos',
+
                 ],
                 ['prompt' => 'Selección de área']
             );
             ?>
     </div>
 
+    <div class="col-md">
+            <?php
+            echo $form->field($model, 'disponibilidad')->dropDownList(
+                [
+                    '1' => 'Disponible',
+                    '2' => 'Ocupado',
+                    
 
-    <?= $form->field($model, 'disponibilidad')->textInput() ?>
+                ],
+                ['prompt' => 'Selección disponibilidad']
+            );
+            ?>
+    </div>
+
+    <!--?= $form->field($model, 'disponibilidad')->textInput() ?>-->
 
 
     <?= $form->field($model, 'id_autor')->textInput() ?>

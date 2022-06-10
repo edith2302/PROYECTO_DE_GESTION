@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id_profe_asignatura',
 
             [
-                'attribute'=>'nombre',
+                'label'=>'Nombre hito',
                 'value'=>function ($model) { return $model->nombre; },
                 //'filter'=>false,
                 'format'=>'raw',
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
-            
+
             /*[
                 'attribute'=>'descripcion',
                 'value'=>function ($model) { return $model->descripcion; },
@@ -58,9 +58,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],*/
 
-            
             [
-                'attribute'=>'fecha_habilitacion',
+                'label'=>'Fecha habilitación',
                 'value'=>function ($model) { return $model->fecha_habilitacion; },
                 //'filter'=>false,
                 'format'=>'raw',
@@ -70,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'attribute'=>'hora_habilitacion',
+                'label'=>'Hora habilitación',
                 'value'=>function ($model) { return $model->hora_habilitacion; },
                 //'filter'=>false,
                 'format'=>'raw',
@@ -79,9 +78,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
 
-
             [
-                'attribute'=>'fecha_limite',
+                'label'=>'Fecha límite',
                 'value'=>function ($model) { return $model->fecha_limite; },
                 //'filter'=>false,
                 'format'=>'raw',
@@ -91,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'attribute'=>'hora_limite',
+                'label'=>'Hora límite',
                 'value'=>function ($model) { return $model->hora_limite; },
                 //'filter'=>false,
                 'format'=>'raw',
@@ -100,9 +98,39 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
 
+             //'tipo_hito',
             [
-                'attribute'=>'tipo_hito',
-                'value'=>function ($model) { return $model->tipo_hito; },
+                'label' => 'Tipo hito',
+                'value' =>
+
+                function ($model) {
+                    if ($model['tipo_hito'] == '0') {
+                        return 'Informe (Avance)';
+                    };
+                    if ($model['tipo_hito'] == '1') {
+                        return 'Presentación';
+                    };
+                    if ($model['tipo_hito'] == '2') {
+                        return 'Defesa de proyecto';
+                    };
+                    if ($model['tipo_hito'] == '3') {
+                        return 'Informe final';
+                    };
+                    return 'ERROR';
+
+                   
+                },
+                'format'=>'raw',
+        //'label'=>'YiiLib.com',
+        'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+        'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+
+
+            ],
+
+            [
+                'label'=>'Porcentaje nota',
+                'value'=>function ($model) { return $model->porcentaje_nota.'%'; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
@@ -110,15 +138,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
 
-            [
-                'attribute'=>'porcentaje_nota',
-                'value'=>function ($model) { return $model->porcentaje_nota; },
-                //'filter'=>false,
-                'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],
 
 
 
