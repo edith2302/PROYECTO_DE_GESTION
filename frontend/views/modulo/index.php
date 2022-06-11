@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id_profesor',
 
             [
-                'attribute'=>'archivo',
+                'label'=>'Archivo',
                 'value'=>function ($model) { return $model->archivo; },
                 //'filter'=>false,
                 'format'=>'raw',
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'attribute'=>'descripcion',
+                'label'=>'Descripción',
                 'value'=>function ($model) { return $model->descripcion; },
                 //'filter'=>false,
                 'format'=>'raw',

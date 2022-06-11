@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             [
-                'attribute'=>'fecha_entrega',
+                'label'=>'Fecha entrega',
                 'value'=>function ($model) { return $model['fecha_entrega']; },
                 //'filter'=>false,
                 'format'=>'raw',
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
   
             [
-                'attribute'=>'hora_entrega',
+                'label'=>'Hora entrega',
                 'value'=>function ($model) { return $model['hora_entrega']; },
                 //'filter'=>false,
                 'format'=>'raw',

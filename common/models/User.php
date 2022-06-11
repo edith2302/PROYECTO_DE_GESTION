@@ -1,8 +1,11 @@
 <?php
 namespace common\models;
 
+use app\models\Usuario;
 use Yii;
-
+/** 
+* @property Usuario $usuario
+*/
 class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
 {
@@ -14,6 +17,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public $authKey;
     public $accessToken;
     public $activate;
+    public $id_usuarioo;
 
     public $role;
 

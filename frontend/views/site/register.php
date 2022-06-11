@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 <h3><?= $msg ?></h3>
 
-<h1>Register</h1>
+<h1>Registro</h1>
 <?php $form = ActiveForm::begin([
     'method' => 'post',
  'id' => 'formulario',
@@ -27,6 +27,6 @@ use yii\widgets\ActiveForm;
 
 
 
-<?= Html::submitButton("Register", ["class" => "btn btn-primary"]) ?>
+<?= Html::submitButton("Registrarse", ["class" => "btn btn-primary"]) ?>
 
 <?php $form->end() ?>

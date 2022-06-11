@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'descripcion',
 
             [
-                'attribute'=>'descripcion',
+                'attribute'=>'Descripción',
                 'value'=>function ($model) { return $model->descripcion; },
                 //'filter'=>false,
                 'format'=>'raw',

@@ -3,13 +3,14 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use app\models\Usuario as ModelsUsuario;
 use common\models\Adjunto;
 use common\models\AuthItem;
 use common\models\AuthItemChild;
 use common\models\TextoAyuda;
 use common\models\Usuario;
 use common\util\Utilidades;
-
+use common\models\User;
 use yii\bootstrap4\Modal;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
@@ -142,14 +143,18 @@ Modal::end();
 
                 <?php endif;?>
 
-                <div align="right">
+                <div>
         
 
                     <?php if(!Yii::$app->user->isGuest):
-                        $nombreUsuario = preg_split('/\s+/', Yii::$app->user->identity->username, -1, PREG_SPLIT_NO_EMPTY);
+                        $nombreUsuario = Usuario::find()
+                        ->where("id_usuario=:id_usuario", [":id_usuario" => Yii::$app->user->identity->id_usuarioo,])
+                        ->one();
+                       
                         ?>
+
                         <p>
-                        <h3>Hola <?= ucfirst(strtolower($nombreUsuario[0])) ?></h3>
+                        <h3>Hola <?= $nombreUsuario->nombre ?></h3>
                         </p>
                         <p>
                             <?= Html::a('Salir', Url::to(['/site/logout']),[
@@ -233,6 +238,24 @@ Modal::end();
                             </li>
                         </ul>
                     </li>
+
+                    <li>
+                    <?= Html::a('Calendario', Url::to(['/proyecto/indexestudiante'])) ?>
+                    </li>
+
+                    <li>
+
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Participantes</span></span>
+                        <ul id="estudiantes">
+                            <li>
+                                <?= Html::a('Lista de estudiantes', Url::to(['/estudiante/index'])) ?>
+                            </li>
+                            <li>
+                                <?= Html::a('Lista de profesores', Url::to(['/profesorguia/index'])) ?>
+                            </li>
+
+                        </ul>
+                 </li>
 
                      <!--menu profesor asignatura-->
                   <?php if (!Yii::$app->user->isGuest):?> 

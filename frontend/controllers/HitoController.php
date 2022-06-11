@@ -62,6 +62,9 @@ class HitoController extends Controller
         ]);
     }
 
+    
+    
+
     /**
      * Displays a single Hito model.
      * @param int $id ID
