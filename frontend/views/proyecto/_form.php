@@ -75,15 +75,15 @@ use yii\helpers\ArrayHelper;
     <!--?= $form->field($model, 'disponibilidad')->textInput() ?>-->
 
 
-    <?= $form->field($model, 'id_autor')->textInput() ?>
+    <!--?= $form->field($model, 'id_autor')->textInput() ?>-->
 
-    <div class="col-md">
+    <!--div class="col-md">
             <?= $form->field($model, 'id_profe_guia')->dropDownList(
                 ArrayHelper::map(Profesorguia::find()->all(),'id',
                         function ($query) {
                             return $query->usuario->nombre;
                         },),['prompt' => 'Seleccione profesor guía'])?>
-    </div>
+    </div>-->
     
     <p align="right">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

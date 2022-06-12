@@ -307,13 +307,19 @@ Modal::end();
                         <!--/ul>-->
                     </li>
                     <li>
-                        <!--span  class="opener"><span class="icon fa-hand-o-up"> Hitos</span></span>-->
-                        <!--ul id="hito">-->
-                             <!--li>-->
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Mi proyecto </span></span>
+                        <ul id="hito">
+
+                        
+                          <li>
+                                <?= Html::a('Proyecto', Url::to(['/hito/indexestudiante'])) ?>
+                           <li>
+                             
+                           <li>
                                 <?= Html::a('Hitos', Url::to(['/hito/indexestudiante'])) ?>
-                           <!--li>-->
-                            
-                        <!--/ul>-->
+                           <li>
+
+                        </ul>
 
                     </li>
                     

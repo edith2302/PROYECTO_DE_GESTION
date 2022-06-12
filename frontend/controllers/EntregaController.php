@@ -64,6 +64,27 @@ class EntregaController extends Controller
         ]);
     }
 
+    
+    public function actionEntregasproyectohito()
+    {
+        $model = new SqlDataProvider([
+            'sql' => 'select hito.id, hito.nombre, hito.descripcion,  
+            from hito join entrega on entrega.id_hito = entrega.id_hito
+            join entrega on entrega.id_proyecto=desarrollaproyecto.id_proyecto
+             join usuario on desarollaproyecto.id_usuario = usuario.id 
+            where desarrollaproyecto.id_usuario and usuario.id = ' . Yii::$app->user->identity->id_usuarioo,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+
+        return $this->render('entregasproyectohito', [
+            'dataProvider' => $model,
+        ]);
+    }
+
+
+    
     /**
      * Displays a single Entrega model.
      * @param int $id ID

@@ -104,7 +104,19 @@ class ProyectoController extends Controller
         ]);
     }
     
+    public function actionViewasignado($id)
+    {
+        return $this->render('viewasignado', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
+    public function actionView2($id)
+    {
+        return $this->render('view2', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
      * Creates a new Proyecto model.
@@ -114,13 +126,13 @@ class ProyectoController extends Controller
     public function actionCreate()
     {
         $model = new Proyecto();
-        //$model->id_autor = Yii::app()->user->getId();
+        $model->id_autor = Yii::$app->user->identity->id_usuarioo;
 
         if ($this->request->isPost) {
             if ($model->load(Yii:: $app->request->post()) && $model->save()) {
 
                 Yii:: $app->session->setFlash('success','La propuesta de proyecto ha sido agragada con éxito');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view2', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -131,6 +143,21 @@ class ProyectoController extends Controller
         ]);
     }
 
+
+    public function actionCreate2($id)
+    {
+
+        $model = $this->findModel($id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['viewasignado', 'id' => $model->id]);
+        }
+
+        return $this->render('create2', [
+            'model' => $model,
+        ]);
+        
+    }
     /**
      * Updates an existing Proyecto model.
      * If update is successful, the browser will be redirected to the 'view' page.

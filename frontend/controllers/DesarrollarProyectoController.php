@@ -7,6 +7,7 @@ use app\models\DesarrollarproyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * DesarrollarproyectoController implements the CRUD actions for Desarrollarproyecto model.
@@ -68,7 +69,7 @@ class DesarrollarproyectoController extends Controller
     public function actionCreate()
     {
         $model = new Desarrollarproyecto();
-
+        $model->id_autor = Yii::$app->user->identity->id_usuarioo;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
