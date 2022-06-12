@@ -6,6 +6,7 @@ return [
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'common\models\User',
+            'loginUrl' => ['frontend/site/login']
         ],
     ],
 ];
