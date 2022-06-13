@@ -2,7 +2,7 @@
 /* CSS Document */
 
 #sidebar, #header, .logo2, input[type="submit"].primary, input[type="reset"].primary, input[type="button"].primary, button.primary, .button.primary, #sidebar2 {
-	background-color: hsl(241, 84%, 10%);
+	background-color: hsl(241, 88%, 13%);
 }
 
 input[type="submit"],
