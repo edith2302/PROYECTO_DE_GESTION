@@ -202,4 +202,13 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         
     }
 
+<<<<<<< HEAD
 }
+=======
+    public static function getDb()
+    {
+        return Yii::$app->db;
+    }
+}
+
+>>>>>>> cc6290386a64f29bdfb6294b11a40a1cda1dbf68
