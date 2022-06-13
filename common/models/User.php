@@ -2,6 +2,7 @@
 namespace common\models;
 
 use app\models\Usuario;
+use yii\db\ActiveRecord;
 use Yii;
 /** 
 * @property Usuario $usuario
@@ -201,7 +202,14 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         
     }
 
+<<<<<<< HEAD
     
     
+=======
+    public static function getDb()
+    {
+        return Yii::$app->db;
+    }
+>>>>>>> d23a064fa5f7a7130c5df33a992eb60940b6e4e0
 }
 
