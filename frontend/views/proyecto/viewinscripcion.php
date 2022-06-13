@@ -63,20 +63,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'estado',
 
-            /*[
-                'label'  => 'Estado',
-                'value'  => function ($model) {
-                    switch ($model->estado) {
-                        case 1:
-                            return "Aprobado";
-                            break;
-                        case 2:
-                            return "Rechazado";
-                            break;
-                        
-                    }
-                },
-            ],*/
             //'disponibilidad',
             //'id_profe_guia',
 
