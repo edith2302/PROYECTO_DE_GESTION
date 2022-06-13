@@ -8,7 +8,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
-
+USE yii\data\SqlDataProvider;
+use app\models\Estudiante;
+use app\models\Proyecto;
 /**
  * DesarrollarproyectoController implements the CRUD actions for Desarrollarproyecto model.
  */
@@ -66,21 +68,36 @@ class DesarrollarproyectoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+        
+        $estudiante = Estudiante::find()->where(['id_usuario' => $logueado])->one();
+        //return $estudiante->id;
+
+        $proyecto = Proyecto::find()->where(['id' => $id])->one();
+        
+         //return $proyecto->id;
         $model = new Desarrollarproyecto();
-        $model->id_autor = Yii::$app->user->identity->id_usuarioo;
-        if ($this->request->isPost) {
+    
+        $model->id_estudiante = $estudiante->id;
+
+        $model->id_proyecto=$proyecto->id;
+
+        $model->save();
+        return $this->redirect(['proyecto/viewinscripcion', 'id' => $model->id]);
+
+        /*if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
-        }
+        }*/
 
-        return $this->render('create', [
+       /* return $this->render('create', [
             'model' => $model,
-        ]);
+        ]);*/
     }
 
     /**

@@ -118,6 +118,13 @@ class ProyectoController extends Controller
         ]);
     }
 
+    public function actionViewinscripcion($id)
+    {
+        return $this->render('viewinscripcion', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
     /**
      * Creates a new Proyecto model.
      * If creation is successful, the browser will be redirected to the 'view' page.

@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+ 
+use app\models\Usuario;
 /* @var $this yii\web\View */
 /* @var $model app\models\Proyecto */
 
@@ -24,11 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'descripcion',
             //'num_integrantes',
-           // 'tipo',
             
-          
-            
-
+            //'tipo',
 
             [
                 'label'  => 'Tipo',
@@ -44,7 +42,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 },
             ],
-            //'area',
+           
+           // 'area',
+
             [
                 'label'  => 'Área',
                 'value'  => function ($model) {
@@ -55,16 +55,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         case 2:
                             return "Sistemas de información";
                             break;
-                        case 3:
-                            return "Estructura de datos";
-                            break;
-                        
+                     case 3:
+                                return "Estructura de datos";
+                                break;
                     }
                 },
             ],
             //'estado',
 
-           /* [
+            /*[
                 'label'  => 'Estado',
                 'value'  => function ($model) {
                     switch ($model->estado) {
@@ -75,27 +74,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             return "Rechazado";
                             break;
                         
-                        
                     }
                 },
             ],*/
             //'disponibilidad',
-
-            /*[
-                'label'  => 'Disponibilidad',
-                'value'  => function ($model) {
-                    switch ($model->disponibilidad) {
-                        case 1:
-                            return "Disponible";
-                            break;
-                        case 2:
-                            return "Ocupado";
-                            break;
-                        
-                        
-                    }
-                },
-            ],*/
             //'id_profe_guia',
 
             [
@@ -115,7 +97,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
 
-            
+            [
+                'label'  => 'Desarrollado por',
+                'value'  => function ($model) {
+                    $logueado= Yii::$app->user->identity->id_usuarioo;
+                    $usuario = Usuario::find()->where(['id_usuario' => $logueado])->one();
+                   
+                    return $usuario->nombre;
+                },
+            ],
+
             //'id_autor',
             [
                 'label'  => 'Autor',

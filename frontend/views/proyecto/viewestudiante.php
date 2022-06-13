@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'estado',
 
-            [
+            /*[
                 'label'  => 'Estado',
                 'value'  => function ($model) {
                     switch ($model->estado) {
@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         
                     }
                 },
-            ],
+            ],*/
             //'disponibilidad',
             //'id_profe_guia',
 
@@ -109,6 +109,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     
 <p align="center">
-    <?= Html::a('Inscribir propuesta', ['viewestudianteproyinscrito', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Inscribir propuesta', ['desarrollarproyecto/create', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 </div>
