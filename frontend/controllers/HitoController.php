@@ -85,6 +85,25 @@ class HitoController extends Controller
     
     }
 
+    public function actionViewentregaestudiante($id)
+    {
+
+        $modelhito = new SqlDataProvider([
+            'sql' => 'SELECT * FROM entrega where id_hito in (select hito.id as id
+            from hito join entrega on entrega.id_hito = hito.id
+            join desarrollarproyecto on entrega.id_proyecto=desarrollarproyecto.id_proyecto
+            join estudiante on desarrollarproyecto.id_estudiante = estudiante.id
+            where estudiante.id_usuario =  ' . Yii::$app->user->identity->id_usuarioo.'
+            and hito.id='.$id.')',
+        ]);
+        //return print_r( $modelhito);
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+            'modelhito' => $modelhito,
+        ]);
+    
+    }
+
     public function actionViewestudiante($id)
     {
         return $this->render('viewestudiante', [

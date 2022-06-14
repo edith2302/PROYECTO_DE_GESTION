@@ -63,5 +63,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <p align="center">
                 <?= Html::a('Agregar entrega', ['entrega/create'], ['class' => 'btn btn-primary']) ?> </p>
             </div>
+
+            <p align="right">
+                <?= Html::a('Entrega de mi proyecto', ['entrega/entregasproyectohito'], ['class' => 'btn btn-success']) ?>
+            </p>
+
     
 </div>

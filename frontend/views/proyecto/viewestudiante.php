@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="proyecto-view">
-
+    
     <h1><?= Html::encode($this->title) ?></h1>
 
    
@@ -112,3 +112,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Html::a('Inscribir propuesta', ['desarrollarproyecto/create', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 </div>
+
+<?php echo $msg ?>

@@ -67,12 +67,20 @@ class EntregaController extends Controller
     
     public function actionEntregasproyectohito()
     {
+        /*
+        SELECT * FROM hito where id in (select hito.id as id
+from hito join entrega on entrega.id_hito = hito.id
+join desarrollarproyecto on entrega.id_proyecto=desarrollarproyecto.id_proyecto
+join estudiante on desarrollarproyecto.id_estudiante = estudiante.id
+where estudiante.id_usuario = 6107)
+        */
         $model = new SqlDataProvider([
-            'sql' => 'select hito.id, hito.nombre, hito.descripcion,  
-            from hito join entrega on entrega.id_hito = entrega.id_hito
-            join entrega on entrega.id_proyecto=desarrollaproyecto.id_proyecto
-             join usuario on desarollaproyecto.id_usuario = usuario.id 
-            where desarrollaproyecto.id_usuario and usuario.id = ' . Yii::$app->user->identity->id_usuarioo,
+            'sql' => 'SELECT * FROM entrega where id_hito in (select hito.id as id
+            from hito join entrega on entrega.id_hito = hito.id
+            join desarrollarproyecto on entrega.id_proyecto=desarrollarproyecto.id_proyecto
+            join estudiante on desarrollarproyecto.id_estudiante = estudiante.id
+            where estudiante.id_usuario =  ' . Yii::$app->user->identity->id_usuarioo.'
+            and hito.id='.$id.')',
             'pagination' => [
                 'pageSize' => 10,
             ],

@@ -60,6 +60,7 @@ class DesarrollarproyectoController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'msg'=> null,
         ]);
     }
 
@@ -77,6 +78,17 @@ class DesarrollarproyectoController extends Controller
 
         $proyecto = Proyecto::find()->where(['id' => $id])->one();
         
+        $proyectoInscritos= Desarrollarproyecto::find()->where(['id_estudiante' => $estudiante->id])->andWhere(['id_proyecto' => $proyecto->id])->one();
+        $msg = null;
+        if($proyectoInscritos != null){
+            return $this->render('../proyecto/viewestudiante', [
+                'model' => $proyecto->findOne($id),
+                'msg'=> "Esto ya fue inscrito",
+            ]);
+        }
+
+
+
          //return $proyecto->id;
         $model = new Desarrollarproyecto();
     
@@ -85,8 +97,11 @@ class DesarrollarproyectoController extends Controller
         $model->id_proyecto=$proyecto->id;
 
         $model->save();
-        return $this->redirect(['proyecto/viewinscripcion', 'id' => $model->id]);
+        //return $this->redirect(['proyecto/viewinscripcion', 'id' => $model->id]);
 
+        return $this->render('../proyecto/viewinscripcion', [
+            'model' => Proyecto::findOne($model->id_proyecto),
+        ]);
         /*if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
