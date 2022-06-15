@@ -69,15 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
     <p align="right">
-        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '¿Está seguro/a de que deseas eliminar éste elemento?',
-                'method' => 'post',
-            ],
-        ]) ?>
-
+        
 
         <?= Html::a('<a class="btn btn-primary" href="index.php?r=entrega/entregashito&id=' . $model->id . '">Ver Entregas</a>')?>
        
