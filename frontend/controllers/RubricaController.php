@@ -11,6 +11,7 @@ use app\models\Item;
 use app\models\Model;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use app\models\Profesorasignatura;
 
 use Yii;
 /**
@@ -73,50 +74,26 @@ class RubricaController extends Controller
     public function actionCreate()
     {
         $model = new Rubrica();
-        $modelsItem = [new Item];
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+        
+        //return $logueado;
+        $profesor= ProfesorAsignatura::find()->where(['id_usuario' => $logueado])->one();
+
+        //return $profesor->id;
+        $model->id_profe_asignatura= $profesor->id;
+       // $modelsItem = [new Item];
+
 
         if ($this->request->isPost) {
             if ($model->load(Yii:: $app->request->post()) && $model->save()) {
-
-
-
-
-                $modelsItem = Model::createMultiple(Item::classname());
-                Model::loadMultiple($modelsItem, Yii::$app->request->post());
-
-                // validate all models
-                $valid = $model->validate();
-                $valid = Model::validateMultiple($modelsItem) && $valid;
-                
-                if ($valid) {
-                    $transaction = \Yii::$app->db->beginTransaction();
-                    try {
-                        if ($flag = $model->save(false)) {
-                            foreach ($modelsItem as $modelItem) 
-                            {
-                                $modelItem->id_rubrica = $model->id;
-                                if (! ($flag = $modelItem->save(false))) {
-                                    $transaction->rollBack();
-                                    break;
-                                }
-                            }
-                        }
-                        if ($flag) {
-                            $transaction->commit();
-                            return $this->redirect(['view', 'id' => $model->id]);
-                        }
-                    } catch (Exception $e) {
-                        $transaction->rollBack();
-                    }
-                }
+        
             
-
-                Yii:: $app->session->setFlash('success','La rúbrica ha sido creada con exito');
+          Yii:: $app->session->setFlash('success','La rúbrica ha sido creada con exito');
                 return $this->redirect(['view', 'id' => $model->id]);
             }else{
                 return $this->render('create', [
                     'model' => $model,
-                    'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
+                    
                 ]);
             }
         } else {
@@ -125,7 +102,7 @@ class RubricaController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'modelsItem'  => $modelsItem,
+            //'modelsItem'  => $modelsItem,
         ]);
     }
 

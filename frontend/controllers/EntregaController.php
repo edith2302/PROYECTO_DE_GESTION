@@ -65,7 +65,7 @@ class EntregaController extends Controller
     }
 
     
-    public function actionEntregasproyectohito()
+   /* public function actionEntregasproyectohito()
     {
         /*
         SELECT * FROM hito where id in (select hito.id as id
@@ -74,7 +74,7 @@ join desarrollarproyecto on entrega.id_proyecto=desarrollarproyecto.id_proyecto
 join estudiante on desarrollarproyecto.id_estudiante = estudiante.id
 where estudiante.id_usuario = 6107)
         */
-        $model = new SqlDataProvider([
+       /* $model = new SqlDataProvider([
             'sql' => 'SELECT * FROM entrega where id_hito in (select hito.id as id
             from hito join entrega on entrega.id_hito = hito.id
             join desarrollarproyecto on entrega.id_proyecto=desarrollarproyecto.id_proyecto
@@ -89,7 +89,7 @@ where estudiante.id_usuario = 6107)
         return $this->render('entregasproyectohito', [
             'dataProvider' => $model,
         ]);
-    }
+    }*/
 
 
     

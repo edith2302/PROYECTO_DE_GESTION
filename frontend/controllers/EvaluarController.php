@@ -2,16 +2,16 @@
 
 namespace frontend\controllers;
 
-use app\models\Item;
-use app\models\ItemSearch;
+use app\models\Evaluar;
+use app\models\EvaluarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ItemController implements the CRUD actions for Item model.
+ * EvaluarController implements the CRUD actions for Evaluar model.
  */
-class ItemController extends Controller
+class EvaluarController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class ItemController extends Controller
     }
 
     /**
-     * Lists all Item models.
+     * Lists all Evaluar models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ItemSearch();
+        $searchModel = new EvaluarSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Displays a single Item model.
+     * Displays a single Evaluar model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,15 +61,14 @@ class ItemController extends Controller
     }
 
     /**
-     * Creates a new Item model.
+     * Creates a new Evaluar model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate($id)
+    public function actionCreate()
     {
-        $model = new Item();
+        $model = new Evaluar();
 
-        $model->id_rubrica=$id;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -84,7 +83,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Updates an existing Item model.
+     * Updates an existing Evaluar model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -104,7 +103,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Deletes an existing Item model.
+     * Deletes an existing Evaluar model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -118,15 +117,15 @@ class ItemController extends Controller
     }
 
     /**
-     * Finds the Item model based on its primary key value.
+     * Finds the Evaluar model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Item the loaded model
+     * @return Evaluar the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Item::findOne(['id' => $id])) !== null) {
+        if (($model = Evaluar::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

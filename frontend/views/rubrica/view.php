@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
    <p align="right">
+        <?= Html::a('Agregar item', ['item/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',

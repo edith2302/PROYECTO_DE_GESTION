@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Item;
+use app\models\Evaluar;
 
 /**
- * ItemSearch represents the model behind the search form of `app\models\Item`.
+ * EvaluarSearch represents the model behind the search form of `app\models\Evaluar`.
  */
-class ItemSearch extends Item
+class EvaluarSearch extends Evaluar
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class ItemSearch extends Item
     public function rules()
     {
         return [
-            [['id', 'puntaje','puntaje_obtenido', 'id_rubrica'], 'integer'],
-            [['descripcion'], 'safe'],
+            [['id', 'nota', 'id_hito', 'id_usuario'], 'integer'],
+            [['comentarios'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class ItemSearch extends Item
      */
     public function search($params)
     {
-        $query = Item::find();
+        $query = Evaluar::find();
 
         // add conditions that should always apply here
 
@@ -59,12 +59,12 @@ class ItemSearch extends Item
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'puntaje' => $this->puntaje,
-            'puntaje_obtenido' => $this->puntaje_obtenido,
-            'id_rubrica' => $this->id_rubrica,
+            'nota' => $this->nota,
+            'id_hito' => $this->id_hito,
+            'id_usuario' => $this->id_usuario,
         ]);
 
-        $query->andFilterWhere(['like', 'descripcion', $this->descripcion]);
+        $query->andFilterWhere(['like', 'comentarios', $this->comentarios]);
 
         return $dataProvider;
     }

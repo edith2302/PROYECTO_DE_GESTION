@@ -23,6 +23,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'puntaje')->textInput() ?>
 
+    <?= $form->field($model, 'puntaje_obtenido')->textInput() ?>
+
     <?= $form->field($model, 'id_rubrica')->textInput() ?>
 
     <div class="form-group">

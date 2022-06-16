@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'descripcion',
             'puntaje',
+            'puntaje_obtenido',
             'id_rubrica',
         ],
     ]) ?>

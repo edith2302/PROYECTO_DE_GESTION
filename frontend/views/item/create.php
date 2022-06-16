@@ -1,11 +1,14 @@
 <?php
 
 use yii\helpers\Html;
-
+use app\models\Rubrica;
 /* @var $this yii\web\View */
 /* @var $model app\models\Item */
 
-$this->title = 'Agregar ítem';
+//$nombre= Rubrica::find()->where(['id' => $id])->one();
+
+$this->title = 'Agregar ítem a ';
+//$this->title = 'Agregar ítem';
 $this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

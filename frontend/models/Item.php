@@ -11,6 +11,7 @@ use Yii;
  * @property string $descripcion
  * @property int $puntaje
  * @property int $id_rubrica
+ * @property int $puntaje_obtenido
  *
  * @property Rubrica $rubrica
  */
@@ -31,7 +32,7 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
         [['descripcion', 'puntaje'/*, 'id_rubrica'*/], 'required'],
-            [['puntaje', 'id_rubrica'], 'integer'],
+            [['puntaje', 'id_rubrica','puntaje_obtenido'], 'integer'],
             [['descripcion'], 'string', 'max' => 1000],
             [['id_rubrica'], 'exist', 'skipOnError' => true, 'targetClass' => Rubrica::className(), 'targetAttribute' => ['id_rubrica' => 'id']],
         ];
@@ -44,9 +45,10 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'descripcion' => 'Descripcion',
-            'puntaje' => 'Puntaje',
-            'id_rubrica' => 'Id Rubrica',
+            'descripcion' => 'Descripción',
+            'puntaje' => 'Puntaje máximo',
+            'puntaje_obtenido' => 'Puntaje obtenido',
+            'id_rubrica' => 'Rubrica',
         ];
     }
 
