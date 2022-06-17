@@ -64,8 +64,8 @@ class RubricaController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $items = $model->items;
-        //$items = Item::find()->where(['id_rubrica' => $id]);
+        //$items = $model->items;
+        $items = Item::find()->where(['id_rubrica' => $id]);
         return $this->render('view', [
             'model' => $model,
             'modelsItem' => $items,
@@ -104,30 +104,36 @@ class RubricaController extends Controller
                 Model::loadMultiple($modelsItem, Yii::$app->request->post());
         
                 // validate all models
-                 $valid = $model->validate();
-                 $valid = Model::validateMultiple($modelsItem) && $valid;
+                $valid = $model->validate();
+                $valid = Model::validateMultiple($modelsItem) && $valid;
 
-                 if ($valid) {
-                   $transaction = \Yii::$app->db->beginTransaction();
+                if ($valid) {
+                    $transaction = \Yii::$app->db->beginTransaction();
 
-                  try {
-                      if ($flag = $model->save(false)) {
-                        foreach ($modelsItem as $modelItem) {
-                            $modelItem->id_rubrica = $model->id;
-                            if (! ($flag = $modelItem->save(false))) {
-                                $transaction->rollBack();
-                                break;
+                    try {
+                        if ($flag = $model->save(false)) {
+                            foreach ($modelsItem as $modelItem) {
+                                $modelItem->id_rubrica = $model->id;
+                                if (! ($flag = $modelItem->save(false))) {
+                                    $transaction->rollBack();
+                                    break;
+                                }
                             }
-                        }
                         }
 
                         if ($flag) {
-                        $transaction->commit();
-                        return $this->redirect(['view', 'id' => $model->id]);
+                            $transaction->commit();
+                            return $this->redirect(['view', 'id' => $model->id]);
                         }
-                   } catch (Exception $e) {
+                    } catch (Exception $e) {
                     $transaction->rollBack();
                 }
+
+            }else{
+                return $this->render('create', [
+                    'model' => $model,
+                    
+                ]);
             }
         }
     }   
@@ -159,7 +165,9 @@ class RubricaController extends Controller
      */
     public function actionUpdate($id)
     {
+        $modelsItem = [new Item];
         $model = $this->findModel($id);
+        
 
         if ( Yii:: $app->request->isPost && $model->load($this->request->post()) && $model->save()) {
 

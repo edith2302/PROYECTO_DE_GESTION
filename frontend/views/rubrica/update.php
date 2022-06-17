@@ -14,8 +14,9 @@ $this->params['breadcrumbs'][] = 'Modificar rúbrica';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?= $this->render('_form2', [
         'model' => $model,
+        'modelsItem'=>$modelsItem,
     ]) ?>
 
 </div>
