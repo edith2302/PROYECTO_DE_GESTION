@@ -11,14 +11,14 @@ use app\models\Item;
 //$modelsItem = Item::find()->where(['id_rubrica' => $id]);
 $js = '
 jQuery(".dynamicform_wrapper").on("afterInsert", function(e, item) {
-    jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
-        jQuery(this).html("Address: " + (index + 1))
+    jQuery(".dynamicform_wrapper .panel-title-items").each(function(index) {
+        jQuery(this).html("Item: " + (index + 1))
     });
 });
 
 jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
-    jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
-        jQuery(this).html("Address: " + (index + 1))
+    jQuery(".dynamicform_wrapper .panel-title-items").each(function(index) {
+        jQuery(this).html("Item: " + (index + 1))
     });
 });
 ';
@@ -28,7 +28,7 @@ $this->registerJs($js);
 
 <div class="rubrica-form">
 
-    <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'ISSUE-form']); ?>
     <div class="row">
         <div class="col-sm-6">
             <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
@@ -41,7 +41,11 @@ $this->registerJs($js);
     <div class="padding-v-md">
         <div class="line line-dashed"></div>
     </div>
-    <?php DynamicFormWidget::begin([
+
+    <div class="panel panel-info">
+    <div class="panel-body">
+
+    <?php  DynamicFormWidget::begin([
         'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
         'widgetBody' => '.container-items', // required: css class selector
         'widgetItem' => '.item', // required: css class
@@ -51,7 +55,8 @@ $this->registerJs($js);
         'deleteButton' => '.remove-item', // css class
 
         'model' => $modelsItem[0],
-        'formId' => 'dynamic-form',
+        //'formId' => 'dynamic-form',
+        'formId' => 'ISSUE-form', //same as your ActiveForm id  
         'formFields' => [
             'descripcion',
             'puntaje',
@@ -61,15 +66,16 @@ $this->registerJs($js);
     ]); ?>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-envelope"></i>Agregar Item
-            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i> Add address</button>
+            <i class="fa fa-envelope"></i>Items
+            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i>Agregar item</button>
             <div class="clearfix"></div>
         </div>
+       
         <div class="panel-body container-items"><!-- widgetContainer -->
             <?php foreach ($modelsItem as $index => $modelItem): ?>
                 <div class="item panel panel-default"><!-- widgetBody -->
                     <div class="panel-heading">
-                        <span class="panel-title-address">Ítem: <?= ($index + 1) ?></span>
+                        <span class="panel-title-items">Item: <?= ($index + 1) ?></span>
                         <button type="button" class="pull-right remove-item btn btn-danger btn-xs"><i class="fa fa-minus"></i></button>
                         <div class="clearfix"></div>
                     </div>
@@ -87,10 +93,9 @@ $this->registerJs($js);
                                 <?= $form->field($modelItem, "[{$index}]puntaje")->textInput(['maxlength' => true]) ?>
                             </div>
                     
-
                         <div class="row">
                             <div class="col-sm-6">
-                                <?= $form->field($modelItem, "[{$index}]puntaje_obtenido")->dropDownList(Yii::$app->params['country'], ['prompt' => '']) ?>
+                                <?= $form->field($modelItem, "[{$index}]puntaje_obtenido")->textInput(['maxlength' => true]) ?>
                             </div>
                            
                         </div><!-- end:row -->
@@ -100,7 +105,8 @@ $this->registerJs($js);
         </div>
     </div>
     <?php DynamicFormWidget::end(); ?>
-
+ </div>
+</div>
     <div class="form-group">
         <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary']) ?>
     </div>
@@ -108,3 +114,9 @@ $this->registerJs($js);
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<link rel="stylesheet" href="https://wbraganca.com/assets/6b720680/css/bootstrap.css">
+<script src="https://wbraganca.com/assets/6b720680/js/bootstrap.js"></script>
+<link rel="stylesheet" href="https://wbraganca.com/css/site.css">
+<link rel="stylesheet" href="https://wbraganca.com/css/base.css">
+<script src="https://wbraganca.com/js/jquery.scrollUp.js"></script>

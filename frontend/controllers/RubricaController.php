@@ -13,6 +13,8 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Profesorasignatura;
 
+use frontend\controllers\Exception;
+
 use Yii;
 /**
  * RubricaController implements the CRUD actions for Rubrica model.
@@ -61,9 +63,16 @@ class RubricaController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $items = $model->items;
+        //$items = Item::find()->where(['id_rubrica' => $id]);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'modelsItem' => $items,
+
         ]);
+
+    
     }
 
     /**
@@ -73,7 +82,11 @@ class RubricaController extends Controller
      */
     public function actionCreate()
     {
+        $this->layout = 'vacio'; 
         $model = new Rubrica();
+
+        $modelsItem = [new Item];
+
         $logueado= Yii::$app->user->identity->id_usuarioo;
         
         //return $logueado;
@@ -86,9 +99,39 @@ class RubricaController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load(Yii:: $app->request->post()) && $model->save()) {
+
+                $modelsItem = Model::createMultiple(Item::classname());
+                Model::loadMultiple($modelsItem, Yii::$app->request->post());
         
-            
-          Yii:: $app->session->setFlash('success','La rúbrica ha sido creada con exito');
+                // validate all models
+                 $valid = $model->validate();
+                 $valid = Model::validateMultiple($modelsItem) && $valid;
+
+                 if ($valid) {
+                   $transaction = \Yii::$app->db->beginTransaction();
+
+                  try {
+                      if ($flag = $model->save(false)) {
+                        foreach ($modelsItem as $modelItem) {
+                            $modelItem->id_rubrica = $model->id;
+                            if (! ($flag = $modelItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                        }
+
+                        if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->id]);
+                        }
+                   } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+    }   
+          /*Yii:: $app->session->setFlash('success','La rúbrica ha sido creada con exito');
                 return $this->redirect(['view', 'id' => $model->id]);
             }else{
                 return $this->render('create', [
@@ -96,14 +139,15 @@ class RubricaController extends Controller
                     
                 ]);
             }
-        } else {
-            $model->loadDefaultValues();
-        }
+           /* else {
+               $model->loadDefaultValues();
+        }*/
 
         return $this->render('create', [
             'model' => $model,
-            //'modelsItem'  => $modelsItem,
+            'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
         ]);
+    
     }
 
     /**

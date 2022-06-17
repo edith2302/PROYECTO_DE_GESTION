@@ -18,6 +18,7 @@ use yii\widgets\ActiveForm;
 
     </p>
     
+    
 
     <?= $form->field($model, 'descripcion')->textarea(['maxlength' => true]) ?>
 
