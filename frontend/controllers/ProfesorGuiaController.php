@@ -102,6 +102,14 @@ class ProfesorguiaController extends Controller
         ]);
     }
 
+    public function actionCreate2($id)
+    {
+       
+        
+        
+        
+    }
+
     /**
      * Deletes an existing Profesorguia model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

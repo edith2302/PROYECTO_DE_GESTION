@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Usuario;
 use app\models\Profesorguia;
+use app\models\Profesoricinf;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -20,7 +21,7 @@ use yii\helpers\ArrayHelper;
             <?= $form->field($model, 'id_profe_guia')
                 ->dropDownList(
                     ArrayHelper::map(
-                        Profesorguia::find()->all(),
+                        Profesoricinf::find()->all(),
                         'id',
                         function ($query) {
                             return $query->usuario->nombre;

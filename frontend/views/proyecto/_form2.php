@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use app\models\Usuario;
 use app\models\Profesorguia;
 use yii\helpers\ArrayHelper;
+use app\models\Profesoricinf;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Proyecto */
@@ -19,7 +20,7 @@ use yii\helpers\ArrayHelper;
    
     <div class="col-md">
             <?= $form->field($model, 'id_profe_guia')->dropDownList(
-                ArrayHelper::map(Profesorguia::find()->all(),'id',
+                ArrayHelper::map(Profesoricinf::find()->all(),'id',
                         function ($query) {
                             return $query->usuario->nombre;
                         },),['prompt' => 'Seleccione profesor guía'])?>
