@@ -14,7 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'authKey')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
 
@@ -29,6 +31,14 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'updated_at')->textInput() ?>
 
     <?= $form->field($model, 'verification_token')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'accessToken')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'activate')->textInput() ?>
+
+    <?= $form->field($model, 'role')->textInput() ?>
+
+    <?= $form->field($model, 'id_usuarioo')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

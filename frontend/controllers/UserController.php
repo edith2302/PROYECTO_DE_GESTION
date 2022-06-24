@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\controllers;
+namespace app\controllers;
 
 use app\models\User;
 use app\models\UserSearch;
@@ -8,25 +8,12 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+
 /**
  * UserController implements the CRUD actions for User model.
  */
 class UserController extends Controller
 {
-
-    private function actionUser(){
-
-        return $this->render("user");
-   
-   
-       }
-   
-       private function actionAdmin(){
-   
-           return $this->render("admin");
-      
-      
-          }
     /**
      * @inheritDoc
      */
@@ -38,7 +25,7 @@ class UserController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST', 'GET'],
+                        'delete' => ['POST'],
                     ],
                 ],
             ]

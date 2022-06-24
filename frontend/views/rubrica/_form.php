@@ -34,7 +34,7 @@ $this->registerJs($js);
             <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-sm-6">
-            <?= $form->field($model, 'descripción')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'descripcion')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 
@@ -42,7 +42,7 @@ $this->registerJs($js);
         <div class="line line-dashed"></div>
     </div>
 
-    hola
+   
     <?php  DynamicFormWidget::begin([
         'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
         'widgetBody' => '.container-items', // required: css class selector

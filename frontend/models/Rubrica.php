@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "rubrica".
  *
  * @property int $id
- * @property int $descripción
+ * @property int $descripcion
  * @property int $escala
  * @property int $id_profe_asignatura
  *
@@ -31,10 +31,10 @@ class Rubrica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre','descripción', 'escala', 'id_profe_asignatura'], 'required'],
+            [['nombre','descripcion', 'escala', 'id_profe_asignatura'], 'required'],
             [['escala', 'id_profe_asignatura'], 'integer'],
             [['nombre'], 'string', 'max' => 100],
-            [['descripción'], 'string', 'max' => 1000],
+            [['descripcion'], 'string', 'max' => 1000],
             [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorasignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
         ];
     }
@@ -47,7 +47,7 @@ class Rubrica extends \yii\db\ActiveRecord
         return [
             'id' => 'Código rúbrica',
             'nombre' => 'Nombre rúbrica',
-            'descripción' => 'Descripción',
+            'descripcion' => 'Descripción',
             'escala' => 'Escala',
             'id_profe_asignatura' => 'Código profesor asignatura',
         ];

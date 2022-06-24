@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             //'id',
             //'nombre',
-            'descripción',
+            'descripcion',
             'escala',
             'id_profe_asignatura',
 
@@ -38,6 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Agregar ítem', ['create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar ítem 2', ['item/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
 
 </div>

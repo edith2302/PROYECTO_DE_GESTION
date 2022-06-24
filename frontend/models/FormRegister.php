@@ -3,7 +3,7 @@
 namespace app\models;
 use Yii;
 use yii\base\model;
-use app\models\Users;
+use app\models\User;
 
 class FormRegister extends model{
  
@@ -27,29 +27,29 @@ class FormRegister extends model{
         ];
     }
     
-    public function email_existe($attribute, $params)
-    {
-  
-  //Buscar el email en la tabla
-  $table = Users::find()->where("email=:email", [":email" => $this->email]);
-  
-  //Si el email existe mostrar el error
-  if ($table->count() == 1)
+  public function email_existe($attribute, $params)
   {
-                $this->addError($attribute, "El email seleccionado existe");
-  }
+  
+    //Buscar el email en la tabla
+    $table = User::find()->where("email=:email", [":email" => $this->email]);
+    
+    //Si el email existe mostrar el error
+    if ($table->count() == 1)
+    {
+      $this->addError($attribute, "El email seleccionado existe");
     }
+  }
  
-    public function username_existe($attribute, $params)
-    {
-  //Buscar el username en la tabla
-  $table = Users::find()->where("username=:username", [":username" => $this->username]);
-  
-  //Si el username existe mostrar el error
-  if ($table->count() == 1)
+  public function username_existe($attribute, $params)
   {
-                $this->addError($attribute, "El usuario seleccionado existe");
-  }
+    //Buscar el username en la tabla
+    $table = User::find()->where("username=:username", [":username" => $this->username]);
+    
+    //Si el username existe mostrar el error
+    if ($table->count() == 1)
+    {
+      $this->addError($attribute, "El usuario seleccionado existe");
     }
+  }
  
 }

@@ -1,30 +1,24 @@
 <?php
+
 namespace common\models;
-
-use app\models\Usuario;
-use yii\db\ActiveRecord;
 use Yii;
-/** 
-* @property Usuario $usuario
-*/
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+use yii\db\ActiveRecord;
 
-{
+class User extends ActiveRecord /*\yii\base\BaseObject*/ implements \yii\web\IdentityInterface{ 
     
-    public $id;
-    public $username;
-    public $email;
-    public $password;
-    public $authKey;
-    public $accessToken;
-    public $activate;
-    public $id_usuarioo;
-
-    public $role;
+    public static function getDb()
+    {
+        return Yii::$app->db;
+    }
+    
+    public static function tableName()
+    {
+        return 'user';
+    }
 
     public static function isUserAdmin($id)
     {
-       if (Users::findOne(['id' => $id, 'activate' => '1', 'role' => 0])){
+       if (User::findOne(['id' => $id, 'activate' => '1', 'role' => 0])){
         return true;
        } else {
 
@@ -35,7 +29,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     public static function isUserProfesorAsignatura($id)
     {
-       if (Users::findOne(['id' => $id, 'activate' => '1', 'role' => 1])){
+       if (User::findOne(['id' => $id, 'activate' => '1', 'role' => 1])){
        return true;
        } else {
 
@@ -45,7 +39,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     public static function isUserEstudiante($id)
     {
-        if (Users::findOne(['id' => $id, 'activate' => '1', 'role' => 2])){
+        if (User::findOne(['id' => $id, 'activate' => '1', 'role' => 2])){
             return true;
         } else {
 
@@ -56,7 +50,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     public static function isUserProfesorICINF($id)
     {
-        if (Users::findOne(['id' => $id, 'activate' => '1',  'role' => 3])){
+        if (User::findOne(['id' => $id, 'activate' => '1',  'role' => 3])){
             return true;
         } else {
 
@@ -65,7 +59,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     }
     public static function isUserComision($id)
     {
-        if (Users::findOne(['id' => $id, 'activate' => '1',  'role' => 4])){
+        if (User::findOne(['id' => $id, 'activate' => '1',  'role' => 4])){
             return true;
         } else {
 
@@ -75,7 +69,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     public static function isUserProfesorGuia($id)
     {
-        if (Users::findOne(['id' => $id, 'activate' => '1',  'role' => 5])){
+        if (User::findOne(['id' => $id, 'activate' => '1',  'role' => 5])){
             return true;
         } else {
 
@@ -85,7 +79,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     public static function isUserJefaturaCarrera($id)
     {
-        if (Users::findOne(['id' => $id, 'activate' => '1',  'role' => 6])){
+        if (User::findOne(['id' => $id, 'activate' => '1',  'role' => 6])){
             return true;
         } else {
 
@@ -101,7 +95,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public static function findIdentity($id)
     {
         
-        $user = Users::find()
+        $user = User::find()
                 ->where("activate=:activate", [":activate" => 1])
                 ->andWhere("id=:id", ["id" => $id])
                 ->one();
@@ -117,7 +111,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public static function findIdentityByAccessToken($token, $type = null)
     {
         
-        $users = Users::find()
+        $users = User::find()
                 ->where("activate=:activate", [":activate" => 1])
                 ->andWhere("accessToken=:accessToken", [":accessToken" => $token])
                 ->all();
@@ -141,7 +135,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     /* Busca la identidad del usuario a través del username */
     public static function findByUsername($username)
     {
-        $users = Users::find()
+        $users = User::find()
                 ->where("activate=:activate", ["activate" => 1])
                 ->andWhere("username=:username", [":username" => $username])
                 ->all();
@@ -182,9 +176,9 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     /* Valida la clave de autenticación */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return $this->getAuthKey() === $authKey;
+        //return $this->authKey === $authKey;
     }
-
     /**
      * Validates password
      *
@@ -196,10 +190,51 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         /* Valida el password */
         if (crypt($password, $this->password) == $this->password) {
             return $password === $password;
-        }
-        
-       
-        
+        } 
     }
 
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAuthKey()
+    {
+        $this->authKey = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * Generates new password reset token
+     */
+    public function generatePasswordResetToken()
+    {
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+    
+    /**
+     * Generates new token for email verification
+     */
+    public function generateEmailVerificationToken()
+    {
+        $this->verification_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+    /**
+     * Removes password reset token
+     */
+    public function removePasswordResetToken()
+    {
+        $this->password_reset_token = null;
+        /* Valida el password */
+        if (crypt($password, $this->password) == $this->password) {
+            return $password === $password;
+        }
+
+
+
+    }
+    
 }

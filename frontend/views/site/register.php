@@ -8,10 +8,10 @@ use yii\widgets\ActiveForm;
 <h1>Registro</h1>
 <?php $form = ActiveForm::begin([
     'method' => 'post',
- 'id' => 'formulario',
- 'enableClientValidation' => false,
- 'enableAjaxValidation' => true,
-]);
+    'id' => 'formulario',
+    'enableClientValidation' => false,
+    'enableAjaxValidation' => true,
+    ]);
 ?>
 <div class="form-group">
  <?= $form->field($model, "username")->input("text") ?>   

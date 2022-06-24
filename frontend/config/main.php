@@ -11,6 +11,9 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+   /* 'modules' => [
+        'debug' =>['class'=> 'yii\debug\Module',]
+    ],*/
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',

@@ -1,78 +1,240 @@
 <?php
 
 namespace app\models;
-
 use Yii;
+use yii\db\ActiveRecord;
 
-/**
- * This is the model class for table "user".
- *
- * @property int $id
- * @property string $username
- * @property string $auth_key
- * @property string $password_hash
- * @property string|null $password_reset_token
- * @property string $email
- * @property int $status
- * @property int $created_at
- * @property int $updated_at
- * @property string|null $verification_token
- *
- * @property Rolusuario[] $rolusuarios
- */
-class User extends \yii\db\ActiveRecord
-{
-    /**
-     * {@inheritdoc}
-     */
+class User extends ActiveRecord /*\yii\base\BaseObject*/ implements \yii\web\IdentityInterface{ 
+    
+    public static function getDb()
+    {
+        return Yii::$app->db;
+    }
+    
     public static function tableName()
     {
         return 'user';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
+    public static function isUserAdmin($id)
     {
-        return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
-            [['auth_key'], 'string', 'max' => 32],
-            [['username'], 'unique'],
-            [['email'], 'unique'],
-            [['password_reset_token'], 'unique'],
-        ];
+       if (User::findOne(['id' => $id, 'activate' => '1', 'role' => 0])){
+        return true;
+       } else {
+
+        return false;
+       }
+
+    }
+
+    public static function isUserProfesorAsignatura($id)
+    {
+       if (User::findOne(['id' => $id, 'activate' => '1', 'role' => 1])){
+       return true;
+       } else {
+
+       return false;
+       }
+    }
+
+    public static function isUserEstudiante($id)
+    {
+        if (User::findOne(['id' => $id, 'activate' => '1', 'role' => 2])){
+            return true;
+        } else {
+
+            return false;
+        }
+
+    }
+
+    public static function isUserProfesorICINF($id)
+    {
+        if (User::findOne(['id' => $id, 'activate' => '1',  'role' => 3])){
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+    public static function isUserComision($id)
+    {
+        if (User::findOne(['id' => $id, 'activate' => '1',  'role' => 4])){
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    public static function isUserProfesorGuia($id)
+    {
+        if (User::findOne(['id' => $id, 'activate' => '1',  'role' => 5])){
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+
+    public static function isUserJefaturaCarrera($id)
+    {
+        if (User::findOne(['id' => $id, 'activate' => '1',  'role' => 6])){
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+    /**
+     * @inheritdoc
+     */
+    
+    /* busca la identidad del usuario a través de su $id */
+
+    public static function findIdentity($id)
+    {
+        
+        $user = User::find()
+                ->where("activate=:activate", [":activate" => 1])
+                ->andWhere("id=:id", ["id" => $id])
+                ->one();
+        
+        return isset($user) ? new static($user) : null;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    public function attributeLabels()
+    
+    /* Busca la identidad del usuario a través de su token de acceso */
+    public static function findIdentityByAccessToken($token, $type = null)
     {
-        return [
-            'id' => 'ID',
-            'username' => 'Username',
-            'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
-            'password_reset_token' => 'Password Reset Token',
-            'email' => 'Email',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'verification_token' => 'Verification Token',
-        ];
+        
+        $users = User::find()
+                ->where("activate=:activate", [":activate" => 1])
+                ->andWhere("accessToken=:accessToken", [":accessToken" => $token])
+                ->all();
+        
+        foreach ($users as $user) {
+            if ($user->accessToken === $token) {
+                return new static($user);
+            }
+        }
+
+        return null;
     }
 
     /**
-     * Gets query for [[Rolusuarios]].
+     * Finds user by username
      *
-     * @return \yii\db\ActiveQuery
+     * @param  string      $username
+     * @return static|null
      */
-    public function getRolusuarios()
+    
+    /* Busca la identidad del usuario a través del username */
+    public static function findByUsername($username)
     {
-        return $this->hasMany(Rolusuario::className(), ['id_user' => 'id']);
-    }
-}
+        $users = User::find()
+                ->where("activate=:activate", ["activate" => 1])
+                ->andWhere("username=:username", [":username" => $username])
+                ->all();
+        
+        foreach ($users as $user) {
+            if (strcasecmp($user->username, $username) === 0) {
+                return new static($user);
+            }
+        }
 
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    
+    /* Regresa el id del usuario */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    
+    /* Regresa la clave de autenticación */
+    public function getAuthKey()
+    {
+        return $this->authKey;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    
+    /* Valida la clave de autenticación */
+    public function validateAuthKey($authKey)
+    {
+        return $this->authKey === $authKey;
+    }
+
+    /**
+     * Validates password
+     *
+     * @param  string  $password password to validate
+     * @return boolean if password provided is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        /* Valida el password */
+        if (crypt($password, $this->password) == $this->password) {
+            return $password === $password;
+        } 
+    }
+
+    public function setPassword($password)
+    {
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAuthKey()
+    {
+        $this->authKey = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * Generates new password reset token
+     */
+    public function generatePasswordResetToken()
+    {
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+    
+    /**
+     * Generates new token for email verification
+     */
+    public function generateEmailVerificationToken()
+    {
+        $this->verification_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+    /**
+     * Removes password reset token
+     */
+    public function removePasswordResetToken()
+    {
+        $this->password_reset_token = null;
+        /* Valida el password */
+        if (crypt($password, $this->password) == $this->password) {
+            return $password === $password;
+        }
+
+
+
+    }
+    
+}

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'nombre',
             //'id',
-            //'descripción',
+            //'descripcion',
             //'escala',
            // 'id_profe_asignatura',
 
@@ -44,8 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'attribute'=>'descripción',
-                'value'=>function ($model) { return $model->descripción; },
+                'attribute'=>'descripcion',
+                'value'=>function ($model) { return $model->descripcion; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
    <p align="right">
-        <?= Html::a('Agregar Rúbrica', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Rúbrica', ['create2'], ['class' => 'btn btn-success']) ?>
     </p>
 
 

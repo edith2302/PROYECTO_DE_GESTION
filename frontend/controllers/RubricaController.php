@@ -82,20 +82,53 @@ class RubricaController extends Controller
      */
     public function actionCreate()
     {
-        $this->layout = 'vacio'; 
-        $model = new Rubrica();
-
+        $modelRubrica = new Rubrica;
         $modelsItem = [new Item];
 
-        $logueado= Yii::$app->user->identity->id_usuarioo;
+        if ($modelRubrica->load(Yii::$app->request->post())) {
+
+            $modelsItem = Model::createMultiple(Item::classname());
+            Model::loadMultiple($modelsItem, Yii::$app->request->post());
+
+            // validate all models
+            $valid = $modelRubrica->validate();
+            $valid = Model::validateMultiple($modelsItem) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+                    if ($flag = $modelRubrica->save(false)) {
+                        foreach ($modelsItem as $modelItem) {
+                            $modelItem->id_rubrica = $modelRubrica->id;
+                            if (! ($flag = $modelItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelRubrica->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+
+        return $this->render('create', [
+            'modelRubrica' => $modelRubrica,
+            'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
+        ]);
+
+
+
+       /* $this->layout = 'vacio'; 
+        $model = $this->findModel($id);
         
-        //return $logueado;
-        $profesor= ProfesorAsignatura::find()->where(['id_usuario' => $logueado])->one();
-
-        //return $profesor->id;
-        $model->id_profe_asignatura= $profesor->id;
-       // $modelsItem = [new Item];
-
+        $modelsItem = [new Item];
 
         if ($this->request->isPost) {
             if ($model->load(Yii:: $app->request->post()) && $model->save()) {
@@ -126,34 +159,48 @@ class RubricaController extends Controller
                             return $this->redirect(['view', 'id' => $model->id]);
                         }
                     } catch (Exception $e) {
-                    $transaction->rollBack();
-                }
+                        $transaction->rollBack();
+                    }
 
-            }else{
-                return $this->render('create', [
-                    'model' => $model,
-                    
-                ]);
+                }else{
+                    return $this->render('create', [
+                        'model' => $model,
+                        
+                    ]);
+                }
             }
-        }
-    }   
-          /*Yii:: $app->session->setFlash('success','La rúbrica ha sido creada con exito');
-                return $this->redirect(['view', 'id' => $model->id]);
-            }else{
-                return $this->render('create', [
-                    'model' => $model,
-                    
-                ]);
-            }
-           /* else {
-               $model->loadDefaultValues();
-        }*/
+        }   
+        
 
         return $this->render('create', [
             'model' => $model,
             'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
-        ]);
+        ]);*/
     
+    }
+
+    public function actionCreate2(){
+
+        $model = new Rubrica();
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+
+        $profesor= ProfesorAsignatura::find()->where(['id_usuario' => $logueado])->one();
+
+        $model->id_profe_asignatura= $profesor->id;
+       
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                Yii:: $app->session->setFlash('success','La rúbrica ha sido creada con éxito');
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('create2', [
+            'model' => $model,
+        ]);
+
     }
 
     /**
@@ -165,7 +212,53 @@ class RubricaController extends Controller
      */
     public function actionUpdate($id)
     {
+
+        $model = $this->findModel($id);
+       /* //$modelsItem = $model->items;
         $modelsItem = [new Item];
+       // $modelsItem = Item::find()->where(['id_rubrica' => $id]);
+        
+       if ($model->load(Yii::$app->request->post())) {
+
+            $oldIDs = ArrayHelper::map($modelsItem, 'id', 'id');
+            $modelsItem = Model::createMultiple(Item::classname(), $modelsItem);
+            Model::loadMultiple($modelsItem, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsItem, 'id', 'id')));
+
+            // validate all models
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelsItem) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        if (!empty($deletedIDs)) {
+                            Item::deleteAll(['id' => $deletedIDs]);
+                        }
+                        foreach ($modelsItem as $modelItem) {
+                            $modelItem->id_rubrica = $modelItem->id;
+                            if (! ($flag = $modelItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+            'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
+        ]);*/
+        //$modelsItem = [new Item];
         $model = $this->findModel($id);
         
 
@@ -178,6 +271,7 @@ class RubricaController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+
     }
 
     /**

@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'descripción') ?>
+    <?= $form->field($model, 'descripcion') ?>
 
     <?= $form->field($model, 'escala') ?>
 

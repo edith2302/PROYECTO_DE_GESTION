@@ -23,7 +23,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'descripcion',
             'puntaje',
-            'puntaje_obtenido',
+            //'puntaje_obtenido',
+
+            [
+                'label'  => 'puntaje_obtenido',
+                
+
+                'value'  => function ($model) {
+
+                    if ($model->puntaje_obtenido==null){
+                        return " " ;
+                     }
+                   
+                },
+            ],
+
+
             'id_rubrica',
         ],
     ]) ?>

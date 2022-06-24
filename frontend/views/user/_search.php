@@ -19,11 +19,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username') ?>
 
-    <?= $form->field($model, 'auth_key') ?>
+    <?= $form->field($model, 'authKey') ?>
+
+    <?= $form->field($model, 'password') ?>
 
     <?= $form->field($model, 'password_hash') ?>
 
-    <?= $form->field($model, 'password_reset_token') ?>
+    <?php // echo $form->field($model, 'password_reset_token') ?>
 
     <?php // echo $form->field($model, 'email') ?>
 
@@ -34,6 +36,14 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'updated_at') ?>
 
     <?php // echo $form->field($model, 'verification_token') ?>
+
+    <?php // echo $form->field($model, 'accessToken') ?>
+
+    <?php // echo $form->field($model, 'activate') ?>
+
+    <?php // echo $form->field($model, 'role') ?>
+
+    <?php // echo $form->field($model, 'id_usuarioo') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
