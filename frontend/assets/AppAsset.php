@@ -25,7 +25,7 @@ class AppAsset extends AssetBundle
         //La versión 4.7 debe ir después de la 5.3.1
         'css/font-awesome-4.7.0/css/font-awesome.css',
         'css/snackbar.css',
-        'css/main.css',
+        'css/main.css', /*---------PROBLEMA----------*/
         //'css/site.css',
     ];
     public $js = [

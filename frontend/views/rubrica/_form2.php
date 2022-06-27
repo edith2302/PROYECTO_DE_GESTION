@@ -73,8 +73,12 @@ $this->registerJs($js);
                         
                         <div class="row">
                             <div class="col-sm-6">
-                                <?= $form->field($modelItem, "[{$index}]descripcion")->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($modelItem, "[{$index}]descripcion")->textarea(['maxlength' => true]) ?>
                             </div>
+                            
+                        </div><!-- end:row -->
+                        <div class="row">
+                            
                             <div class="col-sm-6">
                                 <?= $form->field($modelItem, "[{$index}]puntaje")->textInput(['maxlength' => true]) ?>
                             </div>

@@ -80,9 +80,11 @@ class RubricaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
-        $modelRubrica = new Rubrica;
+        //$modelRubrica = new Rubrica;
+        $modelRubrica = $this->findModel($id);
+        
         $modelsItem = [new Item];
 
         if ($modelRubrica->load(Yii::$app->request->post())) {
