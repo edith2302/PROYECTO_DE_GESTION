@@ -52,7 +52,7 @@ $this->registerJs($js);
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-envelope"></i> Item
-            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i> Agregar ítem</button>
+            <a  class="pull-right add-item btn btn-success btn-sm"><i class="fa fa-plus"></i> Agregar ítem</a>
             <div class="clearfix"></div>
         </div>
         <div class="panel-body container-items"><!-- widgetContainer -->
@@ -60,7 +60,7 @@ $this->registerJs($js);
                 <div class="item panel panel-default"><!-- widgetBody -->
                     <div class="panel-heading">
                         <span class="panel-title-item">Item: <?= ($index + 1) ?></span>
-                        <button type="button" class="pull-right remove-item btn btn-danger btn-xs"><i class="fa fa-minus"></i></button>
+                        <a  class="pull-right remove-item btn btn-danger btn-sm"><i class="fa fa-minus"></i></a>
                         <div class="clearfix"></div>
                     </div>
                     <div class="panel-body">
@@ -94,7 +94,7 @@ $this->registerJs($js);
     <?php DynamicFormWidget::end(); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primaryy']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
