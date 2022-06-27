@@ -12,6 +12,10 @@ use app\models\Model;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Profesorasignatura;
+//use app\base\Model;
+use yii\data\SqlDataProvider;
+
+
 
 use frontend\controllers\Exception;
 
@@ -65,10 +69,15 @@ class RubricaController extends Controller
     {
         $model = $this->findModel($id);
         //$items = $model->items;
-        $items = Item::find()->where(['id_rubrica' => $id]);
+        //$items = Item::find()->where(['id_rubrica' => $id]);
+        $items = new SqlDataProvider([
+            'sql' => "select * from item
+            where id_rubrica = '$id' ",
+           
+        ]);
         return $this->render('view', [
             'model' => $model,
-            'modelsItem' => $items,
+            'dataProvider' => $items,
 
         ]);
 
@@ -86,8 +95,11 @@ class RubricaController extends Controller
         $modelRubrica = $this->findModel($id);
         
         $modelsItem = [new Item];
+        
+        //return 'paso aqui';
 
-        if ($modelRubrica->load(Yii::$app->request->post())) {
+        if ($modelRubrica->load(Yii::$app->request->post(),'')) {
+            //print_r('hola');
 
             $modelsItem = Model::createMultiple(Item::classname());
             Model::loadMultiple($modelsItem, Yii::$app->request->post());
@@ -119,7 +131,7 @@ class RubricaController extends Controller
                 }
             }
         }
-
+        
         return $this->render('create', [
             'modelRubrica' => $modelRubrica,
             'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem

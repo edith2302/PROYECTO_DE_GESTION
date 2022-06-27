@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
+use app\models\Item;
 /* @var $this yii\web\View */
 /* @var $model app\models\Rubrica */
 
@@ -42,4 +46,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Agregar ítem 2', ['item/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+       // 'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            //'id',
+            'descripcion',
+            'puntaje',
+            'puntaje_obtenido',
+            
+        ],
+    ]); ?>
 </div>
