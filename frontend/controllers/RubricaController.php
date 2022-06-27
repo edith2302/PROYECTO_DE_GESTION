@@ -226,8 +226,58 @@ class RubricaController extends Controller
      */
     public function actionUpdate($id)
     {
+        $modelRubrica = $this->findModel($id);
+        $modelsItem =  $modelRubrica->items;
+        
 
-        $model = $this->findModel($id);
+        if ($modelRubrica->load(Yii::$app->request->post())) {
+
+            $oldIDs = ArrayHelper::map($modelsItem, 'id', 'id');
+            $modelsItem = Model::createMultiple(Item::classname(), $modelsItem);
+            Model::loadMultiple($modelsItem, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsItem, 'id', 'id')));
+
+            // validate all models
+            $valid = $modelRubrica->validate();
+            $valid = Model::validateMultiple($modelsItem) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $modelRubrica->save(false)) {
+                        if (!empty($deletedIDs)) {
+                            Item::deleteAll(['id' => $deletedIDs]);
+                        }
+                        foreach ($modelsItem as $modelItem) {
+                            $modelItem->id_rubrica = $modelRubrica->id;
+                            if (! ($flag = $modelItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelRubrica->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+
+        return $this->render('update', [
+            'modelRubrica' => $modelRubrica,
+            'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
+        ]);
+    
+
+
+
+
+
+
+
        /* //$modelsItem = $model->items;
         $modelsItem = [new Item];
        // $modelsItem = Item::find()->where(['id_rubrica' => $id]);
@@ -273,7 +323,11 @@ class RubricaController extends Controller
             'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
         ]);*/
         //$modelsItem = [new Item];
-        $model = $this->findModel($id);
+        
+        
+        
+        
+        /*$model = $this->findModel($id);
         
 
         if ( Yii:: $app->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -284,7 +338,7 @@ class RubricaController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-        ]);
+        ]);*/
 
     }
 

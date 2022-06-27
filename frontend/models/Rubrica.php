@@ -13,6 +13,7 @@ use Yii;
  * @property int $id_profe_asignatura
  *
  * @property Hito[] $hitos
+ * @property Item[] $items
  * @property Profesorasignatura $profeAsignatura
  */
 class Rubrica extends \yii\db\ActiveRecord
@@ -61,6 +62,16 @@ class Rubrica extends \yii\db\ActiveRecord
     public function getHitos()
     {
         return $this->hasMany(Hito::className(), ['id_rubrica' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Items]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItems()
+    {
+        return $this->hasMany(Item::className(), ['id_rubrica' => 'id']);
     }
 
     /**
