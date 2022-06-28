@@ -230,7 +230,7 @@ class RubricaController extends Controller
         $modelsItem =  $modelRubrica->items;
         
 
-        if ($modelRubrica->load(Yii::$app->request->post())) {
+        if ($modelRubrica->load(Yii::$app->request->post(),'')) {
 
             $oldIDs = ArrayHelper::map($modelsItem, 'id', 'id');
             $modelsItem = Model::createMultiple(Item::classname(), $modelsItem);
@@ -286,7 +286,7 @@ class RubricaController extends Controller
         $modelsItem =  $modelRubrica->items;
         
 
-        if ($modelRubrica->load(Yii::$app->request->post())) {
+        if ($modelRubrica->load(Yii::$app->request->post(),'')) {
 
             $oldIDs = ArrayHelper::map($modelsItem, 'id', 'id');
             $modelsItem = Model::createMultiple(Item::classname(), $modelsItem);
@@ -411,7 +411,7 @@ class RubricaController extends Controller
         $modelsItem =  $modelRubrica->items;
         
 
-        if ($modelRubrica->load(Yii::$app->request->post())) {
+        if ($modelRubrica->load(Yii::$app->request->post(),'')) {
 
             $oldIDs = ArrayHelper::map($modelsItem, 'id', 'id');
             $modelsItem = Model::createMultiple(Item::classname(), $modelsItem);
