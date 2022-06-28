@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             //'nombre',
             'descripcion',
-            'escala',
-            'id_profe_asignatura',
+           // 'escala',
+           // 'id_profe_asignatura',
 
             
         ],

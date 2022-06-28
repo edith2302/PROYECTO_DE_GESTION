@@ -30,19 +30,10 @@ $this->registerJs($js);
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
-    <div class="row">
-        <div class="col-sm-6">
             <?= $form->field($modelRubrica, 'nombre')->textInput(['placeholder' => "Nombre de la rúbrica"],['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-6">
+       
             <?= $form->field($modelRubrica, 'descripcion')->textarea(['placeholder' => "Descripción de la rúbrica"],['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-6">
-            <?= $form->field($modelRubrica, 'escala')->textInput(['placeholder' => "Escala"],['maxlength' => true]) ?>
-        </div>
-    </div>
-
-
+    
 
     <div class="padding-v-md">
         <div class="line line-dashed"></div>
@@ -102,7 +93,7 @@ $this->registerJs($js);
     <?php DynamicFormWidget::end(); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primaryy']) ?>
+        <?= Html::submitButton($modelItem->isNewRecord ? 'Guardar' : 'Guardar', ['class' => 'btn btn-primaryy']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

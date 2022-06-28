@@ -16,12 +16,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'descripcion')->textarea(['placeholder' => "Descripción de la rúbrica"],['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'escala')->textInput(['placeholder' => "Escala"],['maxlength' => true]) ?>
+   
 
     <div class="form-group">
 
     <p align="right">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-primaryy']) ?>
 
 </p>
     </div>

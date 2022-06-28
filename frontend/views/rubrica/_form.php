@@ -89,7 +89,7 @@ $this->registerJs($js);
     <?php DynamicFormWidget::end(); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primaryy']) ?>
+        <?= Html::submitButton($modelItem->isNewRecord ? 'Guardar' : 'Guardar', ['class' => 'btn btn-primaryy']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

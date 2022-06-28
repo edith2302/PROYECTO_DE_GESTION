@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $descripcion
- * @property int $escala
+ 
  * @property int $id_profe_asignatura
  *
  * @property Hito[] $hitos
@@ -32,8 +32,8 @@ class Rubrica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre','descripcion', 'escala', 'id_profe_asignatura'], 'required'],
-            [['escala', 'id_profe_asignatura'], 'integer'],
+            [['nombre','descripcion', /*'escala',*/ 'id_profe_asignatura'], 'required'],
+            [[/*'escala',*/ 'id_profe_asignatura'], 'integer'],
             [['nombre'], 'string', 'max' => 100],
             [['descripcion'], 'string', 'max' => 1000],
             [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorasignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
@@ -49,7 +49,7 @@ class Rubrica extends \yii\db\ActiveRecord
             'id' => 'Código rúbrica',
             'nombre' => 'Nombre rúbrica',
             'descripcion' => 'Descripción',
-            'escala' => 'Escala',
+            //'escala' => 'Escala',
             'id_profe_asignatura' => 'Código profesor asignatura',
         ];
     }
