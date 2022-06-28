@@ -193,7 +193,7 @@ class RubricaController extends Controller
     
     }
 
-    public function actionCreate2(){
+    public function actionCreate1(){
 
         $model = new Rubrica();
         $logueado= Yii::$app->user->identity->id_usuarioo;
@@ -211,12 +211,68 @@ class RubricaController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create2', [
+        return $this->render('create1', [
             'model' => $model,
         ]);
 
     }
 
+    /**
+     * Updates an existing Rubrica model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param int $id ID
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdate2($id)
+    {
+        $modelRubrica = $this->findModel($id);
+        $modelsItem =  $modelRubrica->items;
+        
+
+        if ($modelRubrica->load(Yii::$app->request->post())) {
+
+            $oldIDs = ArrayHelper::map($modelsItem, 'id', 'id');
+            $modelsItem = Model::createMultiple(Item::classname(), $modelsItem);
+            Model::loadMultiple($modelsItem, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsItem, 'id', 'id')));
+
+            // validate all models
+            $valid = $modelRubrica->validate();
+            $valid = Model::validateMultiple($modelsItem) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $modelRubrica->save(false)) {
+                        if (!empty($deletedIDs)) {
+                            Item::deleteAll(['id' => $deletedIDs]);
+                        }
+                        foreach ($modelsItem as $modelItem) {
+                            $modelItem->id_rubrica = $modelRubrica->id;
+                            if (! ($flag = $modelItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelRubrica->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+
+        return $this->render('update2', [
+            'modelRubrica' => $modelRubrica,
+            'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
+        ]);
+
+    }
+    
     /**
      * Updates an existing Rubrica model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -341,6 +397,67 @@ class RubricaController extends Controller
         ]);*/
 
     }
+
+     /**
+     * Updates an existing Rubrica model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param int $id ID
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionEvaluar($id)
+    {
+        $modelRubrica = $this->findModel($id);
+        $modelsItem =  $modelRubrica->items;
+        
+
+        if ($modelRubrica->load(Yii::$app->request->post())) {
+
+            $oldIDs = ArrayHelper::map($modelsItem, 'id', 'id');
+            $modelsItem = Model::createMultiple(Item::classname(), $modelsItem);
+            Model::loadMultiple($modelsItem, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsItem, 'id', 'id')));
+
+            // validate all models
+            $valid = $modelRubrica->validate();
+            $valid = Model::validateMultiple($modelsItem) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $modelRubrica->save(false)) {
+                        if (!empty($deletedIDs)) {
+                            Item::deleteAll(['id' => $deletedIDs]);
+                        }
+                        foreach ($modelsItem as $modelItem) {
+                            $modelItem->id_rubrica = $modelRubrica->id;
+                            if (! ($flag = $modelItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelRubrica->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+
+        return $this->render('evaluar', [
+            'modelRubrica' => $modelRubrica,
+            'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
+        ]);
+
+
+    }
+
+
+
+
 
     /**
      * Deletes an existing Rubrica model.

@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
    <p align="right">
-        <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Modificar', ['update2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
         <?= Html::a('Agregar ítem', ['create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Agregar ítem 2', ['item/create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Evaluar', ['evaluar', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= GridView::widget([
@@ -56,9 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'descripcion',
             'puntaje',
-            'puntaje_obtenido',
-            
-            
+            //'puntaje_obtenido',   
         ],
     ]); ?>
 </div>

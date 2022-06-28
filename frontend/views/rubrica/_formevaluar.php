@@ -3,6 +3,15 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
+use yii\widgets\DetailView;
+use yii\grid\GridView;
+
+
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use app\models\Item;
+
+
 
 /* @var $this yii\web\View */
 /* @var $modelRubrica app\models\Rubrica */
@@ -30,20 +39,7 @@ $this->registerJs($js);
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <?= $form->field($modelRubrica, 'nombre')->textInput(['placeholder' => "Nombre de la rúbrica"],['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-6">
-            <?= $form->field($modelRubrica, 'descripcion')->textarea(['placeholder' => "Descripción de la rúbrica"],['maxlength' => true]) ?>
-        </div>
-        <div class="col-sm-6">
-            <?= $form->field($modelRubrica, 'escala')->textInput(['placeholder' => "Escala"],['maxlength' => true]) ?>
-        </div>
-    </div>
-
-
-
+   
     <div class="padding-v-md">
         <div class="line line-dashed"></div>
     </div>
@@ -60,21 +56,15 @@ $this->registerJs($js);
         'formFields' => [
             'descripcion',
             'puntaje',
-            //'puntaje_obtenido',
+            'puntaje_obtenido',
         ],
     ]); ?>
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <i class="fa fa-envelope"></i> Item
-            <a  class="pull-right add-item btn btn-success btn-sm"><i class="fa fa-plus"></i> Agregar ítem</a>
-            <div class="clearfix"></div>
-        </div>
         <div class="panel-body container-items"><!-- widgetContainer -->
             <?php foreach ($modelsItem as $index => $modelItem): ?>
                 <div class="item panel panel-default"><!-- widgetBody -->
                     <div class="panel-heading">
                         <span class="panel-title-item">Item: <?= ($index + 1) ?></span>
-                        <a  class="pull-right remove-item btn btn-danger btn-sm"><i class="fa fa-minus"></i></a>
                         <div class="clearfix"></div>
                     </div>
                     <div class="panel-body">
@@ -87,12 +77,14 @@ $this->registerJs($js);
                         
                         <div class="row">
                             <div class="col-sm-6">
-                                <?= $form->field($modelItem, "[{$index}]descripcion")->textarea(['maxlength' => true]) ?>
+
+
                             </div>
                             
                             <div class="col-sm-6">
-                                <?= $form->field($modelItem, "[{$index}]puntaje")->textInput(['maxlength' => true]) ?>
+                                <?= $form->field($modelItem, "[{$index}]puntaje_obtenido")->textInput(['placeholder' => "0"],['maxlength' => true]) ?>
                             </div>
+                           
                         </div><!-- end:row -->
                     </div>
                 </div>
@@ -102,7 +94,7 @@ $this->registerJs($js);
     <?php DynamicFormWidget::end(); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primaryy']) ?>
+        <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Enviar', ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
