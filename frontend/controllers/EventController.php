@@ -34,28 +34,26 @@ class EventController extends Controller
     /**
      * Lists all Event models.
      *
-     * @return string
+     * @return mixed
      */
     public function actionIndex()
     {
 
         $events = Event:: find()->all();
+        $tasks = [];
 
-
-
-
-        foreach ($events as $event){
+        foreach ($events as $eve){
           //
-          $Event = new \yii2fullcalendar\models\Event();
-          $Event->id = $event->id;
-          $Event->title = $event ->title;
-          $Event->start = $event ->created_date;
-          $events[] = $Event;
+          $event = new \yii2fullcalendar\models\Event();
+          $event->id = $eve->id;
+          $event->title = $eve->title;
+          $event->start = $eve->created_date;
+          $tasks[] = $event;
         }
 
         return $this->render('index', [
             
-            'events' => $events,
+            'events' => $tasks,
         ]);
     }
 

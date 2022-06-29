@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Calendario web</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min">
+        <script  src='js/moment.min.js'></script>
+        <script  src='js/jquery.min.js'></script>
+        <link rel='stylesheet' href='css/fullcalendar.min.css' />
+        <script src='js/fullcalendar.min.js'></script>
+    </head>
+    <body>
+       <div class="container">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-7"><div id="CalendarioWeb"></div></div>
+                <div class="col"></div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#CalendarioWeb').fullCalendar({
+                    header: {
+                        left: 'prev,next',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    defaultDate: '2019-07-09',
+                    buttonIcons: true,
+                    weekNumbers: false,
+                    editable: true,
+                    eventLimit: true,
+                    events: [
+                        {
+                            title: 'All Day Event',
+                            description: 'Lorem ipsum 1...',
+                            start: '2019-07-01',
+                            color: '#3A87AD',
+                            textColor: '#ffffff',
+                        }
+                    ],
+                    dayClick: function (date, jsEvent, view) {
+                        alert('Has hecho click en: '+ date.format());
+                    }, 
+                    eventClick: function (calEvent, jsEvent, view) {
+                        $('#event-title').text(calEvent.title);
+                        $('#event-description').html(calEvent.description);
+                        $('#modal-event').modal();
+                    },  
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -63,7 +63,7 @@ use app\models\Rubrica;
             </div>   
 
             <div class="col-lg-4">
-                <?= Html::a('Agregar Rúbrica', ['rubrica/create'], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Agregar Rúbrica', ['rubrica/create1'], ['class' => 'btn btn-primary']) ?>
             </div>
         </div>
     </div>
