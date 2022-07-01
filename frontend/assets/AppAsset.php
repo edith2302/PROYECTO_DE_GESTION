@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         //Sólo para los íconos de calendarios de los plugins "Kartik" se necesita FA 5+
         'css/fontawesome-free-5.3.1-web/css/all.css',
         // 'css/bootstrap-3.3.7-dist/css/bootstrap.css',
+         'css/bootstrap-4.0.0-dist/css/bootstrap.css',
         //La versión 4.7 debe ir después de la 5.3.1
         'css/font-awesome-4.7.0/css/font-awesome.css',
         'css/snackbar.css',
