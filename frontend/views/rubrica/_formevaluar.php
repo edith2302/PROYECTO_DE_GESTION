@@ -39,6 +39,10 @@ $this->registerJs($js);
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
+            <?= $form->field($modelRubrica, 'nombre')->textInput(['placeholder' => "Nombre de la rúbrica"],['maxlength' => true]) ?>
+       
+            <?= $form->field($modelRubrica, 'descripcion')->textarea(['placeholder' => "Descripción de la rúbrica"],['maxlength' => true]) ?>
+    
    
     <div class="padding-v-md">
         <div class="line line-dashed"></div>
@@ -77,7 +81,8 @@ $this->registerJs($js);
                         
                         <div class="row">
                             <div class="col-sm-6">
-
+                            
+                            <?php echo  ($modelItem-> descripcion) ?>
 
                             </div>
                             
@@ -85,14 +90,18 @@ $this->registerJs($js);
                                 <?= $form->field($modelItem, "[{$index}]puntaje_obtenido")->textInput(['placeholder' => "0"],['maxlength' => true]) ?>
                             </div>
                            
+
                         </div><!-- end:row -->
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
+
+    
     <?php DynamicFormWidget::end(); ?>
 
+    <?= $form->field($modelRubrica, 'observaciones')->textarea(['placeholder' => "Observaciones de la evaluación"],['maxlength' => true]) ?>
     <div class="form-group">
         <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Enviar', ['class' => 'btn btn-danger']) ?>
     </div>

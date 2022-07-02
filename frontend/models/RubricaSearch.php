@@ -17,7 +17,7 @@ class RubricaSearch extends Rubrica
     public function rules()
     {
         return [
-            [['id', 'descripcion',/* 'escala', */'id_profe_asignatura'], 'integer'],
+            [['id', 'descripcion','observaciones',/* 'escala', */'id_profe_asignatura'], 'integer'],
         ];
     }
 
@@ -60,6 +60,7 @@ class RubricaSearch extends Rubrica
             'id' => $this->id,
             'descripcion' => $this->descripcion,
             //'escala' => $this->escala,
+            'observaciones' => $this->observaciones,
             'id_profe_asignatura' => $this->id_profe_asignatura,
         ]);
 
