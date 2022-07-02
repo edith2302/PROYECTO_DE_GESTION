@@ -22,7 +22,9 @@ use app\models\Profesoricinf;
             <?= $form->field($model, 'id_profe_guia')->dropDownList(
                 ArrayHelper::map(Profesoricinf::find()->all(),'id',
                         function ($query) {
-                            return $query->usuario->nombre;
+                            //return $usuario[$query''];
+                            $usuario = Usuario::findOne($query['id_usuario']);                            
+                            return $usuario->nombre;
                         },),['prompt' => 'Seleccione profesor guía'])?>
     </div>
     

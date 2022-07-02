@@ -157,10 +157,15 @@ class ProyectoController extends Controller
     public function actionCreate2($id)
     {
 
-        $model = $this->findModel($id);
+        $model = Proyecto::findOne($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['viewasignado', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $guia = Proyecto::findOne($id);
+            $guia -> id_profe_guia = $model->id_profe_guia;
+            if($guia->save()){
+                return $this->redirect(['viewasignado', 'id' => $model->id]);
+            }
+           
         }
 
         return $this->render('create2', [

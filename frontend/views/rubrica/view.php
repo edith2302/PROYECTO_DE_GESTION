@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
    <p align="right">
-        <?= Html::a('Modificar', ['update2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [

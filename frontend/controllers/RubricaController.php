@@ -285,31 +285,45 @@ class RubricaController extends Controller
         $modelRubrica = $this->findModel($id);
         $modelsItem =  $modelRubrica->items;
         
-
-        if ($modelRubrica->load(Yii::$app->request->post(),'')) {
-
+        //return "pasó aquí 1";
+        if ($modelRubrica->load(Yii::$app->request->post())) {
+            //return print_r($modelRubrica);
             $oldIDs = ArrayHelper::map($modelsItem, 'id', 'id');
             $modelsItem = Model::createMultiple(Item::classname(), $modelsItem);
+            //return "pasó aquí 2";
             Model::loadMultiple($modelsItem, Yii::$app->request->post());
+            //return "pasó aquí 3";
             $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsItem, 'id', 'id')));
-
+            //return print_r($oldIDs);
             // validate all models
             $valid = $modelRubrica->validate();
+            //return $valid; 
             $valid = Model::validateMultiple($modelsItem) && $valid;
-
+             //return print_r ($modelsItem);
+            //return "pasó aquí 4";
             if ($valid) {
+                //return "pasó aquí 5";
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
                     if ($flag = $modelRubrica->save(false)) {
+                        //return "pasó aquí 6";
                         if (!empty($deletedIDs)) {
+                           // return "pasó aquí 7";
                             Item::deleteAll(['id' => $deletedIDs]);
                         }
+                        //return "pasó aquí 8";
                         foreach ($modelsItem as $modelItem) {
+                           // return "pasó aquí 41";
                             $modelItem->id_rubrica = $modelRubrica->id;
+                           // $modelItem->id=null;
+                           // return "pasó aquí 9";
                             if (! ($flag = $modelItem->save(false))) {
+
                                 $transaction->rollBack();
+                                 return "pasó aquí 10";
                                 break;
                             }
+                            unset($modelItem);
                         }
                     }
                     if ($flag) {

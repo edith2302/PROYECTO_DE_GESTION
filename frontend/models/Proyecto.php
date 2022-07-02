@@ -22,7 +22,8 @@ use Yii;
  * @property Defensaproyecto[] $defensaproyectos
  * @property Entrega[] $entregas
  * @property Evaluarproyecto[] $evaluarproyectos
- * @property Profesorguia $profeGuia
+ * 
+ * @property Profesoricinf $profeIcinf
  */
 class Proyecto extends \yii\db\ActiveRecord
 {
@@ -44,7 +45,7 @@ class Proyecto extends \yii\db\ActiveRecord
             [['num_integrantes', 'tipo', 'area', 'estado', 'disponibilidad', 'id_profe_guia', 'id_autor'], 'integer'],
             [['nombre'], 'string', 'max' => 300],
             [['descripcion'], 'string', 'max' => 2000],
-            [['id_profe_guia'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorguia::className(), 'targetAttribute' => ['id_profe_guia' => 'id']],
+            [['id_profe_guia'], 'exist', 'skipOnError' => true, 'targetClass' => ProfesorIcinf::className(), 'targetAttribute' => ['id_profe_guia' => 'id']],
             [['id_autor'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_autor' => 'id_usuario']],
         ];
     }
@@ -113,8 +114,19 @@ class Proyecto extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProfeGuia()
+    /*public function getProfeGuia()
     {
         return $this->hasOne(Profesorguia::className(), ['id' => 'id_profe_guia']);
+    }*/
+
+
+    /**
+     * Gets query for [[ProfeIcinf]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfeIcinf()
+    {
+        return $this->hasOne(Profesoricinf::className(), ['id' => 'id_profe_guia']);
     }
 }
