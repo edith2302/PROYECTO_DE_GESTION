@@ -78,8 +78,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
-
-        <?= Html::a('<a class="btn btn-primary" href="index.php?r=entrega/entregashito&id=' . $model->id . '">Ver Entregas</a>')?>
        
         
     </p>

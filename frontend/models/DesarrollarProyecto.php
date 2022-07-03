@@ -12,6 +12,7 @@ use Yii;
  * @property int $id_estudiante
  *
  * @property Estudiante $estudiante
+ *  @property  Proyecto $proyecto
  */
 class Desarrollarproyecto extends \yii\db\ActiveRecord
 {
@@ -32,6 +33,7 @@ class Desarrollarproyecto extends \yii\db\ActiveRecord
             [['id_proyecto', 'id_estudiante'], 'required'],
             [['id_proyecto', 'id_estudiante'], 'integer'],
             [['id_estudiante'], 'exist', 'skipOnError' => true, 'targetClass' => Estudiante::className(), 'targetAttribute' => ['id_estudiante' => 'id']],
+            [['id_proyecto'], 'exist', 'skipOnError' => true, 'targetClass' => Proyecto::className(), 'targetAttribute' => ['id_proyecto' => 'id']],
         ];
     }
 
@@ -55,5 +57,15 @@ class Desarrollarproyecto extends \yii\db\ActiveRecord
     public function getEstudiante()
     {
         return $this->hasOne(Estudiante::className(), ['id' => 'id_estudiante']);
+    }
+
+    /**
+     * Gets query for [[Estudiante]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProyecto()
+    {
+        return $this->hasOne(Proyecto::className(), ['id' => 'id_proyecto']);
     }
 }

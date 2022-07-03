@@ -61,12 +61,12 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
             <p align="center">
-                <?= Html::a('Agregar entrega', ['entrega/create'], ['class' => 'btn btn-primary']) ?> </p>
+                <?= Html::a('Agregar entrega', ['entrega/create','id' => $model->id], ['class' => 'btn btn-primary']) ?> </p>
             </div>
 
             <p align="right">
                 <?= Html::a('Entrega de mi proyecto', ['viewentregaestudiante','id'=>$model->id], ['class' => 'btn btn-success']) ?>
             </p>
 
-    
+           
 </div>

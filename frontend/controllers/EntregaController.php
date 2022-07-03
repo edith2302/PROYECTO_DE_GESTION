@@ -11,6 +11,9 @@ use app\models\FormUpload;
 use app\models\UploadForm;
 use yii\web\UploadedFile;
 use Yii;
+use app\models\Desarrollarproyecto;
+use app\models\Estudiante;
+use app\models\Proyecto;
 
 use yii\data\SqlDataProvider;
 /**
@@ -116,13 +119,25 @@ where estudiante.id_usuario = 6107)
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new Entrega();
         $model->fecha_entrega = date('Y-m-d');
         $model->hora_entrega = date('H:i:s');
         $horaActual = date('H_i_s');
-
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $estudiante=Estudiante::findOne(['id_usuario'=>$usuario]);
+        //return print_r ($estudiante);
+        
+        $desarrollar=Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
+         //return $desarrollar->id_estudiante;
+        
+        //return $desarrollar->id_proyecto;
+        
+        
+         //return print_r ($idproyecto);
+         $model->id_proyecto=$desarrollar->id_proyecto;
+         $model->id_hito=$id;
         if ($model->load(Yii::$app->request->post())) {
 
             if(UploadedFile::getInstance($model,'evidencia') != '') {
