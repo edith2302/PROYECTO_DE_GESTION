@@ -10,12 +10,15 @@ use app\models\Modulo;
 /* @var $searchModel app\models\ModuloSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Módulos';
+$this->title = 'Material complementario';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modulo-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <p align="right">
+        <?= Html::a('Agregar Módulo', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -57,10 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-
-    <p align="right">
-        <?= Html::a('Agregar Módulo', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
 
 </div>

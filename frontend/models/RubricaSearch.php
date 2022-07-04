@@ -45,6 +45,9 @@ class RubricaSearch extends Rubrica
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination'=>[
+                'pageSize'=>1
+            ]
         ]);
 
         $this->load($params);

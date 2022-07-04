@@ -12,7 +12,7 @@ use yii\bootstrap4\Modal;
 /* @var $searchModel app\models\HitoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Hitos';
+$this->title = 'Gestión de hitos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hito-index">

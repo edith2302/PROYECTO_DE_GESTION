@@ -46,6 +46,9 @@ class HitoSearch extends Hito
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination'=>[
+                'pageSize'=>1
+            ]
         ]);
 
         $this->load($params);

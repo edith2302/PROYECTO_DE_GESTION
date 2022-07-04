@@ -10,7 +10,7 @@ use app\models\Modulo;
 /* @var $searchModel app\models\ModuloSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Documentos de apoyo';
+$this->title = 'Material complementario';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modulo-index">
