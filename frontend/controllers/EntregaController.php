@@ -114,6 +114,15 @@ where estudiante.id_usuario = 6107)
         ]);
     }
 
+    public function actionView2($id)
+    {
+        
+        return $this->render('view2', [
+            'model' => $this->findModel($id),
+            
+        ]);
+    }
+
     /**
      * Creates a new Entrega model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -127,15 +136,9 @@ where estudiante.id_usuario = 6107)
         $horaActual = date('H_i_s');
         $usuario = Yii::$app->user->identity->id_usuarioo;
         $estudiante=Estudiante::findOne(['id_usuario'=>$usuario]);
-        //return print_r ($estudiante);
         
         $desarrollar=Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
-         //return $desarrollar->id_estudiante;
-        
-        //return $desarrollar->id_proyecto;
-        
-        
-         //return print_r ($idproyecto);
+       
          $model->id_proyecto=$desarrollar->id_proyecto;
          $model->id_hito=$id;
         if ($model->load(Yii::$app->request->post())) {
@@ -155,7 +158,8 @@ where estudiante.id_usuario = 6107)
 
             $model->save(false);
 
-            return $this->redirect('../views/entrega');
+            //return $this->redirect('../views/entrega/view2');
+            return $this->redirect(['view2', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -199,7 +203,7 @@ where estudiante.id_usuario = 6107)
 
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view2', 'id' => $model->id]);
         }
 
         return $this->render('update', [

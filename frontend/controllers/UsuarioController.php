@@ -68,9 +68,12 @@ class UsuarioController extends Controller
     public function actionCreate()
     {
         $model = new Usuario();
-
+//return 'paso aqui';
         if ($this->request->isPost) {
+           // return 'paso aqui';
+           //return print_r($model);
             if ($model->load($this->request->post()) && $model->save()) {
+                //return 'paso aqui';
                 return $this->redirect(['view', 'id_usuario' => $model->id_usuario]);
             }
         } else {
@@ -80,6 +83,7 @@ class UsuarioController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+
     }
 
     /**

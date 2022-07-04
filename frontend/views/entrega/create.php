@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use app\models\Hito;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Entrega */
@@ -8,8 +9,10 @@ use yii\helpers\Html;
 
 
 
-
-$this->title = 'Entrega de hito';
+$hito=Hito::findOne(['id'=>$model->id_hito]);
+$nombrehito=$hito->nombre;
+$this->title = 'Entrega de '.$nombrehito;
+//$this->title = 'Entrega de hito';
 $this->params['breadcrumbs'][] = ['label' => 'Entregas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

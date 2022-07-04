@@ -18,7 +18,7 @@ use Yii;
  * @property string|null $apellido
  * @property string|null $email
  * @property string|null $email_alternativo
- * @property int $plan
+ * @property int|null  $plan
  * @property string|null $direccion
  * @property int|null $habilitado_adt
  * @property int|null $habilitado_practica
@@ -64,7 +64,7 @@ class Usuario extends \yii\db\ActiveRecord{
     public function rules()
     {
         return [
-            [['rut', 'nombre', 'username', 'dv', 'password', 'plan'], 'required'],
+        [['rut', 'nombre', 'username', 'dv', 'password', /*'plan'*/], 'required'],
             [['plan', 'habilitado_adt', 'habilitado_practica', 'habilitado_ici'], 'integer'],
             [['rut'], 'string', 'max' => 20],
             [['telefono', 'telefono_alternativo', 'username', 'password', 'apellido', 'email', 'email_alternativo'], 'string', 'max' => 200],

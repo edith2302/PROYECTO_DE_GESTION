@@ -78,10 +78,10 @@ class DesarrollarproyectoController extends Controller
 
         $proyecto = Proyecto::find()->where(['id' => $id])->one();
         
-        $proyectoInscritos= Desarrollarproyecto::find()->where(['id_estudiante' => $estudiante->id])->andWhere(['id_proyecto' => $proyecto->id])->one();
+        $proyectoInscritos= Desarrollarproyecto::find()->where(['id_estudiante' => $estudiante->id])->one();
         $msg = null;
         if($proyectoInscritos != null){
-            return $this->render('../proyecto/viewestudiante', [
+            return $this->render('../proyecto/viewinscripcion2', [
                 'model' => $proyecto->findOne($id),
                 'msg'=> "Esto ya fue inscrito",
             ]);

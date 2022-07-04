@@ -312,7 +312,7 @@ Modal::end();
 
                         
                           <li>
-                                <?= Html::a('Proyecto', Url::to(['/hito/indexestudiante'])) ?>
+                                <?= Html::a('Proyecto', Url::to(['/proyecto/indexestudiante'])) ?>
                            <li>
                              
                            <li>
@@ -440,7 +440,7 @@ Modal::end();
                     <?php endif ?>
      <?php endif; ?>
 
-                    <?php if (!Yii::$app->user->isGuest):?>
+                   <!-- <?php if (!Yii::$app->user->isGuest):?>
                         <li>
                             <?= \yii\bootstrap4\Html::a(' Cerrar Sesión', Url::to(['/site/logout']),[
                                 'class'=>['icon', 'icon fa-times'],
@@ -448,7 +448,7 @@ Modal::end();
                                 'data-method'=>'POST',
                             ]) ?>
                         </li>
-                    <?php endif ?>
+                    <?php endif ?>-->
 
                 </ul>
             </nav>

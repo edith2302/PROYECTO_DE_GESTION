@@ -3,6 +3,8 @@
 namespace frontend\controllers;
 
 use app\models\Proyecto;
+use app\models\Estudiante;
+use app\models\Desarrollarproyecto;
 use app\models\ProyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -86,6 +88,21 @@ class ProyectoController extends Controller
 
     public function actionViewestudiante($id)
     {
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+        
+        $estudiante = Estudiante::find()->where(['id_usuario' => $logueado])->one();
+        //return $estudiante->id;
+
+        $proyecto = Proyecto::find()->where(['id' => $id])->one();
+        
+        $proyectoInscritos= Desarrollarproyecto::find()->where(['id_estudiante' => $estudiante->id])->one();
+        $msg = null;
+        if($proyectoInscritos != null){
+            return $this->render('../proyecto/viewinscripcion2', [
+                'model' => $proyecto->findOne($id),
+                'msg'=> "Esto ya fue inscrito",
+            ]);
+        }
         return $this->render('viewestudiante', [
             'model' => $this->findModel($id),
             'msg'=>null,

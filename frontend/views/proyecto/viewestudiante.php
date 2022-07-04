@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\ProfesorIcinf;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Proyecto */
@@ -88,9 +89,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     if ($model->id_profe_guia==null){
                         return "Sin profesor Guía" ;
                      }
-                   if ($model->id_profe_guia=!null){
-
-                      return  $model->profeGuia->usuario->nombre;
+                     $idp =$model->id_profe_guia;
+                    if ($model->id_profe_guia=!null){
+      
+                    $profIci = Profesoricinf::findOne($idp);
+                   
+                    return  $profIci->usuario->nombre;
                    }
                    
                 },
