@@ -84,6 +84,30 @@ class RubricaController extends Controller
     
     }
 
+    public function obtenerNota($id){
+        $model = $this->findModel($id);
+        //$items = $model->items;
+        //$items = Item::find()->where(['id_rubrica' => $id]);
+        
+        $puntajeideal = new SqlDataProvider([
+            'sql' => "select SUM(puntaje) from item where item.id_rubrica = '$id'",
+           
+        ]);
+
+        $puntajeobtenido = new SqlDataProvider([
+            'sql' => "select SUM(puntaje_obtenido) from item where item.id_rubrica = '$id'",
+           
+        ]);
+        return $this->render('view', [
+            'model' => $model,
+            'dataProvider' => $puntajeideal,
+            'dataProvider' => $puntajeobtenido,
+
+        ]);
+
+
+    }
+
     /**
      * Creates a new Rubrica model.
      * If creation is successful, the browser will be redirected to the 'view' page.

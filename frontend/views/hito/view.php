@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
+use yii\helpers\Url;
+
+use app\models\Entrega;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Hito */
@@ -69,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
     <p align="right">
+        <?= Html::a('Ver entrega', ['entrega/entregashito', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -123,6 +127,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
 
+         
 
             
         ],

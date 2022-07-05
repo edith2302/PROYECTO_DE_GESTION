@@ -68,7 +68,9 @@ use app\models\Rubrica;
         </div>
     </div>
     
-    <?= $form->field($model, 'id_profe_asignatura')->textInput() ?>
+   <!--<?= $form->field($model, 'id_profe_asignatura')->textInput() ?>-->
+
+   
 
     <div class="form-group">
     <p align="right">

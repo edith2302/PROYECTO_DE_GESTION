@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use Yii;
 use yii2mod\alert\Alert;
 USE yii\data\SqlDataProvider;
+use app\models\ProfesorAsignatura;
 //use common\widgets\Alert;
 
 /**
@@ -121,6 +122,11 @@ class HitoController extends Controller
     public function actionCreate()
     {
         $model = new Hito();
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+
+        $profesor= ProfesorAsignatura::find()->where(['id_usuario' => $logueado])->one();
+
+        $model->id_profe_asignatura= $profesor->id;
         //$model->id_profe_asignatura = Yii::app()->user->getId();
 
         if ($this->request->isPost) {

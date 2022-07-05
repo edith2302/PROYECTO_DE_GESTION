@@ -39,10 +39,7 @@ $this->registerJs($js);
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
-            <?= $form->field($modelRubrica, 'nombre')->textInput(['placeholder' => "Nombre de la rúbrica"],['maxlength' => true]) ?>
-       
-            <?= $form->field($modelRubrica, 'descripcion')->textarea(['placeholder' => "Descripción de la rúbrica"],['maxlength' => true]) ?>
-    
+            
    
     <div class="padding-v-md">
         <div class="line line-dashed"></div>
@@ -85,8 +82,13 @@ $this->registerJs($js);
                             <?php echo  ($modelItem-> descripcion) ?>
 
                             </div>
+                            <div class="col-sm-2">
                             
-                            <div class="col-sm-6">
+                            <?php echo  ($modelItem-> puntaje.' pts') ?>
+
+                            </div>
+                            
+                            <div class="col-sm-4">
                                 <?= $form->field($modelItem, "[{$index}]puntaje_obtenido")->textInput(['placeholder' => "0"],['maxlength' => true]) ?>
                             </div>
                            

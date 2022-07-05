@@ -47,6 +47,8 @@ class Proyecto extends \yii\db\ActiveRecord
             [['descripcion'], 'string', 'max' => 2000],
             [['id_profe_guia'], 'exist', 'skipOnError' => true, 'targetClass' => ProfesorIcinf::className(), 'targetAttribute' => ['id_profe_guia' => 'id']],
             [['id_autor'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_autor' => 'id_usuario']],
+       
+       
         ];
     }
 

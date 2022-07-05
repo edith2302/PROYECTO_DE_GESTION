@@ -5,12 +5,14 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use app\models\Entrega;
+use app\models\Hito;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EntregaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Entregas del hito';
+
+$this->title = 'Entregas del hito ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="entrega-index">
@@ -58,6 +60,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
+            /*[
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Entrega $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                 }
+            ],*/
             
         ],
     ]); ?>
