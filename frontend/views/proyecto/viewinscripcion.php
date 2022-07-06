@@ -69,8 +69,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'label'  => 'Profesor guía',
-                
-
                 'value'  => function ($model) {
 
                     if ($model->id_profe_guia==null){

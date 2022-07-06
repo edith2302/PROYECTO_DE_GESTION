@@ -100,7 +100,7 @@ class ProyectoController extends Controller
         if($proyectoInscritos != null){
             return $this->render('../proyecto/viewinscripcion2', [
                 'model' => $proyecto->findOne($id),
-                'msg'=> "Esto ya fue inscrito",
+                'msg'=> null,
             ]);
         }
         return $this->render('viewestudiante', [

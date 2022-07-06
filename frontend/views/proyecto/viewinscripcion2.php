@@ -2,9 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
- 
-use app\models\Usuario;
 use app\models\ProfesorIcinf;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Proyecto */
 
@@ -14,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="proyecto-view">
-
+    
     <h1><?= Html::encode($this->title) ?></h1>
 
    
@@ -25,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'nombre',
             'descripcion',
-            //'num_integrantes',
+            'num_integrantes',
             
             //'tipo',
 
@@ -64,6 +63,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'estado',
 
+            /*[
+                'label'  => 'Estado',
+                'value'  => function ($model) {
+                    switch ($model->estado) {
+                        case 1:
+                            return "Aprobado";
+                            break;
+                        case 2:
+                            return "Rechazado";
+                            break;
+                        
+                    }
+                },
+            ],*/
             //'disponibilidad',
             //'id_profe_guia',
 
@@ -75,23 +88,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     if ($model->id_profe_guia==null){
                         return "Sin profesor Guía" ;
-                    }
-                    $idp =$model->id_profe_guia;
+                     }
+                     $idp =$model->id_profe_guia;
                     if ($model->id_profe_guia=!null){
-                        $profIci = ProfesorIcinf::findOne($idp);
-                        
-                        return  $profIci->usuario->nombre;
-                    }
-                },
-            ],
-
-            [
-                'label'  => 'Desarrollado por',
-                'value'  => function ($model) {
-                    $logueado= Yii::$app->user->identity->id_usuarioo;
-                    $usuario = Usuario::find()->where(['id_usuario' => $logueado])->one();
+      
+                    $profIci = Profesoricinf::findOne($idp);
                    
-                    return $usuario->nombre;
+                    return  $profIci->usuario->nombre;
+                   }
+                   
                 },
             ],
 
@@ -105,7 +110,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ],
     ]) ?>
-
-    
-
 </div>
