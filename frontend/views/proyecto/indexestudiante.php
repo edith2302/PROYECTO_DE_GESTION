@@ -10,10 +10,14 @@ use app\models\Proyecto;
 /* @var $searchModel app\models\ProyectoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Lista propuestas de proyectos';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Propuestas de proyectos';
+
+$this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudiante']];
+
+/*$this->params['breadcrumbs'][] = $this->title;*/
 ?>
-<div class="proyecto-index">
+
+<div class="proyecto-indexestudiante">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -21,41 +25,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'dataProvider' => $dataProvider,
+        //'filterModel' => $searchModel,
+        'dataProvider' => $modelproyectos,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            //'nombre',
+            'nombre',
             //'descripcion',
-            //'num_integrantes',
-            //'tipo',
-            //'area',
+            'num_integrantes',
+            'tipo',
+            'area',
             //'estado',
             //'disponibilidad',
             //'id_profe_guia',
             //'id_autor',
 
-            [
+            /*[
                 'label'=>'Nombre proyecto',
                 'value'=>function ($model) { return $model->nombre; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 0px;text-align: center;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
-
-           /* [
-                'attribute'=>'descripcion',
-                'value'=>function ($model) { return $model->descripcion; },
-                //'filter'=>false,
-                'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],*/
 
 
             [
@@ -64,66 +59,55 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'headerOptions' => ['width' => '200px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
 
-            /*[
-                'attribute'=>'tipo',
-                'value'=>function ($model) { return $model->tipo; },
-                //'filter'=>false,
-                'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],*/
-
             [
-                        'label' => 'Tipo',
-                        'value' =>
+                'label' => 'Tipo',
+                'value' =>
 
-                        function ($model) {
-                            if ($model['tipo'] == '1') {
-                                return 'Desarrollo';
-                            };
-                            if ($model['tipo'] == '2') {
-                                return 'Investigación';
-                            };
-                            return 'ERROR';
-                        },
+                function ($model) {
+                    if ($model['tipo'] == '1') {
+                        return 'Desarrollo';
+                    };
+                    if ($model['tipo'] == '2') {
+                        return 'Investigación';
+                    };
+                    return 'ERROR';
+                },
                         'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'headerOptions' => ['width' => '50px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 10px 0px 10px;text-align: center;'],
        
 
-                    ],
+            ],
 
-                    [
-                        'label' => 'Área',
-                        'value' =>
+            [
+                'label' => 'Área',
+                'value' =>
 
-                        function ($model) {
-                            if ($model['area'] == '1') {
-                                return 'Inteligencia artificial';
-                            };
-                            if ($model['area'] == '2') {
-                                return 'Sistemas de información';
-                            };
+                function ($model) {
+                    if ($model['area'] == '1') {
+                        return 'Inteligencia artificial';
+                    };
+                    if ($model['area'] == '2') {
+                        return 'Sistemas de información';
+                    };
 
-                            if ($model['area'] == '3') {
-                                return 'Estructura de datos';
-                            };
-                            return 'ERROR';
-                        },
+                    if ($model['area'] == '3') {
+                        return 'Estructura de datos';
+                    };
+                    return 'ERROR';
+                },
 
-                        'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'format'=>'raw',
+                'headerOptions' => ['width' => '200px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 10px 0px 10px;text-align: center;'],
 
 
-                    ],
+            ],
 
                     
             [
@@ -132,8 +116,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'urlCreator' => function ($action, Proyecto $model, $key, $index, $column) {
                     $url ='index.php?r=proyecto%2Fviewestudiante&id='.$model->id;
                     return $url;
-                 }
-            ],
+                },
+
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 10px 10px 10px;text-align: center;'],
+            ],*/
         ],
     ]); ?>
 

@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii2mod\alert\Alert;
 use Yii;
+use yii\data\SqlDataProvider;
 
 /**
  * ProyectoController implements the CRUD actions for Proyecto model.
@@ -53,13 +54,31 @@ class ProyectoController extends Controller
 
     public function actionIndexestudiante()
     {
-        $searchModel = new ProyectoSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        //$searchModel = new ProyectoSearch();
+        //$dataProvider = $searchModel->search($this->request->queryParams);
+
+        /*$dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('indexestudiante', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);*/
+        $modelproyectos = new SqlDataProvider([
+            //'sql' => "select * from proyecto where proyecto.id not in(select id_proyecto rom desarrollarproyecto)",
+            
+            'sql' => "SELECT * FROM proyecto where proyecto.id not in(SELECT id_proyecto FROM desarrollarproyecto)",
+            
+            
         ]);
+
+        //return print_r( $modelproyectos);
+
+        return $this->render('indexestudiante', [
+           // 'searchModel' => $searchModel,
+            //'dataProvider' => $dataProvider,
+            'modelproyectos' => $modelproyectos,
+        ]);
+
     }
 
     public function actionIndexprofesor()

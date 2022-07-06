@@ -8,11 +8,12 @@ use app\models\ProfesorIcinf;
 /* @var $model app\models\Proyecto */
 
 $this->title = $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudiante']];
 $this->params['breadcrumbs'][] = $this->title;
+
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="proyecto-view">
+<div class="proyecto-viewestudiante">
     
     <h1><?= Html::encode($this->title) ?></h1>
 
