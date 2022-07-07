@@ -32,19 +32,23 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'nombre',
+            //'nombre',
             //'descripcion',
-            'num_integrantes',
-            'tipo',
-            'area',
+            //'num_integrantes',
+            //'tipo',
+            //'area',
             //'estado',
             //'disponibilidad',
             //'id_profe_guia',
             //'id_autor',
 
-            /*[
+            [
                 'label'=>'Nombre proyecto',
-                'value'=>function ($model) { return $model->nombre; },
+                
+            'value'=>function ($modelproyectos) { 
+            /*return $modelproyectos->nombre; */ /*return print_r($modelproyectos);*/
+                return $modelproyectos['nombre'];
+            },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
@@ -55,7 +59,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
 
             [
                 'label'=>'Número integrantes',
-                'value'=>function ($model) { return $model->num_integrantes; },
+            'value'=>function ($modelproyectos) { /*return $model->num_integrantes;*/
+                return $modelproyectos['num_integrantes']; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
@@ -67,11 +72,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
                 'label' => 'Tipo',
                 'value' =>
 
-                function ($model) {
-                    if ($model['tipo'] == '1') {
+                function ($modelproyectos) {
+                    if ($modelproyectos['tipo'] == '1') {
                         return 'Desarrollo';
                     };
-                    if ($model['tipo'] == '2') {
+                    if ($modelproyectos['tipo'] == '2') {
                         return 'Investigación';
                     };
                     return 'ERROR';
@@ -88,15 +93,15 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
                 'label' => 'Área',
                 'value' =>
 
-                function ($model) {
-                    if ($model['area'] == '1') {
+                function ($modelproyectos) {
+                    if ($modelproyectos['area'] == '1') {
                         return 'Inteligencia artificial';
                     };
-                    if ($model['area'] == '2') {
+                    if ($modelproyectos['area'] == '2') {
                         return 'Sistemas de información';
                     };
 
-                    if ($model['area'] == '3') {
+                    if ($modelproyectos['area'] == '3') {
                         return 'Estructura de datos';
                     };
                     return 'ERROR';
@@ -113,14 +118,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
             [
                 'class' => ActionColumn::className(),
                 'template'=>'{view}',
-                'urlCreator' => function ($action, Proyecto $model, $key, $index, $column) {
-                    $url ='index.php?r=proyecto%2Fviewestudiante&id='.$model->id;
+                'urlCreator' => function ($action, $model, $key, $index, $column) {
+                    $url ='index.php?r=proyecto%2Fviewestudiante&id='.$model['id'];
                     return $url;
                 },
 
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 10px 10px 10px;text-align: center;'],
-            ],*/
+            ],
         ],
     ]); ?>
 
