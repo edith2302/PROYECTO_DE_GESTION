@@ -56,7 +56,28 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'descripcion',
             'puntaje',
-            //'puntaje_obtenido',   
+        
+    'puntaje_obtenido',   
         ],
     ]); ?>
+
+
+<?php if (!$dataProvider2==null){
+    echo
+ GridView::widget([
+        'dataProvider' => $dataProvider2,
+        
+       // 'filterModel' => $searchModel,
+        'columns' => [
+            //['class' => 'yii\grid\SerialColumn'],
+
+            //'id',
+            //'descripcion',
+            //'puntaje',
+            'puntajeideal',
+            'puntajeobtenido',
+            'nota',
+            //'puntaje_obtenido',   
+        ],
+    ]); } ?>
 </div>

@@ -78,18 +78,22 @@ class RubricaController extends Controller
         return $this->render('view', [
             'model' => $model,
             'dataProvider' => $items,
+            'dataProvider2' => null,
 
         ]);
 
     
     }
 
-    public function obtenerNota($id){
+    public function actionObtenerNota($id){
         $model = $this->findModel($id);
         //$items = $model->items;
-        //$items = Item::find()->where(['id_rubrica' => $id]);
-        
-        $puntajeideal = new SqlDataProvider([
+       // $items = Item::find()->where(['id_rubrica' => $id]);
+        $items = new SqlDataProvider([
+            'sql' => "select * from item where item.id_rubrica = '$id'",
+           
+        ]);
+        /*$puntajeideal = new SqlDataProvider([
             'sql' => "select SUM(puntaje) from item where item.id_rubrica = '$id'",
            
         ]);
@@ -97,11 +101,16 @@ class RubricaController extends Controller
         $puntajeobtenido = new SqlDataProvider([
             'sql' => "select SUM(puntaje_obtenido) from item where item.id_rubrica = '$id'",
            
+        ]);*/
+
+        $datos = new SqlDataProvider([
+            'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$id'",
+           
         ]);
         return $this->render('view', [
             'model' => $model,
-            'dataProvider' => $puntajeideal,
-            'dataProvider' => $puntajeobtenido,
+            'dataProvider' =>  $items,
+            'dataProvider2' => $datos,
 
         ]);
 
