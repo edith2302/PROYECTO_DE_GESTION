@@ -71,14 +71,43 @@ class RubricaController extends Controller
         //$items = $model->items;
         //$items = Item::find()->where(['id_rubrica' => $id]);
         $items = new SqlDataProvider([
-            'sql' => "select * from item
-            where id_rubrica = '$id' ",
+            'sql' => "select * from item where id_rubrica = '$id' ",
            
         ]);
+
         return $this->render('view', [
             'model' => $model,
             'dataProvider' => $items,
-            'dataProvider2' => null,
+
+        ]);
+
+    
+    }
+
+    /**
+     * Displays a single Rubrica model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewevaluacion($id)
+    {
+        $model = $this->findModel($id);
+
+        $items = new SqlDataProvider([
+            'sql' => "select * from item where id_rubrica = '$id' ",
+           
+        ]);
+
+        $datos = new SqlDataProvider([
+            'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$id'",
+           
+        ]);
+
+        return $this->render('viewevaluacion', [
+            'model' => $model,
+            'dataProvider' => $items,
+            'dataProvider2' => $datos,
 
         ]);
 
@@ -353,7 +382,7 @@ class RubricaController extends Controller
                             if (! ($flag = $modelItem->save(false))) {
 
                                 $transaction->rollBack();
-                                 return "pasó aquí 10";
+                                 //return "pasó aquí 10";
                                 break;
                             }
                             unset($modelItem);
@@ -486,7 +515,7 @@ class RubricaController extends Controller
                     }
                     if ($flag) {
                         $transaction->commit();
-                        return $this->redirect(['view', 'id' => $modelRubrica->id]);
+                        return $this->redirect(['viewevaluacion', 'id' => $modelRubrica->id]);
                     }
                 } catch (Exception $e) {
                     $transaction->rollBack();

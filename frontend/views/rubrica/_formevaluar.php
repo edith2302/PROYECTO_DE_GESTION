@@ -105,7 +105,7 @@ $this->registerJs($js);
 
     <?= $form->field($modelRubrica, 'observaciones')->textarea(['placeholder' => "Observaciones de la evaluación"],['maxlength' => true]) ?>
     <div class="form-group">
-        <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Enviar', ['class' => 'btn btn-danger']) ?>
+        <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Guardar', ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

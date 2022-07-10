@@ -57,7 +57,7 @@ $this->registerJs($js);
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-envelope"></i> Item
-            <a  class="pull-right add-item btn btn-success btn-sm"><i class="fa fa-plus"></i> Agregar ítem</a>
+            <!--a  class="pull-right add-item btn btn-success btn-sm"><i class="fa fa-plus"></i> Agregar ítem</a>-->
             <div class="clearfix"></div>
         </div>
         <div class="panel-body container-items"><!-- widgetContainer -->

@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-   <p align="right">
+   <!--p align="right">
         <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
         <?= Html::a('Agregar ítem', ['create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Evaluar', ['evaluar', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    </p>
+    </p> -->
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -60,5 +60,23 @@ $this->params['breadcrumbs'][] = $this->title;
     'puntaje_obtenido',   
         ],
     ]); ?>
-    
+
+
+<?php if (!$dataProvider2==null){
+    echo GridView::widget([
+        'dataProvider' => $dataProvider2,
+        
+       // 'filterModel' => $searchModel,
+        'columns' => [
+            //['class' => 'yii\grid\SerialColumn'],
+
+            //'id',
+            //'descripcion',
+            //'puntaje',
+            'puntajeideal',
+            'puntajeobtenido',
+            'nota',
+            //'puntaje_obtenido',   
+        ],
+    ]); } ?>
 </div>
