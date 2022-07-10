@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 5px 0px;text-align: center;'],
             ],
 
             /*[
@@ -75,8 +75,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
 
             [
@@ -85,8 +85,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 00px;text-align: center;'],
             ],
 
             [
@@ -95,8 +95,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 00px;text-align: center;'],
             ],
 
             [
@@ -105,8 +105,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
 
              //'tipo_hito',
@@ -132,9 +132,9 @@ $this->params['breadcrumbs'][] = $this->title;
                    
                 },
                 'format'=>'raw',
-        //'label'=>'YiiLib.com',
-        'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-        'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '200px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
 
 
             ],
@@ -145,22 +145,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
 
 
 
 
             [
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                
                 'urlCreator' => function ($action, Hito $model, $key, $index, $column) {
-
-                   
-
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

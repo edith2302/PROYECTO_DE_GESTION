@@ -1,7 +1,7 @@
 
 <?php
 return[
-'adminEmail' => 'tuemail@gmail.com',
+'adminEmail' => 'administrador@ubiobio.cl',
 'title' => 'Aplicación Yii',
 'salt' => 'fsddsflj38343lj0',
 ];
