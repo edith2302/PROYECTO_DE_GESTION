@@ -6,7 +6,8 @@ use app\models\Rubrica;
 /* @var $this yii\web\View */
 /* @var $modelRubrica app\models\Rubrica */
 
-$this->title = $modelRubrica->nombre;
+//$this->title = $modelRubrica->nombre;
+$this->title = "Evaluación";
 $this->params['breadcrumbs'][] = ['label' => 'Rúbricas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $modelRubrica->nombre, 'url' => ['view', 'id' => $modelRubrica->id]];
 $this->params['breadcrumbs'][] = 'Modificar rúbrica';

@@ -32,7 +32,7 @@ class Rubrica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre','descripcion', 'observaciones',/*'escala',*/ 'id_profe_asignatura'], 'required'],
+            [['nombre','descripcion', /*'observaciones',*//*'escala',*/ 'id_profe_asignatura'], 'required'],
             [[/*'escala',*/ 'id_profe_asignatura'], 'integer'],
             [['nombre'], 'string', 'max' => 100],
             [['descripcion'], 'string', 'max' => 1000],

@@ -19,21 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            //'id',
-            //'nombre',
-            'descripcion',
-           // 'escala',
-           // 'id_profe_asignatura',
-
-            
-        ],
-    ]) ?>
-
-   <p align="right">
+    <p align="right">
         <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -46,6 +32,19 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Evaluar', ['evaluar', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
+
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            //'id',
+            //'nombre',
+            'descripcion',
+           // 'escala',
+           // 'id_profe_asignatura',
+
+            
+        ],
+    ]) ?>  
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         
@@ -57,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion',
             'puntaje',
         
-    'puntaje_obtenido',   
+            //'puntaje_obtenido',   
         ],
     ]); ?>
     

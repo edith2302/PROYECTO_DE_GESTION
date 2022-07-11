@@ -16,6 +16,10 @@ use yii\bootstrap4\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
+use app\models\Desarrollarproyecto;
+use app\models\Estudiante;
+use app\models\Proyecto;
+
 AppAsset::register($this);
 $common_path = dirname(__FILE__,2);
 
@@ -218,9 +222,9 @@ Modal::end();
                         <li>
                             <?= Html::a(' Iniciar Sesión',Url::to(['site/login']),['class'=>'icon fa-sign-in']) ?>
                         </li>
-                        <li>
+                        <!--<li>
                             <?= Html::a(' Registrarse',Url::to(['site/signup']),['class'=>'icon fa-sign-up']) ?>
-                        </li>
+                        </li>-->
                     <?php else: ?>
                         <!--li>
                             <span  class="opener"><span class="icon fa-user"> Ejemplo API</span></span>
@@ -265,7 +269,7 @@ Modal::end();
                         <ul id="proyecto">
 
                             <li>
-                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/index'])) ?>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/index'])) ?>
                             </li>
 
                             
@@ -281,6 +285,9 @@ Modal::end();
                                 <?= Html::a('Gestión de hitos', Url::to(['/hito/index'])) ?>
                             </li>
                             <li>
+                                <?= Html::a('Gestión de rúbricas', Url::to(['/rubrica/index'])) ?>
+                            </li>
+                            <li>
                                 <?= Html::a('Gestión de módulos', Url::to(['/modulo/index'])) ?>
                             </li>
 
@@ -293,26 +300,34 @@ Modal::end();
 
                      <!--menu Estudiante-->
                     <?php if (!Yii::$app->user->isGuest) :?>
-                   <?php  if (Yii::$app->user->identity->role == 2) :?>
+                    <?php  if (Yii::$app->user->identity->role == 2) :?>
+                    <?php  
+                    $logueado= Yii::$app->user->identity->id_usuarioo;
+                    $estudiante = Estudiante::find()->where(['id_usuario' => $logueado])->one();
+                    $modeloDesarrollap = Desarrollarproyecto::find()->where(['id_estudiante' => $estudiante->id])->one();
+                    $proyecto = Proyecto::find()->where(['id' => $modeloDesarrollap->id_proyecto])->one();
+                    //return $proyecto->id;
+                    $idp=$proyecto->id;
+
+                    ?>
+                    
                     <li>
                         <!--span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>-->
                         <!--ul id="proyecto">-->
-
                             <!--li>-->
-                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
                             <!--/li>-->
-
-                            
 
                         <!--/ul>-->
                     </li>
+                    
                     <li>
                         <span  class="opener"><span class="icon fa-hand-o-up"> Mi proyecto </span></span>
                         <ul id="hito">
 
-                        
+                       
                           <li>
-                                <?= Html::a('Proyecto', Url::to(['/proyecto/indexestudiante'])) ?>
+                            <?= Html::a('Mi proyecto', Url::to('/frontend/views/proyecto/viewestudiante', ['model' => $proyecto->id])) ?>
                            <li>
                              
                            <li>
@@ -345,7 +360,7 @@ Modal::end();
                         <ul id="proyecto">
 
                             <li>
-                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
                             </li>
 
                             
@@ -365,7 +380,7 @@ Modal::end();
                         <ul id="proyecto">
 
                             <li>
-                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
                             </li>
 
                             
@@ -384,7 +399,7 @@ Modal::end();
                         <ul id="proyecto">
 
                             <li>
-                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
                             </li>
 
                             
@@ -403,7 +418,7 @@ Modal::end();
                         <ul id="proyecto">
 
                             <li>
-                                <?= Html::a('Lista de propuestas proyectos', Url::to(['/proyecto/indexestudiante'])) ?>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
                             </li>
 
                             

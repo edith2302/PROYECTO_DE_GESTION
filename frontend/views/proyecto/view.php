@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 },
             ],
-            'id_profe_guia',
+           // 'id_profe_guia',
 
             [
                 'label'  => 'Profesor guía',

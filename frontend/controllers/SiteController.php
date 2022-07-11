@@ -422,7 +422,8 @@ class SiteController extends Controller
             //'model' => $model,
         ]);*/
     
-        return $this->redirect("site/login");
+        //return $this->redirect("site/login");
+        return $this->redirect("index.php?r=site%2Flogin");
       
         //return $this->redirect('site/login');
     }

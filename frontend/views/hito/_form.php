@@ -74,7 +74,7 @@ use app\models\Rubrica;
 
     <div class="form-group">
     <p align="right">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-primaryy']) ?>
 
     <p>
     </div>

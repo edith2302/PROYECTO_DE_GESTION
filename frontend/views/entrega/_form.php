@@ -28,7 +28,7 @@ use yii\helpers\ArrayHelper;
 
     <div class="form-group">
     <p align="right">
-        <?= Html::submitButton('Guardar entrega', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Subir entrega', ['class' => 'btn btn-primaryy']) ?>
     <p>
     </div>
 
