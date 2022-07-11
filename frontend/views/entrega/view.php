@@ -2,11 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Hito;
+use app\models\Rubrica;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Entrega */
 
-$this->title = $model->id;
+$hito = Hito::find()->where(['id' => $model->id_hito])->one();
+$this->title = "Entrega de hito ".$hito->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Entregas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -29,19 +32,28 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id_hito',
         ],
     ]) ?>
-
-
-   <p align="right">
-       
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '¿Está seguro/a de eliminar la entrega?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-
+    <?php
+        $hito = Hito::find()->where(['id' => $model->id_hito])->one();
+        $rubrica = Rubrica::find()->where(['id' => $hito->id_rubrica])->one(); 
+    ?>
+    <div class="row">
+        <div class="col-sm-6">
+            <p align="right">
+                <?= Html::a('Evaluar', ['rubrica/evaluar', 'id' => $rubrica->id], ['class' => 'btn btn-primary']) ?>
+            </p>
+        </div>
+                            
+        <div class="col-sm-6">
+            <p align="left">   
+                <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => '¿Está seguro/a de eliminar la entrega?',
+                        'method' => 'post',
+                    ],
+                ]) ?>
+            </p>
+        </div>
+    </div><!-- end:row -->
 </div>
 
