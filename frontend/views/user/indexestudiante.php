@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'username',
+            //'id',
+            //'username',
             'authKey',
             'password',
             'password_hash',
@@ -46,8 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id_usuarioo',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, User $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
+                'urlCreator' => function ($action,  $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model['id']]);
                  }
             ],
         ],

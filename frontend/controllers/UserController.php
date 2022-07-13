@@ -1,12 +1,13 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use app\models\User;
 use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\SqlDataProvider;
 
 
 /**
@@ -45,6 +46,32 @@ class UserController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all User models.
+     *
+     * @return string
+     */
+    public function actionIndexestudiante()
+    {
+        $searchModel = new UserSearch();
+        //$dataProvider = $searchModel->search($this->request->queryParams);
+
+        $model = new SqlDataProvider([
+            'sql' => "SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)" ,
+        ]);
+
+        /*return $this->render('entregashito', [
+            'dataProvider' => $model,
+        ]);*/
+
+        //$dataProvider ='select * from user where role = 2' ;
+        return $this->render('indexestudiante', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $model,
+            //'dataProvider' => $dataProvider,
         ]);
     }
 

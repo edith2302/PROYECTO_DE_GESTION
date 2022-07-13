@@ -7,6 +7,7 @@ use app\models\UsuarioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\SqlDataProvider;
 
 /**
  * UsuarioController implements the CRUD actions for Usuario model.
@@ -46,6 +47,33 @@ class UsuarioController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    /**
+     * Lists all User models.
+     *
+     * @return string
+     */
+    public function actionIndex2()
+    {
+        $searchModel = new UsuarioSearch();
+        //$dataProvider = $searchModel->search($this->request->queryParams);
+
+        $model = new SqlDataProvider([
+            'sql' => "SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)" ,
+        ]);
+
+        /*return $this->render('entregashito', [
+            'dataProvider' => $model,
+        ]);*/
+
+        //$dataProvider ='select * from user where role = 2' ;
+        return $this->render('index2', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $model,
+            //'dataProvider' => $dataProvider,
+        ]);
+    }
+
 
     /**
      * Displays a single Usuario model.

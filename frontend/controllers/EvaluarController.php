@@ -7,6 +7,11 @@ use app\models\EvaluarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Entrega;
+use app\models\Hito;
+use app\models\Rubrica;
+use Yii;
+USE yii\data\SqlDataProvider;
 
 /**
  * EvaluarController implements the CRUD actions for Evaluar model.
@@ -65,11 +70,57 @@ class EvaluarController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($ide)
     {
         $model = new Evaluar();
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+        $entrega = Entrega::find()->where(['id' => $ide])->one();
+        $hito = Hito::find()->where(['id' => $entrega->id_hito])->one();
+        $rubrica = Rubrica::find()->where(['id' => $hito->id_rubrica])->one();
+        $idr = $rubrica->id;
 
-        if ($this->request->isPost) {
+        //-----------------conexion bdd----------------------
+            $bd_name = "yii2advanced";
+            $bd_table = "item";
+            $bd_location = "localhost";
+            $bd_user = "root";
+            $bd_pass = "";
+
+            // conectarse a la bd
+            $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+            if(mysqli_connect_errno()){
+                die("Connection failed: ".mysqli_connect_error());
+            }
+            $datos =$conn->query("SELECT * FROM item");
+
+            $puntaje =$conn->query("select id, puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'");
+            
+           
+            while($calificacion = mysqli_fetch_array($puntaje)){
+                //echo $calificacion['nota'];
+                $notaa = $calificacion['nota'];
+                //return $calificacion['nota'];
+            } 
+            $model->nota = $notaa;
+            //return $notaa;
+
+        $model->id_usuario = $logueado;
+        $model->id_entrega = $entrega->id;
+        $model->comentarios = $rubrica->observaciones;
+
+        //----------------------------------
+        $model->save();
+        Yii:: $app->session->setFlash('success','La evaluación ha sido enviada éxito');
+        //return $this->redirect(['view', 'id' => $model->id]);
+
+        return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id] );
+        /*return $this->render('../rubrica/viewevaluacion', [
+            'model' => Rubrica::findOne($idr),
+        ]);
+
+        */
+
+        /*if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -77,9 +128,10 @@ class EvaluarController extends Controller
             $model->loadDefaultValues();
         }
 
+        
         return $this->render('create', [
             'model' => $model,
-        ]);
+        ]);*/
     }
 
     /**

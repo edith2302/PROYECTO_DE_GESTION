@@ -14,7 +14,8 @@ use yii\helpers\ArrayHelper;
 use app\models\Profesorasignatura;
 //use app\base\Model;
 use yii\data\SqlDataProvider;
-
+use app\models\Entrega;
+use app\models\Hito;
 
 
 use frontend\controllers\Exception;
@@ -90,22 +91,26 @@ class RubricaController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionViewevaluacion($id)
+    public function actionViewevaluacion($idr,$ide)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($idr);
+        $modelentrega = Entrega::find()->where(['id' => $ide])->one(); 
+        //return $modelentrega['id_hito'];
+        //return $modelentrega->id;
 
         $items = new SqlDataProvider([
-            'sql' => "select * from item where id_rubrica = '$id' ",
+            'sql' => "select * from item where id_rubrica = '$idr' ",
            
         ]);
 
         $datos = new SqlDataProvider([
-            'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$id'",
+            'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'",
            
         ]);
 
         return $this->render('viewevaluacion', [
             'model' => $model,
+            'modelentrega' =>$modelentrega,
             'dataProvider' => $items,
             'dataProvider2' => $datos,
 
@@ -114,6 +119,39 @@ class RubricaController extends Controller
     
     }
 
+    /**
+     * Displays a single Rubrica model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewevaluacionenviada($idr)
+    {
+        $model = $this->findModel($idr);
+        //$modelentrega = Entrega::find()->where(['id' => $ide])->one(); 
+         //return $modelentrega['id_hito'];
+         //return $modelentrega->id;
+ 
+         $items = new SqlDataProvider([
+             'sql' => "select * from item where id_rubrica = '$idr' ",
+            
+         ]);
+ 
+         $datos = new SqlDataProvider([
+             'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'",
+            
+         ]);
+ 
+        return $this->render('viewevaluacionenviada', [
+             'model' => $model,
+             //'modelentrega' =>$modelentrega,
+             'dataProvider' => $items,
+             'dataProvider2' => $datos,
+ 
+        ]);
+ 
+     
+     }
     public function actionObtenerNota($id){
         $model = $this->findModel($id);
         //$items = $model->items;
@@ -481,9 +519,16 @@ class RubricaController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionEvaluar($id)
+    public function actionEvaluar(/*$idr,*/$ide)
     {
-        $modelRubrica = $this->findModel($id);
+        //$rubrica = Rubrica::find()->where(['id' => $hito->id_rubrica])->one(); 
+        $modelentrega = Entrega::find()->where(['id' => $ide])->one(); 
+        //return $modelentrega['id_hito'];
+        //return $modelentrega->id_hito;
+        $idt = $modelentrega->id_hito;
+        $modelhito = Hito::find()->where(['id' => $idt])->one(); ;
+        $idr = $modelhito->id_rubrica;
+        $modelRubrica = $this->findModel($idr);
         $modelsItem =  $modelRubrica->items;
         
 
@@ -515,7 +560,7 @@ class RubricaController extends Controller
                     }
                     if ($flag) {
                         $transaction->commit();
-                        return $this->redirect(['viewevaluacion', 'id' => $modelRubrica->id]);
+                        return $this->redirect(['viewevaluacion', 'idr' => $modelRubrica->id,'ide' => $modelentrega->id ] );
                     }
                 } catch (Exception $e) {
                     $transaction->rollBack();
@@ -524,6 +569,7 @@ class RubricaController extends Controller
         }
 
         return $this->render('evaluar', [
+            'modelentrega' =>$modelentrega,
             'modelRubrica' => $modelRubrica,
             'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
         ]);

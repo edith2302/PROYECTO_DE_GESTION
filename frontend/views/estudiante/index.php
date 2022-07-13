@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use app\models\Estudiante;
-
+use app\models\Usuario;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EstudianteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -27,10 +27,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'id_usuario',
-            
-            
+            [
+                'label' => 'Nombre',
+
+                    'value'  => function ($model) {
+                        //$logueado= Yii::$app->user->identity->id_usuarioo;
+                        $usuario = Usuario::find()->where(['id_usuario' => $model->id_usuario])->one();
+                       
+                        return $usuario->nombre;
+                    },
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '120px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+
+            ],
+
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Estudiante $model, $key, $index, $column) {

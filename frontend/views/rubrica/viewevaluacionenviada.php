@@ -33,19 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-   <!--p align="right">
-        <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '¿Está seguro/a de eliminar la rúbrica seleccionada?',
-                'method' => 'post',
-            ],
-        ]) ?>
-        <?= Html::a('Agregar ítem', ['create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Evaluar', ['evaluar', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    </p> -->
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         
@@ -81,7 +68,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); } ?>
 </div>
 
-<div class="form-group">
-    <?= Html::a('Enviar', ['evaluar/create','ide' => $modelentrega->id], ['class' => 'btn btn-primary']) ?>
-</div>
 

@@ -9,11 +9,11 @@ use Yii;
  *
  * @property int $id
  * @property string $comentarios
- * @property int $nota
- * @property int $id_hito
+ * @property float  $nota
+ * @property int $id_entrega
  * @property int $id_usuario
  *
- * @property Hito $hito
+ * @property Entrega $entrega
  * @property Usuario $usuario
  */
 class Evaluar extends \yii\db\ActiveRecord
@@ -32,11 +32,12 @@ class Evaluar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['comentarios', 'nota', 'id_hito', 'id_usuario'], 'required'],
-            [['nota', 'id_hito', 'id_usuario'], 'integer'],
+            [['comentarios', 'nota', 'id_entrega', 'id_usuario'], 'required'],
+            [[ 'id_entrega', 'id_usuario'], 'integer'],
+            [['nota'], 'number'],
             [['comentarios'], 'string', 'max' => 10000],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
-            [['id_hito'], 'exist', 'skipOnError' => true, 'targetClass' => Hito::className(), 'targetAttribute' => ['id_hito' => 'id']],
+            [['id_entrega'], 'exist', 'skipOnError' => true, 'targetClass' => Entrega::className(), 'targetAttribute' => ['id_entrega' => 'id']],
         ];
     }
 
@@ -49,19 +50,19 @@ class Evaluar extends \yii\db\ActiveRecord
             'id' => 'ID',
             'comentarios' => 'Comentarios',
             'nota' => 'Nota',
-            'id_hito' => 'Id Hito',
+            'id_entrega' => 'Id Entrega',
             'id_usuario' => 'Id Usuario',
         ];
     }
 
     /**
-     * Gets query for [[Hito]].
+     * Gets query for [[Entrega]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getHito()
+    public function getEntrega()
     {
-        return $this->hasOne(Hito::className(), ['id' => 'id_hito']);
+        return $this->hasOne(Entrega::className(), ['id' => 'id_entrega']);
     }
 
     /**

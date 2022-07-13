@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
+use app\models\Entrega;
 
 
 use yii\helpers\Url;
@@ -102,10 +103,13 @@ $this->registerJs($js);
 
     
     <?php DynamicFormWidget::end(); ?>
+   
+    <?php $ide = $modelentrega->id ?>
 
     <?= $form->field($modelRubrica, 'observaciones')->textarea(['placeholder' => "Observaciones de la evaluación"],['maxlength' => true]) ?>
+    
     <div class="form-group">
-        <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Guardar', ['class' => 'btn btn-danger']) ?>
+        <?= Html::submitButton($modelItem->isNewRecord ? 'Create' : 'Guardar',['ide' => $ide], ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

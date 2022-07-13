@@ -252,7 +252,7 @@ Modal::end();
                         <span  class="opener"><span class="icon fa-hand-o-up"> Participantes</span></span>
                         <ul id="estudiantes">
                             <li>
-                                <?= Html::a('Lista de estudiantes', Url::to(['/estudiante/index'])) ?>
+                                <?= Html::a('Lista de estudiantes', Url::to(['/usuario/index2'])) ?>
                             </li>
                             <li>
                                 <?= Html::a('Lista de profesores', Url::to(['/profesorguia/index'])) ?>
@@ -327,7 +327,7 @@ Modal::end();
 
                        
                           <li>
-                            <?= Html::a('Mi proyecto', Url::to('/frontend/views/proyecto/viewestudiante', ['model' => $proyecto->id])) ?>
+                            <?= Html::a('Mi proyecto', Url::to('frontend/views/proyecto%2Fviewestudiante', ['model' => $proyecto->id])) ?>
                            <li>
                              
                            <li>

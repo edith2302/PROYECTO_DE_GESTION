@@ -17,7 +17,8 @@ class EvaluarSearch extends Evaluar
     public function rules()
     {
         return [
-            [['id', 'nota', 'id_hito', 'id_usuario'], 'integer'],
+            [['id', 'nota', 'id_entrega', 'id_usuario'], 'integer'],
+            [['nota'], 'number'],
             [['comentarios'], 'safe'],
         ];
     }
@@ -60,7 +61,7 @@ class EvaluarSearch extends Evaluar
         $query->andFilterWhere([
             'id' => $this->id,
             'nota' => $this->nota,
-            'id_hito' => $this->id_hito,
+            'id_entrega' => $this->id_entrega,
             'id_usuario' => $this->id_usuario,
         ]);
 

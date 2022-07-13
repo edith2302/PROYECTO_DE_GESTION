@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\models\Hito;
 use app\models\Rubrica;
+use app\models\Entrega;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Entrega */
@@ -28,18 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'fecha_entrega',
             'hora_entrega',
             'comentarios',
-            //'id_proyecto',
-            //'id_hito',
+            'id_proyecto',
+            'id_hito',
         ],
     ]) ?>
     <?php
         $hito = Hito::find()->where(['id' => $model->id_hito])->one();
         $rubrica = Rubrica::find()->where(['id' => $hito->id_rubrica])->one(); 
+        $entrega = Entrega::find()->where(['id' => $model->id])->one(); 
     ?>
     <div class="row">
         <div class="col-sm-6">
             <p align="right">
-                <?= Html::a('Evaluar', ['rubrica/evaluar', 'id' => $rubrica->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Evaluar', ['rubrica/evaluar',/* 'idr' => $rubrica->id,*/ 'ide' => $entrega->id], ['class' => 'btn btn-primary']) ?>
             </p>
         </div>
                             
