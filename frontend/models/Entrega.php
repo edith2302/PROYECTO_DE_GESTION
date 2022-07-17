@@ -34,7 +34,7 @@ class Entrega extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['evidencia', 'fecha_entrega', 'hora_entrega', 'comentarios', 'id_proyecto', 'id_hito'], 'required'],
+            [['evidencia', 'fecha_entrega', 'hora_entrega'/*, 'comentarios'*/, 'id_proyecto', 'id_hito'], 'required'],
             [['fecha_entrega', 'hora_entrega'], 'safe'],
             [['id_proyecto', 'id_hito'], 'integer'],
             [['evidencia'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf, txt, doc, rar, png, jpg, docx', 'maxSize' => 1024*1024*20],
@@ -55,8 +55,8 @@ class Entrega extends \yii\db\ActiveRecord
             'fecha_entrega' => 'Fecha entrega',
             'hora_entrega' => 'Hora entrega',
             'comentarios' => 'Comentarios',
-            'id_proyecto' => 'Código del proyecto',
-            'id_hito' => 'Código hito',
+            'id_proyecto' => 'Proyecto',
+            'id_hito' => 'Hito',
         ];
     }
 

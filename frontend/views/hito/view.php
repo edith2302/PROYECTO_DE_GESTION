@@ -6,6 +6,7 @@ use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
 
+use app\models\Proyecto;
 use app\models\Entrega;
 
 /* @var $this yii\web\View */
@@ -93,10 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $modelhito,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-
             [
-
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{link}',
                 'buttons' => [
@@ -127,6 +125,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
 
+            [
+                'attribute'=>'id_proyecto',
+                'value'=>function ($model) {
+                    $proyecto = Proyecto::findOne(['id' => $model['id_proyecto']]);
+                    return $proyecto->nombre;
+                },
+                'format'=>'raw',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+
+            [
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+                'class' => ActionColumn::className(),
+                'template'=>'{view}, {delete}',
+                'urlCreator' => function ($action, $model, $key, $index, $column) {
+                    //return Url::toRoute([$action, 'id' => $model['id']]);
+                    $url ='index.php?r=entrega%2Fview&id='.$model['id'];
+                    return $url;
+                }
+            ],
          
 
             

@@ -5,6 +5,9 @@ use yii\widgets\DetailView;
 use app\models\Hito;
 use app\models\Rubrica;
 use app\models\Entrega;
+use yii\grid\GridView;
+use yii\grid\ActionColumn;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Entrega */
@@ -25,12 +28,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
-            'evidencia',
+            //'evidencia',
+            [
+                'label'  => 'Proyecto',
+                'value'  => function ($model) {
+                    return $model->proyecto->nombre;
+                },
+            ],
+
             'fecha_entrega',
             'hora_entrega',
+            //'comentarios',
+            //'id_proyecto',
+            [
+                'label'  => 'Proyecto',
+                'value'  => function ($model) {
+                    return $model->proyecto->nombre;
+                },
+            ],
             'comentarios',
-            'id_proyecto',
-            'id_hito',
+            //'id_hito',
         ],
     ]) ?>
     <?php
@@ -38,6 +55,8 @@ $this->params['breadcrumbs'][] = $this->title;
         $rubrica = Rubrica::find()->where(['id' => $hito->id_rubrica])->one(); 
         $entrega = Entrega::find()->where(['id' => $model->id])->one(); 
     ?>
+
+
     <div class="row">
         <div class="col-sm-6">
             <p align="right">

@@ -9,8 +9,12 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
 use yii2mod\alert\Alert;
-USE yii\data\SqlDataProvider;
+use yii\data\SqlDataProvider;
 use app\models\ProfesorAsignatura;
+use app\models\Proyecto;
+use app\models\Desarrollarproyecto;
+use app\models\Estudiante;
+use app\models\Entrega;
 //use common\widgets\Alert;
 
 /**
@@ -86,6 +90,19 @@ class HitoController extends Controller
     
     }
 
+    /**
+     * Displays a single Hito model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewentregar($id)
+    {
+        return $this->render('viewentregar', [
+            'model' => $this->findModel($id),
+        ]);   
+    }
+
     public function actionViewentregaestudiante($id)
     {
 
@@ -106,10 +123,48 @@ class HitoController extends Controller
     }
 
     public function actionViewestudiante($id)
-    {
-        return $this->render('viewestudiante', [
-            'model' => $this->findModel($id),
+    {   //$id : el id corresponde al hito
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $estudiante = Estudiante::findOne(['id_usuario'=>$usuario]);
+        $desarrollar = Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
+        $proyecto = Proyecto::findOne(['id'=>$desarrollar->id_proyecto]);
+
+        $entrega = Entrega::findOne(['id_proyecto'=>$proyecto->id, 'id_hito'=>$id]);
+        //$entrega = Entrega::findOne(['id_proyecto'=>1, 'id_hito'=>1]);
+
+        $modelentregahito = new SqlDataProvider([
+            'sql' => 'SELECT * FROM `entrega` WHERE entrega.id_proyecto ='.$proyecto->id.' and entrega.id_hito='.$id,
+            
         ]);
+
+        if( $entrega == null){
+            //return "nulo";
+            return $this->render('viewentregar', [
+                'model' => $this->findModel($id),
+            ]);
+        }else{
+            //return "no nulo";
+            return $this->render('viewestudiante', [
+                'model' => $this->findModel($id),
+                'modelentregahito' => $modelentregahito,
+            ]);
+        }
+
+        /*if( $modelentregahito == null){
+            return $this->render('viewentregar', [
+                'model' => $this->findModel($id),
+            ]);
+        }else{     
+            
+            return $this->render('viewestudiante', [
+                'model' => $this->findModel($id),
+                'modelentregahito' => $modelentregahito,
+            ]);
+        }*/
+        
+        /*return $this->render('viewentregar', [
+            'model' => $this->findModel($id),
+        ]);*/
     }
 
     

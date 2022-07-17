@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\models\Hito;
+use app\models\Proyecto;
 
 
 /* @var $this yii\web\View */
@@ -27,6 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'evidencia',
             'fecha_entrega',
             'hora_entrega',
+            [
+                'attribute'=>'id_proyecto',
+                'value'=>function ($model) {
+                    $proyecto = Proyecto::findOne(['id' => $model['id_proyecto']]);
+                    return $proyecto->nombre;
+                },
+            ],
             'comentarios',
             //'id_proyecto',
             //'id_hito',
