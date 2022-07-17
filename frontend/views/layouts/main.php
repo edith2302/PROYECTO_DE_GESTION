@@ -304,10 +304,10 @@ Modal::end();
                     <?php  
                     $logueado= Yii::$app->user->identity->id_usuarioo;
                     $estudiante = Estudiante::find()->where(['id_usuario' => $logueado])->one();
-                    $modeloDesarrollap = Desarrollarproyecto::find()->where(['id_estudiante' => $estudiante->id])->one();
+                    /*$modeloDesarrollap = Desarrollarproyecto::find()->where(['id_estudiante' => $estudiante->id])->one();
                     $proyecto = Proyecto::find()->where(['id' => $modeloDesarrollap->id_proyecto])->one();
                     //return $proyecto->id;
-                    $idp=$proyecto->id;
+                    $idp=$proyecto->id;*/
 
                     ?>
                     
@@ -327,7 +327,8 @@ Modal::end();
 
                        
                           <li>
-                            <?= Html::a('Mi proyecto', Url::to('frontend/views/proyecto%2Fviewestudiante', ['model' => $proyecto->id])) ?>
+                            
+                            <?= Html::a('Mi proyecto', Url::to('frontend/views/proyecto%2Findexestudiante')) ?>
                            <li>
                              
                            <li>

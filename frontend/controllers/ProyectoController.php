@@ -157,13 +157,14 @@ class ProyectoController extends Controller
 
     public function actionViewinscripcion($id)
     {
+        $proyecto = Proyecto::findOne($id);
+        //$proyecto->setDisponibilidad(2);
 
         return $this->render('viewinscripcion', [
             'model' => $this->findModel($id),
         ]);
     }
 
-    
     /**
      * Creates a new Proyecto model.
      * If creation is successful, the browser will be redirected to the 'view' page.

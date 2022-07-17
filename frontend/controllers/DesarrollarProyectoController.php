@@ -97,6 +97,16 @@ class DesarrollarproyectoController extends Controller
         $model->id_proyecto=$proyecto->id;
 
         $model->save();
+
+        $proyectoOc= Desarrollarproyecto::find()->where(['id_proyecto' => $proyecto->id])->one();
+        $ocupado = 2;
+        //return $proyecto->disponibilidad;
+        if($proyectoOc!=null){
+            $proyecto->setDisponibilidad($ocupado);
+            //$proyecto->save();
+        }
+        //return $proyecto->disponibilidad;
+        
         //return $this->redirect(['proyecto/viewinscripcion', 'id' => $model->id]);
 
         return $this->render('../proyecto/viewinscripcion', [

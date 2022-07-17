@@ -131,4 +131,9 @@ class Proyecto extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Profesoricinf::className(), ['id' => 'id_profe_guia']);
     }
+
+    public function setDisponibilidad($nueva_disponibilidad){
+        $this->disponibilidad = $nueva_disponibilidad;
+        $this->save();
+    }
 }
