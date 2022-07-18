@@ -2,8 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+use yii\grid\ActionColumn;
+use yii\helpers\Url;
+
 use app\models\Hito;
 use app\models\Proyecto;
+use app\models\Evaluar;
 
 
 /* @var $this yii\web\View */
@@ -19,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-   
+    <?php $evaluacion = Evaluar::find()->where(['id_entrega' => $model->id])->one(); ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -51,9 +56,46 @@ $this->params['breadcrumbs'][] = $this->title;
 
             
         ],
+        
     ]) ?>
 
 
-
 </div>
+<br><b><?php echo "Evaluación: " ?></b></br>
+<?= GridView::widget([
+        'dataProvider' => $modelnota,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            [
+                'attribute'=>'nota',
+                'value'=>function ($model) {
+                    if($model['nota'] !=null){
+                        return $model['nota'];
+                    }
+                    //return $model['hora_entrega']; 
+                    return " ";
+                },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ], 
+            [
+                'attribute'=>'comentarios',
+                'value'=>function ($model) {
+                    return $model['comentarios'];
+                },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ], 
+ 
+        ],
+    ]); ?>
+
+
 

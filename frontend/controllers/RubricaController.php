@@ -132,15 +132,15 @@ class RubricaController extends Controller
          //return $modelentrega['id_hito'];
          //return $modelentrega->id;
  
-         $items = new SqlDataProvider([
-             'sql' => "select * from item where id_rubrica = '$idr' ",
+        $items = new SqlDataProvider([
+            'sql' => "select * from item where id_rubrica = '$idr' ",
             
-         ]);
+        ]);
  
-         $datos = new SqlDataProvider([
+        $datos = new SqlDataProvider([
              'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'",
             
-         ]);
+        ]);
  
         return $this->render('viewevaluacionenviada', [
              'model' => $model,
@@ -151,7 +151,7 @@ class RubricaController extends Controller
         ]);
  
      
-     }
+    }
     public function actionObtenerNota($id){
         $model = $this->findModel($id);
         //$items = $model->items;

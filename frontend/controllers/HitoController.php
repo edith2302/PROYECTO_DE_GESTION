@@ -132,8 +132,22 @@ class HitoController extends Controller
         $entrega = Entrega::findOne(['id_proyecto'=>$proyecto->id, 'id_hito'=>$id]);
         //$entrega = Entrega::findOne(['id_proyecto'=>1, 'id_hito'=>1]);
 
+        
+        /*SELECT entrega.id as identrega, evaluar.id as idevaluar, entrega.evidencia, entrega.fecha_entrega , entrega.hora_entrega , entrega.comentarios as coment_entrega , entrega.id_proyecto , entrega.id_hito, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM `entrega` JOIN `evaluar` WHERE entrega.id_proyecto =1 and entrega.id_hito=1*/
+
+
+        /*SELECT entrega.id as identrega, evaluar.id as idevaluar, entrega.evidencia, entrega.fecha_entrega , entrega.hora_entrega , entrega.comentarios as coment_entrega , entrega.id_proyecto , entrega.id_hito, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM `entrega` JOIN `evaluar` WHERE entrega.id_proyecto =1 and entrega.id_hito=1 and evaluar.id_entrega =12*/
+
         $modelentregahito = new SqlDataProvider([
-            'sql' => 'SELECT * FROM `entrega` WHERE entrega.id_proyecto ='.$proyecto->id.' and entrega.id_hito='.$id,
+            'sql' => 'SELECT * FROM `entrega`  WHERE entrega.id_proyecto ='.$proyecto->id.' and entrega.id_hito='.$id,
+            //'sql' => 'SELECT * FROM `entrega` JOIN `evaluar` WHERE entrega.id_proyecto ='.$proyecto->id.' and entrega.id_hito='.$id,
+            
+        ]);
+
+        $modelnota = new SqlDataProvider([
+
+            //'sql' => 'SELECT entrega.id as identrega, evaluar.id as idevaluar, entrega.evidencia, entrega.fecha_entrega , entrega.hora_entrega , entrega.comentarios as coment_entrega , entrega.id_proyecto , entrega.id_hito, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM entrega JOIN evaluar WHERE entrega.id_proyecto'.'='.$proyecto->id.' and entrega.id_hito='.$id.' and evaluar.id_entrega ='.$entrega->id,
+            'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
             
         ]);
 
@@ -147,6 +161,7 @@ class HitoController extends Controller
             return $this->render('viewestudiante', [
                 'model' => $this->findModel($id),
                 'modelentregahito' => $modelentregahito,
+                //'modelnota' => $modelnota,
             ]);
         }
 

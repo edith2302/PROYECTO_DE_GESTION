@@ -62,7 +62,17 @@ $this->params['breadcrumbs'][] = $this->title;
             //'puntaje',
             'puntajeideal',
             'puntajeobtenido',
-            'nota',
+            //'nota',
+            [
+                'attribute'=>'nota',
+                'value'=>function ($model) { 
+                    $notaa = round($model['nota'], 1);
+                    return $notaa; 
+                },
+                'format'=>'raw',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+            ],  
             //'puntaje_obtenido',   
         ],
     ]); } ?>

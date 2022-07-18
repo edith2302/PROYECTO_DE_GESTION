@@ -76,6 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $modelentregahito,
+        //'dataProvider' => $modelnota,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -91,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
 
-            [
+            /*[
                 'attribute'=>'id',
                 'value'=>function ($model) { return $model['id']; },
                 //'filter'=>false,
@@ -99,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],
+            ],*/
 
             [
                 'attribute'=>'fecha_entrega',
@@ -120,6 +121,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
+            
+           
+            /*[
+                'attribute'=>'nota',
+                'value'=>function ($model) {
+                    if($model['nota'] !=null){
+                        return "con nota";
+                    }
+                    //return $model['hora_entrega']; 
+                    return "sin nota";
+                },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ], */  
+
 
             [
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],

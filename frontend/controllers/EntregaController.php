@@ -116,9 +116,18 @@ where estudiante.id_usuario = 6107)
 
     public function actionView2($id)
     {
+        $entrega = Entrega::findOne(['id'=>$id]);
+
+        $modelnota = new SqlDataProvider([
+
+            //'sql' => 'SELECT entrega.id as identrega, evaluar.id as idevaluar, entrega.evidencia, entrega.fecha_entrega , entrega.hora_entrega , entrega.comentarios as coment_entrega , entrega.id_proyecto , entrega.id_hito, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM entrega JOIN evaluar WHERE entrega.id_proyecto'.'='.$proyecto->id.' and entrega.id_hito='.$id.' and evaluar.id_entrega ='.$entrega->id,
+            'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
+            
+        ]);
         
         return $this->render('view2', [
             'model' => $this->findModel($id),
+            'modelnota' => $modelnota,
             
         ]);
     }

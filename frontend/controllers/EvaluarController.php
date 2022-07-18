@@ -93,12 +93,13 @@ class EvaluarController extends Controller
             }
             $datos =$conn->query("SELECT * FROM item");
 
-            $puntaje =$conn->query("select id, puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'");
+            $puntaje =$conn->query("select id, puntaje, descripcion,SUM(puntaje_obtenido) as puntaje_obtenido, SUM(puntaje) as puntaje_ideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'");
             
            
             while($calificacion = mysqli_fetch_array($puntaje)){
                 //echo $calificacion['nota'];
-                $notaa = $calificacion['nota'];
+                //round(0.6);
+                $notaa = round($calificacion['nota'], 1);
                 //return $calificacion['nota'];
             } 
             $model->nota = $notaa;
