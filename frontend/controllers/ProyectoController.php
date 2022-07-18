@@ -100,11 +100,29 @@ class ProyectoController extends Controller
      */
     public function actionView($id)
     {
+        $proyecto = Proyecto::find()->where(['id' => $id])->one();
+        if($proyecto->disponibilidad == 2){
+            return $this->render('viewocupado', [
+                'model' => $this->findModel($id),
+            ]);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
+    /**
+     * Displays a single Proyecto model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewocupado($id)
+    {
+        return $this->render('viewocupado', [
+            'model' => $this->findModel($id),
+        ]);
+    }
     public function actionViewestudiante($id)
     {
         $logueado= Yii::$app->user->identity->id_usuarioo;

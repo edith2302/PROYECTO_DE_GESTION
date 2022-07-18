@@ -19,6 +19,7 @@ use frontend\assets\AppAsset;
 use app\models\Desarrollarproyecto;
 use app\models\Estudiante;
 use app\models\Proyecto;
+use app\models\Profesorguia;
 
 AppAsset::register($this);
 $common_path = dirname(__FILE__,2);
@@ -222,9 +223,9 @@ Modal::end();
                         <li>
                             <?= Html::a(' Iniciar Sesión',Url::to(['site/login']),['class'=>'icon fa-sign-in']) ?>
                         </li>
-                        <!--<li>
+                        <li>
                             <?= Html::a(' Registrarse',Url::to(['site/signup']),['class'=>'icon fa-sign-up']) ?>
-                        </li>-->
+                        </li>
                     <?php else: ?>
                         <!--li>
                             <span  class="opener"><span class="icon fa-user"> Ejemplo API</span></span>
@@ -355,13 +356,13 @@ Modal::end();
 
  <!--menu profesor ICINF-->
                     <?php if (!Yii::$app->user->isGuest) :?>
-                   <?php  if (Yii::$app->user->identity->role == 3) :?>
+                    <?php  if (Yii::$app->user->identity->role == 3) :?>
                     <li>
                         <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
                         <ul id="proyecto">
 
                             <li>
-                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexprofesor'])) ?>
                             </li>
 
                             
@@ -381,7 +382,7 @@ Modal::end();
                         <ul id="proyecto">
 
                             <li>
-                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexprofesor'])) ?>
                             </li>
 
                             
@@ -394,18 +395,34 @@ Modal::end();
 
     <!--menu profesor guia-->
                     <?php if (!Yii::$app->user->isGuest) :?>
-                   <?php  if (Yii::$app->user->identity->role == 5) :?>
-                    <li>
+                    <?php 
+                        $usuario = Yii::$app->user->identity->id_usuarioo;
+                        $profeguia = Profesorguia::find()->where(['id_usuario' => $usuario])->one();
+                    ?>
+                    
+                    <?php  if ($profeguia != null) :?>
+                    <!--<li>
                         <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
                         <ul id="proyecto">
 
                             <li>
-                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexprofesor'])) ?>
                             </li>
-
-                            
+                        </ul>
+                    </li>-->
+                    <li>
+                        <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos guiados </span></span>
+                        <ul id="hito">
+                            <li>
+                                <?= Html::a('Mi proyecto', Url::to('frontend/views/proyecto%2Findexestudiante')) ?>
+                            <li>
+                             
+                            <li>
+                                <?= Html::a('Hitos', Url::to(['/hito/indexprofeguia'])) ?>
+                            <li>
 
                         </ul>
+
                     </li>
                     
                     <?php endif ?>

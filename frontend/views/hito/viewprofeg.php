@@ -6,7 +6,6 @@ use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
 
-use app\models\Proyecto;
 use app\models\Entrega;
 
 /* @var $this yii\web\View */
@@ -61,40 +60,29 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'id_rubrica',
 
-            [
+            /*[
                 'label'  => 'Rúbrica',
                 'value'  => function ($model) {
                     return $model->rubrica->nombre;
                 },
-            ],
+            ],*/
             //'id_profe_asignatura',
 
 
         ],
     ]) ?>
-    <p align="right">
-        <?= Html::a('Ver entrega', ['entrega/entregashito', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '¿Está seguro/a de que deseas eliminar éste elemento?',
-                'method' => 'post',
-            ],
-        ]) ?>
-
-       
-        
-    </p>
-    
-
 </div>
 
-<?= GridView::widget([
-        'dataProvider' => $modelhito,
+
+    <?= GridView::widget([
+        'dataProvider' => $modelentregahito,
+        //'dataProvider' => $modelnota,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
+
             [
+
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{link}',
                 'buttons' => [
@@ -104,6 +92,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
 
+            /*[
+                'attribute'=>'id',
+                'value'=>function ($model) { return $model['id']; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],*/
 
             [
                 'attribute'=>'fecha_entrega',
@@ -112,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
             ],
   
             [
@@ -124,32 +121,36 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
             ],
-
-            [
-                'attribute'=>'id_proyecto',
+            
+           
+            /*[
+                'attribute'=>'nota',
                 'value'=>function ($model) {
-                    $proyecto = Proyecto::findOne(['id' => $model['id_proyecto']]);
-                    return $proyecto->nombre;
+                    if($model['nota'] !=null){
+                        return "con nota";
+                    }
+                    //return $model['hora_entrega']; 
+                    return "sin nota";
                 },
+                //'filter'=>false,
                 'format'=>'raw',
+                //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
-            ],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ], */  
+
 
             [
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
-                'template'=>'{view}, {delete}',
+                'template'=>'{view}',
                 'urlCreator' => function ($action, $model, $key, $index, $column) {
                     //return Url::toRoute([$action, 'id' => $model['id']]);
-                    $url ='index.php?r=entrega%2Fview&id='.$model['id'];
+                    $url ='index.php?r=entrega%2Fview2&id='.$model['id'];
                     return $url;
                 }
-            ],
-         
-
-            
+            ],  
         ],
     ]); ?>
 

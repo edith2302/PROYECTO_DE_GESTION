@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion',
             'num_integrantes',
             //'tipo',
+
             [
                 'label'  => 'Tipo',
                 'value'  => function ($model) {
@@ -44,7 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 },
             ],
-            
             //'area',
             [
                 'label'  => 'Área',
@@ -56,14 +56,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         case 2:
                             return "Sistemas de información";
                             break;
-                     case 3:
-                                return "Estructura de datos";
-                                break;
+                        case 3:
+                            return "Estructura de datos";
+                            break;
+                        
                     }
                 },
             ],
             //'estado',
-            [
+
+            /*[
                 'label'  => 'Estado',
                 'value'  => function ($model) {
                     switch ($model->estado) {
@@ -74,13 +76,28 @@ $this->params['breadcrumbs'][] = $this->title;
                             return "Rechazado";
                             break;
                         
+                        
+                    }
+                },
+            ],*/
+            //'disponibilidad',
+
+            [
+                'label'  => 'Disponibilidad',
+                'value'  => function ($model) {
+                    switch ($model->disponibilidad) {
+                        case 1:
+                            return "Disponible";
+                            break;
+                        case 2:
+                            return "Ocupado";
+                            break;
+                        
+                        
                     }
                 },
             ],
-
-            
-            //'disponibilidad',
-            //'id_profe_guia',
+           // 'id_profe_guia',
 
             [
                 'label'  => 'Profesor guía',
@@ -101,23 +118,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
 
+            
             //'id_autor',
-
-            [
-                'label'  => 'Desarrollado por',
-                'value'  => function ($model) {
-                    $desarrollap = Desarrollarproyecto::find()->where(['id_proyecto' => $model->id])->one();
-                    if($desarrollap != null){
-                        $estudiante = Estudiante::find()->where(['id' => $desarrollap->id_estudiante])->one();
-                        $usuario = Usuario::find()->where(['id_usuario' => $estudiante->id_usuario])->one();
-
-                        return $usuario->nombre;
-                    }
-                    return " ";
-                    
-                },
-            ],
-
             [
                 'label'  => 'Autor',
                 'value'  => function ($model) {
@@ -125,6 +127,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
 
+            [
+                'label'  => 'Desarrollado por',
+                'value'  => function ($model) {
+                    $desarrollap = Desarrollarproyecto::find()->where(['id_proyecto' => $model->id])->one();
+                        $estudiante = Estudiante::find()->where(['id' => $desarrollap->id_estudiante])->one();
+                        $usuario = Usuario::find()->where(['id_usuario' => $estudiante->id_usuario])->one();
+
+                        return $usuario->nombre;
+                },
+            ],
+
+           
         ],
     ]) ?>
+
+<p align="right">
+    <?= Html::a('Asignar profesor guía', ['create2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    </p>
+    
 </div>

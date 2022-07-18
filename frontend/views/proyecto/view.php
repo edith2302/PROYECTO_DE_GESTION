@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\models\ProfesorIcinf;
+use app\models\Proyecto;
+use app\models\Usuario;
+use app\models\Desarrollarproyecto;
+use app\models\Estudiante;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Proyecto */
@@ -121,9 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'  => function ($model) {
                     return $model->autor->nombre;
                 },
-            ],
-
-           
+            ],  
         ],
     ]) ?>
 

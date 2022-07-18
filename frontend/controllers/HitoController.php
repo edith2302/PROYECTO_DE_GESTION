@@ -15,6 +15,7 @@ use app\models\Proyecto;
 use app\models\Desarrollarproyecto;
 use app\models\Estudiante;
 use app\models\Entrega;
+use app\models\Profesorguia;
 //use common\widgets\Alert;
 
 /**
@@ -66,7 +67,18 @@ class HitoController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-   
+
+    public function actionIndexprofeguia()
+    {
+        $searchModel = new HitoSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('indexprofeguia', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    
    
     
 
@@ -121,6 +133,36 @@ class HitoController extends Controller
         ]);
     
     }
+
+    
+    public function actionViewprofeg($id)
+    {   //$id : el id corresponde al hito
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $profeguia = Profesorguia::findOne(['id_usuario'=>$usuario]);
+        //$estudiante = Estudiante::findOne(['id_usuario'=>$usuario]);
+        //$desarrollar = Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
+        $proyecto = Proyecto::findOne(['id_profe_guia'=>$profeguia->id]);
+
+        $entrega = Entrega::findOne(['id_proyecto'=>$proyecto->id, 'id_hito'=>$id]);
+
+        $modelentregahito = new SqlDataProvider([
+            'sql' => 'SELECT * FROM `entrega`  WHERE entrega.id_proyecto ='.$proyecto->id.' and entrega.id_hito='.$id, 
+        ]);
+
+        $modelnota = new SqlDataProvider([
+            'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
+            
+        ]);
+
+        return $this->render('viewprofeg', [
+            'model' => $this->findModel($id),
+            'modelentregahito' => $modelentregahito,
+            //'modelnota' => $modelnota,
+        ]);
+        
+    }
+
+
 
     public function actionViewestudiante($id)
     {   //$id : el id corresponde al hito
