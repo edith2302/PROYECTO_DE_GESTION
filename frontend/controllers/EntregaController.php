@@ -140,8 +140,10 @@ where estudiante.id_usuario = 6107)
     public function actionCreate($id)
     {
         $model = new Entrega();
+
         $model->fecha_entrega = date('Y-m-d');
         $model->hora_entrega = date('H:i:s');
+ 
         $horaActual = date('H_i_s');
         $usuario = Yii::$app->user->identity->id_usuarioo;
         $estudiante=Estudiante::findOne(['id_usuario'=>$usuario]);
