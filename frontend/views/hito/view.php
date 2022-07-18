@@ -21,6 +21,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <p align="right">
+        <!--<?= Html::a('Ver entrega', ['entrega/entregashito', 'id' => $model->id], ['class' => 'btn btn-success']) ?>-->
+        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Está seguro/a de que deseas eliminar éste elemento?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
+
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -72,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ],
     ]) ?>
-    <p align="right">
+    <!--<p align="right">
         <?= Html::a('Ver entrega', ['entrega/entregashito', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
@@ -82,14 +95,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-
-       
-        
-    </p>
-    
-
+    </p>-->
+   
 </div>
-
+<div>
+    <br><h2><p align="center"><?= ("Entregas del hito") ?></p></h2></br>
+</div>
 <?= GridView::widget([
         'dataProvider' => $modelhito,
         'columns' => [
@@ -112,7 +123,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
             ],
   
             [

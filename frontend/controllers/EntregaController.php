@@ -14,6 +14,7 @@ use Yii;
 use app\models\Desarrollarproyecto;
 use app\models\Estudiante;
 use app\models\Proyecto;
+use app\models\Evaluar;
 
 use yii\data\SqlDataProvider;
 /**
@@ -104,14 +105,23 @@ where estudiante.id_usuario = 6107)
      */
     public function actionView($id)
     {
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $evaluacion = Evaluar::findOne(['id_entrega'=>$id], ['id_usuario'=>$usuario]);
+
         $modelhito = new SqlDataProvider([
             'sql' => 'select * from entrega 
             where id_hito = ' .$id,
         ]);
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-            'modelhito' => $modelhito,
-        ]);
+
+        if($evaluacion==null){
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+                'modelhito' => $modelhito,
+            ]);
+        }
+        return $this->redirect(['view2', 'id' => $id]);
+        
+        
     }
 
     public function actionView2($id)
@@ -119,8 +129,6 @@ where estudiante.id_usuario = 6107)
         $entrega = Entrega::findOne(['id'=>$id]);
 
         $modelnota = new SqlDataProvider([
-
-            //'sql' => 'SELECT entrega.id as identrega, evaluar.id as idevaluar, entrega.evidencia, entrega.fecha_entrega , entrega.hora_entrega , entrega.comentarios as coment_entrega , entrega.id_proyecto , entrega.id_hito, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM entrega JOIN evaluar WHERE entrega.id_proyecto'.'='.$proyecto->id.' and entrega.id_hito='.$id.' and evaluar.id_entrega ='.$entrega->id,
             'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
             
         ]);

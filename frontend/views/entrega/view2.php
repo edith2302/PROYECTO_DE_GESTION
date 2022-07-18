@@ -61,7 +61,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </div>
-<br><b><?php echo "Evaluación: " ?></b></br>
+<div>
+    <br><h3><p align="left"><?= ("Evaluación") ?></p></h3></br>
+</div>
+
 <?= GridView::widget([
         'dataProvider' => $modelnota,
         'columns' => [

@@ -72,67 +72,76 @@ class EvaluarController extends Controller
      */
     public function actionCreate($ide)
     {
-        $model = new Evaluar();
-        $logueado= Yii::$app->user->identity->id_usuarioo;
-        $entrega = Entrega::find()->where(['id' => $ide])->one();
-        $hito = Hito::find()->where(['id' => $entrega->id_hito])->one();
-        $rubrica = Rubrica::find()->where(['id' => $hito->id_rubrica])->one();
-        $idr = $rubrica->id;
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $evaluacion = Evaluar::findOne(['id_entrega'=>$ide], ['id_usuario'=>$usuario]);
 
-        //-----------------conexion bdd----------------------
-            $bd_name = "yii2advanced";
-            $bd_table = "item";
-            $bd_location = "localhost";
-            $bd_user = "root";
-            $bd_pass = "";
+        if($evaluacion==null){
+         
+            $model = new Evaluar();
+            $logueado= Yii::$app->user->identity->id_usuarioo;
+            $entrega = Entrega::find()->where(['id' => $ide])->one();
+            $hito = Hito::find()->where(['id' => $entrega->id_hito])->one();
+            $rubrica = Rubrica::find()->where(['id' => $hito->id_rubrica])->one();
+            $idr = $rubrica->id;
 
-            // conectarse a la bd
-            $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
-            if(mysqli_connect_errno()){
-                die("Connection failed: ".mysqli_connect_error());
-            }
-            $datos =$conn->query("SELECT * FROM item");
+            //-----------------conexion bdd----------------------
+                $bd_name = "yii2advanced";
+                $bd_table = "item";
+                $bd_location = "localhost";
+                $bd_user = "root";
+                $bd_pass = "";
 
-            $puntaje =$conn->query("select id, puntaje, descripcion,SUM(puntaje_obtenido) as puntaje_obtenido, SUM(puntaje) as puntaje_ideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'");
+                // conectarse a la bd
+                $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+                if(mysqli_connect_errno()){
+                    die("Connection failed: ".mysqli_connect_error());
+                }
+                $datos =$conn->query("SELECT * FROM item");
+
+                $puntaje =$conn->query("select id, puntaje, descripcion,SUM(puntaje_obtenido) as puntaje_obtenido, SUM(puntaje) as puntaje_ideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'");
+                
             
-           
-            while($calificacion = mysqli_fetch_array($puntaje)){
-                //echo $calificacion['nota'];
-                //round(0.6);
-                $notaa = round($calificacion['nota'], 1);
-                //return $calificacion['nota'];
-            } 
-            $model->nota = $notaa;
-            //return $notaa;
+                while($calificacion = mysqli_fetch_array($puntaje)){
+                    //echo $calificacion['nota'];
+                    //round(0.6);
+                    $notaa = round($calificacion['nota'], 1);
+                    //return $calificacion['nota'];
+                } 
+                $model->nota = $notaa;
+                //return $notaa;
 
-        $model->id_usuario = $logueado;
-        $model->id_entrega = $entrega->id;
-        $model->comentarios = $rubrica->observaciones;
+            $model->id_usuario = $logueado;
+            $model->id_entrega = $entrega->id;
+            $model->comentarios = $rubrica->observaciones;
 
-        //----------------------------------
-        $model->save();
-        Yii:: $app->session->setFlash('success','La evaluación ha sido enviada éxito');
-        //return $this->redirect(['view', 'id' => $model->id]);
+            //----------------------------------
+            $model->save();
+            Yii:: $app->session->setFlash('success','La evaluación ha sido enviada éxito');
+            //return $this->redirect(['view', 'id' => $model->id]);
 
-        return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id] );
-        /*return $this->render('../rubrica/viewevaluacion', [
-            'model' => Rubrica::findOne($idr),
-        ]);
+            return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id] );
+            /*return $this->render('../rubrica/viewevaluacion', [
+                'model' => Rubrica::findOne($idr),
+            ]);
 
-        */
+            */
 
-        /*if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            /*if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        
-        return $this->render('create', [
-            'model' => $model,
-        ]);*/
+            
+            return $this->render('create', [
+                'model' => $model,
+            ]);*/
+               
+        }
+        return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id] );
+    
     }
 
     /**
