@@ -65,17 +65,18 @@ class ProfesorguiaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new Profesorguia();
-
-        if ($this->request->isPost) {
+        $model->id_usuario = $id;
+        $model->save();
+        /*if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
-        }
+        }*/
 
         return $this->render('create', [
             'model' => $model,

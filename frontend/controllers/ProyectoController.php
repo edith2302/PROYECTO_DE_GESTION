@@ -5,6 +5,9 @@ namespace frontend\controllers;
 use app\models\Proyecto;
 use app\models\Estudiante;
 use app\models\Desarrollarproyecto;
+use app\models\Profesoricinf;
+use app\models\Profesorguia;
+use app\models\Usuario;
 use app\models\ProyectoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -213,11 +216,18 @@ class ProyectoController extends Controller
     {
 
         $model = Proyecto::findOne($id);
-
+       // $profeicinf = Profesoricinf::findOne($model->id_profe_guia);
+        //$usuario = Usuario::findOne($profeicinf->id_usuario);
+        //$modelpg = new Profesorguia();
         if ($this->request->isPost && $model->load($this->request->post())) {
             $guia = Proyecto::findOne($id);
             $guia -> id_profe_guia = $model->id_profe_guia;
             if($guia->save()){
+                $profeicinf = Profesoricinf::findOne($guia -> id_profe_guia);
+                $usuario = Usuario::findOne($profeicinf->id_usuario);
+                $modelpg = new Profesorguia();
+                $modelpg->id_usuario = $usuario->id_usuario;
+                $modelpg->save();
                 return $this->redirect(['viewasignado', 'id' => $model->id]);
             }
            
