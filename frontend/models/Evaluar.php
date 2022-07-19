@@ -8,6 +8,8 @@ use Yii;
  * This is the model class for table "evaluar".
  *
  * @property int $id
+ * @property int $puntaje_ideal
+ * @property int $puntaje_obtenido
  * @property string $comentarios
  * @property float  $nota
  * @property int $id_entrega
@@ -32,8 +34,8 @@ class Evaluar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['comentarios', 'nota', 'id_entrega', 'id_usuario'], 'required'],
-            [[ 'id_entrega', 'id_usuario'], 'integer'],
+            [['puntaje_ideal','puntaje_obtenido','comentarios', 'nota', 'id_entrega', 'id_usuario'], 'required'],
+            [[ 'puntaje_ideal','puntaje_obtenido','id_entrega', 'id_usuario'], 'integer'],
             [['nota'], 'number'],
             [['comentarios'], 'string', 'max' => 10000],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],
@@ -48,6 +50,8 @@ class Evaluar extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'puntaje_ideal'=> 'Puntaje ideal',
+            'puntaje_obtenido'=> 'Puntaje obtenido',
             'comentarios' => 'Comentarios',
             'nota' => 'Nota',
             'id_entrega' => 'Id Entrega',

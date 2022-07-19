@@ -15,6 +15,7 @@ use app\models\Desarrollarproyecto;
 use app\models\Estudiante;
 use app\models\Proyecto;
 use app\models\Evaluar;
+use yii2mod\alert\Alert;
 
 use yii\data\SqlDataProvider;
 /**
@@ -127,15 +128,23 @@ where estudiante.id_usuario = 6107)
     public function actionView2($id)
     {
         $entrega = Entrega::findOne(['id'=>$id]);
-
+        
         $modelnota = new SqlDataProvider([
-            'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
+            //'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
+            'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios, AVG(nota) as nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
             
         ]);
-        
+
+        $modelcomentarios = new SqlDataProvider([
+            'sql' => 'SELECT evaluar.comentarios FROM `evaluar` WHERE evaluar.id_entrega = '.$entrega->id,
+        ]);
+
+        //SELECT AVG(nota), evaluar.comentarios from evaluar WHERE evaluar.id_entrega=12 GROUP BY evaluar.id_entrega
         return $this->render('view2', [
-            'model' => $this->findModel($id),
+            //'model' => $this->findModel($id),
+            'model' => $entrega,
             'modelnota' => $modelnota,
+            'modelcomentarios' => $modelcomentarios,
             
         ]);
     }
@@ -147,43 +156,48 @@ where estudiante.id_usuario = 6107)
      */
     public function actionCreate($id)
     {
-        $model = new Entrega();
-
-        $model->fecha_entrega = date('Y-m-d');
-        $model->hora_entrega = date('H:i:s');
- 
         $horaActual = date('H_i_s');
         $usuario = Yii::$app->user->identity->id_usuarioo;
-        $estudiante=Estudiante::findOne(['id_usuario'=>$usuario]);
-        
-        $desarrollar=Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
-       
-         $model->id_proyecto=$desarrollar->id_proyecto;
-         $model->id_hito=$id;
-        if ($model->load(Yii::$app->request->post())) {
+        $estudiante = Estudiante::findOne(['id_usuario'=>$usuario]);
+        $desarrollar = Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
 
-            if(UploadedFile::getInstance($model,'evidencia') != '') {
+        $entrega = Entrega::findOne(['id_hito'=>$id],['id_proyecto'=>$desarrollar->id_proyecto]);
 
-                $pdfFile = UploadedFile::getInstance($model, 'evidencia');
-        
-                if (isset($pdfFile->size)) {
-                    $pdfFile->saveAs('archivos/' . $model->proyecto->nombre.'_'.$model->hito->nombre .'_'.$model->fecha_entrega .'_'.$horaActual.'_' . $pdfFile->name);
+        if($entrega == null){
+            //si no existe una entrega del mismo hito y proyecto, permite crearla
+            $model = new Entrega();
+            $model->fecha_entrega = date('Y-m-d');
+            $model->hora_entrega = date('H:i:s');
+            $model->id_proyecto = $desarrollar->id_proyecto;
+            $model->id_hito = $id;
+
+            if ($model->load(Yii::$app->request->post())) {
+                if(UploadedFile::getInstance($model,'evidencia') != '') {
+    
+                    $pdfFile = UploadedFile::getInstance($model, 'evidencia');
+            
+                    if (isset($pdfFile->size)) {
+                        $pdfFile->saveAs('archivos/' . $model->proyecto->nombre.'_'.$model->hito->nombre .'_'.$model->fecha_entrega .'_'.$horaActual.'_' . $pdfFile->name);
+                    }
+    
+                    $model->evidencia = $horaActual.'_'.$pdfFile->name;
+                    $model->save(false);
+    
                 }
-
-                $model->evidencia = $horaActual.'_'.$pdfFile->name;
+    
                 $model->save(false);
-
+    
+                Yii:: $app->session->setFlash('success','La entrega se ha realizado con éxito');
+                //return $this->redirect('../views/entrega/view2');
+                return $this->redirect(['view2', 'id' => $model->id]);
             }
+            return $this->render('create', [
+                'model' => $model,
+            ]);
 
-            $model->save(false);
-
-            //return $this->redirect('../views/entrega/view2');
-            return $this->redirect(['view2', 'id' => $model->id]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        Yii:: $app->session->setFlash('success','¡Ya existe una entrega para el hito seleccionado!');
+        return $this->redirect(['view2', 'id' => $entrega->id] );  
     }
 
     /**

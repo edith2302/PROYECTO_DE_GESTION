@@ -40,12 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'hora_entrega',
             //'comentarios',
             //'id_proyecto',
-            [
-                'label'  => 'Proyecto',
-                'value'  => function ($model) {
-                    return $model->proyecto->nombre;
-                },
-            ],
+            
             'comentarios',
             //'id_hito',
         ],

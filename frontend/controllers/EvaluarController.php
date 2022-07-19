@@ -104,9 +104,14 @@ class EvaluarController extends Controller
                 while($calificacion = mysqli_fetch_array($puntaje)){
                     //echo $calificacion['nota'];
                     //round(0.6);
+                    $puntajeid = $calificacion['puntaje_ideal'];
+                    $puntajeobt = $calificacion['puntaje_obtenido'];
                     $notaa = round($calificacion['nota'], 1);
                     //return $calificacion['nota'];
                 } 
+                
+                $model->puntaje_ideal = $puntajeid;
+                $model->puntaje_obtenido = $puntajeobt;
                 $model->nota = $notaa;
                 //return $notaa;
 
@@ -140,6 +145,7 @@ class EvaluarController extends Controller
             ]);*/
                
         }
+        Yii:: $app->session->setFlash('success','Ya existe una evaluación de ésta entrega');
         return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id] );
     
     }
