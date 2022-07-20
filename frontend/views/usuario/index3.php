@@ -10,7 +10,7 @@ use app\models\Usuario;
 /* @var $searchModel app\models\UsuarioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Lista de estudiantes';
+$this->title = 'Listas de profesores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="usuario-index">
@@ -63,9 +63,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
 
+            
+
             [
-                'attribute'=>'telefono',
-                'value'=>function ($model) { return $model['telefono']; },
+                'attribute'=>'area',
+                'value'=>function ($model) { return $model['area']; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',

@@ -256,7 +256,7 @@ Modal::end();
                                 <?= Html::a('Lista de estudiantes', Url::to(['/usuario/index2'])) ?>
                             </li>
                             <li>
-                                <?= Html::a('Lista de profesores', Url::to(['/profesorguia/index'])) ?>
+                                <?= Html::a('Lista de profesores', Url::to(['/usuario/index3'])) ?>
                             </li>
 
                         </ul>

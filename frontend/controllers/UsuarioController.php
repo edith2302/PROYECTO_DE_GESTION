@@ -74,6 +74,27 @@ class UsuarioController extends Controller
         ]);
     }
 
+    public function actionIndex3()
+    {
+        $searchModel = new UsuarioSearch();
+        //$dataProvider = $searchModel->search($this->request->queryParams);
+
+        $model = new SqlDataProvider([
+            'sql' =>"SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3" ,
+        ]);
+
+        /*return $this->render('entregashito', [
+            'dataProvider' => $model,
+        ]);*/
+
+        //$dataProvider ='select * from user where role = 2' ;
+        return $this->render('index3', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $model,
+            //'dataProvider' => $dataProvider,
+        ]);
+    }
+
 
     /**
      * Displays a single Usuario model.
