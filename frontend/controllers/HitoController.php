@@ -50,8 +50,8 @@ class HitoController extends Controller
                         },
                     ],
                     [
-                        //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'cancelar', 'pdf', 'index1','view', 'view2', 'create'],
+                        //El Estudiante tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout', 'indexestudiante', 'viewentregaestudiante', 'viewentregar','viewestudiante', 'create'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -64,8 +64,8 @@ class HitoController extends Controller
                         },
                     ],
                     [
-                        //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'cancelar', 'pdf', 'index1','view', 'view2', 'create','autorizar', 'denegar', 'index2', 'index5'],
+                        //El profesor ICINF tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout', 'index','view'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -79,7 +79,7 @@ class HitoController extends Controller
                     ],
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'cancelar', 'pdf', 'index1','view', 'view2', 'create', 'autorizar', 'denegar', 'index2', 'index5'],
+                        'actions' => ['logout', 'view', 'index' ],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -93,7 +93,7 @@ class HitoController extends Controller
                     ],
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'cancelar', 'pdf', 'index1','view', 'view2', 'create', 'aceptar', 'rechazar', 'index3', 'index4', 'monto'],
+                        'actions' => ['logout'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -107,7 +107,7 @@ class HitoController extends Controller
                     ],
                 ]
             ]
-                ];
+        ];
     }
 
     /**
