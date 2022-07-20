@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             [
-                'attribute'=>'nombre',
+                'label'=>'Nombre',
                 'value'=>function ($model) { return $model['nombre'].' '.$model['apellido']; },
                 //'filter'=>false,
                 'format'=>'raw',
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'attribute'=>'rut',
+                'label'=>'Rut',
                 'value'=>function ($model) { return $model['rut']; },
                 //'filter'=>false,
                 'format'=>'raw',
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
             [
-                'attribute'=>'email',
+                'label'=>'E-mail',
                 'value'=>function ($model) { return $model['email']; },
                 //'filter'=>false,
                 'format'=>'raw',
@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             [
-                'attribute'=>'telefono',
+                'label'=>'Teléfono',
                 'value'=>function ($model) { return $model['telefono']; },
                 //'filter'=>false,
                 'format'=>'raw',
