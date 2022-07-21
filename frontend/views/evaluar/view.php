@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Evaluar */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Evaluars', 'url' => ['index']];
+$this->title = 'Detalle de la evaluación';
+$this->params['breadcrumbs'][] = ['label' => 'Evaluación', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
+    <!--<p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -24,16 +24,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </p>-->
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
+            'puntaje_ideal',
+            'puntaje_obtenido',
             'comentarios',
             'nota',
-            'id_entrega',
-            'id_usuario',
+            //'id_entrega',
+            //'id_usuario',
         ],
     ]) ?>
 

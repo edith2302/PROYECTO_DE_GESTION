@@ -124,7 +124,7 @@ class EvaluarController extends Controller
             Yii:: $app->session->setFlash('success','La evaluación ha sido enviada éxito');
             //return $this->redirect(['view', 'id' => $model->id]);
 
-            return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id] );
+            return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id, 'idv' =>$model->id] );
             /*return $this->render('../rubrica/viewevaluacion', [
                 'model' => Rubrica::findOne($idr),
             ]);

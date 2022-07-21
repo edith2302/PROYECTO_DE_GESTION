@@ -51,7 +51,8 @@ class Evaluar extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'puntaje_ideal'=> 'Puntaje ideal',
-            'puntaje_obtenido'=> 'Puntaje obtenido',
+            //'puntaje_obtenido'=> 'Puntaje obtenido',
+            'puntaje_obtenido'=> 'Puntaje asignado',
             'comentarios' => 'Comentarios',
             'nota' => 'Nota',
             'id_entrega' => 'Id Entrega',

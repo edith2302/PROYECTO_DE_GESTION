@@ -125,7 +125,7 @@ class RubricaController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionViewevaluacionenviada($idr)
+    public function actionViewevaluacionenviada($idr,$idv)
     {
         $model = $this->findModel($idr);
         //$modelentrega = Entrega::find()->where(['id' => $ide])->one(); 
@@ -142,16 +142,35 @@ class RubricaController extends Controller
             
         ]);
  
-        return $this->render('viewevaluacionenviada', [
-             'model' => $model,
+        //-----------------conexion bdd----------------------
+        $bd_name = "yii2advanced";
+        $bd_table = "item";
+        $bd_location = "localhost";
+        $bd_user = "root";
+        $bd_pass = "";
+
+        // conectarse a la bd
+        $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+        if(mysqli_connect_errno()){
+            die("Connection failed: ".mysqli_connect_error());
+        }
+        $limpiaritem = $conn->query("UPDATE item SET item.puntaje_obtenido = NULL WHERE item.id_rubrica = ".$idr);
+        $limpiarcomen = $conn->query("UPDATE rubrica SET rubrica.observaciones = NULL WHERE rubrica.id =".$idr);
+
+        /*return $this->render('viewevaluacionenviada', [
+            'model' => $model,
              //'modelentrega' =>$modelentrega,
-             'dataProvider' => $items,
-             'dataProvider2' => $datos,
+            'dataProvider' => $items,
+            'dataProvider2' => $datos,
  
-        ]);
+        ]);*/
+        
+        return $this->redirect(['evaluar/view', 'id' =>$idv] );
+    
  
-     
+        //return;
     }
+
     public function actionObtenerNota($id){
         $model = $this->findModel($id);
         //$items = $model->items;
