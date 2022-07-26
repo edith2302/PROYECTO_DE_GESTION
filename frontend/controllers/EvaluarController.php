@@ -121,10 +121,13 @@ class EvaluarController extends Controller
 
             //----------------------------------
             $model->save();
-            Yii:: $app->session->setFlash('success','La evaluación ha sido enviada éxito');
+            $evaluacion2 = Evaluar::findOne(['id_entrega'=>$ide], ['id_usuario'=>$usuario]);
+            Yii:: $app->session->setFlash('success','La evaluación ha sido enviada con éxito');
             //return $this->redirect(['view', 'id' => $model->id]);
 
             return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id, 'idv' =>$model->id] );
+            //return $this->redirect(['evaluar/view', 'id' =>$evaluacion2->id] );
+
             /*return $this->render('../rubrica/viewevaluacion', [
                 'model' => Rubrica::findOne($idr),
             ]);
@@ -146,7 +149,8 @@ class EvaluarController extends Controller
                
         }
         Yii:: $app->session->setFlash('success','Ya existe una evaluación de ésta entrega');
-        return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id] );
+        //return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id] );
+        return $this->redirect(['evaluar/view', 'id' =>$evaluacion->id] );
     
     }
 
