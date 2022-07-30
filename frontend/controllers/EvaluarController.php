@@ -11,7 +11,7 @@ use app\models\Entrega;
 use app\models\Hito;
 use app\models\Rubrica;
 use Yii;
-USE yii\data\SqlDataProvider;
+use yii\data\SqlDataProvider;
 
 /**
  * EvaluarController implements the CRUD actions for Evaluar model.
@@ -125,6 +125,7 @@ class EvaluarController extends Controller
             Yii:: $app->session->setFlash('success','La evaluación ha sido enviada con éxito');
             //return $this->redirect(['view', 'id' => $model->id]);
 
+            //'idv' =>$model->id ......idv: id evaluacion
             return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id, 'idv' =>$model->id] );
             //return $this->redirect(['evaluar/view', 'id' =>$evaluacion2->id] );
 

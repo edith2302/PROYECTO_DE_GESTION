@@ -177,6 +177,44 @@ class HitoController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
+    public function actionView2($id)
+    {
+        $hito = Hito::findOne(['id'=>$id]);
+        $horaActual = date('H:i:s');
+        $fechaActual = date('Y-m-d');
+
+        if($hito->fecha_habilitacion > $fechaActual){
+            return $this->render('view2', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+
+        if($hito->hora_habilitacion > $horaActual){
+            return $this->render('view2', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+        if($hito->fecha_limite < $fechaActual){
+            return $this->render('view2', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+       // return "hora limite: ".$hito->hora_limite." - "."hora actual: ".$horaActual;
+        if($hito->hora_limite < $horaActual){
+            return $this->render('view2', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+        return $this->redirect(['hito/viewestudiante', 'id' => $id] );
+    
+    }
+
+    /**
+     * Displays a single Hito model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionViewentregar($id)
     {
         return $this->render('viewentregar', [

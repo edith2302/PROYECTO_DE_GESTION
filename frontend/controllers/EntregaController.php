@@ -16,8 +16,10 @@ use app\models\Estudiante;
 use app\models\Proyecto;
 use app\models\Evaluar;
 use yii2mod\alert\Alert;
-
 use yii\data\SqlDataProvider;
+
+use app\models\Hito;
+
 /**
  * EntregaController implements the CRUD actions for Entrega model.
  */
@@ -163,6 +165,20 @@ where estudiante.id_usuario = 6107)
 
         $entrega = Entrega::findOne(['id_hito'=>$id],['id_proyecto'=>$desarrollar->id_proyecto]);
 
+        $hitoo = Hito::findOne(['id'=>$id]);
+        $fechaActual2 = date('Y-m-d');
+        $horaActual2  = date('H:i:s');
+
+        if($hitoo->fecha_limite < $fechaActual2){
+            Yii:: $app->session->setFlash('success','Entrega fuera de plazo');
+            return $this->redirect(['hito/view2', 'id' => $id] );
+        }
+       // return "hora limite: ".$hito->hora_limite." - "."hora actual: ".$horaActual;
+        if($hitoo->hora_limite < $horaActual2){
+            Yii:: $app->session->setFlash('success','Entrega fuera de plazo');
+            return $this->redirect(['hito/view2', 'id' => $id] );
+        }
+
         if($entrega == null){
             //si no existe una entrega del mismo hito y proyecto, permite crearla
             $model = new Entrega();
@@ -187,7 +203,7 @@ where estudiante.id_usuario = 6107)
     
                 $model->save(false);
     
-                Yii:: $app->session->setFlash('success','La entrega se ha realizado con éxito');
+                Yii:: $app->session->setFlash('success','Entrega realizada con éxito');
                 //return $this->redirect('../views/entrega/view2');
                 return $this->redirect(['view2', 'id' => $model->id]);
             }
