@@ -179,33 +179,9 @@ class HitoController extends Controller
      */
     public function actionView2($id)
     {
-        $hito = Hito::findOne(['id'=>$id]);
-        $horaActual = date('H:i:s');
-        $fechaActual = date('Y-m-d');
-
-        if($hito->fecha_habilitacion > $fechaActual){
-            return $this->render('view2', [
-                'model' => $this->findModel($id),
-            ]);
-        }
-
-        if($hito->hora_habilitacion > $horaActual){
-            return $this->render('view2', [
-                'model' => $this->findModel($id),
-            ]);
-        }
-        if($hito->fecha_limite < $fechaActual){
-            return $this->render('view2', [
-                'model' => $this->findModel($id),
-            ]);
-        }
-       // return "hora limite: ".$hito->hora_limite." - "."hora actual: ".$horaActual;
-        if($hito->hora_limite < $horaActual){
-            return $this->render('view2', [
-                'model' => $this->findModel($id),
-            ]);
-        }
-        return $this->redirect(['hito/viewestudiante', 'id' => $id] );
+        return $this->render('view2', [
+            'model' => $this->findModel($id),
+        ]);
     
     }
 
@@ -273,35 +249,52 @@ class HitoController extends Controller
 
     public function actionViewestudiante($id)
     {   //$id : el id corresponde al hito
+        $hito = Hito::findOne(['id'=>$id]);
+        $horaActual = date('H:i:s');
+        $fechaActual = date('Y-m-d');
+
+        //return "fecha_habilitacion: ".$hito->fecha_habilitacion." - fecha_Actual: ".$fechaActual;
+    
         $usuario = Yii::$app->user->identity->id_usuarioo;
         $estudiante = Estudiante::findOne(['id_usuario'=>$usuario]);
         $desarrollar = Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
         $proyecto = Proyecto::findOne(['id'=>$desarrollar->id_proyecto]);
 
         $entrega = Entrega::findOne(['id_proyecto'=>$proyecto->id, 'id_hito'=>$id]);
-        //$entrega = Entrega::findOne(['id_proyecto'=>1, 'id_hito'=>1]);
-
-        
-        /*SELECT entrega.id as identrega, evaluar.id as idevaluar, entrega.evidencia, entrega.fecha_entrega , entrega.hora_entrega , entrega.comentarios as coment_entrega , entrega.id_proyecto , entrega.id_hito, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM `entrega` JOIN `evaluar` WHERE entrega.id_proyecto =1 and entrega.id_hito=1*/
-
-
-        /*SELECT entrega.id as identrega, evaluar.id as idevaluar, entrega.evidencia, entrega.fecha_entrega , entrega.hora_entrega , entrega.comentarios as coment_entrega , entrega.id_proyecto , entrega.id_hito, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM `entrega` JOIN `evaluar` WHERE entrega.id_proyecto =1 and entrega.id_hito=1 and evaluar.id_entrega =12*/
 
         $modelentregahito = new SqlDataProvider([
-            'sql' => 'SELECT * FROM `entrega`  WHERE entrega.id_proyecto ='.$proyecto->id.' and entrega.id_hito='.$id,
-            //'sql' => 'SELECT * FROM `entrega` JOIN `evaluar` WHERE entrega.id_proyecto ='.$proyecto->id.' and entrega.id_hito='.$id,
-            
+            'sql' => 'SELECT * FROM `entrega`  WHERE entrega.id_proyecto ='.$proyecto->id.' and entrega.id_hito='.$id,            
         ]);
-
-        /*$modelnota = new SqlDataProvider([
-
-            //'sql' => 'SELECT entrega.id as identrega, evaluar.id as idevaluar, entrega.evidencia, entrega.fecha_entrega , entrega.hora_entrega , entrega.comentarios as coment_entrega , entrega.id_proyecto , entrega.id_hito, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM entrega JOIN evaluar WHERE entrega.id_proyecto'.'='.$proyecto->id.' and entrega.id_hito='.$id.' and evaluar.id_entrega ='.$entrega->id,
-            'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
-            
-        ]);*/
 
         if( $entrega == null){
             //return "nulo";
+
+            //------------------------Validación plazo entrega del hito---------------------------------
+
+            if($hito->fecha_habilitacion > $fechaActual){
+                return $this->render('view2', [
+                    'model' => $this->findModel($id),
+                ]);
+            }
+    
+            if($hito->hora_habilitacion > $horaActual){
+                return $this->render('view2', [
+                    'model' => $this->findModel($id),
+                ]);
+            }
+            if($hito->fecha_limite < $fechaActual){
+                return $this->render('view2', [
+                    'model' => $this->findModel($id),
+                ]);
+            }
+            if($hito->hora_limite < $horaActual){
+                return $this->render('view2', [
+                    'model' => $this->findModel($id),
+                ]);
+            }
+
+
+            //---------------------------------------------------------------------------------------
             return $this->render('viewentregar', [
                 'model' => $this->findModel($id),
             ]);
@@ -313,22 +306,6 @@ class HitoController extends Controller
                 //'modelnota' => $modelnota,
             ]);
         }
-
-        /*if( $modelentregahito == null){
-            return $this->render('viewentregar', [
-                'model' => $this->findModel($id),
-            ]);
-        }else{     
-            
-            return $this->render('viewestudiante', [
-                'model' => $this->findModel($id),
-                'modelentregahito' => $modelentregahito,
-            ]);
-        }*/
-        
-        /*return $this->render('viewentregar', [
-            'model' => $this->findModel($id),
-        ]);*/
     }
 
     
