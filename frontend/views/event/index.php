@@ -23,7 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
+      'options' => [
+        'lang' => 'es',
+        //... more options to be defined here!
+      ],
       'events'=> $events,
+      
   ));
 
   ?>
