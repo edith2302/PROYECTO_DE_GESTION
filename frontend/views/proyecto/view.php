@@ -130,6 +130,23 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 <p align="right">
+    
+    <?= Html::a('Aprobar', ['aprobar', 'id' => $model->id], [
+        'class' => 'btn btn-success',
+        'data' => [
+            'confirm' => '¿Está seguro que quiere aprobar éste proyecto?',
+            'method' => 'post',
+        ],
+        ]) ?>
+
+    <?= Html::a('Rechazar', ['rechazar', 'id' => $model->id], [
+        'class' => 'btn btn-danger',
+        'data' => [
+            'confirm' => '¿Está seguro que quiere rechazar éste proyecto?',
+            'method' => 'post',
+        ],
+        ]) ?>
+
     <?= Html::a('Asignar profesor guía', ['create2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
     

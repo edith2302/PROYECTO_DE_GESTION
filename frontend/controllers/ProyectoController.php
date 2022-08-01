@@ -309,6 +309,34 @@ class ProyectoController extends Controller
         ]);
         
     }
+
+    /**
+     * Updates an existing Proyecto model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param int $id ID
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionAprobar($id)
+    {
+        $model = $this->findModel($id);
+        $model->estado = 1;
+        $model->save();
+
+        Yii:: $app->session->setFlash('success','El proyecto se aprobó con éxito');
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    public function actionRechazar($id)
+    {
+        $model = $this->findModel($id);
+        $model->estado = 2;
+        $model->save();
+        
+        Yii:: $app->session->setFlash('error','El proyecto se rechazó con éxito');
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+
     /**
      * Updates an existing Proyecto model.
      * If update is successful, the browser will be redirected to the 'view' page.
