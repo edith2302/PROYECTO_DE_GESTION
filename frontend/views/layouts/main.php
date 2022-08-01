@@ -245,7 +245,7 @@ Modal::end();
                     </li>
 
                     <li>
-                    <?= Html::a('Calendario', Url::to(['/proyecto/indexestudiante'])) ?>
+                    <?= Html::a('Calendario', Url::to(['/event/index'])) ?>
                     </li>
 
                     <li>

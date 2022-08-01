@@ -22,7 +22,8 @@
         "hail812/yii2-adminlte3": "*",
         "wbraganca/yii2-dynamicform": "dev-master",
         "kartik-v/yii2-icons": "dev-master",
-        "philippfrenzel/yii2fullcalendar": "*"
+        "philippfrenzel/yii2fullcalendar": "3.9.0"
+       
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

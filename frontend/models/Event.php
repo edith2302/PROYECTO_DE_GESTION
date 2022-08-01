@@ -46,11 +46,11 @@ class Event extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'created_date' => 'Created Date',
-            'id_hito' => 'Id Hito',
+            'id' => 'Código',
+            'title' => 'Nombre',
+            'description' => 'Descripción',
+            'created_date' => 'Fecha',
+            'id_hito' => 'Código hito',
         ];
     }
 
