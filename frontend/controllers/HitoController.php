@@ -18,6 +18,8 @@ use app\models\Entrega;
 use app\models\Profesorguia;
 use yii\filters\AccessControl;
 use app\models\User;
+
+use app\models\Event;
 //use common\widgets\Alert;
 
 /**
@@ -352,11 +354,14 @@ class HitoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $evento = Event::findOne(['id_hito'=>$id]);
 
         if (Yii:: $app->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
-            Yii:: $app->session->setFlash('success','El hito se ha modificado con éxito');
-            return $this->redirect(['view', 'id' => $model->id]);
+            
+            return $this->redirect(['event/update', 'id' => $evento->id, 'idh'=>$model->id]);
+            /*Yii:: $app->session->setFlash('success','El hito se ha modificado con éxito');
+            return $this->redirect(['view', 'id' => $model->id]);*/
         }
 
         return $this->render('update', [

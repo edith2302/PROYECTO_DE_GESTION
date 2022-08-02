@@ -85,7 +85,7 @@ class EventController extends Controller
         $hito = Hito::findOne(['id' => $id]);
         $model = new Event();
         $model->title = $hito->nombre;
-        $model->description = $hito->descripcion;
+        $model->description = $hito->descripcion.". Hora límite: ".$hito->hora_limite. " hrs.";
         $model->created_date = $hito->fecha_limite;
         //$model->end = $hito->hora_limite;
         $model->id_hito = $id;
@@ -114,13 +114,21 @@ class EventController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $idh)
     {
         $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        $hito = Hito::findOne(['id'=>$idh]);
+        /*if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        }
+        }*/
+
+        $model->title = $hito->nombre;
+        $model->description = $hito->descripcion.". Hora límite: ".$hito->hora_limite." hrs.";
+        $model->created_date = $hito->fecha_limite;
+        $model->id_hito = $id;
+        $model->save();
+        Yii:: $app->session->setFlash('success','El hito se ha modificado con éxito');
+        return $this->redirect(['hito/view', 'id' => $idh]);
 
         return $this->render('update', [
             'model' => $model,

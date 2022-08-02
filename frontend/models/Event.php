@@ -11,7 +11,6 @@ use Yii;
  * @property string $title
  * @property string $description
  * @property string $created_date
- * @property string $end
  * @property int $id_hito
  *
  * @property Hito $hito
