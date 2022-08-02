@@ -7,6 +7,8 @@ use app\models\EventSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Hito;
+use Yii;
 
 /**
  * EventController implements the CRUD actions for Event model.
@@ -48,6 +50,7 @@ class EventController extends Controller
           $event->id = $eve->id;
           $event->title = $eve->title;
           $event->start = $eve ->created_date;
+         // $event->end = $eve ->end;
           //date('Y-m-d\Th:m:s\Z',strtotime('tomorrow 6am'));//created_date;
          // $events[] = $eve;
           $tasks[] = $event;
@@ -77,18 +80,27 @@ class EventController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
+        $hito = Hito::findOne(['id' => $id]);
         $model = new Event();
-       
+        $model->title = $hito->nombre;
+        $model->description = $hito->descripcion;
+        $model->created_date = $hito->fecha_limite;
+        //$model->end = $hito->hora_limite;
+        $model->id_hito = $id;
 
-        if ($this->request->isPost) {
+       /* if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
-        }
+        }*/
+
+        $model->save();
+        Yii:: $app->session->setFlash('success','El hito ha sido creado con éxito');
+        return $this->redirect(['hito/view', 'id' => $id]);
 
         return $this->render('create', [
             'model' => $model,

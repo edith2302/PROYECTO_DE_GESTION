@@ -11,6 +11,7 @@ use Yii;
  * @property string $title
  * @property string $description
  * @property string $created_date
+ * @property string $end
  * @property int $id_hito
  *
  * @property Hito $hito
@@ -31,8 +32,8 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'id_hito'], 'required'],
-            [['created_date'], 'safe'],
+            [['title', 'description', 'created_date', /*'end',*/'id_hito'], 'required'],
+        [['created_date'/*, 'end'*/], 'safe'],
             [['id_hito'], 'integer'],
             [['title'], 'string', 'max' => 300],
             [['description'], 'string', 'max' => 1000],
@@ -50,6 +51,7 @@ class Event extends \yii\db\ActiveRecord
             'title' => 'Nombre',
             'description' => 'Descripción',
             'created_date' => 'Fecha',
+            //'end' => 'Hora',
             'id_hito' => 'Código hito',
         ];
     }

@@ -828,7 +828,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/philippfrenzel//zipball/0b56a80486fa01b874dda5072ffb9b2cf06210ed",
+                "url": "https://api.github.com/repos/philippfrenzel/yii2fullcalendar/zipball/0b56a80486fa01b874dda5072ffb9b2cf06210ed",
                 "reference": "0b56a80486fa01b874dda5072ffb9b2cf06210ed",
                 "shasum": ""
             },
@@ -844,7 +844,7 @@
             "type": "yii2-extension",
             "autoload": {
                 "psr-4": {
-                    "\\": ""
+                    "yii2fullcalendar\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -867,8 +867,8 @@
                 "yii2"
             ],
             "support": {
-                "issues": "https://github.com/philippfrenzel//issues",
-                "source": "https://github.com/philippfrenzel/"
+                "issues": "https://github.com/philippfrenzel/yii2fullcalendar/issues",
+                "source": "https://github.com/philippfrenzel/yii2fullcalendar"
             },
             "time": "2018-05-04T09:06:24+00:00"
         },
@@ -6149,5 +6149,5 @@
         "php": ">=5.6.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.1.0"
 }

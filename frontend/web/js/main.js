@@ -270,3 +270,23 @@
 })(jQuery);
 
 
+$(function() {
+	$(document).on ('click','.fc-event',function(){
+       var date = $(this).attr('data-date');
+
+	    $.get('index.php?r=event/index', function(data){
+            $('#modal').modal('show')
+	        .find('#modalContent')
+	        .html(data);
+	   });
+    });
+
+
+   $('#modalButton').click(function(){
+      $('#modal').modal('show')
+	    .find('#modalContent')
+		.load($(this).attr('value'));
+    });
+
+});
+

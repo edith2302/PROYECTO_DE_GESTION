@@ -12,6 +12,7 @@ use yii\bootstrap\Modal;
 $this->title = 'Actividades';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="event-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -29,9 +30,22 @@ $this->params['breadcrumbs'][] = $this->title;
       ],
       'events'=> $events,
       
-  ));
+    ));
+
+  ?>
+  <?php
+
+    Modal::begin([
+      'header'=>'<h4>Event</h4>',
+      'id'=>'modal',
+      'size'=>'modal-lg',
+    ]);
+    echo "<div id='modalContent'></div>";
+
+    Modal ::end();
 
   ?>
 
-
 </div>
+
+
