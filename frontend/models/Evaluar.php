@@ -34,8 +34,8 @@ class Evaluar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['puntaje_ideal','puntaje_obtenido','comentarios', 'nota', 'id_entrega', 'id_usuario'], 'required'],
-            [[ 'puntaje_ideal','puntaje_obtenido','id_entrega', 'id_usuario'], 'integer'],
+            [['puntaje_ideal','puntaje_obtenido'/*,'comentarios'*/, 'nota', 'id_entrega', 'id_usuario'], 'required'],
+            [['puntaje_ideal','puntaje_obtenido','id_entrega', 'id_usuario'], 'integer'],
             [['nota'], 'number'],
             [['comentarios'], 'string', 'max' => 10000],
             [['id_usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuario::className(), 'targetAttribute' => ['id_usuario' => 'id_usuario']],

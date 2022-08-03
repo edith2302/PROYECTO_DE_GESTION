@@ -109,19 +109,21 @@ where estudiante.id_usuario = 6107)
     public function actionView($id)
     {
         $usuario = Yii::$app->user->identity->id_usuarioo;
-        $evaluacion = Evaluar::findOne(['id_entrega'=>$id], ['id_usuario'=>$usuario]);
+        //$evaluacion = Evaluar::findOne(['id_entrega'=>$id], ['id_usuario'=>$usuario]);
+        $evaluacion = Evaluar::findOne(['id_entrega'=>$id, 'id_usuario'=>$usuario]);
 
         $modelhito = new SqlDataProvider([
             'sql' => 'select * from entrega 
             where id_hito = ' .$id,
         ]);
-
+        //return "pasó aquí";
         if($evaluacion==null){
             return $this->render('view', [
                 'model' => $this->findModel($id),
                 'modelhito' => $modelhito,
             ]);
         }
+        //return "pasó aquí2";
         return $this->redirect(['view2', 'id' => $id]);
         
         
@@ -163,24 +165,28 @@ where estudiante.id_usuario = 6107)
         $estudiante = Estudiante::findOne(['id_usuario'=>$usuario]);
         $desarrollar = Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
 
-        $entrega = Entrega::findOne(['id_hito'=>$id],['id_proyecto'=>$desarrollar->id_proyecto]);
+        $entrega = Entrega::findOne(['id_hito'=>$id, 'id_proyecto'=>$desarrollar->id_proyecto]);
 
         $hitoo = Hito::findOne(['id'=>$id]);
         $fechaActual2 = date('Y-m-d');
         $horaActual2  = date('H:i:s');
 
-        if($hitoo->fecha_limite < $fechaActual2){
-            Yii:: $app->session->setFlash('success','Entrega fuera de plazo');
-            return $this->redirect(['hito/view2', 'id' => $id] );
-        }
-       // return "hora limite: ".$hito->hora_limite." - "."hora actual: ".$horaActual;
-        if($hitoo->hora_limite < $horaActual2){
-            Yii:: $app->session->setFlash('success','Entrega fuera de plazo');
-            return $this->redirect(['hito/view2', 'id' => $id] );
-        }
 
         if($entrega == null){
-            //si no existe una entrega del mismo hito y proyecto, permite crearla
+            //si no existe una entrega del mismo hito y proyecto, permite crearla, pero primero verifica que esté dentro del plazo
+
+            if($hitoo->fecha_limite < $fechaActual2){
+                Yii:: $app->session->setFlash('error','Entrega fuera de plazo');
+                return $this->redirect(['hito/view2', 'id' => $id] );
+            }
+            if($hitoo->fecha_limite = $fechaActual2){
+                if($hitoo->hora_limite > $horaActual2){
+                    Yii:: $app->session->setFlash('error','Entrega fuera de plazo');
+                    return $this->redirect(['hito/view2', 'id' => $id] );
+                }
+            }
+            
+
             $model = new Entrega();
             $model->fecha_entrega = date('Y-m-d');
             $model->hora_entrega = date('H:i:s');
@@ -204,7 +210,6 @@ where estudiante.id_usuario = 6107)
                 $model->save(false);
     
                 Yii:: $app->session->setFlash('success','Entrega realizada con éxito');
-                //return $this->redirect('../views/entrega/view2');
                 return $this->redirect(['view2', 'id' => $model->id]);
             }
             return $this->render('create', [

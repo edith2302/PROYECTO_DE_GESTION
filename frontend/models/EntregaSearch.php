@@ -18,6 +18,7 @@ class EntregaSearch extends Entrega
     {
         return [
             [['id', 'id_proyecto', 'id_hito'], 'integer'],
+            [['nota'], 'number'],
             [['evidencia', 'fecha_entrega', 'hora_entrega', 'comentarios'], 'safe'],
         ];
     }
@@ -62,6 +63,7 @@ class EntregaSearch extends Entrega
             'fecha_entrega' => $this->fecha_entrega,
             'hora_entrega' => $this->hora_entrega,
             'id_proyecto' => $this->id_proyecto,
+            'nota' => $this->nota,
             'id_hito' => $this->id_hito,
         ]);
 

@@ -147,7 +147,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template'=>'{view}',
                 'urlCreator' => function ($action, $model, $key, $index, $column) {
                     //return Url::toRoute([$action, 'id' => $model['id']]);
-                    $url ='index.php?r=entrega%2Fview2&id='.$model['id'];
+                    
+                    
+                    //$url ='index.php?r=entrega%2Fview2&id='.$model['id'];
+                    $url ='index.php?r=entrega%2Fview&id='.$model['id'];
                     return $url;
                 }
             ],  

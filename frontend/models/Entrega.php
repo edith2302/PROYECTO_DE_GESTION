@@ -14,7 +14,7 @@ use Yii;
  * @property string $comentarios
  * @property int $id_proyecto
  * @property int $id_hito
- *
+ * @property float $nota
  * @property Hito $hito
  * @property Proyecto $proyecto
  */
@@ -35,6 +35,7 @@ class Entrega extends \yii\db\ActiveRecord
     {
         return [
             [['evidencia', 'fecha_entrega', 'hora_entrega'/*, 'comentarios'*/, 'id_proyecto', 'id_hito'], 'required'],
+            [['nota'], 'number'],
             [['fecha_entrega', 'hora_entrega'], 'safe'],
             [['id_proyecto', 'id_hito'], 'integer'],
             [['evidencia'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf, txt, doc, rar, png, jpg, docx', 'maxSize' => 1024*1024*20],
@@ -55,6 +56,7 @@ class Entrega extends \yii\db\ActiveRecord
             'fecha_entrega' => 'Fecha entrega',
             'hora_entrega' => 'Hora entrega',
             'comentarios' => 'Comentarios',
+            'nota' => 'Nota',
             'id_proyecto' => 'Proyecto',
             'id_hito' => 'Hito',
         ];

@@ -255,8 +255,6 @@ class HitoController extends Controller
         $horaActual = date('H:i:s');
         $fechaActual = date('Y-m-d');
 
-        //return "fecha_habilitacion: ".$hito->fecha_habilitacion." - fecha_Actual: ".$fechaActual;
-    
         $usuario = Yii::$app->user->identity->id_usuarioo;
         $estudiante = Estudiante::findOne(['id_usuario'=>$usuario]);
         $desarrollar = Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
@@ -269,45 +267,52 @@ class HitoController extends Controller
         ]);
 
         if( $entrega == null){
-            //return "nulo";
 
-            //------------------------Validación plazo entrega del hito---------------------------------
+            //----------------------Validación plazo entrega del hito---------------------------
 
             if($hito->fecha_habilitacion > $fechaActual){
                 return $this->render('view2', [
                     'model' => $this->findModel($id),
                 ]);
+            }else{
+                if($hito->fecha_habilitacion = $fechaActual){ 
+                    if($hito->hora_habilitacion > $horaActual){
+                        return $this->render('view2', [
+                            'model' => $this->findModel($id),
+                        ]);
+                    }
+                }
             }
-    
-            if($hito->hora_habilitacion > $horaActual){
-                return $this->render('view2', [
-                    'model' => $this->findModel($id),
-                ]);
-            }
+            
+            
             if($hito->fecha_limite < $fechaActual){
                 return $this->render('view2', [
                     'model' => $this->findModel($id),
                 ]);
+            }else{
+                if($hito->fecha_limite = $fechaActual){
+                    if($hito->hora_limite > $horaActual){
+                        return $this->render('view2', [
+                            'model' => $this->findModel($id),
+                        ]);
+                    }
+                }
             }
-            if($hito->hora_limite < $horaActual){
-                return $this->render('view2', [
-                    'model' => $this->findModel($id),
-                ]);
-            }
+            //-----------------------------------------------------------------------------------
 
-
-            //---------------------------------------------------------------------------------------
+            
             return $this->render('viewentregar', [
                 'model' => $this->findModel($id),
             ]);
+            
         }else{
-            //return "no nulo";
+
             return $this->render('viewestudiante', [
                 'model' => $this->findModel($id),
                 'modelentregahito' => $modelentregahito,
-                //'modelnota' => $modelnota,
             ]);
         }
+
     }
 
     

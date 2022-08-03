@@ -73,8 +73,8 @@ class EvaluarController extends Controller
     public function actionCreate($ide)
     {
         $usuario = Yii::$app->user->identity->id_usuarioo;
-        $evaluacion = Evaluar::findOne(['id_entrega'=>$ide], ['id_usuario'=>$usuario]);
-
+        $evaluacion = Evaluar::findOne(['id_entrega'=>$ide,'id_usuario'=>$usuario]);
+        //return $evaluacion->id;
         if($evaluacion==null){
          
             $model = new Evaluar();
@@ -99,8 +99,8 @@ class EvaluarController extends Controller
                 $datos =$conn->query("SELECT * FROM item");
 
                 $puntaje =$conn->query("select id, puntaje, descripcion,SUM(puntaje_obtenido) as puntaje_obtenido, SUM(puntaje) as puntaje_ideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'");
-                
             
+    
                 while($calificacion = mysqli_fetch_array($puntaje)){
                     //echo $calificacion['nota'];
                     //round(0.6);
@@ -113,42 +113,41 @@ class EvaluarController extends Controller
                 $model->puntaje_ideal = $puntajeid;
                 $model->puntaje_obtenido = $puntajeobt;
                 $model->nota = $notaa;
+
+                
                 //return $notaa;
 
             $model->id_usuario = $logueado;
             $model->id_entrega = $entrega->id;
             $model->comentarios = $rubrica->observaciones;
-
+            //return $entrega->nota; 
             //----------------------------------
+            
+            //return "pasó aquí 1";
             $model->save();
+            //return "pasó aquí 2";
+            $evaluEntrega =$conn->query("select evaluar.id as idevaluar, evaluar.comentarios, AVG(nota) as prome, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='$ide'");
+
+            while($notaEnt = mysqli_fetch_array($evaluEntrega)){
+                $promedio = round($notaEnt['prome'], 1);
+                //return $calificacion['nota'];
+            } 
+            //--------------------------------------------------------------------
+            $entreg2 =$conn->query("UPDATE entrega SET nota =".$promedio." WHERE entrega.id=".$ide);
+
+
+            //----------------------------------------------------------------------
+
+
             $evaluacion2 = Evaluar::findOne(['id_entrega'=>$ide], ['id_usuario'=>$usuario]);
             Yii:: $app->session->setFlash('success','La evaluación ha sido enviada con éxito');
             //return $this->redirect(['view', 'id' => $model->id]);
 
             //'idv' =>$model->id ......idv: id evaluacion
             return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id, 'idv' =>$model->id] );
-            //return $this->redirect(['evaluar/view', 'id' =>$evaluacion2->id] );
-
-            /*return $this->render('../rubrica/viewevaluacion', [
-                'model' => Rubrica::findOne($idr),
-            ]);
-
-            */
-
-            /*if ($this->request->isPost) {
-                if ($model->load($this->request->post()) && $model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
-            } else {
-                $model->loadDefaultValues();
-            }
-
-            
-            return $this->render('create', [
-                'model' => $model,
-            ]);*/
                
         }
+        //return "pasó aqui 1";
         Yii:: $app->session->setFlash('success','Ya existe una evaluación de ésta entrega');
         //return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id] );
         return $this->redirect(['evaluar/view', 'id' =>$evaluacion->id] );
