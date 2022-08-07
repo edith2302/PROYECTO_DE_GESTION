@@ -71,15 +71,27 @@ class DesarrollarproyectoController extends Controller
      */
     public function actionCreate($id)
     {
-        $logueado= Yii::$app->user->identity->id_usuarioo;
-        
-        $estudiante = Estudiante::find()->where(['id_usuario' => $logueado])->one();
-        //return $estudiante->id;
+        //-----------------conexion bdd----------------------
+        $bd_name = "yii2advanced";
+        $bd_table = "item";
+        $bd_location = "localhost";
+        $bd_user = "root";
+        $bd_pass = "";
 
+        // conectarse a la bd
+        $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+        if(mysqli_connect_errno()){
+            die("Connection failed: ".mysqli_connect_error());
+        }
+       // -------------------------------------------------------------
+
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+        $estudiante = Estudiante::find()->where(['id_usuario' => $logueado])->one();
         $proyecto = Proyecto::find()->where(['id' => $id])->one();
-        
         $proyectoInscritos= Desarrollarproyecto::find()->where(['id_estudiante' => $estudiante->id])->one();
         $msg = null;
+        
+        //si el estudiante ya inscribió un proyecto, lo redirije a la vista del proyecto inscrito
         if($proyectoInscritos != null){
             return $this->render('../proyecto/viewinscripcion2', [
                 'model' => $proyecto->findOne($id),
@@ -87,42 +99,53 @@ class DesarrollarproyectoController extends Controller
             ]);
         }
 
+        $proyectoIns= Desarrollarproyecto::find()->where(['id_proyecto' => $id])->one();
 
+        //si el proyecto ya fue inscrito consulta por cupos disponibles
+        if($proyectoIns != null){
 
-         //return $proyecto->id;
-        $model = new Desarrollarproyecto();
-    
-        $model->id_estudiante = $estudiante->id;
+            $datospro = $conn->query("SELECT COUNT(*) as total, desarrollarproyecto.id_proyecto, proyecto.num_integrantes as integrantes, proyecto.id from desarrollarproyecto JOIN proyecto on proyecto.id = desarrollarproyecto.id_proyecto WHERE proyecto.id = ".$id." GROUP BY desarrollarproyecto.id_proyecto");
 
-        $model->id_proyecto=$proyecto->id;
+            while($proyectoss = mysqli_fetch_array($datospro)){
+                $idpro = $proyectoss['id'];
+                $inscritos = $proyectoss['total'];
+                $integrant = $proyectoss['integrantes'];
+            }
 
-        $model->save();
-
-        $proyectoOc= Desarrollarproyecto::find()->where(['id_proyecto' => $proyecto->id])->one();
-        $ocupado = 2;
-        //return $proyecto->disponibilidad;
-        if($proyectoOc!=null){
-            $proyecto->setDisponibilidad($ocupado);
-            //$proyecto->save();
+            //si los cupos del proyecto ya están ocupados, lanza un mensaje de error
+            if($integrant == $inscritos){
+                Yii:: $app->session->setFlash('error','Proyecto no disponible');  
+                return $this->redirect(['proyecto/indexestudiante']);                  
+            } 
         }
-        //return $proyecto->disponibilidad;
-        
-        //return $this->redirect(['proyecto/viewinscripcion', 'id' => $model->id]);
 
+            //si quedan cupos del proyecto disponibles, permite inscribirlo
+            //if($integrant > $inscritos){
+        $model = new Desarrollarproyecto();
+        
+        $model->id_estudiante = $estudiante->id;
+        $model->id_proyecto=$id;
+        $model->save();
+        $ocupado = 2;
+
+        $datos = $conn->query("SELECT COUNT(*) as total, desarrollarproyecto.id_proyecto, proyecto.num_integrantes as integrantes, proyecto.id from desarrollarproyecto JOIN proyecto on proyecto.id = desarrollarproyecto.id_proyecto WHERE proyecto.id = ".$id." GROUP BY desarrollarproyecto.id_proyecto");
+
+        while($inscritos = mysqli_fetch_array($datos)){
+            $idpro = $inscritos['id'];
+            $estInscritos = $inscritos['total'];
+            $numIntegrante = $inscritos['integrantes'];
+    
+        }
+  
+        if($numIntegrante == $estInscritos){
+            $proyecto->setDisponibilidad($ocupado);
+        } 
+        
+        Yii:: $app->session->setFlash('success','Proyecto inscrito con éxito');
         return $this->render('../proyecto/viewinscripcion', [
             'model' => Proyecto::findOne($model->id_proyecto),
         ]);
-        /*if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }*/
 
-       /* return $this->render('create', [
-            'model' => $model,
-        ]);*/
     }
 
     /**

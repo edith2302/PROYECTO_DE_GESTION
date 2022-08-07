@@ -112,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     if ($model->id_profe_guia=!null){
                         $profIci = ProfesorIcinf::findOne($idp);
                        
-                        return  $profIci->usuario->nombre;
+                        return  $profIci->usuario->nombre." ".$profIci->usuario->apellido;
                     }
                    
                 },
@@ -123,7 +123,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label'  => 'Autor',
                 'value'  => function ($model) {
-                    return $model->autor->nombre;
+                    return $model->autor->nombre." ".$model->autor->apellido;
                 },
             ],
 
@@ -131,10 +131,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'  => 'Desarrollado por',
                 'value'  => function ($model) {
                     $desarrollap = Desarrollarproyecto::find()->where(['id_proyecto' => $model->id])->one();
-                        $estudiante = Estudiante::find()->where(['id' => $desarrollap->id_estudiante])->one();
-                        $usuario = Usuario::find()->where(['id_usuario' => $estudiante->id_usuario])->one();
+                    $estudiante = Estudiante::find()->where(['id' => $desarrollap->id_estudiante])->one();
+                    $usuario = Usuario::find()->where(['id_usuario' => $estudiante->id_usuario])->one();
 
-                        return $usuario->nombre;
+                    return $usuario->nombre." ".$usuario->apellido;
                 },
             ],
 

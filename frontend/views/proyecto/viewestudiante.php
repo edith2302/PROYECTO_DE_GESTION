@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
       
                     $profIci = Profesoricinf::findOne($idp);
                    
-                    return  $profIci->usuario->nombre;
+                    return  $model->autor->nombre." ".$model->autor->apellido;
                    }
                    
                 },
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label'  => 'Autor',
                 'value'  => function ($model) {
-                    return $model->autor->nombre;
+                    return $model->autor->nombre." ".$model->autor->apellido;
                 },
             ],
 
@@ -114,7 +114,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     
 <p align="center">
-    <?= Html::a('Inscribir propuesta', ['desarrollarproyecto/create', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Inscribir propuesta', ['desarrollarproyecto/create', 'id' => $model->id], [
+        'class' => 'btn btn-primary',
+        'data' => [
+            'confirm' => '¿Está seguro que quiere inscribir el proyecto "'.$model->nombre. '" ?',
+            'method' => 'post',
+        ],
+    ]) ?>
+
+    <!--<?= Html::a('Inscribir propuesta', ['desarrollarproyecto/create', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>-->
     </p>
 </div>
 

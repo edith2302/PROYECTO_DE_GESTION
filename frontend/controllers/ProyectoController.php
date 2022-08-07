@@ -138,10 +138,10 @@ class ProyectoController extends Controller
             'dataProvider' => $dataProvider,
         ]);*/
         $modelproyectos = new SqlDataProvider([
-            //'sql' => "select * from proyecto where proyecto.id not in(select id_proyecto rom desarrollarproyecto)",
             
-            'sql' => "SELECT * FROM proyecto where proyecto.id not in(SELECT id_proyecto FROM desarrollarproyecto)",
-            
+           'sql' => "SELECT * FROM proyecto WHERE proyecto.disponibilidad = 1 ",
+
+           //'sql' => "SELECT proyecto.id, proyecto.nombre, proyecto.descripcion, proyecto.num_integrantes, proyecto.tipo, proyecto.area, proyecto.estado, proyecto.disponibilidad, proyecto.id_profe_guia, proyecto.id_autor, desarrollarproyecto.id_estudiante, COUNT(*) as total FROM proyecto JOIN desarrollarproyecto ON proyecto.id = desarrollarproyecto.id_proyecto GROUP BY proyecto.id  HAVING COUNT(*) <= proyecto.num_integrantes",
             
         ]);
 
@@ -175,7 +175,9 @@ class ProyectoController extends Controller
     public function actionView($id)
     {
         $proyecto = Proyecto::find()->where(['id' => $id])->one();
-        if($proyecto->disponibilidad == 2){
+        $proyectoDesarro = Desarrollarproyecto::find()->where(['id_proyecto' => $id])->one();
+        
+        if($proyectoDesarro != null){
             return $this->render('viewocupado', [
                 'model' => $this->findModel($id),
             ]);
@@ -197,6 +199,29 @@ class ProyectoController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
+    //pasa el id del usuario logueado
+    public function actionViewmiproyecto ($id)
+    {   
+        $estudiante = Estudiante::find()->where(['id_usuario' => $id])->one();
+
+        $modeloDesarrollap = Desarrollarproyecto::find()->where(['id_estudiante' => $estudiante->id])->one();
+
+        if($modeloDesarrollap != null){
+            $proyecto = Proyecto::find()->where(['id' => $modeloDesarrollap->id_proyecto])->one();
+
+            return $this->render('viewmiproyecto', [
+                'model' => $this->findModel($proyecto->id),
+            ]);
+
+        }else{
+            echo "Sin inscripcion";
+        }
+       
+        
+    }
+
+
     public function actionViewestudiante($id)
     {
         $logueado= Yii::$app->user->identity->id_usuarioo;

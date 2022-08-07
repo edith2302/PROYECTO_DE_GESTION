@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
       
                     $profIci = Profesoricinf::findOne($idp);
                    
-                    return  $profIci->usuario->nombre;
+                    return  $profIci->usuario->nombre." ".$profIci->usuario->apellido;
                    }
                    
                 },
@@ -104,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label'  => 'Autor',
                 'value'  => function ($model) {
-                    return $model->autor->nombre;
+                    return $model->autor->nombre." ".$model->autor->apellido;
                 },
             ],
 

@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                      }
                    if ($model->id_profe_guia=!null){
 
-                      return  $model->profeGuia->usuario->nombre;
+                      return  $model->profeGuia->usuario->nombre." ".$model->profeGuia->usuario->apellido;
                    }
                    
                 },
@@ -116,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label'  => 'Autor',
                 'value'  => function ($model) {
-                    return $model->autor->nombre;
+                    return $model->autor->nombre." ".$model->autor->apellido;
                 },
             ],
 
