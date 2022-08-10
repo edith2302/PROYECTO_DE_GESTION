@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <p align="right">
         <?= Html::a('Agregar hito', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar hito 2', ['create2'], ['class' => 'btn btn-primary']) ?>
     </p>
 
    
@@ -160,6 +161,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'urlCreator' => function ($action, Hito $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                 }
+                
             ],
         ],
     ]); ?>

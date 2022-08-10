@@ -459,76 +459,7 @@ class RubricaController extends Controller
             'modelRubrica' => $modelRubrica,
             'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
         ]);
-    
-
-
-
-
-
-
-
-       /* //$modelsItem = $model->items;
-        $modelsItem = [new Item];
-       // $modelsItem = Item::find()->where(['id_rubrica' => $id]);
-        
-       if ($model->load(Yii::$app->request->post())) {
-
-            $oldIDs = ArrayHelper::map($modelsItem, 'id', 'id');
-            $modelsItem = Model::createMultiple(Item::classname(), $modelsItem);
-            Model::loadMultiple($modelsItem, Yii::$app->request->post());
-            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsItem, 'id', 'id')));
-
-            // validate all models
-            $valid = $model->validate();
-            $valid = Model::validateMultiple($modelsItem) && $valid;
-
-            if ($valid) {
-                $transaction = \Yii::$app->db->beginTransaction();
-                try {
-                    if ($flag = $model->save(false)) {
-                        if (!empty($deletedIDs)) {
-                            Item::deleteAll(['id' => $deletedIDs]);
-                        }
-                        foreach ($modelsItem as $modelItem) {
-                            $modelItem->id_rubrica = $modelItem->id;
-                            if (! ($flag = $modelItem->save(false))) {
-                                $transaction->rollBack();
-                                break;
-                            }
-                        }
-                    }
-                    if ($flag) {
-                        $transaction->commit();
-                        return $this->redirect(['view', 'id' => $model->id]);
-                    }
-                } catch (Exception $e) {
-                    $transaction->rollBack();
-                }
-            }
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-            'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
-        ]);*/
-        //$modelsItem = [new Item];
-        
-        
-        
-        
-        /*$model = $this->findModel($id);
-        
-
-        if ( Yii:: $app->request->isPost && $model->load($this->request->post()) && $model->save()) {
-
-            Yii:: $app->session->setFlash('success','La  rúbrica ha sido modificada con exito');
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);*/
-
+      
     }
 
      /**
@@ -609,7 +540,13 @@ class RubricaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        /*$this->findModel($id)->delete();
+        return $this->redirect(['index']);*/
+        $model = $this->findModel($id);
+
+        if ($model->delete()) {
+            Yii::$app->session->setFlash('success', 'Rúbrica eliminada con éxito');
+        }
 
         return $this->redirect(['index']);
     }

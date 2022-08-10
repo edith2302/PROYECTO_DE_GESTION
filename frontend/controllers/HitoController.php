@@ -18,8 +18,15 @@ use app\models\Entrega;
 use app\models\Profesorguia;
 use yii\filters\AccessControl;
 use app\models\User;
-
 use app\models\Event;
+
+use app\models\Evaluador;
+use app\models\Rubrica;
+use app\models\Model;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+
+
 //use common\widgets\Alert;
 
 /**
@@ -322,7 +329,7 @@ class HitoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate2()
     {
         $model = new Hito();
         $logueado= Yii::$app->user->identity->id_usuarioo;
@@ -350,6 +357,92 @@ class HitoController extends Controller
     }
 
     /**
+     * Creates a new Hito model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return string|\yii\web\Response
+     */
+    public function actionCreate()
+    {
+        /*$model = new Hito();
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+
+        $profesor= ProfesorAsignatura::find()->where(['id_usuario' => $logueado])->one();
+
+        $model->id_profe_asignatura= $profesor->id;
+
+        if ($this->request->isPost) {
+            if ($model->load(Yii:: $app->request->post()) && $model->save()) {
+
+                return $this->redirect(['event/create', 'id' => $model->id]);
+
+                Yii:: $app->session->setFlash('success','El hito ha sido creado con éxito');
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('create2', [
+            'model' => $model,
+        ]);*/
+
+
+        
+        //$modelRubrica = $this->findModel($id);
+        $modelHito = new Hito();
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+
+        $profesor= ProfesorAsignatura::find()->where(['id_usuario' => $logueado])->one();
+
+        $modelHito->id_profe_asignatura= $profesor->id;
+
+        
+        
+        //------------------------------------------------------------
+        
+        $modelsEvaluador = [new Evaluador];
+
+        if ($modelHito->load(Yii::$app->request->post())) {
+
+            $modelsEvaluador = Model::createMultiple(Evaluador::classname());
+            Model::loadMultiple($modelsEvaluador, Yii::$app->request->post());
+
+            // validate all models
+            $valid = $modelHito->validate();
+            $valid = Model::validateMultiple($modelsEvaluador) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+                    if ($flag = $modelHito->save(false)) {
+                        foreach ($modelsEvaluador as $modelEvaluador) {
+                            $modelEvaluador->id_hito = $modelHito->id;
+                            if (! ($flag = $modelEvaluador->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelHito->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+
+        return $this->render('create2', [
+            'modelHito' => $modelHito,
+            'modelsEvaluador' => (empty($modelsEvaluador)) ? [new Evaluador] : $modelsEvaluador
+        ]);
+        //------------------------------------------------------------
+    }
+
+    /**
      * Updates an existing Hito model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
@@ -358,7 +451,7 @@ class HitoController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        /*$model = $this->findModel($id);
         $evento = Event::findOne(['id_hito'=>$id]);
 
         if (Yii:: $app->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -367,11 +460,92 @@ class HitoController extends Controller
             return $this->redirect(['event/update', 'id' => $evento->id, 'idh'=>$model->id]);
             /*Yii:: $app->session->setFlash('success','El hito se ha modificado con éxito');
             return $this->redirect(['view', 'id' => $model->id]);*/
-        }
+        /*}
 
         return $this->render('update', [
             'model' => $model,
+        ]);*/
+
+
+        $modelHito = $this->findModel($id);
+        $modelsEvaluador =  $modelHito->evaluadores;
+        
+        if ($modelHito->load(Yii::$app->request->post())) {
+            
+            $oldIDs = ArrayHelper::map($modelsEvaluador, 'id', 'id');
+            $modelsEvaluador = Model::createMultiple(Evaluador::classname(), $modelsEvaluador);
+            
+            Model::loadMultiple($modelsEvaluador, Yii::$app->request->post());
+            
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsEvaluador, 'id', 'id')));
+           
+            // validate all models
+            $valid = $modelHito->validate();
+
+            $valid = Model::validateMultiple($modelsEvaluador) && $valid;
+
+            if ($valid) {
+
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $modelHito->save(false)) {
+                      
+                        if (!empty($deletedIDs)) {
+                           
+                           Evaluador::deleteAll(['id' => $deletedIDs]);
+                        }
+                        
+                        foreach ($modelsEvaluador as $modelEvaluador) {
+                           
+                            $modelEvaluador->id_hito = $modelHito->id;
+  
+                            if (! ($flag = $modelEvaluador->save(false))) {
+
+                                $transaction->rollBack();
+                                break;
+                            }
+                            unset($modelEvaluador);
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelHito->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+
+        return $this->render('update', [
+            'modelHito' => $modelHito,
+            'modelsEvaluador' => (empty($modelsEvaluador)) ? [new Evaluador] : $modelsEvaluador
         ]);
+    }
+
+    /**
+     * Updates an existing Hito model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param int $id ID
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdate2($id)
+    {
+        /*$model = $this->findModel($id);
+        $evento = Event::findOne(['id_hito'=>$id]);
+
+        if (Yii:: $app->request->isPost && $model->load($this->request->post()) && $model->save()) {
+
+            
+            return $this->redirect(['event/update', 'id' => $evento->id, 'idh'=>$model->id]);
+            /*Yii:: $app->session->setFlash('success','El hito se ha modificado con éxito');
+            return $this->redirect(['view', 'id' => $model->id]);*/
+        /*}
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);*/
     }
 
     /**
@@ -382,10 +556,16 @@ class HitoController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
-    {
-       
-         
-        $this->findModel($id)->delete();
+    {   
+       /* $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);*/
+
+        $model = $this->findModel($id);
+
+        if ($model->delete()) {
+            Yii::$app->session->setFlash('success', 'Hito eliminado con éxito');
+        }
 
         return $this->redirect(['index']);
         

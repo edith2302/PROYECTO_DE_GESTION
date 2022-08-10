@@ -9,13 +9,12 @@ $this->title = 'Agregar Hito';
 $this->params['breadcrumbs'][] = ['label' => 'Hitos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="hito-create">
+<div class="hito-create2">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'modelHito' => $modelHito,
-        'modelsEvaluador' =>$modelsEvaluador,
+    <?= $this->render('_form2', [
+        'model' => $model,
     ]) ?>
 
 </div>

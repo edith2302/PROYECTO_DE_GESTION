@@ -3,11 +3,11 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Hito */
+/* @var $modelHito app\models\Hito */
 
-$this->title = 'Actualizar Hito: ' . $model->nombre;
+$this->title = 'Actualizar Hito: ' . $modelHito->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Hitos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $modelHito->id, 'url' => ['view', 'id' => $modelHito->id]];
 $this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="hito-update">
@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = 'Actualizar';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'modelHito' => $modelHito,
+        'modelsEvaluador' =>$modelsEvaluador,
     ]) ?>
 
 </div>

@@ -20,6 +20,7 @@ use Yii;
  * @property int $id_profe_asignatura
  *
  * @property Entrega[] $entregas
+ * @property Evaluador[] $evaluadores
  * @property Profesorasignatura $profeAsignatura
  * @property Rubrica $rubrica
  */
@@ -97,5 +98,15 @@ class Hito extends \yii\db\ActiveRecord
     public function getRubrica()
     {
         return $this->hasOne(Rubrica::className(), ['id' => 'id_rubrica']);
+    }
+
+    /**
+     * Gets query for [[Evaluadores]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEvaluadores()
+    {
+        return $this->hasMany(Evaluador::className(), ['id_hito' => 'id']);
     }
 }
