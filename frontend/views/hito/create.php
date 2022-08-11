@@ -3,7 +3,8 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Hito */
+/* @var $modelHito app\models\Hito */
+/* @var $modelsEvaluador app\models\Evaluador */
 
 $this->title = 'Agregar Hito';
 $this->params['breadcrumbs'][] = ['label' => 'Hitos', 'url' => ['index']];
@@ -17,5 +18,4 @@ $this->params['breadcrumbs'][] = $this->title;
         'modelHito' => $modelHito,
         'modelsEvaluador' =>$modelsEvaluador,
     ]) ?>
-
 </div>

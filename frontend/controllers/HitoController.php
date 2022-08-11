@@ -351,7 +351,7 @@ class HitoController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
+        return $this->render('create2', [
             'model' => $model,
         ]);
     }
@@ -427,7 +427,10 @@ class HitoController extends Controller
 
                     if ($flag) {
                         $transaction->commit();
-                        return $this->redirect(['view', 'id' => $modelHito->id]);
+                        return $this->redirect(['event/create', 'id' => $modelHito->id]);
+
+                        //Yii:: $app->session->setFlash('success','El hito ha sido creado con éxito');
+                        //return $this->redirect(['view', 'id' => $modelHito->id]);
                     }
                 } catch (Exception $e) {
                     $transaction->rollBack();
@@ -435,7 +438,7 @@ class HitoController extends Controller
             }
         }
 
-        return $this->render('create2', [
+        return $this->render('create', [
             'modelHito' => $modelHito,
             'modelsEvaluador' => (empty($modelsEvaluador)) ? [new Evaluador] : $modelsEvaluador
         ]);
@@ -466,8 +469,9 @@ class HitoController extends Controller
             'model' => $model,
         ]);*/
 
-
         $modelHito = $this->findModel($id);
+        $evento = Event::findOne(['id_hito'=>$id]);
+
         $modelsEvaluador =  $modelHito->evaluadores;
         
         if ($modelHito->load(Yii::$app->request->post())) {
@@ -509,7 +513,11 @@ class HitoController extends Controller
                     }
                     if ($flag) {
                         $transaction->commit();
-                        return $this->redirect(['view', 'id' => $modelHito->id]);
+                        
+                        return $this->redirect(['event/update', 'id' => $evento->id, 'idh'=>$modelHito->id]);
+                        
+                        /*Yii:: $app->session->setFlash('success','El hito se ha modificado con éxito');
+                        return $this->redirect(['view', 'id' => $modelHito->id]);*/
                     }
                 } catch (Exception $e) {
                     $transaction->rollBack();

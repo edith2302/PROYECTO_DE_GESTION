@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
   
    
     <p>
-        <?= Html::a('Agendar actividad', ['create'], ['class' => 'btn btn-success']) ?>
+        <!--<?= Html::a('Agendar actividad', ['create'], ['class' => 'btn btn-success']) ?>-->
     </p>
 
     <?= \yii2fullcalendar\yii2fullcalendar::widget(array(
