@@ -261,6 +261,9 @@ class HitoController extends Controller
         $hito = Hito::findOne(['id'=>$id]);
         $horaActual = date('H:i:s');
         $fechaActual = date('Y-m-d');
+        //return "hora ac: ".$horaActual." - hora lim: ".$hito->hora_limite." ...... fe ac: ".$fechaActual." - fech lim: ".$hito->fecha_limite;
+        
+        //return "hora ac: ".$horaActual." - hora habi: ".$hito->hora_habilitacion." ...... fe ac: ".$fechaActual." - fech habi: ".$hito->fecha_habilitacion;
 
         $usuario = Yii::$app->user->identity->id_usuarioo;
         $estudiante = Estudiante::findOne(['id_usuario'=>$usuario]);
@@ -274,16 +277,20 @@ class HitoController extends Controller
         ]);
 
         if( $entrega == null){
-
+            //return "pasó 1";
             //----------------------Validación plazo entrega del hito---------------------------
 
             if($hito->fecha_habilitacion > $fechaActual){
+                //return "pasó 2";
                 return $this->render('view2', [
                     'model' => $this->findModel($id),
                 ]);
             }else{
-                if($hito->fecha_habilitacion = $fechaActual){ 
+                if($hito->fecha_habilitacion == $fechaActual){ 
+                    //return $hito->fecha_habilitacion ." = ". $fechaActual;
+                    //return "pasó 3";
                     if($hito->hora_habilitacion > $horaActual){
+                      //return "pasó 4";
                         return $this->render('view2', [
                             'model' => $this->findModel($id),
                         ]);
@@ -297,7 +304,7 @@ class HitoController extends Controller
                     'model' => $this->findModel($id),
                 ]);
             }else{
-                if($hito->fecha_limite = $fechaActual){
+                if($hito->fecha_limite == $fechaActual){
                     if($hito->hora_limite > $horaActual){
                         return $this->render('view2', [
                             'model' => $this->findModel($id),

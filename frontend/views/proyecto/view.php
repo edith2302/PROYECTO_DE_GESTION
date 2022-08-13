@@ -112,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     if ($model->id_profe_guia=!null){
                         $profIci = ProfesorIcinf::findOne($idp);
                        
-                        return  $profIci->usuario->nombre." ".$profIci->$usuario->apellido;
+                        return  $profIci->usuario->nombre." ".$profIci->usuario->apellido;
                     }
                    
                 },

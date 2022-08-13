@@ -7,13 +7,13 @@
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 
-$this->title = 'Signup';
+$this->title = 'Registro';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to signup:</p>
+    <p>Complete los siguientes campos para registrarse:</p>
 
     <div class="row">
         <div class="col-lg-5">
@@ -24,6 +24,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'email') ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
+
+                <div class="body-content">
+            <?php
+            echo $form->field($model, 'role')->dropDownList(
+                [
+                    
+                    '1' => 'Profesor de asignatura',
+                    '2' => 'Estudiante',
+                    '3' => 'Profesor ICINF',
+                    //'4' => 'Informe (Avance)',
+                ],
+                ['prompt' => 'Seleccionar rol']
+            );
+            ?>
+        </div>
 
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

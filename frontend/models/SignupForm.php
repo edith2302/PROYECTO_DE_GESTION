@@ -14,6 +14,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $role;
 
 
     /**
@@ -37,6 +38,21 @@ class SignupForm extends Model
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'Id',
+            'username' => 'Username',
+            'email' => 'Email',
+            'password' => 'Password',
+            'role' => 'Rol',
+        ];
+    }
+
 
     /**
      * Signs user up.

@@ -319,11 +319,18 @@ class ProyectoController extends Controller
             $guia = Proyecto::findOne($id);
             $guia -> id_profe_guia = $model->id_profe_guia;
             if($guia->save()){
+                
                 $profeicinf = Profesoricinf::findOne($guia -> id_profe_guia);
                 $usuario = Usuario::findOne($profeicinf->id_usuario);
-                $modelpg = new Profesorguia();
-                $modelpg->id_usuario = $usuario->id_usuario;
-                $modelpg->save();
+
+                $profeg = Profesorguia::findOne(['id_usuario'=>$usuario->id_usuario]);
+
+                if($profeg != null){
+                    $modelpg = new Profesorguia();
+                    $modelpg->id_usuario = $usuario->id_usuario;
+                    $modelpg->save();
+                }
+                Yii:: $app->session->setFlash('success','Profesor asignado con éxito');
                 return $this->redirect(['viewasignado', 'id' => $model->id]);
             }
            

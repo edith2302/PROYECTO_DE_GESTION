@@ -19,6 +19,10 @@ use yii2mod\alert\Alert;
 use yii\data\SqlDataProvider;
 
 use app\models\Hito;
+use app\models\Evaluador;
+use app\models\User;
+use app\models\Profesoricinf;
+use app\models\Profesorguia;
 
 /**
  * EntregaController implements the CRUD actions for Entrega model.
@@ -106,27 +110,75 @@ where estudiante.id_usuario = 6107)
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    //vista que muestra el botón de evaluar
     public function actionView($id)
     {
+        $entrega = Entrega::findOne(['id'=>$id]);
+        $proyecto = Proyecto::findOne(['id'=>$entrega->id_proyecto]);
+        $hito = Hito::findOne(['id'=>$entrega->id_hito]);
         $usuario = Yii::$app->user->identity->id_usuarioo;
-        //$evaluacion = Evaluar::findOne(['id_entrega'=>$id], ['id_usuario'=>$usuario]);
+        $user = User::findOne(['id_usuarioo'=>$usuario]);
+        $profguia = Profesoricinf::findOne(['id'=>$proyecto->id_profe_guia]);
+
+        $evaluador = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>$user->role]);
         $evaluacion = Evaluar::findOne(['id_entrega'=>$id, 'id_usuario'=>$usuario]);
+
+        $comision = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>4]);
+        $profe_guia = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>5]);
 
         $modelhito = new SqlDataProvider([
             'sql' => 'select * from entrega 
             where id_hito = ' .$id,
         ]);
-        //return "pasó aquí";
-        if($evaluacion==null){
-            return $this->render('view', [
-                'model' => $this->findModel($id),
-                'modelhito' => $modelhito,
-            ]);
-        }
-        //return "pasó aquí2";
+
+            
+        /*
+            '1' => 'Profesor de asignatura',--------> se evalua antes 
+            '5' => 'Profesor Guía',
+            '3' => 'Profesor ICINF',--------> se evalua antes 
+            '4' => 'Comisión Evaluadora',
+        */
+
+
+
+
+        //si no existe una evaluación del usuario a la entrega seleccionada, pasa
+        if($evaluacion==null){ //(1)
+
+            //si el rol del usuario logueado está autorizado para evaluar, le aparece la opción evaluar
+            if($evaluador!=null){
+                return $this->render('view', [
+                    'model' => $this->findModel($id),
+                    'modelhito' => $modelhito,
+                ]);
+
+            }
+
+            //si el rol autorizado para evaluar es la comisión (4), entonces revisa que el rol del usuario logueado sea profesor ICINF(3)
+            if($comision !=null){
+                if($user->role == 3){
+                    return $this->render('view', [
+                        'model' => $this->findModel($id),
+                        'modelhito' => $modelhito,
+                    ]);
+                }
+            }
+
+
+            //si el rol autorizado para evaluar es el profe guía, entonces pregunta si el id del usuario logueado es el mismo del profe ICINF asignado como profe guia 
+            if($profe_guia != null){
+                if($profguia->id_usuario == $usuario){
+                    return $this->render('view', [
+                        'model' => $this->findModel($id),
+                        'modelhito' => $modelhito,
+                    ]);
+                }
+            } 
+        }//termina if(1)
+
         return $this->redirect(['view2', 'id' => $id]);
-        
-        
+                
     }
 
     public function actionView2($id)
@@ -179,7 +231,7 @@ where estudiante.id_usuario = 6107)
                 Yii:: $app->session->setFlash('error','Entrega fuera de plazo');
                 return $this->redirect(['hito/view2', 'id' => $id] );
             }
-            if($hitoo->fecha_limite = $fechaActual2){
+            if($hitoo->fecha_limite == $fechaActual2){
                 if($hitoo->hora_limite > $horaActual2){
                     Yii:: $app->session->setFlash('error','Entrega fuera de plazo');
                     return $this->redirect(['hito/view2', 'id' => $id] );

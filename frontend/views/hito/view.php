@@ -158,6 +158,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $url;
                 }
             ],
+            [
+                'label'  => 'Tipo de hito',
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
+                'class' => ActionColumn::className(),
+                'template'=>'{view}, {delete}',
+                'urlCreator' => function ($action, $model, $key, $index, $column) {
+                    //return Url::toRoute([$action, 'id' => $model['id']]);
+                    $url ='index.php?r=entrega%2Fview&id='.$model['id'];
+                    return $url;
+                }
+            ],
          
 
             
