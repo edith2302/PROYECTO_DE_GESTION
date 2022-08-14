@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     
     <p align="right">
-        <?= Html::a('Agregar Rúbrica', ['create1'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar Rúbrica', ['create2'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -59,11 +59,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             [
+                'header'=>"Acciones",
+                'headerOptions' => ['width' => '80px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Rubrica $model, $key, $index, $column) {
+                    if($action =='update'){
+                        return 'index.php?r=rubrica%2Fviewmodificar&id='.$model['id'];
+                    }
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
+
         ],
     ]); ?>
 

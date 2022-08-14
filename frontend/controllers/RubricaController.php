@@ -85,6 +85,29 @@ class RubricaController extends Controller
     
     }
 
+     /**
+     * Displays a single Rubrica model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewmodificar($id)
+    {
+        $model = $this->findModel($id);
+        $items = new SqlDataProvider([
+            'sql' => "select * from item where id_rubrica = '$id' ",
+           
+        ]);
+
+        return $this->render('viewmodificar', [
+            'model' => $model,
+            'dataProvider' => $items,
+
+        ]);
+
+    
+    }
+
     /**
      * Displays a single Rubrica model.
      * @param int $id ID
@@ -203,6 +226,66 @@ class RubricaController extends Controller
 
     }
 
+    public function actionCreate2()
+    {
+        /*
+        'modelRubrica' => $modelRubrica,
+        'modelsItem'=>$modelsItem,
+        */
+        $modelRubrica = new Rubrica();
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+
+        $profesor= ProfesorAsignatura::find()->where(['id_usuario' => $logueado])->one();
+
+        $modelRubrica->id_profe_asignatura= $profesor->id;
+
+        
+        $modelsItem = [new Item];
+
+        if ($modelRubrica->load(Yii::$app->request->post())) {
+
+            $modelsItem = Model::createMultiple(Item::classname());
+            Model::loadMultiple($modelsItem, Yii::$app->request->post());
+
+            // validate all models
+            $valid = $modelRubrica->validate();
+            $valid = Model::validateMultiple($modelsItem) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+                    if ($flag = $modelRubrica->save(false)) {
+                        foreach ($modelsItem as $modelItem) {
+                            $modelItem->id_rubrica = $modelRubrica->id;
+                            if (! ($flag = $modelItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($flag) {
+                        $transaction->commit();
+                        
+                        Yii:: $app->session->setFlash('success','La Rúbrica ha sido creado con éxito');
+                        return $this->redirect(['view', 'id' => $modelRubrica->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+
+        return $this->render('create2', [
+            'modelRubrica' => $modelRubrica,
+            'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
+        ]);
+        
+    }
+
+
+
     /**
      * Creates a new Rubrica model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -210,15 +293,11 @@ class RubricaController extends Controller
      */
     public function actionCreate($id)
     {
-        //$modelRubrica = new Rubrica;
         $modelRubrica = $this->findModel($id);
-        
         $modelsItem = [new Item];
         
-        //return 'paso aqui';
 
         if ($modelRubrica->load(Yii::$app->request->post(),'')) {
-            //print_r('hola');
 
             $modelsItem = Model::createMultiple(Item::classname());
             Model::loadMultiple($modelsItem, Yii::$app->request->post());

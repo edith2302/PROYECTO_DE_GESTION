@@ -106,6 +106,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
+                'header'=>"Archivo adjunto",
+                'headerOptions' => ['width' => '105px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:5px 0px 0px 0px;text-align: center;'],
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{link}',
                 'buttons' => [
@@ -117,16 +120,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             [
-                'attribute'=>'fecha_entrega',
-                'value'=>function ($model) { return $model['fecha_entrega']; },
-                //'filter'=>false,
+                //'attribute'=>'fecha_entrega',
+                'header'=>"Fecha y hora de entrega",
+                'value'=>function ($model) { return $model['fecha_entrega']."  /  ".$model['hora_entrega']." hrs"; },
                 'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'headerOptions' => ['width' => '200px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
             ],
   
-            [
+           /* [
                 'attribute'=>'hora_entrega',
                 'value'=>function ($model) { return $model['hora_entrega']; },
                 //'filter'=>false,
@@ -134,21 +136,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
-            ],
+            ],*/
 
             [
-                'attribute'=>'id_proyecto',
+                //'attribute'=>'id_proyecto',
+                'header'=>"Proyecto",
                 'value'=>function ($model) {
                     $proyecto = Proyecto::findOne(['id' => $model['id_proyecto']]);
                     return $proyecto->nombre;
                 },
                 'format'=>'raw',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'headerOptions' => ['width' => '350px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
             ],
 
             [
-                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'header'=>"Acciones",
+                'headerOptions' => ['width' => '80px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                 'template'=>'{view}, {delete}',
@@ -159,19 +163,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'label'  => 'Tipo de hito',
-                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
+                'header'=>"Evaluar",
+                'headerOptions' => ['width' => '70px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
-                'template'=>'{view}, {delete}',
-                'urlCreator' => function ($action, $model, $key, $index, $column) {
-                    //return Url::toRoute([$action, 'id' => $model['id']]);
-                    $url ='index.php?r=entrega%2Fview&id='.$model['id'];
-                    return $url;
-                }
+                'template'=>'{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ('index.php?r=rubrica%2Fevaluar&ide='.$model['id']) ? Html::a('<img src="images/iconos/evaluar.PNG" width="20" height="20">', 'index.php?r=rubrica%2Fevaluar&ide='.$model['id']) : '';
+                    },
+                ],
             ],
-         
-
             
         ],
     ]); ?>

@@ -19,7 +19,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <br><br><h4><?= "Descripción: "?></h4>
+    <p align="right">
+        <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Está seguro/a de eliminar la rúbrica seleccionada?',
+                'method' => 'post',
+            ],
+        ]) ?>
+        <?= Html::a('Agregar ítem', ['create', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+    </p>
+
+
+    <h4><?= "Descripción: "?></h4>
     <?=($model->descripcion)?>
 
    <!-- <?= DetailView::widget([

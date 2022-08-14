@@ -1,21 +1,22 @@
 <?php
 
 use yii\helpers\Html;
-use app\models\Rubrica;
 
 /* @var $this yii\web\View */
+/* @var $model app\models\Rubrica */
 /* @var $modelRubrica app\models\Rubrica */
+/* @var $modelItem app\models\Item */
 
-$this->title = 'Modificar rúbrica: ' . $modelRubrica->nombre;
+$this->title = 'Agregar Rúbrica';
 $this->params['breadcrumbs'][] = ['label' => 'Rúbricas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $modelRubrica->nombre, 'url' => ['view', 'id' => $modelRubrica->id]];
-$this->params['breadcrumbs'][] = 'Modificar rúbrica';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="rubrica-update">
+<div class="rubrica-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form3', [
+    <?= $this->render('_form2', [
+        //'model' => $model,
         'modelRubrica' => $modelRubrica,
         'modelsItem'=>$modelsItem,
     ]) ?>

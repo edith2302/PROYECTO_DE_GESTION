@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->proyecto->nombre;
                 },
             ],
-
+            
             'fecha_entrega',
             'hora_entrega',
             //'comentarios',
@@ -43,7 +43,14 @@ $this->params['breadcrumbs'][] = $this->title;
             
             'comentarios',
             //'id_hito',
+            [
+                'label'  => 'evidencia',
+                'value'  => function ($model) {
+                    return (($model->evidencia != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model->evidencia, ['target' => '_blank']) : '');
+                },
+            ],
         ],
+
     ]) ?>
     <?php
         $hito = Hito::find()->where(['id' => $model->id_hito])->one();
