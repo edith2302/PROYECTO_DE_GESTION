@@ -142,7 +142,9 @@ Modal::end();
                     echo Html::a('',['usuario/mi-perfil'],[
                         'class'=>'icon fa-user-circle',
                         'title'=>'Mi perfil',
-                        'style'=>'float:left; font-size:56px; top:-7px'
+                        
+                        'style'=>'float:left; font-size:40px; top:-9px'
+                       
                     ])
                     ?>
 
@@ -236,12 +238,8 @@ Modal::end();
                             </ul>
                         </li>-->
                     <li>
-                        <span  class="opener"><span class="icon fa-user"> Cuenta</span></span>
-                        <ul id="cuenta">
-                            <li>
-                                <?= Html::a('Mi Perfil', Url::to(['/usuario/mi-perfil'])) ?>
-                            </li>
-                        </ul>
+                     <?= Html::a('Mi Perfil', Url::to(['/usuario/mi-perfil']),['class'=>'icon fa-user-circle']) ?>
+                           
                     </li>
 
                     <li>
@@ -501,7 +499,7 @@ Modal::end();
             <div class="footer" id="foot">
                 <img src="images/logo_ubb.png" width="235" height="70" alt="UBB">
                 <!--p class="copyright">Sistema gestión de Anteproyecto de título</p>-->
-                <p class="copyright" title="Desarrollado por memoristas Edith Parra y Girleyn Molina ">Desarrollado por memoristas Edith Parra y Girleyn Molina </p>
+                <p class="copyright" title= "Proyecto de título desarrollado por memoristas Edith Parra y Girleyn Molina, Ingeniería Civil Informática">Proyecto de título desarrollado por memoristas Edith Parra y Girleyn Molina, Ingeniería Civil Informática </p>
             </div>
         </div>
 

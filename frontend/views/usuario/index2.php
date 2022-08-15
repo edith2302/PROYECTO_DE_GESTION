@@ -17,10 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <p align="right">
+    <?= Html::a('Exportar PDF', ['export-pdf1'], ['class' => 'btn btn-primary']) ?>
+    <!--<?= Html::a('Exportar Excel', ['export-excel2'], ['class' => 'btn btn-primary']) ?>-->
+    </p>
    
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+ 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -101,6 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],*/
         ],
     ]); ?>
+    
 
 
 

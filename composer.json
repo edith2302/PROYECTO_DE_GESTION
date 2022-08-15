@@ -22,7 +22,9 @@
         "hail812/yii2-adminlte3": "*",
         "wbraganca/yii2-dynamicform": "dev-master",
         "kartik-v/yii2-icons": "dev-master",
-        "philippfrenzel/yii2fullcalendar": "3.9.0"
+        "philippfrenzel/yii2fullcalendar": "3.9.0",
+        "kartik-v/yii2-mpdf": "*",
+        "hscstudio/yii2-export": "*"
        
     },
     "require-dev": {
