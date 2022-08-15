@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p align="right">
+    <?= Html::a('Agregar propuesta', ['create'], ['class' => 'btn btn-success']) ?>
     <?= Html::a('Exportar PDF', ['export-pdf1'], ['class' => 'btn btn-primary']) ?>
     <!--<?= Html::a('Exportar Excel', ['export-excel2'], ['class' => 'btn btn-primary']) ?>-->
     </p>
@@ -130,6 +131,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
 
             [
+                'header'=>"Acción",
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                 'template'=>'{view}',
                 'urlCreator' => function ($action, Proyecto $model, $key, $index, $column) {
@@ -140,9 +144,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <p align="right">
-        <?= Html::a('Agregar propuesta', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
 
 </div>

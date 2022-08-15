@@ -7,10 +7,9 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Modulo */
-
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Modulos', 'url' => ['index']];
+//$this->title = $model->id;
+$this->title = 'Material complementario';
+$this->params['breadcrumbs'][] = ['label' => 'Gestión de Módulos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

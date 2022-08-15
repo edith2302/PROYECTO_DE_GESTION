@@ -11,7 +11,8 @@ use app\models\Modulo;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Material complementario';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Gestión de Módulos', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modulo-index">
 
@@ -66,6 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
             [
+
+                'header'=>"Acciones",
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Modulo $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);

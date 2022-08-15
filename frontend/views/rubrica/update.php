@@ -7,7 +7,7 @@ use app\models\Rubrica;
 /* @var $modelRubrica app\models\Rubrica */
 
 $this->title = 'Modificar rúbrica: ' . $modelRubrica->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Rúbricas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Gestión de Rúbricas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $modelRubrica->nombre, 'url' => ['view', 'id' => $modelRubrica->id]];
 $this->params['breadcrumbs'][] = 'Modificar rúbrica';
 ?>

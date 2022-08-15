@@ -116,6 +116,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
 
                     
             [
+
+                'header'=>"Acción",
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                 'template'=>'{view}',
                 'urlCreator' => function ($action, $model, $key, $index, $column) {

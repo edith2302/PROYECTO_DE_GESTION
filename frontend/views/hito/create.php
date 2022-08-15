@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $modelsEvaluador app\models\Evaluador */
 
 $this->title = 'Agregar Hito';
-$this->params['breadcrumbs'][] = ['label' => 'Hitos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Gestión de Hitos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hito-create">

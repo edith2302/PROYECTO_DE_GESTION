@@ -11,7 +11,7 @@ use app\models\Item;
 /* @var $model app\models\Rubrica */
 
 $this->title = $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Rúbricas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Gestión de Rúbricas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

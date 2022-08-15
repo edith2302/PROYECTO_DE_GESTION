@@ -13,7 +13,7 @@ use app\models\Entrega;
 /* @var $model app\models\Hito */
 
 $this->title = $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Hitos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'gestión de Hitos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

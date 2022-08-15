@@ -178,7 +178,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             
             [
-                
+                'header'=>"Acción",
+                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                 'template'=>'{view}',
                 'urlCreator' => function ($action, Proyecto $model, $key, $index, $column) {

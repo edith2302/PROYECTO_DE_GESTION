@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Modulo */
 
 $this->title = 'Modificar Módulo: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Módulos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Gestión de Módulos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Modificar';
 ?>
