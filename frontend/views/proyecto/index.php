@@ -176,17 +176,41 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],*/
 
-            
             [
-                'header'=>"Acción",
+                'header'=>"Acciones",
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
-                'template'=>'{view}',
+                'template'=>'{view},{update}',
+                'urlCreator' => function ($action, Proyecto $model, $key, $index, $column) {
+                   // return Url::toRoute([$action, 'id' => $model->id]);
+                    if($action =='update'){
+                        return 'index.php?r=proyecto%2Fviewmodificar&id='.$model['id'];
+                    }
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }
+                
+            ],
+
+            /*[
+                'header'=>"Acción",
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+                'class' => ActionColumn::className(),
+                'template'=>'{view},{aprobar},{rechazar}',
+                'buttons' => [
+                    'rechazar' => function ($url, $model, $key) {
+                        return ('index.php?r=proyecto%2Frechazar&id='.$model['id']) ? Html::a('<img src="images/iconos/rechazar.PNG" width="40" height="25">', 'index.php?r=proyecto%2Frechazar&id='.$model['id']) : '';
+                    },
+                    'aprobar' => function ($url, $model, $key) {
+                        return ('index.php?r=proyecto%2Faprobar&id='.$model['id']) ? Html::a('<img src="images/iconos/aprobar.PNG" width="40" height="25">', 'index.php?r=proyecto%2Faprobar&id='.$model['id']) : '';
+                    },
+                ],
                 'urlCreator' => function ($action, Proyecto $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
+                }
+            ],*/
+
         ],
     ]); ?>
 

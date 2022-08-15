@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="proyecto-view">
+<div class="proyecto-viewmodificar2">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'estado',
 
-            /*[
+            [
                 'label'  => 'Estado',
                 'value'  => function ($model) {
                     switch ($model->estado) {
@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         
                     }
                 },
-            ],*/
+            ],
             //'disponibilidad',
 
             [
@@ -118,32 +118,26 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
 
-            
-            //'id_autor',
             [
                 'label'  => 'Autor',
                 'value'  => function ($model) {
                     return $model->autor->nombre." ".$model->autor->apellido;
                 },
-            ],
-
-            [
-                'label'  => 'Desarrollado por',
-                'value'  => function ($model) {
-                    $desarrollap = Desarrollarproyecto::find()->where(['id_proyecto' => $model->id])->one();
-                    $estudiante = Estudiante::find()->where(['id' => $desarrollap->id_estudiante])->one();
-                    $usuario = Usuario::find()->where(['id_usuario' => $estudiante->id_usuario])->one();
-
-                    return $usuario->nombre." ".$usuario->apellido;
-                },
-            ],
-
-           
+            ],  
         ],
     ]) ?>
 
-      <!--<p align="right">
-    <?= Html::a('Asignar profesor guía', ['create2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    </p>-->
+    <p align="right">
+
+        <?= Html::a('Cambiar estado', ['cambiarestado', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Está seguro que quiere cambiar el estado del proyecto '.'"'.$model->nombre.'"'.' ?',
+                'method' => 'post',
+            ],
+        ]) ?>
+
+        <?= Html::a('Asignar profesor guía', ['create2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    </p>
     
 </div>

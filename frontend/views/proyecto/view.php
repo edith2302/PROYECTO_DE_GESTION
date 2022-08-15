@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'estado',
 
-            /*[
+            [
                 'label'  => 'Estado',
                 'value'  => function ($model) {
                     switch ($model->estado) {
@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         
                     }
                 },
-            ],*/
+            ],
             //'disponibilidad',
 
             [
@@ -129,7 +129,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-<p align="right">
+    <!--<p align="right">
     
     <?= Html::a('Aprobar', ['aprobar', 'id' => $model->id], [
         'class' => 'btn btn-success',
@@ -148,6 +148,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
 
     <?= Html::a('Asignar profesor guía', ['create2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    </p>
+    </p>-->
     
 </div>

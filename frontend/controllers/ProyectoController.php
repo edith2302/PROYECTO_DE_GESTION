@@ -194,6 +194,81 @@ class ProyectoController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
+    public function actionViewmodificar($id)
+    {
+        $proyecto = Proyecto::findOne(['id'=>$id]);
+
+        //si no tiene profe guia y su estado es diferente de null pasa
+        if(($proyecto->id_profe_guia == null) && ($proyecto->estado != null)){
+            return $this->render('viewmodificar2', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+
+        //si ya tiene profe guia y su estado es null pasa
+        if(($proyecto->id_profe_guia != null) && ($proyecto->estado == null)){
+            return $this->render('viewmodificar3', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+
+        //si ya tiene profe guia y su estado es diferente de null pasa
+        if(($proyecto->id_profe_guia != null) && ($proyecto->estado != null)){
+            return $this->render('viewmodificar4', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+
+        return $this->render('viewmodificar', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Displays a single Proyecto model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewmodificar2($id)
+    {
+        return $this->render('viewmodificar2', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Displays a single Proyecto model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewmodificar3($id)
+    {
+        return $this->render('viewmodificar3', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Displays a single Proyecto model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewmodificar4($id)
+    {
+        return $this->render('viewmodificar4', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Displays a single Proyecto model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionViewocupado($id)
     {
         return $this->render('viewocupado', [
@@ -356,7 +431,7 @@ class ProyectoController extends Controller
         $model->estado = 1;
         $model->save();
 
-        Yii:: $app->session->setFlash('success','El proyecto se aprobó con éxito');
+        Yii:: $app->session->setFlash('success','El proyecto '.'"'.$model->nombre.'"'.' se aprobó con éxito');
         return $this->redirect(['view', 'id' => $model->id]);
     }
 
@@ -366,10 +441,35 @@ class ProyectoController extends Controller
         $model->estado = 2;
         $model->save();
         
-        Yii:: $app->session->setFlash('error','El proyecto se rechazó con éxito');
+        Yii:: $app->session->setFlash('success','El proyecto '.'"'.$model->nombre.'"'.' se rechazó con éxito');
         return $this->redirect(['view', 'id' => $model->id]);
     }
 
+    public function actionCambiarestado($id)
+    {
+        $model = $this->findModel($id);
+        //return $model->estado ;
+    
+        if($model->estado == 1){
+            //return "pasó 3";
+            $model->estado = 2;
+            //return "pasó 4";
+            $model->save();
+            Yii:: $app->session->setFlash('success','El proyecto '.'"'.$model->nombre.'"'.' se rechazó con éxito');
+
+        }else{ 
+
+            if($model->estado == 2){
+                //return "pasó 1";
+                $model->estado = 1;
+                $model->save();
+                Yii:: $app->session->setFlash('success','El proyecto '.'"'.$model->nombre.'"'.' se aprobó con éxito');
+            }
+        }
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+    
     /**
      * Updates an existing Proyecto model.
      * If update is successful, the browser will be redirected to the 'view' page.
