@@ -499,7 +499,7 @@ Modal::end();
             <div class="footer" id="foot">
                 <img src="images/logo_ubb.png" width="235" height="70" alt="UBB">
                 <!--p class="copyright">Sistema gestión de Anteproyecto de título</p>-->
-                <p class="copyright" title= "Proyecto de título desarrollado por memoristas Edith Parra y Girleyn Molina, Ingeniería Civil Informática">Proyecto de título desarrollado por memoristas Edith Parra y Girleyn Molina, Ingeniería Civil Informática </p>
+                <p class="copyright" title= "Proyecto de título desarrollado por  Edith Parra y Girleyn Molina, ">Proyecto de título desarrollado por Edith Parra y Girleyn Molina</p>
             </div>
         </div>
 

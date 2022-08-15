@@ -148,7 +148,7 @@ class EvaluarController extends Controller
                
         }
         //return "pasó aqui 1";
-        Yii:: $app->session->setFlash('success','Ya existe una evaluación de ésta entrega');
+        Yii:: $app->session->setFlash('success','Ya calificó ésta entrega');
         //return $this->redirect(['rubrica/viewevaluacionenviada', 'idr' => $rubrica->id] );
         return $this->redirect(['evaluar/view', 'id' =>$evaluacion->id] );
     

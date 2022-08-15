@@ -97,7 +97,7 @@
             "version": "v1.10.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fullcalendar/fullcalendar-scheduler.git",
+                "url": "git@github.com:fullcalendar/fullcalendar-scheduler.git",
                 "reference": "56c3aef7610de850835ac97ad29ff45bf3cbe3cc"
             },
             "dist": {
@@ -6599,5 +6599,5 @@
         "php": ">=5.6.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.1.0"
 }

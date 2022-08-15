@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Hitos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="hito-view">
+<div class="hito-viewevprofeg">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{link}',
                 'buttons' => [
                     'link' => function ($url, $model, $key) {
-                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', 'archivos/'.$model['evidencia'], ['target' => '_blank']) : '';
+                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', "archivos/".$model['evidencia'], ['target' => '_blank']) : '';
                     },
                 ],
             ],
@@ -142,15 +142,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+                'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                 'template'=>'{view}',
                 'urlCreator' => function ($action, $model, $key, $index, $column) {
                     //return Url::toRoute([$action, 'id' => $model['id']]);
-                    $url ='index.php?r=entrega%2Fview2&id='.$model['id'];
+                    
+                    
+                    //$url ='index.php?r=entrega%2Fview2&id='.$model['id'];
+                    $url ='index.php?r=entrega%2Fview&id='.$model['id'];
                     return $url;
                 }
             ],  
+            [
+                'header'=>"Evaluar",
+                'headerOptions' => ['width' => '70px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+                'class' => ActionColumn::className(),
+                'template'=>'{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ('index.php?r=rubrica%2Fevaluar&ide='.$model['id']) ? Html::a('<img src="images/iconos/evaluar.PNG" width="20" height="20">', 'index.php?r=rubrica%2Fevaluar&ide='.$model['id']) : '';
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

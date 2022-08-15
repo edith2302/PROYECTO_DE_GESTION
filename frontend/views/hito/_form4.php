@@ -27,7 +27,7 @@ jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
 $this->registerJs($js);
 ?>
 
-<div class="hito-form">
+<div class="hito-form4">
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
@@ -120,7 +120,7 @@ $this->registerJs($js);
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-user-circle-o "></i>  Evaluador
-            <a  class="pull-right add-item btn btn-success btn-sm"><i class="fa fa-plus"></i> Agregar evaluador</a>
+           <!-- <a  class="pull-right add-item btn btn-success btn-sm"><i class="fa fa-plus"></i> Agregar evaluador</a> -->
             <div class="clearfix"></div>
         </div>
         <div class="panel-body container-items"><!-- widgetContainer -->

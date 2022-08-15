@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Modulo */
@@ -27,15 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-<p align="right">
-        <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '¿Está seguro/a de eliminar el archivo?',
-                'method' => 'post',
-            ],
-        ]) ?>
-</p>
-
+    <p align="right">
+            <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => '¿Está seguro/a de eliminar el archivo?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+    </p>
 </div>

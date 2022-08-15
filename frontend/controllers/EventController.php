@@ -118,15 +118,19 @@ class EventController extends Controller
     {
         $model = $this->findModel($id);
         $hito = Hito::findOne(['id'=>$idh]);
-        /*if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }*/
-
         $model->title = $hito->nombre;
         $model->description = $hito->descripcion.". Hora límite: ".$hito->hora_limite." hrs.";
         $model->created_date = $hito->fecha_limite;
-        $model->id_hito = $id;
+        
+        $model->id_hito = $idh;
+
         $model->save();
+        
+        /*if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            Yii:: $app->session->setFlash('success','El hito se ha modificado con éxito');
+            return $this->redirect(['hito/view', 'id' => $idh]);
+        }*/
+      
         Yii:: $app->session->setFlash('success','El hito se ha modificado con éxito');
         return $this->redirect(['hito/view', 'id' => $idh]);
 

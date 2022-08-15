@@ -16,11 +16,11 @@ use app\models\Profesorasignatura;
 use yii\data\SqlDataProvider;
 use app\models\Entrega;
 use app\models\Hito;
-
-
 use frontend\controllers\Exception;
-
 use Yii;
+
+use app\models\Evaluar;
+
 /**
  * RubricaController implements the CRUD actions for Rubrica model.
  */
@@ -550,6 +550,13 @@ class RubricaController extends Controller
      */
     public function actionEvaluar(/*$idr,*/$ide)
     {
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $evaluacion = Evaluar::findOne(['id_entrega'=>$ide, 'id_usuario'=>$usuario]);
+
+        if($evaluacion != null){
+            Yii:: $app->session->setFlash('success','Ya calificó ésta entrega');
+            return $this->redirect(['evaluar/view', 'id' =>$evaluacion->id] );
+        }
         //$rubrica = Rubrica::find()->where(['id' => $hito->id_rubrica])->one(); 
         $modelentrega = Entrega::find()->where(['id' => $ide])->one(); 
         //return $modelentrega['id_hito'];

@@ -4,6 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
+use yii\helpers\Url;
+
+use app\models\Proyecto;
+use app\models\Entrega;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Hito */
@@ -16,6 +20,20 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="hito-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <p align="right">
+        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Está seguro/a de que desea eliminar el hito '.'"'.$model->nombre.'"'.'?',
+                'method' => 'post',
+            ],
+        ]) ?>
+         <?= Html::a('Agregar evaluador', ['create3', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+    </p>
+
+
 
     <?= DetailView::widget([
         'model' => $model,
@@ -68,57 +86,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ],
     ]) ?>
-    <p align="right">
-        
-
-        <?= Html::a('<a class="btn btn-primary" href="index.php?r=entrega/entregashito&id=' . $model->id . '">Ver Entregas</a>')?>
-       
-        
-    </p>
-    
-
+   
 </div>
-
-<?= GridView::widget([
-        'dataProvider' => $modelhito,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-
-            [
-
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{link}',
-                'buttons' => [
-                    'link' => function ($url, $model, $key) {
-                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', 'archivos/'.$model['evidencia'], ['target' => '_blank']) : '';
-                    },
-                ],
-            ],
-
-
-            [
-                'attribute'=>'fecha_entrega',
-                'value'=>function ($model) { return $model['fecha_entrega']; },
-                //'filter'=>false,
-                'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],
-  
-            [
-                'attribute'=>'hora_entrega',
-                'value'=>function ($model) { return $model['hora_entrega']; },
-                //'filter'=>false,
-                'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],
-
-
-            
-        ],
-    ]); ?>
 

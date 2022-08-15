@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Hitos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="hito-view">
+<div class="hito-viewprofeg">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{link}',
                 'buttons' => [
                     'link' => function ($url, $model, $key) {
-                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model['evidencia'], ['target' => '_blank']) : '';
+                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', "archivos/".$model['evidencia'], ['target' => '_blank']) : '';
                     },
                 ],
             ],

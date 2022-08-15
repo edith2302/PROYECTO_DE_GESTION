@@ -26,7 +26,7 @@ jQuery(".dynamicform_wrapper").on("afterDelete", function(e) {
 $this->registerJs($js);
 ?>
 
-<div class="rubrica-form">
+<div class="rubrica-form2">
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 

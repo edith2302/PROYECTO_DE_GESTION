@@ -17,12 +17,13 @@ use app\models\Proyecto;
 use app\models\Evaluar;
 use yii2mod\alert\Alert;
 use yii\data\SqlDataProvider;
-
 use app\models\Hito;
 use app\models\Evaluador;
 use app\models\User;
 use app\models\Profesoricinf;
 use app\models\Profesorguia;
+
+use app\models\Usuario;
 
 /**
  * EntregaController implements the CRUD actions for Entrega model.
@@ -58,6 +59,23 @@ class EntregaController extends Controller
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+    /**
+     * Lists all Entrega models.
+     *
+     * @return string
+     */
+    public function actionIndex2()
+    {
+        $searchModel = new EntregaSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index2', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -114,7 +132,8 @@ where estudiante.id_usuario = 6107)
     //vista que muestra el botón de evaluar
     public function actionView($id)
     {
-        $entrega = Entrega::findOne(['id'=>$id]);
+        //validación evaluador
+       /* $entrega = Entrega::findOne(['id'=>$id]);
         $proyecto = Proyecto::findOne(['id'=>$entrega->id_proyecto]);
         $hito = Hito::findOne(['id'=>$entrega->id_hito]);
         $usuario = Yii::$app->user->identity->id_usuarioo;
@@ -131,17 +150,6 @@ where estudiante.id_usuario = 6107)
             'sql' => 'select * from entrega 
             where id_hito = ' .$id,
         ]);
-
-            
-        /*
-            '1' => 'Profesor de asignatura',--------> se evalua antes 
-            '5' => 'Profesor Guía',
-            '3' => 'Profesor ICINF',--------> se evalua antes 
-            '4' => 'Comisión Evaluadora',
-        */
-
-
-
 
         //si no existe una evaluación del usuario a la entrega seleccionada, pasa
         if($evaluacion==null){ //(1)
@@ -175,7 +183,36 @@ where estudiante.id_usuario = 6107)
                     ]);
                 }
             } 
-        }//termina if(1)
+        }//termina if(1)*/
+        $model = Entrega::findOne(['id'=>$id]);
+        $proyecto = Proyecto::findOne(['id' => $model['id_proyecto']]);
+        $desarrollap = Desarrollarproyecto::find()->where(['id_proyecto' => $proyecto->id])->one();
+        $estudiante = Estudiante::find()->where(['id' => $desarrollap->id_estudiante])->one();
+        $usuario = Usuario::find()->where(['id_usuario' => $estudiante->id_usuario])->one();
+
+        //-----------------conexion bdd----------------------
+        $bd_name = "yii2advanced";
+        $bd_table = "item";
+        $bd_location = "localhost";
+        $bd_user = "root";
+        $bd_pass = "";
+
+        // conectarse a la bd
+        $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+        if(mysqli_connect_errno()){
+            die("Connection failed: ".mysqli_connect_error());
+        }
+
+        $count = $conn->query("SELECT COUNT(*) as total from desarrollarproyecto WHERE desarrollarproyecto.id_proyecto = ".$proyecto->id."  GROUP BY desarrollarproyecto.id_proyecto");
+
+        while($cantidad = mysqli_fetch_array($count )){
+            $total = $cantidad['total'];
+        } 
+        //-------------------------------------------------------------------
+        //si hay dos incritos, entonces muestra una vista con ambos nombres
+        if($total == 2){
+            return $this->redirect(['view3', 'id' => $id]);
+        }
 
         return $this->redirect(['view2', 'id' => $id]);
                 
@@ -197,6 +234,30 @@ where estudiante.id_usuario = 6107)
 
         //SELECT AVG(nota), evaluar.comentarios from evaluar WHERE evaluar.id_entrega=12 GROUP BY evaluar.id_entrega
         return $this->render('view2', [
+            //'model' => $this->findModel($id),
+            'model' => $entrega,
+            'modelnota' => $modelnota,
+            'modelcomentarios' => $modelcomentarios,
+            
+        ]);
+    }
+
+    public function actionView3($id)
+    {
+        $entrega = Entrega::findOne(['id'=>$id]);
+        
+        $modelnota = new SqlDataProvider([
+            //'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
+            'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios, AVG(nota) as nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
+            
+        ]);
+
+        $modelcomentarios = new SqlDataProvider([
+            'sql' => 'SELECT evaluar.comentarios FROM `evaluar` WHERE evaluar.id_entrega = '.$entrega->id,
+        ]);
+
+        //SELECT AVG(nota), evaluar.comentarios from evaluar WHERE evaluar.id_entrega=12 GROUP BY evaluar.id_entrega
+        return $this->render('view3', [
             //'model' => $this->findModel($id),
             'model' => $entrega,
             'modelnota' => $modelnota,

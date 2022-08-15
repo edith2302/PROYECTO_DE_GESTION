@@ -26,12 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           // ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
             //'archivo',
             //'descripcion',
             //'id_profesor',
+
+            [
+                'header'=>"Archivo adjunto",
+                'headerOptions' => ['width' => '105px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:5px 0px 0px 0px;text-align: center;'],
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ($model['archivo'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="42" height="42">', 'modulos/'.$model['archivo'], ['target' => '_blank']) : '';
+                    },
+                ],
+            ],/*
 
             [
                 'label'=>'Archivo',
@@ -41,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],
+            ],*/
 
             [
                 'label'=>'Descripción',

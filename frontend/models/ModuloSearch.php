@@ -47,7 +47,7 @@ class ModuloSearch extends Modulo
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination'=>[
-                'pageSize'=>2
+                'pageSize'=>10
             ]
         ]);
 

@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Entregas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="entrega-view2">
+<div class="entrega-view3">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -50,14 +50,38 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
-                'label'  => 'Estudiante',
+                'label'  => 'Estudiantes',
                 'value'  => function ($model) {
                     $proyecto = Proyecto::findOne(['id' => $model['id_proyecto']]);
                     $desarrollap = Desarrollarproyecto::find()->where(['id_proyecto' => $proyecto->id])->one();
-                    $estudiante = Estudiante::find()->where(['id' => $desarrollap->id_estudiante])->one();
-                    $usuario = Usuario::find()->where(['id_usuario' => $estudiante->id_usuario])->one();
 
-                    return "--".$usuario->nombre." ".$usuario->apellido;
+                    //-----------------conexion bdd----------------------
+                    $bd_name = "yii2advanced";
+                    $bd_table = "item";
+                    $bd_location = "localhost";
+                    $bd_user = "root";
+                    $bd_pass = "";
+
+                    // conectarse a la bd
+                    $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+                    if(mysqli_connect_errno()){
+                        die("Connection failed: ".mysqli_connect_error());
+                    }
+
+                    $datos = $conn->query("SELECT * from desarrollarproyecto WHERE desarrollarproyecto.id_proyecto = ".$proyecto->id);
+
+                    $nombres = "";
+
+
+                    while($students = mysqli_fetch_array($datos )){
+                        $estudiante = Estudiante::find()->where(['id' => $students['id_estudiante']])->one();
+                        $usuario = Usuario::find()->where(['id_usuario' => $estudiante->id_usuario])->one();
+                        $nombres = $nombres."  -- ".$usuario->nombre." ".$usuario->apellido." ";
+                    } 
+                    //-------------------------------------------------------------------
+                    
+
+                    return $nombres;
                 },
             ],
             'comentarios', 
@@ -100,11 +124,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $comentario;
                 },
             ],
-            
         ],
     ]) ?>
 
 </div>
+
 
 <!--<div>
     <br><h3><p align="left"><?= ("Evaluación") ?></p></h3></br>

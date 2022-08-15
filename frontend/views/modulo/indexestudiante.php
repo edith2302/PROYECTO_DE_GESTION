@@ -40,6 +40,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ],*/
 
             //'descripcion',
+            [
+                'header'=>"Archivo adjunto",
+                'headerOptions' => ['width' => '105px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:5px 0px 0px 0px;text-align: center;'],
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ($model['archivo'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', 'modulos/'.$model['archivo'], ['target' => '_blank']) : '';
+                    },
+                ],
+            ],
 
             [
                 'attribute'=>'Descripción',
@@ -51,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
 
-            [
+            /*[
 
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{link}',
@@ -60,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return ($model->archivo != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model->archivo, ['target' => '_blank']) : '';
                     },
                 ],
-            ],
+            ],*/
         ],
     ]); ?>
 

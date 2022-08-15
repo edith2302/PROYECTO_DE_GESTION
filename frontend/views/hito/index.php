@@ -72,15 +72,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'label'=>'Fecha habilitación',
-                'value'=>function ($model) { return $model->fecha_habilitacion; },
+                'value'=>function ($model) { return $model->fecha_habilitacion." / ". $model->hora_habilitacion." hrs"; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'headerOptions' => ['width' => '250px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
 
-            [
+            /*[
                 'label'=>'Hora habilitación',
                 'value'=>function ($model) { return $model->hora_habilitacion; },
                 //'filter'=>false,
@@ -88,19 +88,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 00px;text-align: center;'],
-            ],
+            ],*/
 
             [
                 'label'=>'Fecha límite',
-                'value'=>function ($model) { return $model->fecha_limite; },
+                'value'=>function ($model) { return $model->fecha_limite." / ". $model->hora_limite." hrs"; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
+                'headerOptions' => ['width' => '250px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 00px;text-align: center;'],
             ],
 
-            [
+           /* [
                 'label'=>'Hora límite',
                 'value'=>function ($model) { return $model->hora_limite; },
                 //'filter'=>false,
@@ -108,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
-            ],
+            ],*/
 
              //'tipo_hito',
             [
@@ -154,11 +154,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             [
+                'header'=>"Acciones",
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                
                 'urlCreator' => function ($action, Hito $model, $key, $index, $column) {
+                   // return Url::toRoute([$action, 'id' => $model->id]);
+                    if($action =='update'){
+                        return 'index.php?r=hito%2Fviewmodificar&id='.$model['id'];
+                    }
                     return Url::toRoute([$action, 'id' => $model->id]);
                 }
                 

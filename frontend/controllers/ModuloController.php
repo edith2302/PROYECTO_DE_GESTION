@@ -12,6 +12,8 @@ use app\models\UploadForm;
 use yii\web\UploadedFile;
 use Yii;
 
+use app\models\ProfesorAsignatura;
+
 /**
  * ModuloController implements the CRUD actions for Modulo model.
  */
@@ -84,6 +86,10 @@ class ModuloController extends Controller
     {
         $model = new Modulo();
         $horaActual = date('H_i_s');
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+        $profesor= ProfesorAsignatura::find()->where(['id_usuario' => $logueado])->one();
+        $model->id_profesor= $profesor->id;
+
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -102,7 +108,10 @@ class ModuloController extends Controller
 
             $model->save(false);
 
-            return $this->redirect('../views/modulo');
+            Yii:: $app->session->setFlash('success','¡Módulo generado con éxito!');
+            return $this->redirect(['view', 'id' => $model->id] );  
+    
+            //return $this->redirect('../views/modulo');
         }
 
         return $this->render('create', [

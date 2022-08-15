@@ -18,7 +18,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'descripcion')->textarea(['maxlength' => true]) ?>
 
-    <div class="col-md">
+   <!-- <div class="col-md">
             <?= $form->field($model, 'id_profesor')
                 ->dropDownList(
                     ArrayHelper::map(
@@ -30,13 +30,13 @@ use yii\helpers\ArrayHelper;
                         
                     ),
                     ['prompt' => 'Seleccione profesor'])?>
-    </div>
+    </div>-->
 
     <?= $form->field($model, 'archivo')->fileInput(['maxlength' => true]) ?>
    
     <div class="form-group">
     <p align="right">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-primaryy']) ?>
 
     <p>
     </div>

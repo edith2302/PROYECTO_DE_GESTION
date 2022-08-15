@@ -6,6 +6,7 @@ use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use yii\helpers\Url;
 
+use app\models\Proyecto;
 use app\models\Entrega;
 
 /* @var $this yii\web\View */
@@ -16,9 +17,22 @@ $this->params['breadcrumbs'][] = ['label' => 'Hitos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="hito-view">
+<div class="hito-viewev">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+   <!-- <p align="right">
+        <?= Html::a('Ver entrega', ['entrega/entregashito', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Está seguro/a de que deseas eliminar éste elemento?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>-->
+
 
     <?= DetailView::widget([
         'model' => $model,
@@ -60,29 +74,41 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             //'id_rubrica',
 
-            /*[
+            [
                 'label'  => 'Rúbrica',
                 'value'  => function ($model) {
                     return $model->rubrica->nombre;
                 },
-            ],*/
+            ],
             //'id_profe_asignatura',
 
 
         ],
     ]) ?>
+    <!--<p align="right">
+        <?= Html::a('Ver entrega', ['entrega/entregashito', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Está seguro/a de que deseas eliminar éste elemento?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>-->
+   
 </div>
-
-
-    <?= GridView::widget([
-        'dataProvider' => $modelentregahito,
-        //'dataProvider' => $modelnota,
+<div>
+    <br><h2><p align="center"><?= ("Entregas del hito") ?></p></h2></br>
+</div>
+<?= GridView::widget([
+        'dataProvider' => $modelhito,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-
             [
-
+                'header'=>"Archivo adjunto",
+                'headerOptions' => ['width' => '105px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:5px 0px 0px 0px;text-align: center;'],
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{link}',
                 'buttons' => [
@@ -92,27 +118,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
 
-            /*[
-                'attribute'=>'id',
-                'value'=>function ($model) { return $model['id']; },
-                //'filter'=>false,
-                'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ],*/
 
             [
-                'attribute'=>'fecha_entrega',
-                'value'=>function ($model) { return $model['fecha_entrega']; },
-                //'filter'=>false,
+                //'attribute'=>'fecha_entrega',
+                'header'=>"Fecha y hora de entrega",
+                'value'=>function ($model) { return $model['fecha_entrega']."  /  ".$model['hora_entrega']." hrs"; },
                 'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'headerOptions' => ['width' => '200px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
             ],
   
-            [
+           /* [
                 'attribute'=>'hora_entrega',
                 'value'=>function ($model) { return $model['hora_entrega']; },
                 //'filter'=>false,
@@ -120,37 +136,45 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
-            ],
-            
-           
-            /*[
-                'attribute'=>'nota',
-                'value'=>function ($model) {
-                    if($model['nota'] !=null){
-                        return "con nota";
-                    }
-                    //return $model['hora_entrega']; 
-                    return "sin nota";
-                },
-                //'filter'=>false,
-                'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
-            ], */  
-
+            ],*/
 
             [
-                'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+                //'attribute'=>'id_proyecto',
+                'header'=>"Proyecto",
+                'value'=>function ($model) {
+                    $proyecto = Proyecto::findOne(['id' => $model['id_proyecto']]);
+                    return $proyecto->nombre;
+                },
+                'format'=>'raw',
+                'headerOptions' => ['width' => '350px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
+            ],
+
+            [
+                'header'=>"Acciones",
+                'headerOptions' => ['width' => '80px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                 'template'=>'{view}',
                 'urlCreator' => function ($action, $model, $key, $index, $column) {
                     //return Url::toRoute([$action, 'id' => $model['id']]);
-                    $url ='index.php?r=entrega%2Fview2&id='.$model['id'];
+                    $url ='index.php?r=entrega%2Fview&id='.$model['id'];
                     return $url;
                 }
-            ],  
+            ],
+            [
+                'header'=>"Evaluar",
+                'headerOptions' => ['width' => '70px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+                'class' => ActionColumn::className(),
+                'template'=>'{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ('index.php?r=rubrica%2Fevaluar&ide='.$model['id']) ? Html::a('<img src="images/iconos/evaluar.PNG" width="20" height="20">', 'index.php?r=rubrica%2Fevaluar&ide='.$model['id']) : '';
+                    },
+                ],
+            ],
+            
         ],
     ]); ?>
 

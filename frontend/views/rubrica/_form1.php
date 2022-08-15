@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="rol-form">
+<div class="rubrica-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

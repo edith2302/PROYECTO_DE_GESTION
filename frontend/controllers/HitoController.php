@@ -26,6 +26,10 @@ use app\models\Model;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
+use app\models\Evaluar;
+use app\models\Profesoricinf;
+use app\models\Usuario;
+
 
 //use common\widgets\Alert;
 
@@ -172,10 +176,157 @@ class HitoController extends Controller
             'sql' => "select * from entrega 
             where id_hito = ' $id'",
         ]);
-        //return print_r( $modelhito);
+
+        //-------------------------validación evaluador--------------------------------------
+
+        $hito = Hito::findOne(['id'=>$id]);
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $user = User::findOne(['id_usuarioo'=>$usuario]);
+
+        $evaluador = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>$user->role]);
+        $evaluacion = Evaluar::findOne(['id_entrega'=>$id, 'id_usuario'=>$usuario]);
+
+        $comision = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>4]);
+        $profe_guia = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>5]);
+        $profe_asignatura = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>1]);
+
+        $modelhito = new SqlDataProvider([
+            'sql' => 'select * from entrega 
+            where id_hito = ' .$id,
+        ]);
+
+
+            //si el rol del usuario logueado es (1) profe asignatura y esta autorizado para evaluar, pasa
+            if($profe_asignatura != null){
+                if($user->role == 1){
+                    return $this->render('viewpev', [
+                        'model' => $this->findModel($id),
+                        'modelhito' => $modelhito,
+                    ]);
+    
+                }
+            }
+
+
+            //si el rol del usuario logueado está autorizado para evaluar, le aparece la opción evaluar
+            if($evaluador!=null){
+                return $this->render('viewev', [
+                    'model' => $this->findModel($id),
+                    'modelhito' => $modelhito,
+                ]);
+
+            }
+
+            //si el rol autorizado para evaluar es la comisión (4), entonces revisa que el rol del usuario logueado sea profesor ICINF(3)
+            if($comision !=null){
+                if($user->role == 3){
+                    return $this->render('viewev', [
+                        'model' => $this->findModel($id),
+                        'modelhito' => $modelhito,
+                    ]);
+                }
+            }
+
+
+            //si el rol autorizado para evaluar es el profe guía, entonces pregunta si el id del usuario logueado es el mismo del profe ICINF asignado como profe guia 
+
+            //$profguia = Profesoricinf::findOne(['id'=>$proyecto->id_profe_guia]);
+            if($profe_guia != null){
+                return $this->redirect(['viewevprofeg', 'id' => $id]);
+                /*if($profguia->id_usuario == $usuario){
+                    return $this->render('viewev', [
+                        'model' => $this->findModel($id),
+                        'modelhito' => $modelhito,
+                    ]);
+                }*/
+            } 
+        
+        
+        //---------------------------fin validación--------------------------------------
+        $rolUser = $user->role;
+        if($rolUser == 1){
+            return $this->render('viewpa', [
+                'model' => $this->findModel($id),
+                'modelhito' => $modelhito,
+            ]);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
             'modelhito' => $modelhito,
+        ]);
+    
+    }
+
+      /**
+     * Displays a single Hito model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewpa($id)
+    { //muestra las entregras, el profe las puede eliminar
+        $modelhito = new SqlDataProvider([
+            'sql' => "select * from entrega 
+            where id_hito = ' $id'",
+        ]);
+        //return print_r( $modelhito);
+        return $this->render('viewpa', [
+            'model' => $this->findModel($id),
+            'modelhito' => $modelhito,
+        ]);
+    
+    }
+
+     /**
+     * Displays a single Hito model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewpev($id)
+    { //muestra las entregras, las que se pueden evaluar y eliminar
+        $modelhito = new SqlDataProvider([
+            'sql' => "select * from entrega 
+            where id_hito = ' $id'",
+        ]);
+        //return print_r( $modelhito);
+        return $this->render('viewpev', [
+            'model' => $this->findModel($id),
+            'modelhito' => $modelhito,
+        ]);
+    
+    }
+
+     /**
+     * Displays a single Hito model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewev($id)
+    { //muestra las entregras, las que se pueden evaluar
+        $modelhito = new SqlDataProvider([
+            'sql' => "select * from entrega 
+            where id_hito = ' $id'",
+        ]);
+        //return print_r( $modelhito);
+        return $this->render('viewev', [
+            'model' => $this->findModel($id),
+            'modelhito' => $modelhito,
+        ]);
+    
+    }
+
+    /**
+     * Displays a single Hito model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewmodificar($id)
+    {
+        return $this->render('viewmodificar', [
+            'model' => $this->findModel($id),
         ]);
     
     }
@@ -250,6 +401,29 @@ class HitoController extends Controller
             'model' => $this->findModel($id),
             'modelentregahito' => $modelentregahito,
             //'modelnota' => $modelnota,
+        ]);
+        
+    }
+
+    public function actionViewevprofeg($id)
+    {   //$id : el id corresponde al hito
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $profeguia = Profesorguia::findOne(['id_usuario'=>$usuario]);
+        $proyecto = Proyecto::findOne(['id_profe_guia'=>$profeguia->id]);
+        $entrega = Entrega::findOne(['id_proyecto'=>$proyecto->id, 'id_hito'=>$id]);
+
+        $modelentregahito = new SqlDataProvider([
+            'sql' => 'SELECT * FROM `entrega`  WHERE entrega.id_proyecto ='.$proyecto->id.' and entrega.id_hito='.$id, 
+        ]);
+
+        $modelnota = new SqlDataProvider([
+            'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
+            
+        ]);
+
+        return $this->render('viewprofeg', [
+            'model' => $this->findModel($id),
+            'modelentregahito' => $modelentregahito,
         ]);
         
     }
@@ -450,6 +624,60 @@ class HitoController extends Controller
             'modelsEvaluador' => (empty($modelsEvaluador)) ? [new Evaluador] : $modelsEvaluador
         ]);
         //------------------------------------------------------------
+    }
+
+
+
+    /**
+     * Creates a new Hito model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return string|\yii\web\Response
+     */
+    public function actionCreate3($id)
+    {
+        $modelHito = $this->findModel($id);
+        $modelsEvaluador = [new Evaluador];
+        
+
+        if ($modelHito->load(Yii::$app->request->post(),'')) {
+
+            $modelsEvaluador = Model::createMultiple(Evaluador::classname());
+            Model::loadMultiple($modelsEvaluador, Yii::$app->request->post());
+
+            // validate all models
+            $valid = $modelHito->validate();
+            $valid = Model::validateMultiple($modelsEvaluador) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+                    if ($flag = $modelHito->save(false)) {
+                        foreach ($modelsEvaluador as $modelEvaluador) {
+                            $modelEvaluador->id_rubrica = $modelHito->id;
+                            if (! ($flag = $modelEvaluador->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($flag) {
+                        $transaction->commit();
+                        Yii:: $app->session->setFlash('success','¡Evaluadores asignados con éxito!');
+                        return $this->redirect(['view', 'id' => $modelHito->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+        
+        return $this->render('create3', [
+            'modelHito' => $modelHito,
+            'modelsEvaluador' => (empty($modelsEvaluador)) ? [new Item] : $modelsEvaluador
+        ]);
+
     }
 
     /**

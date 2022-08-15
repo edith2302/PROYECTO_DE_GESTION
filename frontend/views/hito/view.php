@@ -21,8 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p align="right">
-        <!--<?= Html::a('Ver entrega', ['entrega/entregashito', 'id' => $model->id], ['class' => 'btn btn-success']) ?>-->
+   <!-- <p align="right">
+        <?= Html::a('Ver entrega', ['entrega/entregashito', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </p>-->
 
 
     <?= DetailView::widget([
@@ -113,7 +113,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{link}',
                 'buttons' => [
                     'link' => function ($url, $model, $key) {
-                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model['evidencia'], ['target' => '_blank']) : '';
+                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', 'archivos/'.$model['evidencia'], ['target' => '_blank']) : '';
                     },
                 ],
             ],
@@ -155,24 +155,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '80px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
-                'template'=>'{view}, {delete}',
+                'template'=>'{view}',
                 'urlCreator' => function ($action, $model, $key, $index, $column) {
                     //return Url::toRoute([$action, 'id' => $model['id']]);
                     $url ='index.php?r=entrega%2Fview&id='.$model['id'];
                     return $url;
                 }
-            ],
-            [
-                'header'=>"Evaluar",
-                'headerOptions' => ['width' => '70px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
-                'class' => ActionColumn::className(),
-                'template'=>'{link}',
-                'buttons' => [
-                    'link' => function ($url, $model, $key) {
-                        return ('index.php?r=rubrica%2Fevaluar&ide='.$model['id']) ? Html::a('<img src="images/iconos/evaluar.PNG" width="20" height="20">', 'index.php?r=rubrica%2Fevaluar&ide='.$model['id']) : '';
-                    },
-                ],
             ],
             
         ],

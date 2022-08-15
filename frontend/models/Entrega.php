@@ -55,7 +55,7 @@ class Entrega extends \yii\db\ActiveRecord
             'evidencia' => 'Archivo adjunto',
             'fecha_entrega' => 'Fecha entrega',
             'hora_entrega' => 'Hora entrega',
-            'comentarios' => 'Comentarios',
+            'comentarios' => 'Comentarios de la entrega',
             'nota' => 'Nota',
             'id_proyecto' => 'Proyecto',
             'id_hito' => 'Hito',
