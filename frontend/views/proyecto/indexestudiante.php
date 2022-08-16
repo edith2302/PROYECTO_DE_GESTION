@@ -10,7 +10,7 @@ use app\models\Proyecto;
 /* @var $searchModel app\models\ProyectoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Propuestas de proyectos';
+$this->title = 'Propuestas de proyecto';
 
 $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudiante']];
 
@@ -21,6 +21,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <p align="right">
+        <?= Html::a('Agregar propuesta', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
     
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -115,7 +118,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
             ],
 
                     
-            [
+            /*[
 
                 'header'=>"Acción",
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
@@ -129,13 +132,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
 
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 10px 10px 10px;text-align: center;'],
-            ],
+            ],*/
         ],
     ]); ?>
 
-    <p align="right">
-        <?= Html::a('Agregar propuesta', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
 
 </div>

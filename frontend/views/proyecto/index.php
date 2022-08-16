@@ -10,7 +10,7 @@ use app\models\Proyecto;
 /* @var $searchModel app\models\ProyectoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Lista propuestas de proyectos';
+$this->title = 'Propuestas de proyecto';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="proyecto-index">

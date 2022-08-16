@@ -238,17 +238,17 @@ Modal::end();
                             </ul>
                         </li>-->
                     <li>
-                     <?= Html::a('Mi Perfil', Url::to(['/usuario/mi-perfil']),['class'=>'icon fa-user-circle']) ?>
+                     <?= Html::a(' Mi Perfil', Url::to(['/usuario/mi-perfil']),['class'=>'icon fa-user-circle']) ?>
                            
                     </li>
 
                     <li>
-                    <?= Html::a('Calendario', Url::to(['/event/index'])) ?>
+                    <?= Html::a(' Calendario', Url::to(['/event/index']),['class'=>"icon fa-calendar" ]) ?>
                     </li>
 
                     <li>
 
-                        <span  class="opener"><span class="icon fa-hand-o-up"> Participantes</span></span>
+                        <span  class="opener"><span class="icon fa-users"> Participantes</span></span>
                         <ul id="estudiantes">
                             <li>
                                 <?= Html::a('Lista de estudiantes', Url::to(['/usuario/index2'])) ?>
@@ -264,16 +264,13 @@ Modal::end();
                   <?php if (!Yii::$app->user->isGuest):?> 
                     <?php if (Yii::$app->user->identity->role == 1):?>
                     <li>
-                        <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
-                        <ul id="proyecto">
+                        
 
-                            <li>
-                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/index'])) ?>
-                            </li>
-
+                           
+                                <?= Html::a(' Propuestas de proyecto', Url::to(['/proyecto/index']),['class'=>'icon fa-lightbulb-o']) ?>
                             
 
-                        </ul>
+            
                     </li>
                    
                     <li>
