@@ -175,7 +175,7 @@ class ProyectoController extends Controller
      */
     public function actionView($id)
     {
-        $proyecto = Proyecto::find()->where(['id' => $id])->one();
+        /*$proyecto = Proyecto::find()->where(['id' => $id])->one();
         $proyectoDesarro = Desarrollarproyecto::find()->where(['id_proyecto' => $id])->one();
         
         if($proyectoDesarro != null){
@@ -183,6 +183,46 @@ class ProyectoController extends Controller
                 'model' => $this->findModel($id),
             ]);
         }
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);*/
+
+         //-----------------conexion bdd----------------------
+        $bd_name = "yii2advanced";
+        $bd_table = "item";
+        $bd_location = "localhost";
+        $bd_user = "root";
+        $bd_pass = "";
+
+        // conectarse a la bd
+        $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+        if(mysqli_connect_errno()){
+            die("Connection failed: ".mysqli_connect_error());
+        }
+
+        $count = $conn->query("SELECT COUNT(*) as total from desarrollarproyecto WHERE desarrollarproyecto.id_proyecto = ".$id."  GROUP BY desarrollarproyecto.id_proyecto");
+
+        while($cantidad = mysqli_fetch_array($count )){
+            $total = $cantidad['total'];
+        } 
+        //-------------------------------------------------------------------
+
+        //si hay dos incritos, entonces muestra una vista con ambos nombres
+        if($total == 2){
+            //return $this->redirect(['viewocupado2', 'id' => $id]);
+            return $this->render('viewocupado2', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+
+        //si hay un incrito, entonces muestra una vista con el nombre del inscrito
+        if($total == 1){
+            // return $this->redirect(['viewocupado2', 'id' => $id]);
+            return $this->render('viewocupado', [
+                'model' => $this->findModel($id),
+            ]);
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -276,6 +316,26 @@ class ProyectoController extends Controller
         ]);
     }
 
+    /**
+     * Displays a single Proyecto model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewocupado2($id)
+    {
+        return $this->render('viewocupado2', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+
+     /**
+     * Displays a single Proyecto model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     //pasa el id del usuario logueado
     public function actionViewmiproyecto ($id)
     {   
