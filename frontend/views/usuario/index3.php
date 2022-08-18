@@ -10,7 +10,7 @@ use app\models\Usuario;
 /* @var $searchModel app\models\UsuarioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Listas de profesores';
+$this->title = 'Lista de profesores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="usuario-index">
@@ -47,15 +47,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
 
+
+
+
             [
                 'label'=>'Rut',
-                'value'=>function ($model) { return $model['rut']; },
+                'value'=>function ($model) { 
+
+                    $formatRut = $model['rut'];
+
+                    if (strpos($formatRut, '-') !== false ) {
+            
+                        $splittedRut = explode('-', $formatRut);
+                        $number = number_format($splittedRut[0], 0, ',', '.');
+                        $verifier = strtoupper($splittedRut[1]);
+                        return $number . '-' . $verifier;
+                    }
+                    return number_format($formatRut, 0, ',', '.');
+                
+                },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
+            
             [
                 'label'=>'Email',
                 'value'=>function ($model) { return $model['email']; },
@@ -66,7 +83,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
 
-            
 
             [
                 'label'=>'Área',
