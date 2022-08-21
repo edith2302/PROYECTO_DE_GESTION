@@ -111,6 +111,19 @@ class UsuarioController extends Controller
         ]);
     }
 
+     /**
+     * Displays a single Usuario model.
+     * @param int $id_usuario Id Usuario
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewmiperfil($id_usuario)
+    {
+        return $this->render('viewmiperfil', [
+            'model' => $this->findModel($id_usuario),
+        ]);
+    }
+
     /**
      * Creates a new Usuario model.
      * If creation is successful, the browser will be redirected to the 'view' page.

@@ -249,8 +249,10 @@ Modal::end();
                                 </li>
                             </ul>
                         </li>-->
+                    <?php $logue= Yii::$app->user->identity->id_usuarioo; ?>
                     <li>
-                     <?= Html::a(' Mi Perfil', Url::to(['/usuario/mi-perfil']),['class'=>'icon fa-user-circle']) ?>
+                        
+                     <?= Html::a(' Mi Perfil', Url::to(['/usuario/viewmiperfil','id_usuario' => $logue]),['class'=>'icon fa-user-circle']) ?>
                            
                     </li>
 
