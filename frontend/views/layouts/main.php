@@ -157,11 +157,23 @@ Modal::end();
                         $nombreUsuario = Usuario::find()
                         ->where("id_usuario=:id_usuario", [":id_usuario" => Yii::$app->user->identity->id_usuarioo,])
                         ->one();
+                        $userr = User::find()->where(['id_usuarioo' => $nombreUsuario->id_usuario])->one();
+                        
+                        if($userr->role == 1){
+                            $rol = "Profesor asignatura";
+                        }
+                        if($userr->role == 2){
+                            $rol = "Estudiante";
+                        }
+                        if($userr->role == 3){
+                            $rol = "Profesor ICINF";
+                        }
                        
                         ?>
 
                         <p>
-                        <h3>Hola <?= $nombreUsuario->nombre ?></h3>
+                            <h3>Hola <?= $nombreUsuario->nombre ?></h3>
+                            <?= $rol ?>
                         </p>
                         <p>
                             <?= Html::a('Salir', Url::to(['/site/logout']),[
