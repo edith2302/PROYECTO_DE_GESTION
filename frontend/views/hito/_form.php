@@ -71,8 +71,32 @@ $this->registerJs($js);
             ?>
         </div>
 
-        <?= $form->field($modelHito, 'porcentaje_nota')->textInput(['placeholder' => "100"])?>
+        <?php
+            //-----------------conexion bdd----------------------
+            $bd_name = "yii2advanced";
+            $bd_table = "item";
+            $bd_location = "localhost";
+            $bd_user = "root";
+            $bd_pass = "";
 
+            // conectarse a la bd
+            $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+            if(mysqli_connect_errno()){
+                die("Connection failed: ".mysqli_connect_error());
+            }
+            $datos = $conn->query("SELECT SUM(hito.porcentaje_nota) as total FROM hito");
+
+            while($porcentaje = mysqli_fetch_array($datos )){
+                $porcentaje_total = $porcentaje['total'];
+            } 
+            //-------------------------------------------------------------------
+        
+        ?>
+
+        <?= $form->field($modelHito, 'porcentaje_nota')->textInput(['placeholder' => "100"])?>
+        <i><?php echo "*Porcentaje total actual : ".$porcentaje_total?></i>
+        <br></br>
+        
         <div class="body-content">
             <div class="row">
 
@@ -81,7 +105,7 @@ $this->registerJs($js);
                 </div>   
 
                 <div class="col-lg-4">
-                    <?= Html::a('Agregar Rúbrica', ['rubrica/create1'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('Agregar Rúbrica', ['rubrica/create1'], ['class' => 'btn btn-success']) ?>
                 </div>
             </div>
         </div>

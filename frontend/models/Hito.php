@@ -42,12 +42,49 @@ class Hito extends \yii\db\ActiveRecord
         return [
             [['nombre', 'descripcion', 'fecha_habilitacion', 'hora_habilitacion', 'fecha_limite', 'hora_limite', 'tipo_hito', 'porcentaje_nota', 'id_rubrica', 'id_profe_asignatura'], 'required'],
             [['fecha_habilitacion', 'hora_habilitacion', 'fecha_limite', 'hora_limite'], 'safe'],
+            
+            ['fecha_limite', 'compare', 'compareAttribute' => 'fecha_habilitacion', 'operator' => '>='],
+            
             [['tipo_hito', 'porcentaje_nota', 'id_rubrica', 'id_profe_asignatura'], 'integer'],
             [['nombre'], 'string', 'max' => 100],
             [['descripcion'], 'string', 'max' => 2000],
+
+            ['porcentaje_nota', 'porcentajeTotal'],
+
             [['id_rubrica'], 'exist', 'skipOnError' => true, 'targetClass' => Rubrica::className(), 'targetAttribute' => ['id_rubrica' => 'id']],
             [['id_profe_asignatura'], 'exist', 'skipOnError' => true, 'targetClass' => Profesorasignatura::className(), 'targetAttribute' => ['id_profe_asignatura' => 'id']],
         ];
+    }
+
+    public function porcentajeTotal($attribute, $params)
+    {
+        //-----------------conexion bdd----------------------
+        $bd_name = "yii2advanced";
+        $bd_table = "item";
+        $bd_location = "localhost";
+        $bd_user = "root";
+        $bd_pass = "";
+
+        // conectarse a la bd
+        $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+        if(mysqli_connect_errno()){
+            die("Connection failed: ".mysqli_connect_error());
+        }
+        $datos = $conn->query("SELECT SUM(hito.porcentaje_nota) as total FROM hito");
+
+        while($porcentaje = mysqli_fetch_array($datos )){
+            $porcentaje_total = $porcentaje['total'];
+        } 
+        //-------------------------------------------------------------------
+        $nuevoPorc = $this->$attribute;
+        $suma = $porcentaje_total + $nuevoPorc;
+
+        if($suma > 100){
+            $this->addError($attribute, "El porcentaje total supera el 100% ");
+            return false;
+        }else{
+            return true;
+        }
     }
 
     /**
