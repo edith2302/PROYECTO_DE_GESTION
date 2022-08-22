@@ -80,6 +80,43 @@ class EntregaController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    /**
+     * Lists all Entrega models.
+     *
+     * @return string
+     */
+    public function actionIndexnotas()
+    {
+        $searchModel = new EntregaSearch();
+        
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $estudiante = Estudiante::findOne(['id_usuario'=>$usuario]);
+        $desarrollar = Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
+        $proyecto = Proyecto::findOne(['id'=>$desarrollar->id_proyecto]);
+        $idpro = $proyecto->id;
+        //$entrega = Entrega::findOne(['id_hito'=>$id, 'id_proyecto'=>$desarrollar->id_proyecto]);
+
+        //return $idpro;
+        $modelentregas = new SqlDataProvider([
+            'sql' => "select * from entrega 
+            where id_proyecto = ' $idpro'",
+        ]);
+        
+        return $this->render('indexnotas', [
+            'searchModel' => $searchModel,
+            'modelentregas' => $modelentregas,
+        ]);
+
+        /*$searchModel = new EntregaSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);*/
+
+    }
     //se muestran todas las entregas por hito
     public function actionEntregashito($id)
     {

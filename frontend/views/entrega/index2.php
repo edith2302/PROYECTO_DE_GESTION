@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 <p align="right">
-        <?= Html::a('Agregar entrega', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Agregar entrega', ['index3'], ['class' => 'btn btn-success']) ?>
     </p>
 
 

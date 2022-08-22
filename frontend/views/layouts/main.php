@@ -304,6 +304,15 @@ Modal::end();
                         </ul>
 
                     </li>
+                    <li>
+                        
+
+                           
+                            <?= Html::a(' Calificaciones', Url::to(['/proyecto/index'])/*,['class'=>'icon fa-lightbulb-o']*/) ?>
+                            
+
+            
+                    </li>
                     <?php endif ?>
                     <?php endif ?>
 
@@ -343,6 +352,10 @@ Modal::end();
                              
                            <li>
                                 <?= Html::a('Hitos', Url::to(['/hito/indexestudiante'])) ?>
+                           <li>
+
+                           <li>
+                                <?= Html::a('Calificaciones', Url::to(['/entrega/indexnotas'])) ?>
                            <li>
 
                         </ul>
