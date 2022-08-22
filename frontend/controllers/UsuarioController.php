@@ -290,7 +290,7 @@ class UsuarioController extends Controller
         return $pdf->render(); 
     }
 
-    /*public function actionExportExcel2()
+    public function actionExportExcel2()
     {
         $searchModel = new Usuariosearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -328,7 +328,7 @@ class UsuarioController extends Controller
         // Output the result as a file on the server. You can change output file
         $OpenTBS->Show(OPENTBS_DOWNLOAD, 'export.xlsx'); // Also merges all [onshow] automatic fields.			
         exit;
-    } */
+    } 
 
     /*public function actionIndex4()
     {

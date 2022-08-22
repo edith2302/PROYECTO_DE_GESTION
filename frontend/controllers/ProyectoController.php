@@ -620,4 +620,45 @@ class ProyectoController extends Controller
         // return the pdf output as per the destination setting
         return $pdf->render(); 
     }
+
+
+    /*public function actionExportExcel2()
+    {
+        $searchModel = new Usuariosearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        // Initalize the TBS instance
+        $OpenTBS = new \hscstudio\export\OpenTBS; // new instance of TBS
+        // Change with Your template kaka
+		$template = Yii::getAlias('@hscstudio/export').'/templates/opentbs/ms-excel.xlsx';
+        $OpenTBS->LoadTemplate($template); // Also merge some [onload] automatic fields (depends of the type of document).
+        //$OpenTBS->VarRef['modelName']= "Mahasiswa";				
+        $data = [];
+        $no=1;
+        foreach($dataProvider->getModels() as $estudiante){
+            $data[] = [
+                'no'=>$no++,
+                'nombre'=>$estudiante->nombre,
+                'rut'=>$estudiante->rut,
+                'email'=>$estudiante->email,
+                'telefono'=>$estudiante->telefono,
+            ];
+        }
+        
+        $data2[0] = [
+                'no'=>'X',
+                'nombre'=>'Y',
+                'rut'=>'Z',
+            ];
+        $data2[1] = [
+                'no'=>'X',
+                'nombre'=>'Y',
+                'rut'=>'Z',
+            ];
+        $OpenTBS->MergeBlock('data', $data);
+        $OpenTBS->MergeBlock('data2', $data2);
+        // Output the result as a file on the server. You can change output file
+        $OpenTBS->Show(OPENTBS_DOWNLOAD, 'export.xlsx'); // Also merges all [onshow] automatic fields.			
+        exit;
+    } */
 }
