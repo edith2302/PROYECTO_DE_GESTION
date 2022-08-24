@@ -38,19 +38,25 @@ class Item extends \yii\db\ActiveRecord
             //[['puntaje_obtenido', 'puntaje'],'puntajelimite'],
             //['puntaje_obtenido', 'puntajelimite2'],
             ['puntaje_obtenido', 'compare', 'compareValue' => 0, 'operator' => '>'],
-            ['puntaje_obtenido', 'compare', 'compareAttribute' => 'puntaje', 'operator' => '<='],
+            //['puntaje_obtenido', 'compare', 'compareAttribute' => 'puntaje', 'operator' => '<='],
+            ['puntaje_obtenido', 'puntajelimite2'],
 
             [['id_rubrica'], 'exist', 'skipOnError' => true, 'targetClass' => Rubrica::className(), 'targetAttribute' => ['id_rubrica' => 'id']],
         ];
     }
 
-    public function puntajelimite2($model, $attribute)
+    public function puntajelimite2($attribute, $params)
     {
-        $puntajeMax = $model->puntaje;
-        $puntajeAsign = $attribute;
+        $model = Item::findOne($this->id);
+        //$puntajeMax = $this->puntaje;
 
-        if ($puntajeAsign > $puntajeMax) {
+        //$puntajeAsign = $attribute;
+
+        if ($attribute > $model->puntaje ) {
             $this->addError($attribute, "El puntaje asignado no puede superar el puntaje del ítem");
+            return false;
+        }else{
+            return true;
         }
     }
 

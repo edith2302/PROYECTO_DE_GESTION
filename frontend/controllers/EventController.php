@@ -70,10 +70,11 @@ class EventController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderPartial('view', [
             'model' => $this->findModel($id),
         ]);
     }
+
 
     /**
      * Creates a new Event model.
@@ -102,7 +103,7 @@ class EventController extends Controller
         Yii:: $app->session->setFlash('success','El hito ha sido creado con éxito');
         return $this->redirect(['hito/view', 'id' => $id]);
 
-        return $this->render('create', [
+        return $this->renderPartial('create', [
             'model' => $model,
         ]);
     }

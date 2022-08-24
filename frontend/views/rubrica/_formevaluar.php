@@ -61,9 +61,11 @@ $this->registerJs($js);
             'puntaje_obtenido',
         ],
     ]); ?>
+    <?php echo $msg ?>
     <div class="panel panel-default">
         <div class="panel-body container-items"><!-- widgetContainer -->
             <?php foreach ($modelsItem as $index => $modelItem): ?>
+
                 <div class="item panel panel-default"><!-- widgetBody -->
                     <div class="panel-heading">
                         <span class="panel-title-item">Item: <?= ($index + 1) ?></span>

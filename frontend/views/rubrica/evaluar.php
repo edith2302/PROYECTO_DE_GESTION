@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = 'Evaluación';
         'modelentrega' =>$modelentrega,
         'modelRubrica' => $modelRubrica,
         'modelsItem'=>$modelsItem,
+        'msg' => $msg,
     ]) ?>
 
 </div>

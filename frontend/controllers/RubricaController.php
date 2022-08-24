@@ -582,6 +582,22 @@ class RubricaController extends Controller
             if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
+                    foreach ($modelsItem as $modelItem) {
+                        if($modelItem->puntaje_obtenido > $modelItem->puntaje){
+                            return $this->render('evaluar', [
+                                'modelentrega' =>$modelentrega,
+                                'modelRubrica' => $modelRubrica,
+                                'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem,
+                                'msg' => "El puntaje asignado debe ser menor o igual al puntaje de ítem."
+                            ]);
+                            
+                        }
+                        $modelItem->id_rubrica = $modelRubrica->id;
+                        if (! ($flag = $modelItem->save(false))) {
+                            $transaction->rollBack();
+                            break;
+                        }
+                    }
                     if ($flag = $modelRubrica->save(false)) {
                         if (!empty($deletedIDs)) {
                             Item::deleteAll(['id' => $deletedIDs]);
@@ -607,7 +623,8 @@ class RubricaController extends Controller
         return $this->render('evaluar', [
             'modelentrega' =>$modelentrega,
             'modelRubrica' => $modelRubrica,
-            'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem
+            'modelsItem' => (empty($modelsItem)) ? [new Item] : $modelsItem,
+            'msg' => null
         ]);
 
 
