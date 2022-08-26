@@ -213,10 +213,16 @@ class UsuarioController extends Controller
        
              $titulo="LISTADO DE ESTUDIANTES DE ANTEPROYECTO DE TÍTULO";
              $fecha=date("d-m-y");
-             $losestudiantes= Usuario::find()->all();
-            /* $estudiantes = new SqlDataProvider([
+             //$losestudiantes= Usuario::find()->all();
+            /* $losestudiantes = new SqlDataProvider([
              'sql' => "SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)" ,
              ]);*/
+
+            
+             
+         
+         
+ 
 
 
         // get your HTML raw content without any layouts or scripts
@@ -224,7 +230,7 @@ class UsuarioController extends Controller
             'titulo'=>$titulo,
             'fecha'=>$fecha,
             'titulo'=>$titulo,
-            'estudiantes'=>$losestudiantes,
+            //'estudiantes'=>$losestudiantes,
         
         ]);
         // setup kartik\mpdf\Pdf component

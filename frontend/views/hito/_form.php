@@ -94,7 +94,7 @@ $this->registerJs($js);
         ?>
 
         <?= $form->field($modelHito, 'porcentaje_nota')->textInput(['placeholder' => "100"])?>
-        <i><?php echo "*Porcentaje total actual : ".$porcentaje_total?></i>
+        <i><?php echo "*Porcentaje  actual acumulado : ".$porcentaje_total?></i>
         <br></br>
         
         <div class="body-content">
