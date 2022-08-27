@@ -134,10 +134,44 @@ class UsuarioController extends Controller
         $model = new Usuario();
 //return 'paso aqui';
         if ($this->request->isPost) {
-           // return 'paso aqui';
-           //return print_r($model);
+            
             if ($model->load($this->request->post()) && $model->save()) {
                 //return 'paso aqui';
+                $usuarioNuevo = Usuario::find()->where(['id_usuario' => $model->id_usuario])->one();
+
+                //----------------------------------------------------------
+                $formatRut = $usuarioNuevo->rut;
+
+                /*if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
+                    return ("Tiene - y tiene . ");
+                }else{
+                    return ("no tiene - ni .");
+                }*/
+
+                //si el rut tiene punto y guión lo deja igual
+                if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
+                    return $this->redirect(['view', 'id_usuario' => $model->id_usuario]);
+                }
+                
+
+                if (strpos($formatRut, '-') !== false ) {
+
+                    $splittedRut = explode('-', $formatRut);
+                    $number = number_format($splittedRut[0], 0, ',', '.');
+                    $verifier = strtoupper($splittedRut[1]);
+                    $usuarioNuevo->rut = $number . '-' . $verifier;
+                    $usuarioNuevo->save();
+                   // return "rut 1: ". $usuarioNuevo->rut;
+                }
+                //return "rut 2: ". $usuarioNuevo->rut;
+                $usuarioNuevo->rut = number_format($formatRut, 0, ',', '.');
+                //return "rut: ".$usuarioNuevo->rut = $usuarioNuevo->rut." verifi: ".$number . '-' . $verifier;
+                $usuarioNuevo->rut = $number . '-' . $verifier;
+                $usuarioNuevo->save();
+                //return "rut 3: ". $usuarioNuevo->rut;
+
+                //-------------------------------------------------
+
                 return $this->redirect(['view', 'id_usuario' => $model->id_usuario]);
             }
         } else {
@@ -211,7 +245,7 @@ class UsuarioController extends Controller
 
        
        
-             $titulo="LISTADO DE ESTUDIANTES DE ANTEPROYECTO DE TÍTULO";
+             $titulo="LISTA DE ESTUDIANTES DE ANTEPROYECTO DE TÍTULO";
              $fecha=date("d-m-y");
              //$losestudiantes= Usuario::find()->all();
             /* $losestudiantes = new SqlDataProvider([
@@ -322,10 +356,10 @@ class UsuarioController extends Controller
               border-radius: 5px;
             }', 
              // set mPDF properties on the fly
-            'options' => ['title' => 'Reporte de estudiantes'],
+            'options' => ['title' => 'Lista de estudiantes'],
              // call mPDF methods on the fly
             'methods' => [ 
-                'SetHeader'=>['Reporte estudiantes'], 
+                'SetHeader'=>['Lista de estudiantes'], 
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
@@ -366,7 +400,7 @@ class UsuarioController extends Controller
             // any css to be embedded if required
             'cssInline' => '.kv-heading-1{font-size:18px}', 
              // set mPDF properties on the fly
-            'options' => ['title' => 'Krajee Report Title'],
+            'options' => ['title' => 'Listado de Profesores de Ingeniería Civil Informática'],
              // call mPDF methods on the fly
             'methods' => [ 
                 'SetHeader'=>['Listado de Profesores de Ingeniería Civil Informática'], 

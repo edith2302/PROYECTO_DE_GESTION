@@ -54,18 +54,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Rut',
                 'value'=>function ($model) { 
 
-                    $formatRut = $model['rut'];
-
-                    if (strpos($formatRut, '-') !== false ) {
-            
-                        $splittedRut = explode('-', $formatRut);
-                        $number = number_format($splittedRut[0], 0, ',', '.');
-                        $verifier = strtoupper($splittedRut[1]);
-                        return $number . '-' . $verifier;
-                    }
-                    return number_format($formatRut, 0, ',', '.');
-                
-                },
+                    /* $formatRut = $model['rut'];
+ 
+                     if (strpos($formatRut, '-') !== false ) {
+             
+                         $splittedRut = explode('-', $formatRut);
+                         $number = number_format($splittedRut[0], 0, ',', '.');
+                         $verifier = strtoupper($splittedRut[1]);
+                         return $number . '-' . $verifier;
+                     }
+                     return number_format($formatRut, 0, ',', '.');*/
+                     return $model['rut'];
+                 },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',

@@ -100,6 +100,51 @@ class Usuario extends \yii\db\ActiveRecord{
         ];
     }
 
+    public function formatoRut($model) { 
+
+        $formatRut = $model->rut;
+
+        if (strpos($formatRut, '-') !== false ) {
+
+            $splittedRut = explode('-', $formatRut);
+            $number = number_format($splittedRut[0], 0, ',', '.');
+            $verifier = strtoupper($splittedRut[1]);
+            //return $number . '-' . $verifier;
+            $model->rut = $number . '-' . $verifier;
+            $model->save();
+        }
+        
+        $model->rut = number_format($formatRut, 0, ',', '.');
+        $model->save();
+        //return number_format($formatRut, 0, ',', '.');
+    
+    }
+
+
+    public function getFormattedRut() {
+
+        $unformattedRut = $this->rut;
+
+        if (strpos($unformattedRut, '-') !== false ) {
+
+            $splittedRut = explode('-', $unformattedRut);
+
+            $number = number_format($splittedRut[0], 0, ',', '.');
+
+            $verifier = strtoupper($splittedRut[1]);
+
+            return $number . '-' . $verifier;
+
+        }
+
+        //return number_format($unformattedRut, 0, ',', '.');
+        
+
+        $this->rut = number_format($unformattedRut, 0, ',', '.');
+        $this->save();
+
+    }
+
     /**
      * Gets query for [[Adjuntos]].
      *

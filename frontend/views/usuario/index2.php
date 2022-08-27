@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Rut',
                 'value'=>function ($model) { 
 
-                    $formatRut = $model['rut'];
+                   /* $formatRut = $model['rut'];
 
                     if (strpos($formatRut, '-') !== false ) {
             
@@ -69,8 +69,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         $verifier = strtoupper($splittedRut[1]);
                         return $number . '-' . $verifier;
                     }
-                    return number_format($formatRut, 0, ',', '.');
-                
+                    return number_format($formatRut, 0, ',', '.');*/
+                    return $model['rut'];
                 },
                 //'filter'=>false,
                 'format'=>'raw',

@@ -8,25 +8,28 @@
 <table  style="width:100%">
    <tr>
      <th>
-        <img src="<?= Yii::$app->request->baseUrl.'/images/logo3.png'?>"width="200" heigth="150">
+     <img src="<?= Yii::$app->request->baseUrl.'/images/logo3.png'?>"width="200" heigth="150">
      </th>
-      <td style="text-align: center">
-      <h4><?php echo $titulo;?></h4>
+      <td style="text-align: right">
+
+        <!--<br><h4><?php echo $titulo;?></h4></br>-->
       </td>
  </tr>
 </table>
 
 
-<?php echo "Reporte generado con fecha: ".$fecha;?>  
-
-
+<p align="center">
+    <br><h4><?php echo $titulo;?></h4></br><br>
+</p>
+      
 
 
 <table class ="blueTable">
     <thead>
         <tr>
-            <td><b>Nombre</b></td>
+            <td><b>N°</b></td>
             <td><b>Rut</b></td>
+            <td><b>Nombre</b></td>
             <td><b>Email</b></td>
             <td><b>Teléfono</b></td>
         </tr>
@@ -66,49 +69,36 @@
         die("Connection failed: ".mysqli_connect_error());
     }
     $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)");
-
+    $num =0;
     while($estudiantes = mysqli_fetch_array($losestudiantes )){
        // $lista = $estudiantes['nombre'];
-
+       $num= $num+1;
         echo "<tr>\n";
-           echo "<td>";
-            echo $estudiantes['nombre'];
-            echo "</td>\n";
-           echo "<td>";
 
+        echo "<td>";
+        echo $num;
+        echo "</td>\n";
 
-           
-            $student = Usuario::find()->where(['id_usuario' => $estudiantes['id_usuario']])->one();
+        echo "<td>";
+        echo $estudiantes['rut'];
+        echo "</td>\n";
 
-            function (/*$student*/$estudiantes) { 
-                $formatRut = $estudiantes['rut'];
+        echo "<td>";
+        echo $estudiantes['nombre']." ".$estudiantes['apellido'] ;
+        echo "</td>\n";
 
-                if (strpos($formatRut, '-') !== false ) {
-        
-                    $splittedRut = explode('-', $formatRut);
-                    $number = number_format($splittedRut[0], 0, ',', '.');
-                    $verifier = strtoupper($splittedRut[1]);
-                    return $number . '-' . $verifier;
-                }
-                return number_format($formatRut, 0, ',', '.');
-        
-            };
+        echo "<td>";
+        echo $estudiantes['email'];
+        echo "</td>\n";
 
-
-
-
-           echo $student['rut'];
-            echo "</td>\n";
-           echo "<td>";
-
-           echo $estudiantes['email'];
-            echo "</td>\n";
-           echo "<td>";
-           echo $estudiantes['telefono'];
-            echo "</td>\n";
-           echo "<td>";
+        echo "<td>";
+        echo $estudiantes['telefono'];
+        echo "</td>\n";
+        echo "</tr>";
     } 
     //-------------------------------------------------------------------
 
 ?>
 </table>
+
+<br> <i><?php  echo "Reporte generado con fecha: ".$fecha;?> </i> </br>
