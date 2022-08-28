@@ -486,7 +486,108 @@ class UsuarioController extends Controller
 
     public function actionExportExcel2()
     {
-        $searchModel = new Usuariosearch();
+        header('Content-type:application/xlsx');
+        header('Content-Disposition: attachment; filename=Lista de estudiantes.xls');    ?>
+            
+
+            <table border="1">
+            <tr>
+                <th>N°</th>
+                <th>Rut</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+            </tr>
+            
+            <?php
+                //-----------------conexion bdd----------------------
+                $bd_name = "yii2advanced";
+                $bd_table = "usuario";
+                $bd_location = "localhost";
+                $bd_user = "root";
+                $bd_pass = "";
+
+                // conectarse a la bd
+                $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+                if(mysqli_connect_errno()){
+                    die("Connection failed: ".mysqli_connect_error());
+                }
+                $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)");
+                $num =0;
+                while($estudiantes = mysqli_fetch_array($losestudiantes )){
+                // $lista = $estudiantes['nombre'];
+                $num= $num+1;
+                    echo "<tr>\n";
+
+                    echo "<td>";
+                    echo $num;
+                    echo "</td>\n";
+
+                    
+                    $formatRut = $estudiantes['rut'];
+                    $rutt = "";
+                    //si el rut está con formato, solo lo muestra
+                    if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
+                        $rutt = $estudiantes['rut'];
+                            
+                    }else{
+                        //si el rut está con guión, lo formatea
+                        if (strpos($formatRut, '-') !== false ) {
+
+                            $splittedRut = explode('-', $formatRut);
+                            $number = number_format($splittedRut[0], 0, ',', '.');
+                            $verifier = strtoupper($splittedRut[1]);
+                            $rutt = $number . '-' . $verifier;
+                        }else{
+                            //si no tiene punto ni guión
+                            if(!((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false))){
+                                $largo = strlen($formatRut);
+                                $resultado = substr($formatRut, 0, $largo-1 ); 
+                                $verifi = substr($formatRut, $largo-1);
+                                $number =  number_format($resultado, 0, ',', '.');
+                                $rutt = $number."-".$verifi;
+                                
+                            }
+                            //si el rut está con puntos sin guión, lo formatea
+                            if (strpos($formatRut, '.') !== false ) {
+                                $largo = strlen($formatRut);
+                                $resultado = substr($formatRut, 0, $largo-1 ); 
+                                $verifi = substr($formatRut, $largo-1);
+                                $rutt = $resultado."-".$verifi;
+                            }
+
+                        }
+                    }
+                    
+                
+                    echo "<td>";
+                    echo $rutt;
+                    echo "</td>\n";
+
+                    echo "<td>";
+                    echo $estudiantes['nombre']." ".$estudiantes['apellido'] ;
+                    echo "</td>\n";
+
+                    echo "<td>";
+                    echo $estudiantes['email'];
+                    echo "</td>\n";
+
+                    echo "<td>";
+                    echo $estudiantes['telefono'];
+                    echo "</td>\n";
+                    echo "</tr>";
+                } 
+                //-------------------------------------------------------------------
+                return;
+                
+            ?>
+            </table>
+            <?php return; ?>
+            
+        <?php
+        
+    
+       /* $searchModel = new Usuariosearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         
         // Initalize the TBS instance
@@ -521,7 +622,8 @@ class UsuarioController extends Controller
         $OpenTBS->MergeBlock('data2', $data2);
         // Output the result as a file on the server. You can change output file
         $OpenTBS->Show(OPENTBS_DOWNLOAD, 'export.xlsx'); // Also merges all [onshow] automatic fields.			
-        exit;
+        exit;*/
+
     } 
 
     /*public function actionIndex4()
