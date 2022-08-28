@@ -25,6 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <p align="right">
         <!--<?= Html::a('Agregar hito', ['create2'], ['class' => 'btn btn-success']) ?>-->
         <?= Html::a('Agregar hito', ['create'], ['class' => 'btn btn-success']) ?>
+        
+    <!--<?= Html::a('Exportar PDF', ['export-pdf1'], ['class' => 'btn btn-primary']) ?>-->
+   
+    
     </p>
 
    

@@ -369,19 +369,20 @@ class UsuarioController extends Controller
     }
 
     public function actionExportPdf2() {
-        $searchModel = new UsuarioSearch();
+        //$searchModel = new UsuarioSearch();
         //$dataProvider = $searchModel->search($this->request->queryParams);
 
-        $model = new SqlDataProvider([
-            'sql' =>"SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3" ,
-        ]);
-
-        
-        //$dataProvider = $searchModel->search($this->request->queryParams);
+        $titulo="LISTA DE PROFESORES DE INGENIERÍA CIVIL INFORMÁTICA";
+             $fecha=date("d-m-y");
 
         // get your HTML raw content without any layouts or scripts
-        $content = $this->renderPartial('_indexpdf2',['dataProvider' => $model,]);
+        $content = $this->renderPartial('_indexpdf2',[
+            'titulo'=>$titulo,
+            'fecha'=>$fecha,
+            'titulo'=>$titulo,
+            
         
+        ]);
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([
             // set to use core fonts only
@@ -398,12 +399,83 @@ class UsuarioController extends Controller
             // enhanced bootstrap css built by Krajee for mPDF formatting 
             'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
             // any css to be embedded if required
-            'cssInline' => '.kv-heading-1{font-size:18px}', 
+            'cssInline' => 'table.blueTable{
+
+                border:1px solid #1C6EA4;
+                background-color: #EEEEEE;
+                width: 100%;
+                text-align: left;
+                border-collapse: collapse;
+            }
+            
+            table.blueTable td, table.blueTable th{
+            
+                border: 1px solid #AAAAAA;
+                padding: 3px 2px;
+            }
+            
+            table.blueTable tbody td{
+            
+             font-size: 10px;
+            }
+            
+            table.blueTable tr:nth-child(even){
+            
+            background: #D0E4F5;
+             }
+            
+            
+             table.blueTable thead{
+            
+              background: #1C6EA4;
+              background: -moz-linear-gradient(top,#5592bb 0%, #327cad 66%, #1C6EA4 100%);
+              background: -webkit-linear-gradient(top,#5592bb 0%, #327cad 66%, #1C6EA4 100%);
+              background: linear-gradient(top bottom,#5592bb 0%, #327cad 66%, #1C6EA4 100%);
+              border-bottom:  2px solid #444444;
+             }
+            
+             table.blueTable thead th{
+            
+               font-size: 15px;
+               font-weight: bold;
+               color: #FFFFFF;
+               border-left: 2px solid #D0E4F5;
+            }
+            
+            table.blueTable thead th:first-child{
+               border-left: none;
+            }
+            table.blueTable tfoot{
+            
+               font-size: 14px;
+               font-weight: bold;
+               color: #FFFFFF;
+                background: #D0E4F5;
+                background: -moz-linear-gradient(top,#dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+              background: -webkit-linear-gradient(top,#dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+              background: linear-gradient(top bottom,#dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+              border-bottom:  2px solid #444444;
+            }
+            table.blueTable tfoot td{
+              font-size: 14px;
+            }
+            
+            table.blueTable tfoot .links{
+              text-align: right;
+            }
+            
+            table.blueTable tfoot .links a{
+              display: inline-block;
+              background: #1C6EA4;
+              color: #FFFFFF;
+              padding: 2px 8px;
+              border-radius: 5px;
+            }', 
              // set mPDF properties on the fly
-            'options' => ['title' => 'Listado de Profesores de Ingeniería Civil Informática'],
+            'options' => ['title' => 'Lista de profesores de Ingeniería Civil Informática'],
              // call mPDF methods on the fly
             'methods' => [ 
-                'SetHeader'=>['Listado de Profesores de Ingeniería Civil Informática'], 
+                'SetHeader'=>['Lista de profesores de Ingeniería Civil Informática'], 
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
