@@ -79,8 +79,45 @@
         echo $num;
         echo "</td>\n";
 
+        
+        $formatRut = $estudiantes['rut'];
+        $rutt = "";
+        //si el rut está con formato, solo lo muestra
+        if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
+            $rutt = $estudiantes['rut'];
+                
+        }else{
+            //si el rut está con guión, lo formatea
+            if (strpos($formatRut, '-') !== false ) {
+
+                $splittedRut = explode('-', $formatRut);
+                $number = number_format($splittedRut[0], 0, ',', '.');
+                $verifier = strtoupper($splittedRut[1]);
+                $rutt = $number . '-' . $verifier;
+            }else{
+                //si no tiene punto ni guión
+                if(!((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false))){
+                    $largo = strlen($formatRut);
+                    $resultado = substr($formatRut, 0, $largo-1 ); 
+                    $verifi = substr($formatRut, $largo-1);
+                    $number =  number_format($resultado, 0, ',', '.');
+                    $rutt = $number."-".$verifi;
+                    
+                }
+                //si el rut está con puntos sin guión, lo formatea
+                if (strpos($formatRut, '.') !== false ) {
+                    $largo = strlen($formatRut);
+                    $resultado = substr($formatRut, 0, $largo-1 ); 
+                    $verifi = substr($formatRut, $largo-1);
+                    $rutt = $resultado."-".$verifi;
+                }
+
+            }
+        }
+        
+    
         echo "<td>";
-        echo $estudiantes['rut'];
+        echo $rutt;
         echo "</td>\n";
 
         echo "<td>";
