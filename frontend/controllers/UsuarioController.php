@@ -11,6 +11,13 @@ use yii\data\SqlDataProvider;
 use kartik\mpdf\Pdf;
 use Yii;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use PHPExcel_Style_Border;
+//require 'vendor/autoload.php';
+
 /**
  * UsuarioController implements the CRUD actions for Usuario model.
  */
@@ -484,13 +491,117 @@ class UsuarioController extends Controller
         return $pdf->render(); 
     }
 
+    public function actionExportExcel3()
+    {
+        //-----------------conexion bdd----------------------
+        $bd_name = "yii2advanced";
+        $bd_table = "usuario";
+        $bd_location = "localhost";
+        $bd_user = "root";
+        $bd_pass = "";
+
+        // conectarse a la bd
+        $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+        if(mysqli_connect_errno()){
+            die("Connection failed: ".mysqli_connect_error());
+        }
+
+        $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)");
+
+        $excel = new Spreadsheet();
+        $hojaActiva = $excel->getActiveSheet();
+        $hojaActiva->setTitle("Lista de estudiantes");
+
+        $hojaActiva->getColumnDimension('B')->setWidth(5);
+        $hojaActiva->setCellValue('B2', 'N°');
+        $hojaActiva->getColumnDimension('C')->setWidth(20);
+        $hojaActiva->setCellValue('C2', 'Rut');
+        $hojaActiva->getColumnDimension('D')->setWidth(30);
+        $hojaActiva->setCellValue('D2', 'Nombre');
+        $hojaActiva->getColumnDimension('E')->setWidth(30);
+        $hojaActiva->setCellValue('E2', 'Email');
+        $hojaActiva->getColumnDimension('F')->setWidth(15);
+        $hojaActiva->setCellValue('F2', 'Teléfono');
+
+        $num =0;
+        $fila = 3;
+        while($estudiantes = mysqli_fetch_array($losestudiantes )){
+            $num = $num+1;
+
+            $hojaActiva->setCellValue('B'.$fila,$num );
+
+            //----------------------------------------------------------
+            $formatRut = $estudiantes['rut'];
+            $rutt = "";
+            //si el rut está con formato, solo lo muestra
+            if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
+                $rutt = $estudiantes['rut'];
+                    
+            }else{
+                //si el rut está con guión, lo formatea
+                if (strpos($formatRut, '-') !== false ) {
+
+                    $splittedRut = explode('-', $formatRut);
+                    $number = number_format($splittedRut[0], 0, ',', '.');
+                    $verifier = strtoupper($splittedRut[1]);
+                    $rutt = $number . '-' . $verifier;
+                }else{
+                    //si no tiene punto ni guión
+                    if(!((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false))){
+                        $largo = strlen($formatRut);
+                        $resultado = substr($formatRut, 0, $largo-1 ); 
+                        $verifi = substr($formatRut, $largo-1);
+                        $number =  number_format($resultado, 0, ',', '.');
+                        $rutt = $number."-".$verifi;
+                        
+                    }
+                    //si el rut está con puntos sin guión, lo formatea
+                    if (strpos($formatRut, '.') !== false ) {
+                        $largo = strlen($formatRut);
+                        $resultado = substr($formatRut, 0, $largo-1 ); 
+                        $verifi = substr($formatRut, $largo-1);
+                        $rutt = $resultado."-".$verifi;
+                    }
+
+                }
+            }
+            //----------------------------------------------------------
+            $hojaActiva->setCellValue('C'.$fila,$rutt );
+            $hojaActiva->setCellValue('D'.$fila,$estudiantes['nombre']." ".$estudiantes['apellido'] );
+            $hojaActiva->setCellValue('E'.$fila,$estudiantes['email'] );
+            $hojaActiva->setCellValue('F'.$fila,$estudiantes['telefono'] );
+
+            $fila++;
+        }
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="Lista de esudiantes.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer = IOFactory::createWriter($excel, 'Xlsx');
+        ob_clean();
+        $writer->save('php://output');
+        exit;
+
+        
+        
+        
+
+
+
+
+    }
+
+
     public function actionExportExcel2()
     {
-        header('Content-type:application/xlsx');
+        //header('Content-type:application/xlsx; charset = UTF-8');
+        header("Content-type: application/vnd.ms-excel; charset = iso-8859-1");
         header('Content-Disposition: attachment; filename=Lista de estudiantes.xls');    ?>
             
 
             <table border="1">
+            <caption>Estudiantes de Anteproyecto de títulos</caption>
             <tr>
                 <th>N°</th>
                 <th>Rut</th>
@@ -516,7 +627,7 @@ class UsuarioController extends Controller
                 $num =0;
                 while($estudiantes = mysqli_fetch_array($losestudiantes )){
                 // $lista = $estudiantes['nombre'];
-                $num= $num+1;
+                    $num= $num+1;
                     echo "<tr>\n";
 
                     echo "<td>";
