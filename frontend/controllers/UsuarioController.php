@@ -68,7 +68,7 @@ class UsuarioController extends Controller
         //$dataProvider = $searchModel->search($this->request->queryParams);
 
         $model = new SqlDataProvider([
-            'sql' => "SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)" ,
+            'sql' => "SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)",
         ]);
 
         /*return $this->render('entregashito', [
@@ -89,7 +89,7 @@ class UsuarioController extends Controller
         //$dataProvider = $searchModel->search($this->request->queryParams);
 
         $model = new SqlDataProvider([
-            'sql' =>"SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3" ,
+            'sql' => "SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3",
         ]);
 
         /*return $this->render('entregashito', [
@@ -118,7 +118,7 @@ class UsuarioController extends Controller
         ]);
     }
 
-     /**
+    /**
      * Displays a single Usuario model.
      * @param int $id_usuario Id Usuario
      * @return string
@@ -139,9 +139,9 @@ class UsuarioController extends Controller
     public function actionCreate()
     {
         $model = new Usuario();
-//return 'paso aqui';
+        //return 'paso aqui';
         if ($this->request->isPost) {
-            
+
             if ($model->load($this->request->post()) && $model->save()) {
                 //return 'paso aqui';
                 $usuarioNuevo = Usuario::find()->where(['id_usuario' => $model->id_usuario])->one();
@@ -159,16 +159,16 @@ class UsuarioController extends Controller
                 if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
                     return $this->redirect(['view', 'id_usuario' => $model->id_usuario]);
                 }
-                
 
-                if (strpos($formatRut, '-') !== false ) {
+
+                if (strpos($formatRut, '-') !== false) {
 
                     $splittedRut = explode('-', $formatRut);
                     $number = number_format($splittedRut[0], 0, ',', '.');
                     $verifier = strtoupper($splittedRut[1]);
                     $usuarioNuevo->rut = $number . '-' . $verifier;
                     $usuarioNuevo->save();
-                   // return "rut 1: ". $usuarioNuevo->rut;
+                    // return "rut 1: ". $usuarioNuevo->rut;
                 }
                 //return "rut 2: ". $usuarioNuevo->rut;
                 $usuarioNuevo->rut = number_format($formatRut, 0, ',', '.');
@@ -188,7 +188,6 @@ class UsuarioController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-
     }
 
     /**
@@ -241,51 +240,52 @@ class UsuarioController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    
- //reporte pdf
 
-      public function actionExportPdf1() {
+    //reporte pdf
+
+    public function actionExportPdf1()
+    {
 
         //$searchModel = new UsuarioSearch();
         //$dataProvider = $searchModel->search($this->request->queryParams);
-       
 
-       
-       
-             $titulo="LISTA DE ESTUDIANTES DE ANTEPROYECTO DE TÍTULO";
-             $fecha=date("d-m-y");
-             //$losestudiantes= Usuario::find()->all();
-            /* $losestudiantes = new SqlDataProvider([
+
+
+
+        $titulo = "LISTA DE ESTUDIANTES DE ANTEPROYECTO DE TÍTULO";
+        $fecha = date("d-m-y");
+        //$losestudiantes= Usuario::find()->all();
+        /* $losestudiantes = new SqlDataProvider([
              'sql' => "SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)" ,
              ]);*/
 
-            
-             
-         
-         
- 
+
+
+
+
+
 
 
         // get your HTML raw content without any layouts or scripts
-        $content = $this->renderPartial('_indexpdf3',[
-            'titulo'=>$titulo,
-            'fecha'=>$fecha,
-            'titulo'=>$titulo,
+        $content = $this->renderPartial('_indexpdf3', [
+            'titulo' => $titulo,
+            'fecha' => $fecha,
+            'titulo' => $titulo,
             //'estudiantes'=>$losestudiantes,
-        
+
         ]);
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([
             // set to use core fonts only
-            'mode' => Pdf::MODE_CORE, 
+            'mode' => Pdf::MODE_CORE,
             // A4 paper format
-            'format' => Pdf::FORMAT_A4, 
+            'format' => Pdf::FORMAT_A4,
             // portrait orientation
-            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            'orientation' => Pdf::ORIENT_PORTRAIT,
             // stream to browser inline
-            'destination' => Pdf::DEST_BROWSER, 
+            'destination' => Pdf::DEST_BROWSER,
             // your html content input
-            'content' => $content,  
+            'content' => $content,
             // format content from your own css file if needed or use the
             // enhanced bootstrap css built by Krajee for mPDF formatting 
             'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
@@ -361,47 +361,48 @@ class UsuarioController extends Controller
               color: #FFFFFF;
               padding: 2px 8px;
               border-radius: 5px;
-            }', 
-             // set mPDF properties on the fly
+            }',
+            // set mPDF properties on the fly
             'options' => ['title' => 'Lista de estudiantes'],
-             // call mPDF methods on the fly
-            'methods' => [ 
-                'SetHeader'=>['Lista de estudiantes'], 
-                'SetFooter'=>['{PAGENO}'],
+            // call mPDF methods on the fly
+            'methods' => [
+                'SetHeader' => ['Lista de estudiantes'],
+                'SetFooter' => ['{PAGENO}'],
             ]
         ]);
-        
+
         // return the pdf output as per the destination setting
-        return $pdf->render(); 
+        return $pdf->render();
     }
 
-    public function actionExportPdf2() {
+    public function actionExportPdf2()
+    {
         //$searchModel = new UsuarioSearch();
         //$dataProvider = $searchModel->search($this->request->queryParams);
 
-        $titulo="LISTA DE PROFESORES DE INGENIERÍA CIVIL INFORMÁTICA";
-             $fecha=date("d-m-y");
+        $titulo = "LISTA DE PROFESORES DE INGENIERÍA CIVIL INFORMÁTICA";
+        $fecha = date("d-m-y");
 
         // get your HTML raw content without any layouts or scripts
-        $content = $this->renderPartial('_indexpdf2',[
-            'titulo'=>$titulo,
-            'fecha'=>$fecha,
-            'titulo'=>$titulo,
-            
-        
+        $content = $this->renderPartial('_indexpdf2', [
+            'titulo' => $titulo,
+            'fecha' => $fecha,
+            'titulo' => $titulo,
+
+
         ]);
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([
             // set to use core fonts only
-            'mode' => Pdf::MODE_CORE, 
+            'mode' => Pdf::MODE_CORE,
             // A4 paper format
-            'format' => Pdf::FORMAT_A4, 
+            'format' => Pdf::FORMAT_A4,
             // portrait orientation
-            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            'orientation' => Pdf::ORIENT_PORTRAIT,
             // stream to browser inline
-            'destination' => Pdf::DEST_BROWSER, 
+            'destination' => Pdf::DEST_BROWSER,
             // your html content input
-            'content' => $content,  
+            'content' => $content,
             // format content from your own css file if needed or use the
             // enhanced bootstrap css built by Krajee for mPDF formatting 
             'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
@@ -477,18 +478,18 @@ class UsuarioController extends Controller
               color: #FFFFFF;
               padding: 2px 8px;
               border-radius: 5px;
-            }', 
-             // set mPDF properties on the fly
+            }',
+            // set mPDF properties on the fly
             'options' => ['title' => 'Lista de profesores de Ingeniería Civil Informática'],
-             // call mPDF methods on the fly
-            'methods' => [ 
-                'SetHeader'=>['Lista de profesores de Ingeniería Civil Informática'], 
-                'SetFooter'=>['{PAGENO}'],
+            // call mPDF methods on the fly
+            'methods' => [
+                'SetHeader' => ['Lista de profesores de Ingeniería Civil Informática'],
+                'SetFooter' => ['{PAGENO}'],
             ]
         ]);
-        
+
         // return the pdf output as per the destination setting
-        return $pdf->render(); 
+        return $pdf->render();
     }
 
     public function actionExportExcel3()
@@ -502,8 +503,8 @@ class UsuarioController extends Controller
 
         // conectarse a la bd
         $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
-        if(mysqli_connect_errno()){
-            die("Connection failed: ".mysqli_connect_error());
+        if (mysqli_connect_errno()) {
+            die("Connection failed: " . mysqli_connect_error());
         }
 
         $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)");
@@ -523,12 +524,12 @@ class UsuarioController extends Controller
         $hojaActiva->getColumnDimension('F')->setWidth(15);
         $hojaActiva->setCellValue('F2', 'Teléfono');
 
-        $num =0;
+        $num = 0;
         $fila = 3;
-        while($estudiantes = mysqli_fetch_array($losestudiantes )){
-            $num = $num+1;
+        while ($estudiantes = mysqli_fetch_array($losestudiantes)) {
+            $num = $num + 1;
 
-            $hojaActiva->setCellValue('B'.$fila,$num );
+            $hojaActiva->setCellValue('B' . $fila, $num);
 
             //----------------------------------------------------------
             $formatRut = $estudiantes['rut'];
@@ -536,43 +537,49 @@ class UsuarioController extends Controller
             //si el rut está con formato, solo lo muestra
             if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
                 $rutt = $estudiantes['rut'];
-                    
-            }else{
+            } else {
                 //si el rut está con guión, lo formatea
-                if (strpos($formatRut, '-') !== false ) {
+                if (strpos($formatRut, '-') !== false) {
 
                     $splittedRut = explode('-', $formatRut);
                     $number = number_format($splittedRut[0], 0, ',', '.');
                     $verifier = strtoupper($splittedRut[1]);
                     $rutt = $number . '-' . $verifier;
-                }else{
+                } else {
                     //si no tiene punto ni guión
-                    if(!((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false))){
+                    if (!((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false))) {
                         $largo = strlen($formatRut);
-                        $resultado = substr($formatRut, 0, $largo-1 ); 
-                        $verifi = substr($formatRut, $largo-1);
+                        $resultado = substr($formatRut, 0, $largo - 1);
+                        $verifi = substr($formatRut, $largo - 1);
                         $number =  number_format($resultado, 0, ',', '.');
-                        $rutt = $number."-".$verifi;
-                        
+                        $rutt = $number . "-" . $verifi;
                     }
                     //si el rut está con puntos sin guión, lo formatea
-                    if (strpos($formatRut, '.') !== false ) {
+                    if (strpos($formatRut, '.') !== false) {
                         $largo = strlen($formatRut);
-                        $resultado = substr($formatRut, 0, $largo-1 ); 
-                        $verifi = substr($formatRut, $largo-1);
-                        $rutt = $resultado."-".$verifi;
+                        $resultado = substr($formatRut, 0, $largo - 1);
+                        $verifi = substr($formatRut, $largo - 1);
+                        $rutt = $resultado . "-" . $verifi;
                     }
-
                 }
             }
             //----------------------------------------------------------
-            $hojaActiva->setCellValue('C'.$fila,$rutt );
-            $hojaActiva->setCellValue('D'.$fila,$estudiantes['nombre']." ".$estudiantes['apellido'] );
-            $hojaActiva->setCellValue('E'.$fila,$estudiantes['email'] );
-            $hojaActiva->setCellValue('F'.$fila,$estudiantes['telefono'] );
+            $hojaActiva->setCellValue('C' . $fila, $rutt);
+            $hojaActiva->setCellValue('D' . $fila, $estudiantes['nombre'] . " " . $estudiantes['apellido']);
+            $hojaActiva->setCellValue('E' . $fila, $estudiantes['email']);
+            $hojaActiva->setCellValue('F' . $fila, $estudiantes['telefono']);
 
             $fila++;
         }
+
+        $fila--;
+        //-------------Set Borde Negro----------------------
+        $hojaActiva->getStyle("B2:F$fila")
+            ->getFont()->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_BLACK);
+        $hojaActiva->getStyle("B2:F$fila")
+            ->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        
+        //-----------------------------------
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="Lista de esudiantes.xlsx"');
@@ -583,24 +590,16 @@ class UsuarioController extends Controller
         $writer->save('php://output');
         exit;
 
-        
-        
-        
-
-
-
-
     }
-
 
     public function actionExportExcel2()
     {
         //header('Content-type:application/xlsx; charset = UTF-8');
         header("Content-type: application/vnd.ms-excel; charset = iso-8859-1");
         header('Content-Disposition: attachment; filename=Lista de estudiantes.xls');    ?>
-            
 
-            <table border="1">
+
+        <table border="1">
             <caption>Estudiantes de Anteproyecto de títulos</caption>
             <tr>
                 <th>N°</th>
@@ -609,96 +608,93 @@ class UsuarioController extends Controller
                 <th>Email</th>
                 <th>Teléfono</th>
             </tr>
-            
+
             <?php
-                //-----------------conexion bdd----------------------
-                $bd_name = "yii2advanced";
-                $bd_table = "usuario";
-                $bd_location = "localhost";
-                $bd_user = "root";
-                $bd_pass = "";
+            //-----------------conexion bdd----------------------
+            $bd_name = "yii2advanced";
+            $bd_table = "usuario";
+            $bd_location = "localhost";
+            $bd_user = "root";
+            $bd_pass = "";
 
-                // conectarse a la bd
-                $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
-                if(mysqli_connect_errno()){
-                    die("Connection failed: ".mysqli_connect_error());
-                }
-                $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)");
-                $num =0;
-                while($estudiantes = mysqli_fetch_array($losestudiantes )){
+            // conectarse a la bd
+            $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+            if (mysqli_connect_errno()) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+            $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)");
+            $num = 0;
+            while ($estudiantes = mysqli_fetch_array($losestudiantes)) {
                 // $lista = $estudiantes['nombre'];
-                    $num= $num+1;
-                    echo "<tr>\n";
+                $num = $num + 1;
+                echo "<tr>\n";
 
-                    echo "<td>";
-                    echo $num;
-                    echo "</td>\n";
+                echo "<td>";
+                echo $num;
+                echo "</td>\n";
 
-                    
-                    $formatRut = $estudiantes['rut'];
-                    $rutt = "";
-                    //si el rut está con formato, solo lo muestra
-                    if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
-                        $rutt = $estudiantes['rut'];
-                            
-                    }else{
-                        //si el rut está con guión, lo formatea
-                        if (strpos($formatRut, '-') !== false ) {
 
-                            $splittedRut = explode('-', $formatRut);
-                            $number = number_format($splittedRut[0], 0, ',', '.');
-                            $verifier = strtoupper($splittedRut[1]);
-                            $rutt = $number . '-' . $verifier;
-                        }else{
-                            //si no tiene punto ni guión
-                            if(!((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false))){
-                                $largo = strlen($formatRut);
-                                $resultado = substr($formatRut, 0, $largo-1 ); 
-                                $verifi = substr($formatRut, $largo-1);
-                                $number =  number_format($resultado, 0, ',', '.');
-                                $rutt = $number."-".$verifi;
-                                
-                            }
-                            //si el rut está con puntos sin guión, lo formatea
-                            if (strpos($formatRut, '.') !== false ) {
-                                $largo = strlen($formatRut);
-                                $resultado = substr($formatRut, 0, $largo-1 ); 
-                                $verifi = substr($formatRut, $largo-1);
-                                $rutt = $resultado."-".$verifi;
-                            }
+                $formatRut = $estudiantes['rut'];
+                $rutt = "";
+                //si el rut está con formato, solo lo muestra
+                if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
+                    $rutt = $estudiantes['rut'];
+                } else {
+                    //si el rut está con guión, lo formatea
+                    if (strpos($formatRut, '-') !== false) {
 
+                        $splittedRut = explode('-', $formatRut);
+                        $number = number_format($splittedRut[0], 0, ',', '.');
+                        $verifier = strtoupper($splittedRut[1]);
+                        $rutt = $number . '-' . $verifier;
+                    } else {
+                        //si no tiene punto ni guión
+                        if (!((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false))) {
+                            $largo = strlen($formatRut);
+                            $resultado = substr($formatRut, 0, $largo - 1);
+                            $verifi = substr($formatRut, $largo - 1);
+                            $number =  number_format($resultado, 0, ',', '.');
+                            $rutt = $number . "-" . $verifi;
+                        }
+                        //si el rut está con puntos sin guión, lo formatea
+                        if (strpos($formatRut, '.') !== false) {
+                            $largo = strlen($formatRut);
+                            $resultado = substr($formatRut, 0, $largo - 1);
+                            $verifi = substr($formatRut, $largo - 1);
+                            $rutt = $resultado . "-" . $verifi;
                         }
                     }
-                    
-                
-                    echo "<td>";
-                    echo $rutt;
-                    echo "</td>\n";
+                }
 
-                    echo "<td>";
-                    echo $estudiantes['nombre']." ".$estudiantes['apellido'] ;
-                    echo "</td>\n";
 
-                    echo "<td>";
-                    echo $estudiantes['email'];
-                    echo "</td>\n";
+                echo "<td>";
+                echo $rutt;
+                echo "</td>\n";
 
-                    echo "<td>";
-                    echo $estudiantes['telefono'];
-                    echo "</td>\n";
-                    echo "</tr>";
-                } 
-                //-------------------------------------------------------------------
-                return;
-                
+                echo "<td>";
+                echo $estudiantes['nombre'] . " " . $estudiantes['apellido'];
+                echo "</td>\n";
+
+                echo "<td>";
+                echo $estudiantes['email'];
+                echo "</td>\n";
+
+                echo "<td>";
+                echo $estudiantes['telefono'];
+                echo "</td>\n";
+                echo "</tr>";
+            }
+            //-------------------------------------------------------------------
+            return;
+
             ?>
-            </table>
-            <?php return; ?>
-            
-        <?php
-        
-    
-       /* $searchModel = new Usuariosearch();
+        </table>
+        <?php return; ?>
+
+<?php
+
+
+        /* $searchModel = new Usuariosearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         
         // Initalize the TBS instance
@@ -735,7 +731,7 @@ class UsuarioController extends Controller
         $OpenTBS->Show(OPENTBS_DOWNLOAD, 'export.xlsx'); // Also merges all [onshow] automatic fields.			
         exit;*/
 
-    } 
+    }
 
     /*public function actionIndex4()
     {
@@ -751,7 +747,4 @@ class UsuarioController extends Controller
         $estudiantes=Usuario::model()->findAll();
         $this->render("index",array("estudiantes"=>$estudiantes));
     }*/
-
-
-
 }

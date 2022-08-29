@@ -35,31 +35,31 @@
           
         </tr>
     </thead>
+    <tbody>
+    <?php 
+        foreach ($proyectos as $proyecto){
 
-    <?php
-   foreach ($proyectos as $proyecto){
+            echo "<tr>";
+            echo "<td>";
+            echo $proyecto['nombre'] ;
+            echo "</td>\n";
 
-        echo "<td>";
-        echo $proyecto['nombre'] ;
-        echo "</td>\n";
+            echo '<td style="width: 170px;">';
+            echo $proyecto['num_integrantes'];
+            echo "</td>\n";
 
-        echo "<td>";
-        echo $proyecto['num_integrantes'];
-        echo "</td>\n";
+            echo "<td>";
+            echo $proyecto['tipo'];
+            echo "</td>\n";
 
-
-        echo "<td>";
-        echo $proyecto['tipo'];
-        echo "</td>\n";
-
-        echo "<td>";
-        echo $proyecto['area'];
-        echo "</td>\n";
-        echo "</tr>";
-    } 
-    //-------------------------------------------------------------------
-
-?>
+            echo "<td>";
+            echo $proyecto['area'];
+            echo "</td>\n";
+            echo "</tr>";
+        } 
+ 
+    ?>
+    </tbody>
 </table>
 
 <br> <i><?php  echo "Reporte generado con fecha: ".$fecha;?> </i> </br>
