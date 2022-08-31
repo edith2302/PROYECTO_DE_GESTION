@@ -27,11 +27,11 @@
 <table class ="blueTable">
     <thead>
         <tr>
-            <td><b>N°</b></td>
-            <td><b>Rut</b></td>
-            <td><b>Nombre</b></td>
-            <td><b>Email</b></td>
-            <td><b>Área</b></td>
+        <td><b>N°</b></td>
+        <td style="width: 170px; text-align:center"><b>Rut</b></td>
+        <td style="width: 170px; text-align:center"><b>Nombre</b></td>
+        <td style="width: 170px; text-align:center"><b>Email</b></td>
+        <td style="width: 170px; text-align:center"><b>Área</b></td>
         </tr>
     </thead>
 
@@ -116,19 +116,19 @@
         }
         
     
-        echo "<td>";
+        echo '<td style="width: 100px; text-align:center">';
         echo $rutt;
         echo "</td>\n";
 
-        echo "<td>";
+        echo '<td style="width: 180px; text-align:center">';
         echo $profesores['nombre']." ".$profesores['apellido'] ;
         echo "</td>\n";
 
-        echo "<td>";
+        echo '<td style="width: 180px; text-align:center">';
         echo $profesores['email'];
         echo "</td>\n";
 
-        echo "<td>";
+        echo '<td style="width: 180px; text-align:center">';
         echo $profesores['area'];
         echo "</td>\n";
         echo "</tr>";

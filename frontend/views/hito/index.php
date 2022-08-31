@@ -26,12 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <!--<?= Html::a('Agregar hito', ['create2'], ['class' => 'btn btn-success']) ?>-->
         <?= Html::a('Agregar hito', ['create'], ['class' => 'btn btn-success']) ?>
         
-    <!--<?= Html::a('Exportar PDF', ['export-pdf1'], ['class' => 'btn btn-primary']) ?>-->
-   
+        <?= Html::a('Exportar PDF', ['export-pdf1'], ['class' => 'btn btn-primary']) ?>
+       <?php // echo Html::a('Exportar Excel', ['export-excel3'], ['class' => 'btn btn-primary']) ?>
+            <a class="btn btn-primary" href="index.php?r=hito/export-excel1" target="_blank">Exportar Excel</a>
+   </p>
     
-    </p>
-
-   
     
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

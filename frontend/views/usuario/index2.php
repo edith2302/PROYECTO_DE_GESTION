@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p align="right">
     <?= Html::a('Exportar PDF', ['export-pdf1'], ['class' => 'btn btn-primary']) ?>
     <?php // echo Html::a('Exportar Excel', ['export-excel3'], ['class' => 'btn btn-primary']) ?>
-       <a class="btn btn-primary" href="index.php?r=usuario/export-excel3" target="_blank">Exportar Excel</a>
+       <a class="btn btn-primary" href="index.php?r=usuario/export-excel2" target="_blank">Exportar Excel</a>
     </p>
    
 

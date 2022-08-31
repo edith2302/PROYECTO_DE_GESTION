@@ -31,6 +31,12 @@ use app\models\Profesoricinf;
 use app\models\Usuario;
 use kartik\mpdf\Pdf;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use PHPExcel_Style_Border;
+
 //use common\widgets\Alert;
 
 /**
@@ -832,12 +838,12 @@ class HitoController extends Controller
 
     //reporte pdf
 
-    /*public function actionExportPdf1() {
+    public function actionExportPdf1() {
 
         $searchModel = new HitoSearch();
         //$dataProvider = $searchModel->search($this->request->queryParams);
     
-             $titulo="LISTA DE HITOS";
+             $titulo="LISTA DE HITOS DE ANTEPROYECTO DE TÍTULO";
              $fecha=date("d-m-y");
 
              $loshitos= Hito::find()->all();
@@ -939,16 +945,73 @@ class HitoController extends Controller
               border-radius: 5px;
             }', 
              // set mPDF properties on the fly
-            'options' => ['title' => 'Lista de hitos'],
+            'options' => ['title' => 'Actividades'],
              // call mPDF methods on the fly
             'methods' => [ 
-                'SetHeader'=>['Lista de hitos'], 
+                'SetHeader'=>['Actividades'], 
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);
         
         // return the pdf output as per the destination setting
         return $pdf->render(); 
-    }*/
+    }
+
+
+    public function actionExportExcel1()
+    {
+        
+        $loshitos= Hito::find()->all();
+
+        $excel = new Spreadsheet();
+        $hojaActiva = $excel->getActiveSheet();
+        $hojaActiva->setTitle("Lista de hitos");
+
+        $hojaActiva->getColumnDimension('B')->setWidth(5);
+        $hojaActiva->setCellValue('B2', 'N°');
+        $hojaActiva->getColumnDimension('C')->setWidth(20);
+        $hojaActiva->setCellValue('C2', 'Nombre hito');
+        $hojaActiva->getColumnDimension('D')->setWidth(30);
+        $hojaActiva->setCellValue('D2', 'Fecha habilitación');
+        $hojaActiva->getColumnDimension('E')->setWidth(30);
+        $hojaActiva->setCellValue('E2', 'Fecha limite');
+        $hojaActiva->getColumnDimension('F')->setWidth(15);
+        $hojaActiva->setCellValue('F2', 'Porcentaje nota');
+
+       
+
+        $num = 0;
+        $fila = 3;
+        while (($loshitos)) {
+            $num = $num + 1;
+
+            $hojaActiva->setCellValue('B' . $fila, $num);
+            $hojaActiva->setCellValue('C' . $fila, $loshitos['nombre']);
+            $hojaActiva->setCellValue('D' . $fila, $loshitos['fecha_habilitacion'] );
+            $hojaActiva->setCellValue('E' . $fila, $loshitos['fecha_limite']);
+            $hojaActiva->setCellValue('F' . $fila, $loshitos['porcentaje_nota']);
+
+            $fila++;
+        }
+
+        $fila--;
+        //-------------Set Borde Negro----------------------
+        $hojaActiva->getStyle("B2:F$fila")
+            ->getFont()->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_BLACK);
+        $hojaActiva->getStyle("B2:F$fila")
+            ->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        
+        //-----------------------------------
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="Lista de hitos.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer = IOFactory::createWriter($excel, 'Xlsx');
+        ob_clean();
+        $writer->save('php://output');
+        exit;
+
+    }
 
 }

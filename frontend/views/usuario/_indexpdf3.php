@@ -28,10 +28,10 @@
     <thead>
         <tr>
             <td><b>N°</b></td>
-            <td><b>Rut</b></td>
-            <td><b>Nombre</b></td>
-            <td><b>Email</b></td>
-            <td><b>Teléfono</b></td>
+            <td style="width: 170px; text-align:center"><b>Rut</b></td>
+            <td style="width: 170px; text-align:center"><b>Nombre</b></td>
+            <td style="width: 170px; text-align:center"><b>Email</b></td>
+            <td style="width: 170px; text-align:center"><b>Teléfono</b></td>
         </tr>
     </thead>
 
@@ -116,19 +116,19 @@
         }
         
     
-        echo "<td>";
+        echo '<td style="width: 100px; text-align:center">';
         echo $rutt;
         echo "</td>\n";
 
-        echo "<td>";
+        echo '<td style="width: 190px; text-align:center">';
         echo $estudiantes['nombre']." ".$estudiantes['apellido'] ;
         echo "</td>\n";
 
-        echo "<td>";
+        echo '<td style="width: 150px; text-align:center">';
         echo $estudiantes['email'];
         echo "</td>\n";
 
-        echo "<td>";
+        echo '<td style="width: 150px; text-align:center">';
         echo $estudiantes['telefono'];
         echo "</td>\n";
         echo "</tr>";

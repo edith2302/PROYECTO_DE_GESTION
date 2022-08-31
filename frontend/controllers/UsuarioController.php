@@ -492,7 +492,7 @@ class UsuarioController extends Controller
         return $pdf->render();
     }
 
-    public function actionExportExcel3()
+    public function actionExportExcel2()
     {
         //-----------------conexion bdd----------------------
         $bd_name = "yii2advanced";
@@ -582,7 +582,7 @@ class UsuarioController extends Controller
         //-----------------------------------
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="Lista de esudiantes.xlsx"');
+        header('Content-Disposition: attachment;filename="Lista de estudiantes.xlsx"');
         header('Cache-Control: max-age=0');
 
         $writer = IOFactory::createWriter($excel, 'Xlsx');
@@ -592,159 +592,108 @@ class UsuarioController extends Controller
 
     }
 
-    public function actionExportExcel2()
+    
+    public function actionExportExcel1()
     {
-        //header('Content-type:application/xlsx; charset = UTF-8');
-        header("Content-type: application/vnd.ms-excel; charset = iso-8859-1");
-        header('Content-Disposition: attachment; filename=Lista de estudiantes.xls');    ?>
+        //-----------------conexion bdd----------------------
+        $bd_name = "yii2advanced";
+        $bd_table = "usuario";
+        $bd_location = "localhost";
+        $bd_user = "root";
+        $bd_pass = "";
 
+        // conectarse a la bd
+        $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+        if (mysqli_connect_errno()) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
 
-        <table border="1">
-            <caption>Estudiantes de Anteproyecto de títulos</caption>
-            <tr>
-                <th>N°</th>
-                <th>Rut</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-            </tr>
+        $losprofesores = $conn->query("SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3");
 
-            <?php
-            //-----------------conexion bdd----------------------
-            $bd_name = "yii2advanced";
-            $bd_table = "usuario";
-            $bd_location = "localhost";
-            $bd_user = "root";
-            $bd_pass = "";
+        $excel = new Spreadsheet();
+        $hojaActiva = $excel->getActiveSheet();
+        $hojaActiva->setTitle("Lista de profesores");
 
-            // conectarse a la bd
-            $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
-            if (mysqli_connect_errno()) {
-                die("Connection failed: " . mysqli_connect_error());
-            }
-            $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)");
-            $num = 0;
-            while ($estudiantes = mysqli_fetch_array($losestudiantes)) {
-                // $lista = $estudiantes['nombre'];
-                $num = $num + 1;
-                echo "<tr>\n";
+        $hojaActiva->getColumnDimension('B')->setWidth(5);
+        $hojaActiva->setCellValue('B2', 'N°');
+        $hojaActiva->getColumnDimension('C')->setWidth(20);
+        $hojaActiva->setCellValue('C2', 'Rut');
+        $hojaActiva->getColumnDimension('D')->setWidth(30);
+        $hojaActiva->setCellValue('D2', 'Nombre');
+        $hojaActiva->getColumnDimension('E')->setWidth(30);
+        $hojaActiva->setCellValue('E2', 'Email');
+        $hojaActiva->getColumnDimension('F')->setWidth(15);
+        $hojaActiva->setCellValue('F2', 'Área');
 
-                echo "<td>";
-                echo $num;
-                echo "</td>\n";
+       
 
+        $num = 0;
+        $fila = 3;
+        while ($profesores = mysqli_fetch_array($losprofesores)) {
+            $num = $num + 1;
 
-                $formatRut = $estudiantes['rut'];
-                $rutt = "";
-                //si el rut está con formato, solo lo muestra
-                if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
-                    $rutt = $estudiantes['rut'];
+            $hojaActiva->setCellValue('B' . $fila, $num);
+
+            //----------------------------------------------------------
+            $formatRut = $profesores['rut'];
+            $rutt = "";
+            //si el rut está con formato, solo lo muestra
+            if ((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false)) {
+                $rutt = $profesores['rut'];
+            } else {
+                //si el rut está con guión, lo formatea
+                if (strpos($formatRut, '-') !== false) {
+
+                    $splittedRut = explode('-', $formatRut);
+                    $number = number_format($splittedRut[0], 0, ',', '.');
+                    $verifier = strtoupper($splittedRut[1]);
+                    $rutt = $number . '-' . $verifier;
                 } else {
-                    //si el rut está con guión, lo formatea
-                    if (strpos($formatRut, '-') !== false) {
-
-                        $splittedRut = explode('-', $formatRut);
-                        $number = number_format($splittedRut[0], 0, ',', '.');
-                        $verifier = strtoupper($splittedRut[1]);
-                        $rutt = $number . '-' . $verifier;
-                    } else {
-                        //si no tiene punto ni guión
-                        if (!((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false))) {
-                            $largo = strlen($formatRut);
-                            $resultado = substr($formatRut, 0, $largo - 1);
-                            $verifi = substr($formatRut, $largo - 1);
-                            $number =  number_format($resultado, 0, ',', '.');
-                            $rutt = $number . "-" . $verifi;
-                        }
-                        //si el rut está con puntos sin guión, lo formatea
-                        if (strpos($formatRut, '.') !== false) {
-                            $largo = strlen($formatRut);
-                            $resultado = substr($formatRut, 0, $largo - 1);
-                            $verifi = substr($formatRut, $largo - 1);
-                            $rutt = $resultado . "-" . $verifi;
-                        }
+                    //si no tiene punto ni guión
+                    if (!((strpos($formatRut, ".") !== false) && (strpos($formatRut, "-") !== false))) {
+                        $largo = strlen($formatRut);
+                        $resultado = substr($formatRut, 0, $largo - 1);
+                        $verifi = substr($formatRut, $largo - 1);
+                        $number =  number_format($resultado, 0, ',', '.');
+                        $rutt = $number . "-" . $verifi;
+                    }
+                    //si el rut está con puntos sin guión, lo formatea
+                    if (strpos($formatRut, '.') !== false) {
+                        $largo = strlen($formatRut);
+                        $resultado = substr($formatRut, 0, $largo - 1);
+                        $verifi = substr($formatRut, $largo - 1);
+                        $rutt = $resultado . "-" . $verifi;
                     }
                 }
-
-
-                echo "<td>";
-                echo $rutt;
-                echo "</td>\n";
-
-                echo "<td>";
-                echo $estudiantes['nombre'] . " " . $estudiantes['apellido'];
-                echo "</td>\n";
-
-                echo "<td>";
-                echo $estudiantes['email'];
-                echo "</td>\n";
-
-                echo "<td>";
-                echo $estudiantes['telefono'];
-                echo "</td>\n";
-                echo "</tr>";
             }
-            //-------------------------------------------------------------------
-            return;
+            //----------------------------------------------------------
+            $hojaActiva->setCellValue('C' . $fila, $rutt);
+            $hojaActiva->setCellValue('D' . $fila, $profesores['nombre'] . " " . $profesores['apellido']);
+            $hojaActiva->setCellValue('E' . $fila, $profesores['email']);
+            $hojaActiva->setCellValue('F' . $fila, $profesores['area']);
 
-            ?>
-        </table>
-        <?php return; ?>
-
-<?php
-
-
-        /* $searchModel = new Usuariosearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
-        // Initalize the TBS instance
-        $OpenTBS = new \hscstudio\export\OpenTBS; // new instance of TBS
-        // Change with Your template kaka
-		$template = Yii::getAlias('@hscstudio/export').'/templates/opentbs/ms-excel.xlsx';
-        $OpenTBS->LoadTemplate($template); // Also merge some [onload] automatic fields (depends of the type of document).
-        //$OpenTBS->VarRef['modelName']= "Mahasiswa";				
-        $data = [];
-        $no=1;
-        foreach($dataProvider->getModels() as $estudiante){
-            $data[] = [
-                'no'=>$no++,
-                'nombre'=>$estudiante->nombre,
-                'rut'=>$estudiante->rut,
-                'email'=>$estudiante->email,
-                'telefono'=>$estudiante->telefono,
-            ];
+            $fila++;
         }
+
+        $fila--;
+        //-------------Set Borde Negro----------------------
+        $hojaActiva->getStyle("B2:F$fila")
+            ->getFont()->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_BLACK);
+        $hojaActiva->getStyle("B2:F$fila")
+            ->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
         
-        $data2[0] = [
-                'no'=>'X',
-                'nombre'=>'Y',
-                'rut'=>'Z',
-            ];
-        $data2[1] = [
-                'no'=>'X',
-                'nombre'=>'Y',
-                'rut'=>'Z',
-            ];
-        $OpenTBS->MergeBlock('data', $data);
-        $OpenTBS->MergeBlock('data2', $data2);
-        // Output the result as a file on the server. You can change output file
-        $OpenTBS->Show(OPENTBS_DOWNLOAD, 'export.xlsx'); // Also merges all [onshow] automatic fields.			
-        exit;*/
+        //-----------------------------------
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="Lista de profesores ICINF.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer = IOFactory::createWriter($excel, 'Xlsx');
+        ob_clean();
+        $writer->save('php://output');
+        exit;
 
     }
 
-    /*public function actionIndex4()
-    {
-        $searchModel = new UsuarioSearch();
-        //$dataProvider = $searchModel->search($this->request->queryParams);
-
-        $model = new SqlDataProvider([
-            'sql' => "SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)" ,
-        ]);
-        $content=$this->renderPartial("excel",array("model"=>Usuario::model()->findAll()),true);
-        Yii::app()->request->sendFile("test.xls",$content);
-
-        $estudiantes=Usuario::model()->findAll();
-        $this->render("index",array("estudiantes"=>$estudiantes));
-    }*/
+  
 }

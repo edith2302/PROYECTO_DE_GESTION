@@ -20,7 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <p align="right">
     <?= Html::a('Exportar PDF', ['export-pdf2'], ['class' => 'btn btn-primary']) ?>
     <!--<?= Html::a('Exportar Excel', ['export-excel2'], ['class' => 'btn btn-primary']) ?>-->
+    <?php // echo Html::a('Exportar Excel', ['export-excel3'], ['class' => 'btn btn-primary']) ?>
+       <a class="btn btn-primary" href="index.php?r=usuario/export-excel1" target="_blank">Exportar Excel</a>
     </p>
+    
+
+   
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
