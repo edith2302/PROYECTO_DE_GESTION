@@ -960,8 +960,21 @@ class HitoController extends Controller
 
     public function actionExportExcel1()
     {
-        
-        $loshitos= Hito::find()->all();
+          //-----------------conexion bdd----------------------
+          $bd_name = "yii2advanced";
+          $bd_table = "hito";
+          $bd_location = "localhost";
+          $bd_user = "root";
+          $bd_pass = "";
+  
+          // conectarse a la bd
+          $conn = mysqli_connect($bd_location, $bd_user, $bd_pass, $bd_name);
+          if (mysqli_connect_errno()) {
+              die("Connection failed: " . mysqli_connect_error());
+          }
+  
+          $loshitos = $conn->query("SELECT * FROM hito");
+        //$loshitos= Hito::find()->all();
 
         $excel = new Spreadsheet();
         $hojaActiva = $excel->getActiveSheet();
@@ -969,7 +982,7 @@ class HitoController extends Controller
 
         $hojaActiva->getColumnDimension('B')->setWidth(5);
         $hojaActiva->setCellValue('B2', 'N°');
-        $hojaActiva->getColumnDimension('C')->setWidth(20);
+        $hojaActiva->getColumnDimension('C')->setWidth(30);
         $hojaActiva->setCellValue('C2', 'Nombre hito');
         $hojaActiva->getColumnDimension('D')->setWidth(30);
         $hojaActiva->setCellValue('D2', 'Fecha habilitación');
@@ -982,14 +995,14 @@ class HitoController extends Controller
 
         $num = 0;
         $fila = 3;
-        while (($loshitos)) {
+        while ($hitos = mysqli_fetch_array($loshitos)) {
             $num = $num + 1;
 
             $hojaActiva->setCellValue('B' . $fila, $num);
-            $hojaActiva->setCellValue('C' . $fila, $loshitos['nombre']);
-            $hojaActiva->setCellValue('D' . $fila, $loshitos['fecha_habilitacion'] );
-            $hojaActiva->setCellValue('E' . $fila, $loshitos['fecha_limite']);
-            $hojaActiva->setCellValue('F' . $fila, $loshitos['porcentaje_nota']);
+            $hojaActiva->setCellValue('C' . $fila, $hitos['nombre']);
+            $hojaActiva->setCellValue('D' . $fila, $hitos['fecha_habilitacion']." / ".$hitos['hora_habilitacion']." hrs" );
+            $hojaActiva->setCellValue('E' . $fila, $hitos['fecha_limite']."  / ".$hitos['hora_limite']." hrs");
+            $hojaActiva->setCellValue('F' . $fila, $hitos['porcentaje_nota']." %");
 
             $fila++;
         }

@@ -18,9 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p align="right">
-    <?= Html::a('Exportar PDF', ['export-pdf1'], ['class' => 'btn btn-primary']) ?>
+    <!--<?= Html::a('Exportar PDF', ['export-pdf1'], ['class' => 'btn btn-primary']) ?>-->
+    <a  class=" btn btn-primary" href="index.php?r=usuario/export-pdf1" >Exportar PDF <i class="fa fa-file-pdf-o"></i> </a>
     <?php // echo Html::a('Exportar Excel', ['export-excel3'], ['class' => 'btn btn-primary']) ?>
-       <a class="btn btn-primary" href="index.php?r=usuario/export-excel2" target="_blank">Exportar Excel</a>
+       <a class="btn btn-primary" href="index.php?r=usuario/export-excel2" target="_blank">Exportar Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
     </p>
    
 

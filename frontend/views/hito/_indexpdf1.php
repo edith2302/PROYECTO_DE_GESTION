@@ -60,7 +60,7 @@
             echo "</td>\n";*/
 
             echo '<td style="width: 140px; text-align:center">';
-            echo $hito['porcentaje_nota'];
+            echo $hito['porcentaje_nota']."%";
             echo "</td>\n";
             echo "</tr>";
         } 
