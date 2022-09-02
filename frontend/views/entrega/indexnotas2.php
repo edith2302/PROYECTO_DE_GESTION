@@ -45,11 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 $datos = $conn->query("SELECT hito.nombre, hito.porcentaje_nota as porcentaje, hito.id as id_hito, entrega.id as id_entrega, entrega.nota, entrega.id_proyecto, entrega.id_hito from entrega JOIN hito ON entrega.id_hito = hito.id");
 
+                $num =0;
+
                 while($hitos = mysqli_fetch_array( $datos )){
                     $id_proyecto = $hitos['id_proyecto'];
                     $desarrolaP = Desarrollarproyecto::findOne(['id_proyecto' => $id_proyecto]);
 
                     $hitoo = $hitos['nombre']." (".$hitos['porcentaje']."%)";
+                    //$num++;
                     ?> 
                     <th> <?php echo $hitoo ?>  </th>
 
@@ -74,11 +77,15 @@ $this->params['breadcrumbs'][] = $this->title;
         if(mysqli_connect_errno()){
             die("Connection failed: ".mysqli_connect_error());
         }
-        $estudiantes = $conn->query("SELECT usuario.id_usuario, usuario.nombre, usuario.apellido, estudiante.id as id_estudi FROM usuario JOIN estudiante on usuario.id_usuario = estudiante.id_usuario");
+        $estudiantes = $conn->query("SELECT usuario.id_usuario, usuario.nombre, usuario.apellido, estudiante.id as id_estudi FROM usuario JOIN estudiante on usuario.id_usuario = estudiante.id_usuario ORDER BY usuario.apellido ASC");
         
-
-        $num =0;
+        $cont =0;
+        $id_Est="";
+        
+        
         while($estudiante = mysqli_fetch_array( $estudiantes )){
+            $id_Est= $estudiante['id_estudi'];
+            $prom = 0;
             $num= $num+1;
             echo "<tr>\n";
             echo "<td>";
@@ -90,46 +97,28 @@ $this->params['breadcrumbs'][] = $this->title;
             echo  $nombree;
             echo "</td>\n";
 
+
+            $notas_estudiantes = $conn->query("SELECT entrega.id as id_entrega, entrega.nota, entrega.id_proyecto as idpro, entrega.id_hito as idhito, estudiante.id as idestudiant, estudiante.id_usuario, usuario.nombre, hito.porcentaje_nota as porcentaje FROM entrega join hito on entrega.id_hito = hito.id join desarrollarproyecto on entrega.id_proyecto=desarrollarproyecto.id_proyecto join estudiante on desarrollarproyecto.id_estudiante = estudiante.id join usuario on estudiante.id_usuario = usuario.id_usuario WHERE desarrollarproyecto.id_estudiante = ".$id_Est);
+
+            while($notass_e = mysqli_fetch_array( $notas_estudiantes )){
+                echo "<td>";
+                echo  $notass_e['nota'];
+                echo "</td>\n";
+
+                $prom = $prom +($notass_e['nota'] * $notass_e['porcentaje'] / 100);
+            }
+
+           /* echo "<td>";
+            echo  " ";
+            echo "</td>\n";*/
+
+            echo "<td>";
+            echo  $prom;
+            echo "</td>\n";
+
             echo "</tr>\n";
 
         }
-
-    //-----------------conexion bdd----------------------
-    
-    /*while($profesores = mysqli_fetch_array( $losprofesores )){
-      
-       $num= $num+1;
-        echo "<tr>\n";
-
-        echo "<td>";
-        echo $num;
-        echo "</td>\n";
-
-        
-        $formatRut = $profesores['rut'];
-        $rutt = "";
-        
-        
-        
-    
-        echo "<td>";
-        echo $rutt;
-        echo "</td>\n";
-
-        echo "<td>";
-        echo $profesores['nombre']." ".$profesores['apellido'] ;
-        echo "</td>\n";
-
-        echo "<td>";
-        echo $profesores['email'];
-        echo "</td>\n";
-
-        echo "<td>";
-        echo $profesores['area'];
-        echo "</td>\n";
-        echo "</tr>";
-    } */
-    //-------------------------------------------------------------------
 
 ?>
 </table>
