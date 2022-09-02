@@ -16,7 +16,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
 use PHPExcel_Style_Border;
-//require 'vendor/autoload.php';
+
 
 /**
  * UsuarioController implements the CRUD actions for Usuario model.
@@ -68,7 +68,7 @@ class UsuarioController extends Controller
         //$dataProvider = $searchModel->search($this->request->queryParams);
 
         $model = new SqlDataProvider([
-            'sql' => "SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)",
+            'sql' => "SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2) ORDER BY usuario.apellido ASC",
         ]);
 
         /*return $this->render('entregashito', [
@@ -89,7 +89,7 @@ class UsuarioController extends Controller
         //$dataProvider = $searchModel->search($this->request->queryParams);
 
         $model = new SqlDataProvider([
-            'sql' => "SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3",
+            'sql' => "SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3 ORDER BY usuario.apellido ASC",
         ]);
 
         /*return $this->render('entregashito', [
@@ -507,7 +507,10 @@ class UsuarioController extends Controller
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)");
+        $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2) ORDER BY usuario.apellido ASC");
+
+        $cells = 'A2';
+        $color = 'FFFF0000';
 
         $excel = new Spreadsheet();
         $hojaActiva = $excel->getActiveSheet();
@@ -608,7 +611,7 @@ class UsuarioController extends Controller
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        $losprofesores = $conn->query("SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3");
+        $losprofesores = $conn->query("SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3 ORDER BY usuario.apellido ASC");
 
         $excel = new Spreadsheet();
         $hojaActiva = $excel->getActiveSheet();
@@ -622,7 +625,7 @@ class UsuarioController extends Controller
         $hojaActiva->setCellValue('D2', 'Nombre');
         $hojaActiva->getColumnDimension('E')->setWidth(30);
         $hojaActiva->setCellValue('E2', 'Email');
-        $hojaActiva->getColumnDimension('F')->setWidth(15);
+        $hojaActiva->getColumnDimension('F')->setWidth(30);
         $hojaActiva->setCellValue('F2', 'Área');
 
        

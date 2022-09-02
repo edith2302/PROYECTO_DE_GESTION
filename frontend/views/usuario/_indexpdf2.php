@@ -68,7 +68,7 @@
     if(mysqli_connect_errno()){
         die("Connection failed: ".mysqli_connect_error());
     }
-    $losprofesores = $conn->query("SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3");
+    $losprofesores = $conn->query("SELECT usuario.id_usuario, usuario.nombre, usuario.apellido,usuario.rut, profesoricinf.area, user.email FROM usuario JOIN profesoricinf on usuario.id_usuario = profesoricinf.id_usuario JOIN user on user.id_usuarioo=usuario.id_usuario WHERE user.role = 3 ORDER BY usuario.apellido ASC");
     $num =0;
     while($profesores = mysqli_fetch_array( $losprofesores )){
       

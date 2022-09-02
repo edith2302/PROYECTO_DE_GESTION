@@ -68,7 +68,7 @@
     if(mysqli_connect_errno()){
         die("Connection failed: ".mysqli_connect_error());
     }
-    $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2)");
+    $losestudiantes = $conn->query("SELECT * FROM usuario WHERE usuario.id_usuario IN (SELECT id_usuarioo FROM user WHERE user.role = 2) ORDER BY usuario.apellido ASC");
     $num =0;
     while($estudiantes = mysqli_fetch_array($losestudiantes )){
        // $lista = $estudiantes['nombre'];
