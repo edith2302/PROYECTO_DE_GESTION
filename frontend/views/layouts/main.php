@@ -308,7 +308,7 @@ Modal::end();
                         
 
                            
-                            <?= Html::a(' Calificaciones', Url::to(['/proyecto/index'])/*,['class'=>'icon fa-lightbulb-o']*/) ?>
+                    <?= Html::a(' Calificaciones', Url::to(['/entrega/indexnotas2'])/*,['class'=>'icon fa-lightbulb-o']*/) ?>
                             
 
             

@@ -117,6 +117,31 @@ class EntregaController extends Controller
         ]);*/
 
     }
+
+    
+
+    /**
+     * Lists all Entrega models.
+     *
+     * @return string
+     */
+    public function actionIndexnotas2()
+    {
+        $searchModel = new EntregaSearch();
+        
+        $modelentregas = new SqlDataProvider([
+            'sql' => "SELECT entrega.id, entrega.nota, entrega.id_proyecto, entrega.id_hito from entrega",
+        ]);
+        
+        return $this->render('indexnotas2', [
+            'searchModel' => $searchModel,
+            'modelentregas' => $modelentregas,
+        ]);
+
+    }
+
+
+    
     //se muestran todas las entregas por hito
     public function actionEntregashito($id)
     {
