@@ -571,15 +571,25 @@ class ProyectoController extends Controller
      */
     public function actionUpdate($id)
     {
+        $proyectoInscritoo = Desarrollarproyecto::findOne(['id_proyecto'=> $id]);
         $model = $this->findModel($id);
 
+        //si el proyecto está inscrito, no puede modificarlo
+        if($proyectoInscritoo != null){
+            Yii:: $app->session->setFlash('error','El proyecto '.'"'.$model->nombre.'"'.' no se puede modificar, porque ya fue inscrito. ');
+
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            Yii:: $app->session->setFlash('error','Proyecto actualizado con éxito. ');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
         ]);
+
     }
 
     /**
@@ -591,8 +601,19 @@ class ProyectoController extends Controller
      */
     public function actionDelete($id)
     {
+        $proyectoInscritoo = Desarrollarproyecto::findOne(['id_proyecto'=> $id]);
+        $model = $this->findModel($id);
+        
+        //si el proyecto está inscrito, no puede eliminarlo
+        if($proyectoInscritoo != null){
+            Yii:: $app->session->setFlash('error','No fue posible eliminar el proyecto '.'"'.$model->nombre.'"'.', porque ya fue inscrito. ');
+
+            return $this->redirect(['index']);
+        }
+
         $this->findModel($id)->delete();
 
+        Yii:: $app->session->setFlash('success','Proyecto eliminado con éxito.');
         return $this->redirect(['index']);
     }
 
