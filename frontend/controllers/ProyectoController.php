@@ -156,6 +156,22 @@ class ProyectoController extends Controller
 
     }
 
+    public function actionIndexpropuestas()
+    {
+        $logueado = Yii::$app->user->identity->id_usuarioo;
+        $modelproyectos = new SqlDataProvider([
+            
+           'sql' => "SELECT * FROM proyecto WHERE proyecto.id_autor = ".$logueado,
+ 
+        ]);
+
+        return $this->render('indexpropuestas', [
+            'modelproyectos' => $modelproyectos,
+        ]);
+
+    }
+
+
     public function actionIndexprofesor()
     {
         $searchModel = new ProyectoSearch();

@@ -277,15 +277,27 @@ Modal::end();
                      <!--menu profesor asignatura-->
                   <?php if (!Yii::$app->user->isGuest):?> 
                     <?php if (Yii::$app->user->identity->role == 1):?>
-                    <li>
-                        
-
-                           
-                                <?= Html::a(' Propuestas de proyecto', Url::to(['/proyecto/index']),['class'=>'icon fa-lightbulb-o']) ?>
-                            
-
-            
+                   <!-- <li>
+                        <?= Html::a(' Propuestas de proyecto', Url::to(['/proyecto/index']),['class'=>'icon fa-lightbulb-o']) ?>
                     </li>
+
+                    <li>
+                        <?= Html::a(' Mis propuestas', Url::to(['/proyecto/indexpropuestas']),['class'=>'icon fa-lightbulb-o']) ?>
+                    </li>-->
+
+                    
+                    <li>
+                        <span  class="opener"><span class="icon fa-lightbulb-o"> Propuestas de proyecto</span></span>
+                        <ul>
+                            <li>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/index'])) ?>
+                            </li>
+                            <li>
+                                <?= Html::a('Mis propuestas', Url::to(['/proyecto/indexpropuestas'])) ?>
+                            </li>
+                        </ul>
+                    </li>
+
                    
                     <li>
 
@@ -330,15 +342,23 @@ Modal::end();
 
                     ?>
                     
-                    <li>
-                        <!--span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>-->
-                        <!--ul id="proyecto">-->
-                            <!--li>-->
-                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
-                            <!--/li>-->
+                    <!--<li>
+                        <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
+                    </li>-->
 
-                        <!--/ul>-->
+                    <li>
+                        <span  class="opener"><span class="icon fa-lightbulb-o"> Propuestas de proyecto</span></span>
+                        <ul>
+                            <li>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexestudiante'])) ?>
+                            </li>
+                            <li>
+                                <?= Html::a('Mis propuestas', Url::to(['/proyecto/indexpropuestas'])) ?>
+                            </li>
+                        </ul>
                     </li>
+
+
                     
                     <li>
                         <span  class="opener"><span class="icon fa-hand-o-up"> Mi proyecto </span></span>
@@ -379,16 +399,24 @@ Modal::end();
  <!--menu profesor ICINF-->
                     <?php if (!Yii::$app->user->isGuest) :?>
                     <?php  if (Yii::$app->user->identity->role == 3) :?>
-                    <li>
+                    <!--<li>
                         <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
                         <ul id="proyecto">
-
                             <li>
                                 <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexprofesor'])) ?>
                             </li>
+                        </ul>
+                    </li>-->
 
-                            
-
+                    <li>
+                        <span  class="opener"><span class="icon fa-lightbulb-o"> Propuestas de proyecto</span></span>
+                        <ul>
+                            <li>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexprofesor'])) ?>
+                            </li>
+                            <li>
+                                <?= Html::a('Mis propuestas', Url::to(['/proyecto/indexpropuestas'])) ?>
+                            </li>
                         </ul>
                     </li>
                     
@@ -406,9 +434,6 @@ Modal::end();
                             <li>
                                 <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexprofesor'])) ?>
                             </li>
-
-                            
-
                         </ul>
                     </li>
                     
@@ -446,6 +471,21 @@ Modal::end();
                         </ul>
 
                     </li>
+
+                    <li>
+                        <span  class="opener"><span class="icon fa-lightbulb-o"> Propuestas de proyecto</span></span>
+                        <ul>
+                            <li>
+                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexprofesor'])) ?>
+                            </li>
+                            <li>
+                                <?= Html::a('Mis propuestas', Url::to(['/proyecto/indexpropuestas'])) ?>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    
                     
                     <?php endif ?>
                     <?php endif ?>
