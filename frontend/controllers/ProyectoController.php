@@ -255,21 +255,21 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::findOne(['id'=>$id]);
 
         //si no tiene profe guia y su estado es diferente de null pasa
-        if(($proyecto->id_profe_guia == null) && ($proyecto->estado != null)){
+        if(($proyecto->id_profe_guia == null) && ($proyecto->estado != 3 /*null*/)){
             return $this->render('viewmodificar2', [
                 'model' => $this->findModel($id),
             ]);
         }
 
         //si ya tiene profe guia y su estado es null pasa
-        if(($proyecto->id_profe_guia != null) && ($proyecto->estado == null)){
+        if(($proyecto->id_profe_guia != null) && ($proyecto->estado == 3 /*null*/)){
             return $this->render('viewmodificar3', [
                 'model' => $this->findModel($id),
             ]);
         }
 
         //si ya tiene profe guia y su estado es diferente de null pasa
-        if(($proyecto->id_profe_guia != null) && ($proyecto->estado != null)){
+        if(($proyecto->id_profe_guia != null) && ($proyecto->estado != 3 /*null*/)){
             return $this->render('viewmodificar4', [
                 'model' => $this->findModel($id),
             ]);

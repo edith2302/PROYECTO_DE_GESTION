@@ -73,6 +73,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         case 2:
                             return "Rechazado";
                             break;
+                        case 3:
+                            return "Pendiente";
+                            break;
                         
                     }
                 },

@@ -58,7 +58,7 @@ use yii\helpers\ArrayHelper;
             ?>
     </div>
 
-    <div class="col-md">
+    <!--<div class="col-md">
             <?php
             echo $form->field($model, 'disponibilidad')->dropDownList(
                 [
@@ -70,7 +70,7 @@ use yii\helpers\ArrayHelper;
                 ['prompt' => 'Selección disponibilidad']
             );
             ?>
-    </div>
+    </div>-->
 
     <!--?= $form->field($model, 'disponibilidad')->textInput() ?>-->
 
@@ -86,7 +86,7 @@ use yii\helpers\ArrayHelper;
     </div>-->
     
     <p align="right">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-primaryy']) ?>
 
     <p>
 
