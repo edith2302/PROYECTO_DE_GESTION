@@ -514,6 +514,15 @@ class ProyectoController extends Controller
     public function actionRechazar($id)
     {
         $model = $this->findModel($id);
+
+        $proyectoInscritoo = Desarrollarproyecto::findOne(['id_proyecto'=> $id]);
+        
+        //si el proyecto está inscrito, no puede rechazarlo
+        if($proyectoInscritoo != null){
+            Yii:: $app->session->setFlash('error','No fue posible rechazar el proyecto '.'"'.$model->nombre.'"'.', porque ya fue inscrito. ');
+            return $this->redirect(['view', 'id' => $id]);
+        }
+
         $model->estado = 2;
         $model->save();
         
@@ -523,9 +532,16 @@ class ProyectoController extends Controller
 
     public function actionCambiarestado($id)
     {
+        $proyectoInscritoo = Desarrollarproyecto::findOne(['id_proyecto'=> $id]);
         $model = $this->findModel($id);
-        //return $model->estado ;
-    
+        
+        //si el proyecto está inscrito, no puede rechazarlo
+        if($proyectoInscritoo != null){
+            Yii:: $app->session->setFlash('error','No fue posible cambiar el estado del proyecto '.'"'.$model->nombre.'"'.', porque ya fue inscrito. ');
+            return $this->redirect(['view', 'id' => $id]);
+        }
+        
+        
         if($model->estado == 1){
             //return "pasó 3";
             $model->estado = 2;
