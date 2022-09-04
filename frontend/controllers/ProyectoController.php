@@ -510,6 +510,13 @@ class ProyectoController extends Controller
         $model->estado = 1;
         $model->save();
 
+        $estudi = Estudiante::findOne(['id_usuario'=>$model->id_autor]);
+
+        //si el autor es un estudiante, entonces aprueba el proyecto y se inscribe automáticamente 
+        if($estudi != null){
+            return $this->redirect(['desarrollarproyecto/create2', 'id' => $id]);
+        }
+
         Yii:: $app->session->setFlash('success','El proyecto '.'"'.$model->nombre.'"'.' se aprobó con éxito');
         return $this->redirect(['view', 'id' => $model->id]);
     }
