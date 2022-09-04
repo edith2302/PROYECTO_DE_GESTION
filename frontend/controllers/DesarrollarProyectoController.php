@@ -71,6 +71,22 @@ class DesarrollarproyectoController extends Controller
      */
     public function actionCreate($id)
     {
+        $proyectoInsc = Proyecto::find()->where(['id' => $id])->one();
+
+        //si el estado del proyecto no es aprobado, no permite inscribirlo
+        if($proyectoInsc->estado != 1 ){
+
+            Yii:: $app->session->setFlash('error','Proyecto no disponible');
+            return $this->redirect(['proyecto/indexestudiante']);
+        }
+
+        //si la disponibilidad del proyecto no es 1, no permite inscribirlo
+        if($proyectoInsc->disponibilidad != 1 ){
+
+            Yii:: $app->session->setFlash('error','Proyecto no disponible');
+            return $this->redirect(['proyecto/indexestudiante']);
+        }
+
         //-----------------conexion bdd----------------------
         $bd_name = "yii2advanced";
         $bd_table = "item";
@@ -91,8 +107,9 @@ class DesarrollarproyectoController extends Controller
         $proyectoInscritos= Desarrollarproyecto::find()->where(['id_estudiante' => $estudiante->id])->one();
         $msg = null;
         
-        //si el estudiante ya inscribió un proyecto, lo redirije a la vista del proyecto inscrito
+        //si el estudiante ya inscribió un proyecto, lo redirige a la vista del proyecto inscrito
         if($proyectoInscritos != null){
+            Yii:: $app->session->setFlash('error','El estudiante logueado ya cuenta con un proyecto insrito.');  
             return $this->render('../proyecto/viewinscripcion2', [
                 'model' => $proyecto->findOne($id),
                 'msg'=> "Esto ya fue inscrito",

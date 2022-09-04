@@ -118,7 +118,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
             ],
 
                     
-            /*[
+            [
 
                 'header'=>"Acción",
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
@@ -132,7 +132,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
 
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 10px 10px 10px;text-align: center;'],
-            ],*/
+            ],
         ],
     ]); ?>
 

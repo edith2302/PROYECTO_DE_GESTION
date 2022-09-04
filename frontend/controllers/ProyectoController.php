@@ -140,7 +140,10 @@ class ProyectoController extends Controller
         ]);*/
         $modelproyectos = new SqlDataProvider([
             
-           'sql' => "SELECT * FROM proyecto WHERE proyecto.disponibilidad = 1 ",
+           //'sql' => "SELECT * FROM proyecto WHERE proyecto.disponibilidad = 1 ",
+
+           //Sólo muestra los proyectos disponibles y con estado aprobado(1)
+           'sql' =>"SELECT * FROM proyecto WHERE proyecto.disponibilidad = 1 AND proyecto.estado = 1",
 
            //'sql' => "SELECT proyecto.id, proyecto.nombre, proyecto.descripcion, proyecto.num_integrantes, proyecto.tipo, proyecto.area, proyecto.estado, proyecto.disponibilidad, proyecto.id_profe_guia, proyecto.id_autor, desarrollarproyecto.id_estudiante, COUNT(*) as total FROM proyecto JOIN desarrollarproyecto ON proyecto.id = desarrollarproyecto.id_proyecto GROUP BY proyecto.id  HAVING COUNT(*) <= proyecto.num_integrantes",
             
