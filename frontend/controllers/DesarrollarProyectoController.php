@@ -306,6 +306,29 @@ class DesarrollarproyectoController extends Controller
         return $this->redirect(['index']);
     }
 
+   
+
+    /**
+     * Deletes an existing Desarrollarproyecto model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param int $id ID
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionEliminarinscripcion($id)
+    {   //pasa el id del proyecto
+        $logueado= Yii::$app->user->identity->id_usuarioo;
+        $estudiante = Estudiante::find()->where(['id_usuario' => $logueado])->one();
+        $proyecto = Proyecto::find()->where(['id' => $id])->one();
+
+        $desarrollarProy= Desarrollarproyecto::find()->where(['id_proyecto' => $id],['id_estudiante' => $estudiante->id])->one();
+
+        Yii:: $app->session->setFlash('success','Inscripción de proyecto eliminada con éxito');
+        return $this->redirect(['proyecto/viewmiproyecto']);
+    }
+
+
+
     /**
      * Finds the Desarrollarproyecto model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

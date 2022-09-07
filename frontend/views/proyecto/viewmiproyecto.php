@@ -17,7 +17,16 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <h1><?= Html::encode($this->title) ?></h1>
 
-   
+    <p align="right">
+
+        <?= Html::a('Eliminar inscripción', ['eliminarinscripcion', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => '¿Está seguro que quiere eliminar la inscripción del proyecto '.'"'.$model->nombre.'"'.' ?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
 
     <?= DetailView::widget([
         'model' => $model,
