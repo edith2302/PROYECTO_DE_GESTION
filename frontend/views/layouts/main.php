@@ -21,6 +21,8 @@ use app\models\Estudiante;
 use app\models\Proyecto;
 use app\models\Profesorguia;
 
+use app\models\Evaluador;
+
 AppAsset::register($this);
 $common_path = dirname(__FILE__,2);
 
@@ -371,7 +373,7 @@ Modal::end();
                            <li>
                              
                            <li>
-                                <?= Html::a('Hitos', Url::to(['/hito/indexestudiante'])) ?>
+                                <?= Html::a(' Hitos', Url::to(['/hito/indexestudiante']),['class'=>'fa fa-file-text-o']) ?>
                            <li>
 
                            <li>
@@ -419,6 +421,19 @@ Modal::end();
                             </li>
                         </ul>
                     </li>
+
+                    <?php 
+                        //si el profesor ICI puede evaluar, muestra los histos
+                        $evaluadorr = Evaluador::findOne(['rol'=>3]);
+                        if($evaluadorr != null){ ?>
+                            <li>
+                                <?= Html::a(' Hitos', Url::to(['/hito/indexproficiev']),['class'=>'fa fa-file-text-o']) ?>
+                                <!--fa fa-file-text-->                            
+                            </li>
+                         <?php  
+                        }
+                    
+                    ?>
                     
                     <?php endif ?>
                     <?php endif ?>
@@ -465,7 +480,7 @@ Modal::end();
                             <li>
                              
                             <li>
-                                <?= Html::a('Hitos', Url::to(['/hito/indexprofeguia'])) ?>
+                                <?= Html::a(' Hitos', Url::to(['/hito/indexprofeguia']),['class'=>'fa fa-file-text-o']) ?>
                             <li>
 
                         </ul>
