@@ -166,7 +166,7 @@ Modal::end();
                             $rol = "Estudiante";
                         }
                         if($userr->role == 3){
-                            $rol = "Profesor ICINF";
+                            $rol = "Profesor ICI";
                         }
                        
                         ?>

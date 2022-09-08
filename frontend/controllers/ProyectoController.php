@@ -187,9 +187,9 @@ class ProyectoController extends Controller
     }
 
     public function actionIndexprofeguia()
-    {
+    {   //en proyecto, el id del profe guia corresponde al id del profesor ICINF
         $usuario = Yii::$app->user->identity->id_usuarioo;
-        $profeguia = Profesorguia::findOne(['id_usuario'=>$usuario]);
+        $profeguia = Profesoricinf::findOne(['id_usuario'=>$usuario]);
 
         $modelproyectos = new SqlDataProvider([
             
