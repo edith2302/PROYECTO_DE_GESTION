@@ -403,7 +403,7 @@ Modal::end();
                         <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos</span></span>
                         <ul id="proyecto">
                             <li>
-                                <?= Html::a('Lista de propuestas', Url::to(['/proyecto/indexprofesor'])) ?>
+                                <?= Html::a('Lista de propuestas', Url::to(['proyecto/indexprofesor'])) ?>
                             </li>
                         </ul>
                     </li>-->
@@ -461,7 +461,7 @@ Modal::end();
                         <span  class="opener"><span class="icon fa-hand-o-up"> Proyectos guiados </span></span>
                         <ul id="hito">
                             <li>
-                                <?= Html::a('Mi proyecto', Url::to('frontend/views/proyecto%2Findexestudiante')) ?>
+                                <?= Html::a(' Proyectos', Url::to(['/proyecto/indexprofeguia'])) ?>
                             <li>
                              
                             <li>
@@ -471,6 +471,11 @@ Modal::end();
                         </ul>
 
                     </li>
+
+                   <!-- <li>
+                        <?= Html::a(' Proyectos guiados', Url::to(['/proyecto/indexprofeguia'])) ?>
+                    </li> -->
+
 
                     <li>
                         <span  class="opener"><span class="icon fa-lightbulb-o"> Propuestas de proyecto</span></span>

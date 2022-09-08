@@ -13,7 +13,7 @@ use app\models\Proyecto;
 $this->title = 'Propuestas de proyecto';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="proyecto-index">
+<div class="proyecto-indexprofesor">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 0px;text-align: center;'],
+                'contentOptions' => ['style'=>'padding:10px 10px 0px 0px;text-align: center;'],
             ],
 
            /* [
@@ -69,8 +69,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'headerOptions' => ['width' => '200px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 10px 0px 0px;text-align: center;'],
             ],
 
             /*[
@@ -98,8 +98,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                         'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'headerOptions' => ['width' => '150px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 10px 0px 0px;text-align: center;'],
        
 
                     ],
@@ -124,13 +124,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+                'headerOptions' => ['width' => '200px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 10px 0px 0px;text-align: center;'],
 
 
                     ],
 
-            /*[
+            [
                 'header'=>"Acción",
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
@@ -140,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $url ='index.php?r=proyecto%2Fviewprofesor&id='.$model->id;
                     return $url;
                  }
-            ],*/
+            ],
         ],
     ]); ?>
 

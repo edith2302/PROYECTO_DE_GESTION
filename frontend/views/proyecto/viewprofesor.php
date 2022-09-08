@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="proyecto-view">
+<div class="proyecto-viewprofesor">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -63,7 +63,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             //'estado',
-            [
+           
+           /* [
                 'label'  => 'Estado',
                 'value'  => function ($model) {
                     switch ($model->estado) {
@@ -79,13 +80,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         
                     }
                 },
-            ],
+            ],*/
 
             
             //'disponibilidad',
             //'id_profe_guia',
 
-            [
+            /*[
                 'label'  => 'Profesor guía',
                 
                 'value'  => function ($model) {
@@ -101,11 +102,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                    
                 },
-            ],
+            ],*/
 
             //'id_autor',
 
-            [
+           /* [
                 'label'  => 'Desarrollado por',
                 'value'  => function ($model) {
                     $desarrollap = Desarrollarproyecto::find()->where(['id_proyecto' => $model->id])->one();
@@ -118,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return " ";
                     
                 },
-            ],
+            ],*/
 
             [
                 'label'  => 'Autor',

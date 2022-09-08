@@ -7,16 +7,18 @@ use yii\grid\ActionColumn;
 use yii\helpers\Url;
 
 use app\models\Entrega;
+use app\models\Proyecto;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Hito */
 
-$this->title = $model->nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Entrega de proyectos guiados', 'url' => ['index']];
+$proyecto = Proyecto::find()->where(['id' => $idp])->one();
+$this->title = "Entrega del proyecto del proyecto ".$proyecto->nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Proyectos guiados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="hito-viewprofeg">
+<div class="hito-viewentregapg">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -24,13 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
-            //'nombre',
-            [
-                'label'  => 'Nombre de hito',
-                'value'  => function ($model) {
-                    return $model->nombre;
-                },
-            ],
+            'nombre',
             'descripcion',
             'fecha_habilitacion',
             'hora_habilitacion',
@@ -81,14 +77,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <?= GridView::widget([
-        'dataProvider' => $modelentregahito,
+        'dataProvider' => $modelentrega,
         //'dataProvider' => $modelnota,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
 
             [
-                'header'=>"Evidencia",
+
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{link}',
                 'buttons' => [
@@ -96,8 +92,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', "archivos/".$model['evidencia'], ['target' => '_blank']) : '';
                     },
                 ],
-                'headerOptions' => ['width' => '200px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:10px 0px 10px 0px;text-align: center;'],
             ],
 
             /*[
@@ -149,7 +143,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             [
-                'header'=>"Acciones",
                 'headerOptions' => ['width' => '100px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
@@ -163,6 +156,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $url;
                 }
             ],  
+            [
+                'header'=>"Evaluar",
+                'headerOptions' => ['width' => '70px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+                'class' => ActionColumn::className(),
+                'template'=>'{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ('index.php?r=rubrica%2Fevaluar&ide='.$model['id']) ? Html::a('<img src="images/iconos/evaluar.PNG" width="20" height="20">', 'index.php?r=rubrica%2Fevaluar&ide='.$model['id']) : '';
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

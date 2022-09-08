@@ -64,7 +64,7 @@ class ProyectoController extends Controller
                     ],
                     [
                         //El profesor ICINF tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'create','view','index'],
+                        'actions' => ['logout', 'create','view','index', 'indexprofesor','viewprofesor'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -185,6 +185,42 @@ class ProyectoController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    public function actionIndexprofeguia()
+    {
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $profeguia = Profesorguia::findOne(['id_usuario'=>$usuario]);
+
+        $modelproyectos = new SqlDataProvider([
+            
+            'sql' => "SELECT * FROM proyecto WHERE proyecto.id_profe_guia = ".$profeguia->id,
+ 
+        ]);
+
+        return $this->render('indexprofeguia', [
+            'modelproyectos' => $modelproyectos,
+        ]);
+
+    }
+
+
+
+        
+    public function actionViewprofeguia($id)
+    {
+        $modelp = new SqlDataProvider([
+            'sql' => "SELECT * FROM hito",
+        ]);
+        
+
+        return $this->render('viewprofeguia', [
+            'model' => $this->findModel($id),
+            'modelp' => $modelp,
+        ]);
+    }
+
+
+
 
     /**
      * Displays a single Proyecto model.

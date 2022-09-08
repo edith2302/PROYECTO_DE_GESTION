@@ -190,7 +190,7 @@ class HitoController extends Controller
         $user = User::findOne(['id_usuarioo'=>$usuario]);
 
         $evaluador = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>$user->role]);
-        $evaluacion = Evaluar::findOne(['id_entrega'=>$id, 'id_usuario'=>$usuario]);
+        //$evaluacion = Evaluar::findOne(['id_entrega'=>$id, 'id_usuario'=>$usuario]);
 
         $comision = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>4]);
         $profe_guia = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>5]);
@@ -262,6 +262,23 @@ class HitoController extends Controller
         ]);
     
     }
+
+
+    public function actionViewentregapg($id, $idp)
+    {  //id: id hito     idp: id proyeto
+        $modelentrega = new SqlDataProvider([
+            'sql' => "select * from entrega where id_hito = ".$id." and id_proyecto= ".$idp,
+            //'sql' => "select * from entrega where id_hito = 1 and id_proyecto= 1",
+            
+        ]);
+        //return print_r( $modelhito);
+        return $this->render('viewentregapg', [
+            'model' => $this->findModel($id),
+            'modelentrega' => $modelentrega,
+        ]);
+    
+    }
+
 
       /**
      * Displays a single Hito model.
@@ -403,7 +420,51 @@ class HitoController extends Controller
             
         ]);
 
+        //---------------validación evaluador-------------------
+        $hito = Hito::findOne(['id'=>$id]);
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $user = User::findOne(['id_usuarioo'=>$usuario]);
+
+        $evaluador = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>5]);
+        
+        //si el profe guia esta seleccionar para evaluar, aparece la opción en la entrega
+        if($evaluador != null){
+            return $this->render('viewprofegev', [
+                'model' => $this->findModel($id),
+                'modelentregahito' => $modelentregahito,
+                //'modelnota' => $modelnota,
+            ]);
+        }
+
+        //-------------------------------------------------------
         return $this->render('viewprofeg', [
+            'model' => $this->findModel($id),
+            'modelentregahito' => $modelentregahito,
+            //'modelnota' => $modelnota,
+        ]);
+        
+    }
+
+    public function actionViewprofegev($id)
+    {   //$id : el id corresponde al hito
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $profeguia = Profesorguia::findOne(['id_usuario'=>$usuario]);
+        //$estudiante = Estudiante::findOne(['id_usuario'=>$usuario]);
+        //$desarrollar = Desarrollarproyecto::findOne(['id_estudiante'=>$estudiante]);
+        $proyecto = Proyecto::findOne(['id_profe_guia'=>$profeguia->id]);
+
+        $entrega = Entrega::findOne(['id_proyecto'=>$proyecto->id, 'id_hito'=>$id]);
+
+        $modelentregahito = new SqlDataProvider([
+            'sql' => 'SELECT * FROM `entrega`  WHERE entrega.id_proyecto ='.$proyecto->id.' and entrega.id_hito='.$id, 
+        ]);
+
+        $modelnota = new SqlDataProvider([
+            'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios as coment_ev, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
+            
+        ]);
+
+        return $this->render('viewprofegev', [
             'model' => $this->findModel($id),
             'modelentregahito' => $modelentregahito,
             //'modelnota' => $modelnota,
