@@ -49,7 +49,7 @@ $this->registerJs($js);
         'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
         'widgetBody' => '.container-items', // required: css class selector
         'widgetItem' => '.item', // required: css class
-        'limit' => 4, // the maximum times, an element can be cloned (default 999)
+        'limit' => 100, // the maximum times, an element can be cloned (default 999)
         'min' => 0, // 0 or 1 (default 1)
         'insertButton' => '.add-item', // css class
         'deleteButton' => '.remove-item', // css class
@@ -62,6 +62,7 @@ $this->registerJs($js);
         ],
     ]); ?>
     <?php echo $msg ?>
+    
     <div class="panel panel-default">
         <div class="panel-body container-items"><!-- widgetContainer -->
             <?php foreach ($modelsItem as $index => $modelItem): ?>
@@ -85,11 +86,11 @@ $this->registerJs($js);
                             <?php echo  ($modelItem-> descripcion) ?>
 
                             </div>
-                            <div class="col-sm-2">
+                            <!--<div class="col-sm-2">
                             
                             <?php echo  ($modelItem-> puntaje.' pts') ?>
 
-                            </div>
+                            </div>-->
                             
                             <div class="col-sm-4">
                                 <?= $form->field($modelItem, "[{$index}]puntaje_obtenido")->textInput(['placeholder' => "0"],['maxlength' => true]) ?>

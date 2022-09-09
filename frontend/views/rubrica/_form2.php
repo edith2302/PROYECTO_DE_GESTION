@@ -56,7 +56,7 @@ $this->registerJs($js);
     ]); ?>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-envelope"></i> Item
+            <i class="fa fa-server"></i> Item
             <a  class="pull-right add-item btn btn-success btn-sm"><i class="fa fa-plus"></i> Agregar ítem</a>
             <div class="clearfix"></div>
         </div>
@@ -76,15 +76,12 @@ $this->registerJs($js);
                             }
                         ?>
                         
-                        <div class="row">
-                            <div class="col-sm-6">
+                        <!--<div class="row">-->
+                           <!-- <div class="col-sm-6">-->
                                 <?= $form->field($modelItem, "[{$index}]descripcion")->textarea(['maxlength' => true]) ?>
-                            </div>
-                            
-                            <div class="col-sm-6">
-                                <?= $form->field($modelItem, "[{$index}]puntaje")->textInput(['maxlength' => true]) ?>
-                            </div>
-                        </div><!-- end:row -->
+                            <!--</div>-->
+        
+                       <!-- </div>--><!-- end:row -->
                     </div>
                 </div>
             <?php endforeach; ?>

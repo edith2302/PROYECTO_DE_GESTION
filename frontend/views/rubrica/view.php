@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <br><br><h4><?= "Descripción: "?></h4>
-    <?=($model->descripcion)?>
+    <?=($model->descripcion)?><br><br>
 
    <!-- <?= DetailView::widget([
         'model' => $model,
@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
         ],
     ]) ?>  -->
+    <br><h4><?= "Ítems:"?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         
@@ -43,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             'descripcion',
-            'puntaje',
+            //'puntaje',
         
             //'puntaje_obtenido',   
         ],

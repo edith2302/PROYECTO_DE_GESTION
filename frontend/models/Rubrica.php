@@ -51,7 +51,7 @@ class Rubrica extends \yii\db\ActiveRecord
             'nombre' => 'Nombre rúbrica',
             'descripcion' => 'Descripción',
             //'escala' => 'Escala',
-            'observaciones' => 'Observaciones',
+            'observaciones' => 'Observaciones:',
             'id_profe_asignatura' => 'Código profesor asignatura',
         ];
     }

@@ -31,15 +31,16 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-        [['descripcion', 'puntaje'/*, 'id_rubrica'*/], 'required'],
-            [['puntaje', 'id_rubrica','puntaje_obtenido'], 'integer'],
-            [['descripcion'], 'string', 'max' => 1000],
+        [['descripcion', /*'puntaje', 'id_rubrica'*/], 'required'],
+        [[/*'puntaje',*/ 'id_rubrica','puntaje_obtenido'], 'integer'],
+            [['descripcion'], 'string', 'max' => 2000],
             
             //[['puntaje_obtenido', 'puntaje'],'puntajelimite'],
             //['puntaje_obtenido', 'puntajelimite2'],
             ['puntaje_obtenido', 'compare', 'compareValue' => 0, 'operator' => '>'],
             //['puntaje_obtenido', 'compare', 'compareAttribute' => 'puntaje', 'operator' => '<='],
-            ['puntaje_obtenido', 'puntajelimite2'],
+           
+            // ['puntaje_obtenido', 'puntajelimite2'],
 
             [['id_rubrica'], 'exist', 'skipOnError' => true, 'targetClass' => Rubrica::className(), 'targetAttribute' => ['id_rubrica' => 'id']],
         ];
@@ -103,7 +104,7 @@ class Item extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'descripcion' => 'Descripción',
-            'puntaje' => 'Puntaje máximo',
+            //'puntaje' => 'Puntaje máximo',
             'puntaje_obtenido' => 'Puntaje obtenido',
             'id_rubrica' => 'Rubrica',
         ];
