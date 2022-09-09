@@ -96,10 +96,11 @@ $this->params['breadcrumbs'][] = $this->title;
         $prom = $prom + ($notaa * ($porcent/100));
     } 
     //-------------------------------------------------------------------
-    
+    $promedioo=  round($prom, 1);
 
 ?>
-<b><?= "Promedio: "?></b><?=$prom  ?>
+<!--<b><?= "Promedio: "?></b><?=$promedioo  ?>-->
 
-<h4><?= "Promedio: ".$prom ?></h4>
+
+<h3><?= "Promedio: ".$promedioo ?></h3>
 

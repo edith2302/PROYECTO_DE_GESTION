@@ -239,9 +239,9 @@ Modal::end();
                         <li>
                             <?= Html::a(' Iniciar Sesión',Url::to(['site/login']),['class'=>'icon fa-sign-in']) ?>
                         </li>
-                        <li>
+                        <!--<li>
                             <?= Html::a(' Registrarse',Url::to(['site/signup']),['class'=>'icon fa-sign-up']) ?>
-                        </li>
+                        </li>-->
                     <?php else: ?>
                         <!--li>
                             <span  class="opener"><span class="icon fa-user"> Ejemplo API</span></span>
@@ -398,7 +398,7 @@ Modal::end();
                     <?php endif ?>
                     <?php endif ?>
 
- <!--menu profesor ICINF-->
+ <!--menu profesor ICI-->
                     <?php if (!Yii::$app->user->isGuest) :?>
                     <?php  if (Yii::$app->user->identity->role == 3) :?>
                     <!--<li>
@@ -434,6 +434,19 @@ Modal::end();
                         }
                     
                     ?>
+
+                   <?php  
+                        //si el profesor ICI puede evaluar, muestra los histos
+                        $evaluadorr = Evaluador::findOne(['rol'=>4]);
+                        if($evaluadorr != null){ ?>
+                            <li>
+                                <?= Html::a(' Hitos', Url::to(['/hito/indexcomision']),['class'=>'fa fa-file-text-o']) ?>
+                                <!--fa fa-file-text-->                            
+                            </li>
+                         <?php  
+                        }
+                    
+                    ?>
                     
                     <?php endif ?>
                     <?php endif ?>
@@ -451,6 +464,7 @@ Modal::end();
                             </li>
                         </ul>
                     </li>
+
                     
                     <?php endif ?>
                     <?php endif ?>
@@ -492,7 +506,7 @@ Modal::end();
                     </li> -->
 
 
-                    <li>
+                    <!--<li>
                         <span  class="opener"><span class="icon fa-lightbulb-o"> Propuestas de proyecto</span></span>
                         <ul>
                             <li>
@@ -502,7 +516,7 @@ Modal::end();
                                 <?= Html::a('Mis propuestas', Url::to(['/proyecto/indexpropuestas'])) ?>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
 
 
                     

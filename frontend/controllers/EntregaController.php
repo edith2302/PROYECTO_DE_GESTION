@@ -284,7 +284,7 @@ where estudiante.id_usuario = 6107)
     {
         $entrega = Entrega::findOne(['id'=>$id]);
         
-        $modelnota = new SqlDataProvider([
+        /*$modelnota = new SqlDataProvider([
             //'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios, evaluar.nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
             'sql' => 'SELECT evaluar.id as idevaluar, evaluar.comentarios, AVG(nota) as nota, evaluar.id_entrega, evaluar.id_usuario FROM evaluar WHERE  evaluar.id_entrega ='.$entrega->id,
             
@@ -292,14 +292,19 @@ where estudiante.id_usuario = 6107)
 
         $modelcomentarios = new SqlDataProvider([
             'sql' => 'SELECT evaluar.comentarios FROM `evaluar` WHERE evaluar.id_entrega = '.$entrega->id,
+        ]);*/
+        $modelhito = new SqlDataProvider([
+            'sql' => "select * from entrega 
+            where id = ' $id'",
         ]);
 
         //SELECT AVG(nota), evaluar.comentarios from evaluar WHERE evaluar.id_entrega=12 GROUP BY evaluar.id_entrega
         return $this->render('view2', [
             //'model' => $this->findModel($id),
             'model' => $entrega,
-            'modelnota' => $modelnota,
-            'modelcomentarios' => $modelcomentarios,
+            'modelhito' => $modelhito,
+            //'modelnota' => $modelnota,
+            //'modelcomentarios' => $modelcomentarios,
             
         ]);
     }
@@ -318,12 +323,18 @@ where estudiante.id_usuario = 6107)
             'sql' => 'SELECT evaluar.comentarios FROM `evaluar` WHERE evaluar.id_entrega = '.$entrega->id,
         ]);
 
+        $modelhito = new SqlDataProvider([
+            'sql' => "select * from entrega 
+            where id = ' $id'",
+        ]);
+
         //SELECT AVG(nota), evaluar.comentarios from evaluar WHERE evaluar.id_entrega=12 GROUP BY evaluar.id_entrega
         return $this->render('view3', [
             //'model' => $this->findModel($id),
             'model' => $entrega,
             'modelnota' => $modelnota,
             'modelcomentarios' => $modelcomentarios,
+            'modelhito' => $modelhito,
             
         ]);
     }
@@ -377,8 +388,10 @@ where estudiante.id_usuario = 6107)
                         $pdfFile->saveAs('archivos/' . $model->proyecto->nombre.'_'.$model->hito->nombre .'_'.$model->fecha_entrega .'_'.$horaActual.'_' . $pdfFile->name);
                     }
     
-                    $model->evidencia = $horaActual.'_'.$pdfFile->name;
+                    //$model->evidencia = $horaActual.'_'.$pdfFile->name;
+                    $model->evidencia = $model->proyecto->nombre.'_'.$model->hito->nombre .'_'.$model->fecha_entrega .'_'.$horaActual.'_' . $pdfFile->name;
                     $model->save(false);
+
     
                 }
     
@@ -408,7 +421,8 @@ where estudiante.id_usuario = 6107)
         $model = $this->findModel($id);
 
         $model->fecha_entrega = date('Y-m-d');
-        $model->hora_entrega = date('H:i:s');;
+        $model->hora_entrega = date('H:i:s');
+       //return $model->id_proyecto;
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -421,11 +435,12 @@ where estudiante.id_usuario = 6107)
                 }
 
                 $model->evidencia = 'archivos/' . $model->proyecto->nombre .'----'. $model->fecha_entrega .'----'. $model->hito->nombre .'.' . $pdfFile->extension;
-                $model->save(false);
+                //return print_r($model);
+                $model->save();
 
             }
 
-            $model->save(false);
+            $model->save();
 
             
         }

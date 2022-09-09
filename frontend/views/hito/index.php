@@ -169,7 +169,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     if($action =='update'){
                         return 'index.php?r=hito%2Fviewmodificar&id='.$model['id'];
                     }
-                    return Url::toRoute([$action, 'id' => $model->id]);
+                    return Url::toRoute([$action, 'id' => $model['id']]);
                 }
                 
             ],

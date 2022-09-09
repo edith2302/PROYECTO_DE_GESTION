@@ -185,6 +185,24 @@ class HitoController extends Controller
             'modelhitoss' => $modelhitoss,
         ]);
     }
+
+    public function actionIndexcomision()
+    {
+        $searchModel = new HitoSearch();
+        //$dataProvider = $searchModel->search($this->request->queryParams);
+
+        $modelhitoss = new SqlDataProvider([
+            'sql' => 'SELECT hito.id as idh, evaluador.id as ide, hito.nombre, hito.descripcion, hito.fecha_habilitacion, hito.hora_habilitacion, hito.fecha_limite, hito.hora_limite, hito.tipo_hito, hito.porcentaje_nota, hito.id_rubrica, hito.id_profe_asignatura FROM hito JOIN evaluador ON hito.id = evaluador.id_hito WHERE evaluador.rol = 4',
+        ]);
+
+        
+
+        return $this->render('indexcomision', [
+            'searchModel' => $searchModel,
+            'modelhitoss' => $modelhitoss,
+        ]);
+    }
+    
     
 
     /**

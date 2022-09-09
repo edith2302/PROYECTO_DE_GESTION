@@ -34,7 +34,7 @@ class Entrega extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['evidencia', 'fecha_entrega', 'hora_entrega'/*, 'comentarios'*/, 'id_proyecto', 'id_hito'], 'required'],
+        [['evidencia', 'fecha_entrega', 'hora_entrega'/*, 'comentarios'*//*, 'id_proyecto'*//*, 'id_hito'*/], 'required'],
             [['nota'], 'number'],
             [['fecha_entrega', 'hora_entrega'], 'safe'],
             [['id_proyecto', 'id_hito'], 'integer'],

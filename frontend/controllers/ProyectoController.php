@@ -628,7 +628,7 @@ class ProyectoController extends Controller
         }
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            Yii:: $app->session->setFlash('error','Proyecto actualizado con éxito. ');
+            Yii:: $app->session->setFlash('success','Proyecto actualizado con éxito. ');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -680,45 +680,7 @@ class ProyectoController extends Controller
     }
 
 
-    //reporte pdf
-
-    /*public function actionExportPdf1() {
-
-        $searchModel = new ProyectoSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        // get your HTML raw content without any layouts or scripts
-        $content = $this->renderPartial('_indexpdfinicial',['dataProvider' => $dataProvider,]);
-        
-        // setup kartik\mpdf\Pdf component
-        $pdf = new Pdf([
-            // set to use core fonts only
-            'mode' => Pdf::MODE_CORE, 
-            // A4 paper format
-            'format' => Pdf::FORMAT_A4, 
-            // portrait orientation
-            'orientation' => Pdf::ORIENT_PORTRAIT, 
-            // stream to browser inline
-            'destination' => Pdf::DEST_BROWSER, 
-            // your html content input
-            'content' => $content,  
-            // format content from your own css file if needed or use the
-            // enhanced bootstrap css built by Krajee for mPDF formatting 
-            'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
-            // any css to be embedded if required
-            'cssInline' => '.kv-heading-1{font-size:18px}', 
-             // set mPDF properties on the fly
-            'options' => ['title' => 'Krajee Report Title'],
-             // call mPDF methods on the fly
-            'methods' => [ 
-                'SetHeader'=>['Listado de Estudiantes de Anteproyecto de título'], 
-                'SetFooter'=>['{PAGENO}'],
-            ]
-        ]);
-        
-        // return the pdf output as per the destination setting
-        return $pdf->render(); 
-    }*/
+    
 
     //reporte pdf
 
@@ -844,168 +806,8 @@ class ProyectoController extends Controller
         return $pdf->render(); 
     }
 
-    /*public function actionExportPdf1() {
-
-        
-        //$searchModel = new ProyectoSearch();
-        //$dataProvider = $searchModel->search($this->request->queryParams);
-
-        // get your HTML raw content without any layouts or scripts
-        //$content = $this->renderPartial('_indexpdf1',['dataProvider' => $dataProvider,]);
-             $titulo="LISTA DE PROPUESTAS DE PROYECTOS";
-             $fecha=date("d-m-y");
-
-             $losproyectos= Proyecto::find()->all();
-        
-        // get your HTML raw content without any layouts or scripts
-        $content = $this->renderPartial('_indexpdfinicial',[
-        //return $this->renderPartial('_indexpdfinicial',[
-            'titulo'=>$titulo,
-            'fecha'=>$fecha,
-            'titulo'=>$titulo,
-            'proyectos'=>$losproyectos,
-        
-        ]);
-        // setup kartik\mpdf\Pdf component
-        $pdf = new Pdf([
-            // set to use core fonts only
-            'mode' => Pdf::MODE_CORE, 
-            // A4 paper format
-            'format' => Pdf::FORMAT_A4, 
-            // portrait orientation
-            'orientation' => Pdf::ORIENT_PORTRAIT, 
-            // stream to browser inline
-            'destination' => Pdf::DEST_BROWSER, 
-            // your html content input
-            'content' => $content,  
-            // format content from your own css file if needed or use the
-            // enhanced bootstrap css built by Krajee for mPDF formatting 
-            'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
-            // any css to be embedded if required
-            'cssInline' => 'table.blueTable{
-
-                border:1px solid #1C6EA4;
-                background-color: #EEEEEE;
-                width: 100%;
-                text-align: left;
-                border-collapse: collapse;
-            }
-            
-            table.blueTable td, table.blueTable th{
-            
-                border: 1px solid #AAAAAA;
-                padding: 3px 2px;
-            }
-            
-            table.blueTable tbody td{
-            
-             font-size: 10px;
-            }
-            
-            table.blueTable tr:nth-child(even){
-            
-            background: #D0E4F5;
-             }
-            
-            
-             table.blueTable thead{
-            
-              background: #1C6EA4;
-              background: -moz-linear-gradient(top,#5592bb 0%, #327cad 66%, #1C6EA4 100%);
-              background: -webkit-linear-gradient(top,#5592bb 0%, #327cad 66%, #1C6EA4 100%);
-              background: linear-gradient(top bottom,#5592bb 0%, #327cad 66%, #1C6EA4 100%);
-              border-bottom:  2px solid #444444;
-             }
-            
-             table.blueTable thead th{
-            
-               font-size: 15px;
-               font-weight: bold;
-               color: #FFFFFF;
-               border-left: 2px solid #D0E4F5;
-            }
-            
-            table.blueTable thead th:first-child{
-               border-left: none;
-            }
-            table.blueTable tfoot{
-            
-               font-size: 14px;
-               font-weight: bold;
-               color: #FFFFFF;
-                background: #D0E4F5;
-                background: -moz-linear-gradient(top,#dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-              background: -webkit-linear-gradient(top,#dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-              background: linear-gradient(top bottom,#dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
-              border-bottom:  2px solid #444444;
-            }
-            table.blueTable tfoot td{
-              font-size: 14px;
-            }
-            
-            table.blueTable tfoot .links{
-              text-align: right;
-            }
-            
-            table.blueTable tfoot .links a{
-              display: inline-block;
-              background: #1C6EA4;
-              color: #FFFFFF;
-              padding: 2px 8px;
-              border-radius: 5px;
-            }', 
-             // set mPDF properties on the fly
-            'options' => ['title' => 'Lista de propuestas'],
-             // call mPDF methods on the fly
-            'methods' => [ 
-                'SetHeader'=>['Lista de propuestas'], 
-                'SetFooter'=>['{PAGENO}'],
-            ]
-        ]);
-        
-        // return the pdf output as per the destination setting
-        return $pdf->render(); 
-    }*/
+    
 
 
-
-    /*public function actionExportExcel2()
-    {
-        $searchModel = new Usuariosearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
-        // Initalize the TBS instance
-        $OpenTBS = new \hscstudio\export\OpenTBS; // new instance of TBS
-        // Change with Your template kaka
-		$template = Yii::getAlias('@hscstudio/export').'/templates/opentbs/ms-excel.xlsx';
-        $OpenTBS->LoadTemplate($template); // Also merge some [onload] automatic fields (depends of the type of document).
-        //$OpenTBS->VarRef['modelName']= "Mahasiswa";				
-        $data = [];
-        $no=1;
-        foreach($dataProvider->getModels() as $estudiante){
-            $data[] = [
-                'no'=>$no++,
-                'nombre'=>$estudiante->nombre,
-                'rut'=>$estudiante->rut,
-                'email'=>$estudiante->email,
-                'telefono'=>$estudiante->telefono,
-            ];
-        }
-        
-        $data2[0] = [
-                'no'=>'X',
-                'nombre'=>'Y',
-                'rut'=>'Z',
-            ];
-        $data2[1] = [
-                'no'=>'X',
-                'nombre'=>'Y',
-                'rut'=>'Z',
-            ];
-        $OpenTBS->MergeBlock('data', $data);
-        $OpenTBS->MergeBlock('data2', $data2);
-        // Output the result as a file on the server. You can change output file
-        $OpenTBS->Show(OPENTBS_DOWNLOAD, 'export.xlsx'); // Also merges all [onshow] automatic fields.			
-        exit;
-    } */
+   
 }

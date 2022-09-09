@@ -43,11 +43,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 if(mysqli_connect_errno()){
                     die("Connection failed: ".mysqli_connect_error());
                 }
-                $datos = $conn->query("SELECT hito.nombre, hito.porcentaje_nota as porcentaje, hito.id as id_hito, entrega.id as id_entrega, entrega.nota, entrega.id_proyecto, entrega.id_hito from entrega JOIN hito ON entrega.id_hito = hito.id");
+                //$datos = $conn->query("SELECT hito.nombre, hito.porcentaje_nota as porcentaje, hito.id as id_hito, entrega.id as id_entrega, entrega.nota, entrega.id_proyecto, entrega.id_hito from entrega JOIN hito ON entrega.id_hito = hito.id");
+                $datos = $conn->query("SELECT hito.nombre, hito.porcentaje_nota as porcentaje, hito.id as id_hito from hito");
 
                 $num =0;
+               
 
                 while($hitos = mysqli_fetch_array( $datos )){
+                   
                     $id_proyecto = $hitos['id_proyecto'];
                     $desarrolaP = Desarrollarproyecto::findOne(['id_proyecto' => $id_proyecto]);
 
@@ -113,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
             echo "</td>\n";*/
 
             echo "<td>";
-            echo  $prom;
+            echo  round($prom, 1);
             echo "</td>\n";
 
             echo "</tr>\n";

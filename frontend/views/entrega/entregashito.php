@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{link}',
                 'buttons' => [
                     'link' => function ($url, $model, $key) {
-                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/pdf.svg" width="32" height="32">', $model['evidencia'], ['target' => '_blank']) : '';
+                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/archivos.png" width="50" height="50">', $model['evidencia'], ['target' => '_blank']) : '';
                     },
                 ],
             ],

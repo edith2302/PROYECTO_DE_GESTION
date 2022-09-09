@@ -130,62 +130,29 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 
-<!--<div>
-    <br><h3><p align="left"><?= ("Evaluación") ?></p></h3></br>
-</div>
-
 <?= GridView::widget([
-        'dataProvider' => $modelnota,
+        'dataProvider' => $modelhito,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
+            
             [
-                'attribute'=>'nota',
-                'value'=>function ($model) {
-                    if($model['nota'] !=null){
-                        return round($model['nota'], 1);
-                    }
-                    return " ";
-                },
+                'header'=>"Archivo adjunto",
+                'headerOptions' => ['width' => '105px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:5px 0px 0px 0px;text-align: center;'],
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{link}',
+                'buttons' => [
+                    'link' => function ($url, $model, $key) {
+                        return ($model['evidencia'] != '') ? Html::a('     <img src="images/iconos/archivos.png" width="50" height="50">', 'archivos/'.$model['evidencia'], ['target' => '_blank']) : '';
+                    },
+                ],
+            ],
 
-                'format'=>'raw',
-                'headerOptions' => ['width' => '850px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
-            ], 
-            /*[
-                'attribute'=>'comentarios',
-                'value'=>function ($model) {
-                    return $model['comentarios'];
-                },
 
-                'format'=>'raw',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
-            ], */
- 
+            
+            
         ],
-
-        
     ]); ?>
 
-<?= GridView::widget([
-        'dataProvider' => $modelcomentarios,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'attribute'=>'comentarios',
-                'value'=>function ($model) {
-                    return $model['comentarios'];
-                },
-                //'filter'=>false,
-                'format'=>'raw',
-                //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '850px;','style'=>'text-align: center !important;'],
-                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
-            ], 
- 
-        ],
-    ]); ?>-->
 
 
 
