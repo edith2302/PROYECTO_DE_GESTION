@@ -98,19 +98,27 @@ class EvaluarController extends Controller
                 }
                 $datos =$conn->query("SELECT * FROM item");
 
-                $puntaje =$conn->query("select id, puntaje, descripcion,SUM(puntaje_obtenido) as puntaje_obtenido, SUM(puntaje) as puntaje_ideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'");
+
+
+                $total_items = $conn->query("select COUNT(*) as total from item where item.id_rubrica = '$idr'");
             
-    
-                while($calificacion = mysqli_fetch_array($puntaje)){
-                    //echo $calificacion['nota'];
-                    //round(0.6);
-                    $puntajeid = $calificacion['puntaje_ideal'];
-                    $puntajeobt = $calificacion['puntaje_obtenido'];
-                    $notaa = round($calificacion['nota'], 1);
-                    //return $calificacion['nota'];
+                while($items = mysqli_fetch_array($total_items)){
+                    $total_it = $items['total'];
+                    
                 } 
+                $puntaje_ideal = $total_it*7;
+    
+                $puntaje = $conn->query("select SUM(puntaje_obtenido) as puntaje_obtenido from item where item.id_rubrica = '$idr'");
+
+                while($calificacion = mysqli_fetch_array($puntaje)){
+
+                    $puntajeobt = $calificacion['puntaje_obtenido'];
+
+                } 
+                $calificac = $puntajeobt/$total_it;
+                $notaa = round($calificac, 1);
                 
-                $model->puntaje_ideal = $puntajeid;
+                $model->puntaje_ideal = $puntaje_ideal;
                 $model->puntaje_obtenido = $puntajeobt;
                 $model->nota = $notaa;
 

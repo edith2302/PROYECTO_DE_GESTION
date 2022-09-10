@@ -86,11 +86,7 @@ $this->registerJs($js);
                             <?php echo  ($modelItem-> descripcion) ?>
 
                             </div>
-                            <!--<div class="col-sm-2">
-                            
-                            <?php echo  ($modelItem-> puntaje.' pts') ?>
 
-                            </div>-->
                             
                             <div class="col-sm-4">
                                 <?= $form->field($modelItem, "[{$index}]puntaje_obtenido")->textInput(['placeholder' => "0"],['maxlength' => true]) ?>

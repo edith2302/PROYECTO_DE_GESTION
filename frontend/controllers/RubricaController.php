@@ -127,7 +127,9 @@ class RubricaController extends Controller
         ]);
 
         $datos = new SqlDataProvider([
-            'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'",
+            //'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'",
+
+            'sql' => "select *  from  item where item.id_rubrica = '$idr'",
            
         ]);
 
@@ -161,7 +163,9 @@ class RubricaController extends Controller
         ]);
  
         $datos = new SqlDataProvider([
-             'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'",
+            'sql' => "select * from item where item.id_rubrica = '$idr'",
+
+            //'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'",
             
         ]);
  
@@ -213,7 +217,9 @@ class RubricaController extends Controller
         ]);*/
 
         $datos = new SqlDataProvider([
-            'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$id'",
+            //'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$id'",
+
+            'sql' => "select * from  item where item.id_rubrica = '$id'",
            
         ]);
         return $this->render('view', [
@@ -583,7 +589,7 @@ class RubricaController extends Controller
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
                     foreach ($modelsItem as $modelItem) {
-                        if($modelItem->puntaje_obtenido > $modelItem->puntaje){
+                       /* if($modelItem->puntaje_obtenido > $modelItem->puntaje){
                             return $this->render('evaluar', [
                                 'modelentrega' =>$modelentrega,
                                 'modelRubrica' => $modelRubrica,
@@ -591,7 +597,7 @@ class RubricaController extends Controller
                                 'msg' => "El puntaje asignado debe ser menor o igual al puntaje de ítem."
                             ]);
                             
-                        }
+                        }*/
                         $modelItem->id_rubrica = $modelRubrica->id;
                         if (! ($flag = $modelItem->save(false))) {
                             $transaction->rollBack();
