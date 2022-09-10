@@ -129,7 +129,11 @@ class RubricaController extends Controller
         $datos = new SqlDataProvider([
             //'sql' => "select id,puntaje, descripcion,SUM(puntaje_obtenido) as puntajeobtenido, SUM(puntaje) as puntajeideal, SUM(puntaje_obtenido)*7/SUM(puntaje) as nota from  item where item.id_rubrica = '$idr'",
 
-            'sql' => "select *  from  item where item.id_rubrica = '$idr'",
+           // 'sql' => "select *  from  item where item.id_rubrica = '$idr'",
+
+           'sql' => "Select COUNT(*) as total, COUNT(*)*7 as puntaje_ideal, SUM(puntaje_obtenido) as puntaje_obtenido, SUM(puntaje_obtenido)/COUNT(*) as nota from item where item.id_rubrica = '$idr'",
+
+           
            
         ]);
 

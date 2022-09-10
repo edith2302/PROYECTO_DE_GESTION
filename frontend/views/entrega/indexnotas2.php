@@ -116,7 +116,16 @@ $this->params['breadcrumbs'][] = $this->title;
             echo "</td>\n";*/
 
             echo "<td>";
-            echo  round($prom, 1);
+
+            $porcent = $conn->query("SELECT SUM(hito.porcentaje_nota) as total_porcent from hito");
+
+            while($porc = mysqli_fetch_array($porcent )){
+                $porcentajee = $porc['total_porcent'];
+            } 
+            if($porcentajee == 100){
+                echo  round($prom, 1);
+            }
+            echo  "0";
             echo "</td>\n";
 
             echo "</tr>\n";

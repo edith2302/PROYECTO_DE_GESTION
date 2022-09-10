@@ -89,12 +89,13 @@ $this->registerJs($js);
             while($porcentaje = mysqli_fetch_array($datos )){
                 $porcentaje_total = $porcentaje['total'];
             } 
+            $porcen_faltante = 100 -$porcentaje_total;
             //-------------------------------------------------------------------
         
         ?>
 
         <?= $form->field($modelHito, 'porcentaje_nota')->textInput(['placeholder' => "100"])?>
-        <i><?php echo "*Porcentaje  actual acumulado : ".$porcentaje_total?></i>
+        <i><b><?php echo "*Porcentaje faltante : ".$porcen_faltante?></b></i>
         <br></br>
         
         <div class="body-content">
@@ -105,7 +106,7 @@ $this->registerJs($js);
                 </div>   
 
                 <div class="col-lg-4">
-                    <?= Html::a('Agregar Rúbrica', ['rubrica/create1'], ['class' => 'btn btn-success']) ?>
+                    <?= Html::a('Agregar Rúbrica', ['rubrica/create2'], ['class' => 'btn btn-success']) ?>
                 </div>
             </div>
         </div>
@@ -164,13 +165,6 @@ $this->registerJs($js);
                         ?>
                         
                         <div class="row">
-                           <!-- <div class="col-sm-6">
-                                <?= $form->field($modelEvaluador, "[{$index}]id_hito")->textarea(['maxlength' => true]) ?>
-                            </div>-->
-
-                            <!--<div class="col-sm-6">
-                                <?= $form->field($modelEvaluador, "[{$index}]rol")->textInput(['maxlength' => true]) ?>
-                            </div>-->
 
                             <div class="col-sm-6">
                                 <div class="body-content">
@@ -179,7 +173,7 @@ $this->registerJs($js);
                                             
                                             '1' => 'Profesor de asignatura',
                                             '5' => 'Profesor Guía',
-                                            '3' => 'Profesor ICINF',
+                                            '3' => 'Profesor ICI',
                                             '4' => 'Comisión Evaluadora',
                                         ],
                                         ['prompt' => 'Seleccionar Evaluador']

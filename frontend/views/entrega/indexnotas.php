@@ -88,6 +88,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     $datos = $conn->query("select entrega.nota, entrega.id_hito, hito.porcentaje_nota from entrega JOIN hito ON entrega.id_hito = hito.id where id_proyecto = ".$idpro);
 
+    $porcent = $conn->query("SELECT SUM(hito.porcentaje_nota) as total_porcent from hito");
+
+    while($porc = mysqli_fetch_array($porcent )){
+        $porcentajee = $porc['total_porcent'];
+    } 
+
     $prom = 0;
 
     while($notass = mysqli_fetch_array($datos )){
@@ -99,8 +105,14 @@ $this->params['breadcrumbs'][] = $this->title;
     $promedioo=  round($prom, 1);
 
 ?>
-<!--<b><?= "Promedio: "?></b><?=$promedioo  ?>-->
+
+<?php 
+    if( $porcentajee == 100){ ?>
+        <h3><?= "Promedio: ".$promedioo ?></h3>
+        <?php   
+    }
+?>
 
 
-<h3><?= "Promedio: ".$promedioo ?></h3>
+
 
