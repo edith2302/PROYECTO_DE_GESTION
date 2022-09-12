@@ -262,7 +262,13 @@ Modal::end();
                     <?= Html::a(' Calendario', Url::to(['/event/index']),['class'=>"icon fa-calendar" ]) ?>
                     </li>
 
-                    <li>
+                    
+
+                     <!--menu profesor asignatura-->
+                  <?php if (!Yii::$app->user->isGuest):?> 
+                    <?php if (Yii::$app->user->identity->role == 1):?>
+
+                        <li>
 
                         <span  class="opener"><span class="icon fa-users"> Participantes</span></span>
                         <ul id="estudiantes">
@@ -275,10 +281,6 @@ Modal::end();
 
                         </ul>
                  </li>
-
-                     <!--menu profesor asignatura-->
-                  <?php if (!Yii::$app->user->isGuest):?> 
-                    <?php if (Yii::$app->user->identity->role == 1):?>
                    <!-- <li>
                         <?= Html::a(' Propuestas de proyecto', Url::to(['/proyecto/index']),['class'=>'icon fa-lightbulb-o']) ?>
                     </li>
@@ -376,12 +378,13 @@ Modal::end();
                                 <?= Html::a(' Hitos', Url::to(['/hito/indexestudiante']),['class'=>'fa fa-file-text-o']) ?>
                            <li>
 
-                           <li>
-                                <?= Html::a('Calificaciones', Url::to(['/entrega/indexnotas'])) ?>
-                           <li>
+                           
 
                         </ul>
 
+                    </li>
+                    <li>
+                                <?= Html::a('Calificaciones', Url::to(['/entrega/indexnotas'])) ?>
                     </li>
                     
                     <li>

@@ -32,11 +32,11 @@ class ProyectoController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout','index', 'create','view','indexprofesor','viewasignado','asignarpofguia','viewprofesor'],
+                'only' => ['logout','index', 'create','view','indexprofesor','viewasignado'],
                 'rules' => [
                     [//eliminar este usuario al finalizar el proyecto
                         //El profesor asignatura tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout','index', 'create','view','indexprofesor','viewasignado','asignarpofguia','viewprofesor'],
+                        'actions' =>['logout','index', 'create','view','indexprofesor','viewasignado','asignarpofguia','viewprofesor','view2','_form','index2','_indexpdf1','indexpdfinicial','asignarpofguia','create2','indexpropuestas','viewmodificar','viewmodificar2','viewmodificar3','viewmodificar4','viewocupado','viewocupado2',],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -50,7 +50,7 @@ class ProyectoController extends Controller
                     ],
                     [
                         //El Estudiante tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'indexestudiante', 'viewentregaestudiante', 'viewentregar','viewestudiante', 'create'],
+                        'actions' => ['logout', 'indexestudiante', 'viewentregaestudiante', 'viewentregar','viewestudiante', 'create','indexdisponibles','viewmiproyecto','viewinscripcion2','viewinscripcion','indexpropuestas'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -64,7 +64,7 @@ class ProyectoController extends Controller
                     ],
                     [
                         //El profesor ICINF tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'create','view','index', 'indexprofesor','viewprofesor'],
+                        'actions' => ['logout', 'create','view','index', 'indexprofesor','viewprofesor','indexpropuestas','indexprofesor'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -78,7 +78,7 @@ class ProyectoController extends Controller
                     ],
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'create','view', 'index' ],
+                        'actions' => ['logout', 'create','view', 'index','indexprofeguia','indexpropuestas','viewprofeguia','viewentregapg' ],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados

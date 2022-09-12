@@ -16,7 +16,8 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
 use PHPExcel_Style_Border;
-
+use app\models\User;
+use yii\filters\AccessControl;
 
 /**
  * UsuarioController implements the CRUD actions for Usuario model.
@@ -28,18 +29,86 @@ class UsuarioController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST', 'GET'],
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout','index', 'update','view'],
+                'rules' => [
+                    [//eliminar este usuario al finalizar el proyecto
+                        //El profesor asignatura tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout','index','index2','index3','viewmiperfil','_indexpdf1','_indexpdf2','_indexpdf3'],
+                        //Esta propiedad establece que tiene permisos
+                        'allow' => true,
+                        //Usuarios autenticados, el signo ? es para invitados
+                        'roles' => ['@'],
+                        //Este método nos permite crear un filtro sobre la identidad del usuario
+                        //y así establecer si tiene permisos o no
+                        'matchCallback' => function ($rule, $action) {
+                            //Llamada al método que comprueba si es un administrador
+                            return User::isUserProfesorAsignatura(Yii::$app->user->identity->id);
+                        },
                     ],
-                ],
+                    [
+                        //El Estudiante tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout','viewmiperfil' ],
+                        //Esta propiedad establece que tiene permisos
+                        'allow' => true,
+                        //Usuarios autenticados, el signo ? es para invitados
+                        'roles' => ['@'],
+                        //Este método nos permite crear un filtro sobre la identidad del usuario
+                        //y así establecer si tiene permisos o no
+                        'matchCallback' => function ($rule, $action) {
+                            //Llamada al método que comprueba si es un administrador
+                            return User::isUserEstudiante(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                        //El profesor ICINF tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout','viewmiperfil'],
+                        //Esta propiedad establece que tiene permisos
+                        'allow' => true,
+                        //Usuarios autenticados, el signo ? es para invitados
+                        'roles' => ['@'],
+                        //Este método nos permite crear un filtro sobre la identidad del usuario
+                        //y así establecer si tiene permisos o no
+                        'matchCallback' => function ($rule, $action) {
+                            //Llamada al método que comprueba si es un administrador
+                            return User::isUserProfesorICINF(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                        //El administrador tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout',  'viewmiperfil'],
+                        //Esta propiedad establece que tiene permisos
+                        'allow' => true,
+                        //Usuarios autenticados, el signo ? es para invitados
+                        'roles' => ['@'],
+                        //Este método nos permite crear un filtro sobre la identidad del usuario
+                        //y así establecer si tiene permisos o no
+                        'matchCallback' => function ($rule, $action) {
+                            //Llamada al método que comprueba si es un administrador
+                            return User::isUserProfesorGuia(Yii::$app->user->identity->id);
+                        },
+                    ],
+                    [
+                        //El administrador tiene permisos sobre las siguientes acciones
+                        'actions' => ['logout','viewmiperfil','update','create','view','index','index2','index3'],
+                        //Esta propiedad establece que tiene permisos
+                        'allow' => true,
+                        //Usuarios autenticados, el signo ? es para invitados
+                        'roles' => ['@'],
+                        //Este método nos permite crear un filtro sobre la identidad del usuario
+                        //y así establecer si tiene permisos o no
+                        'matchCallback' => function ($rule, $action) {
+                            //Llamada al método que comprueba si es un administrador
+                            return User::isUserAdmin(Yii::$app->user->identity->id);
+                        },
+                    ],
+                ]
             ]
-        );
+        ];
     }
+
 
     /**
      * Lists all Usuario models.
