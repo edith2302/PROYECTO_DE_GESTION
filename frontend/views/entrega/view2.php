@@ -34,13 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             //'id',
             //'evidencia',
-           /* [
+            /*[
                 'label'  => 'evidencia',
-                'value'  => function ($model) {
-                    return (($model->evidencia != '') ? Html::a('<img src="'.$model->evidencia.'" alt="images/iconos/pdf.svg" width="500" height="600">') : '');
+                'value'  =>  ('<button class="btn btn-primary" href="'.$model->evidencia.'">Ver Evidencia</button>'),
                     
-                },
+                
             ],*/
+
             //'fecha_entrega',
             [
                 'attribute'=>'fecha_entrega',
@@ -112,7 +112,8 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
-
+<div align="right"> 
+<a class="btn btn-primary" href="archivos/<?=$model->evidencia ?>" target="_blank">Ver adjunto </a></div>
 <?= GridView::widget([
         'dataProvider' => $modelhito,
         'columns' => [

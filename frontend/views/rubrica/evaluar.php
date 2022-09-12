@@ -25,8 +25,8 @@ $this->params['breadcrumbs'][] = 'Evaluación';
     <table border="1">
         <thead>
             <tr>  
-                <td style="width: 170px; text-align:center">7</td>
-                <td style="width: 170px; text-align:center">6</td>
+                <td bgcolor="pink" style="width: 170px; text-align:center">7</td>
+                <td bgcolor="red"style="width: 170px; text-align:center">6</td>
                 <td style="width: 170px; text-align:center">5</td>
                 <td style="width: 170px; text-align:center">4</td>
                 <td style="width: 170px; text-align:center">3</td>

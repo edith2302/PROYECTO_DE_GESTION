@@ -571,6 +571,21 @@ class ProyectoController extends Controller
 
         $model->estado = 2;
         $model->save();
+
+        //Creamos el mensaje que será enviado a la cuenta de correo del usuario
+     $subject = "Proyecto rechazado";
+     $body = "<p>Estimado estudiante te informamos que tu propuesta ".$model->nombre ."ha sido rechazado";
+     $usuario = Usuario::findOne(['id_usuario'=>$model->autor]);
+     //$email = $usuario->email;
+     $email= 'edith.parra1601@alumnos.ubiobio.cl';
+     //Enviamos el correo
+     Yii::$app->mailer->compose()
+     ->setTo($email)
+     ->setFrom([Yii::$app->params["Notificacion"] => Yii::$app->params["title"]])
+     ->setSubject($subject)
+     ->setHtmlBody($body)
+     ->send();
+     
         
         Yii:: $app->session->setFlash('success','El proyecto '.'"'.$model->nombre.'"'.' se rechazó con éxito');
         return $this->redirect(['view', 'id' => $model->id]);

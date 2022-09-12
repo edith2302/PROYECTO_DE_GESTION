@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'descripcion',
             //'fecha_habilitacion',
            // 'hora_habilitacion',
-            //'fecha_limite',
+            //'fecha_limite:date',
             //'hora_limite',
            // 'tipo_hito',
             //'porcentaje_nota',
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],*/
 
-            [
+           /* [
                 'label'=>'Fecha habilitación',
                 'value'=>function ($model) { return $model->fecha_habilitacion; },
                 //'filter'=>false,
@@ -66,13 +66,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
-            ],
+            ],*/
 
             [
                 'label'=>'Hora habilitación',
                 'value'=>function ($model) { return $model->hora_habilitacion; },
                 //'filter'=>false,
-                'format'=>'raw',
+                'format'=>'date',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Fecha límite',
                 'value'=>function ($model) { return $model->fecha_limite; },
                 //'filter'=>false,
-                'format'=>'raw',
+                'format'=>'date',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],

@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'descripcion',
             'fecha_habilitacion',
             'hora_habilitacion',
-            'fecha_limite',
+            'fecha_limite:date',
             'hora_limite',
            // 'tipo_hito',
             [

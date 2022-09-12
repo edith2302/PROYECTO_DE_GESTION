@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label'  => 'evidencia',
                 'value'  => function ($model) {
-                    return (($model->evidencia != '') ? Html::a('     <img src="images/iconos/archivos.png" width="50" height="50">', $model->evidencia, ['target' => '_blank']) : '');
+                    return (($model->evidencia != '') ? Html::a('     <img src="images/iconos/archivos.png" width="32" height="32">', $model->evidencia, ['target' => '_blank']) : '');
                 },
             ],
         ],
