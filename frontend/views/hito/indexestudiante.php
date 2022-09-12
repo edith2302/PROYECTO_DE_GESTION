@@ -70,9 +70,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'label'=>'Hora habilitación',
-                'value'=>function ($model) { return $model->hora_habilitacion; },
+                'value'=>function ($model) { return $model->hora_habilitacion." hrs"; },
                 //'filter'=>false,
-                'format'=>'date',
+                'format'=>'raw',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'label'=>'Hora límite',
-                'value'=>function ($model) { return $model->hora_limite; },
+                'value'=>function ($model) { return $model->hora_limite." hrs"; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',

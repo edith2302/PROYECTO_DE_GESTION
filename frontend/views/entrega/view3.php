@@ -33,14 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
-            'evidencia',
+            //'evidencia',
             //'fecha_entrega',
-            [
+            /*[
                 'attribute'=>'fecha_entrega',
                 'value'=>function ($model) {
                     return $model->fecha_entrega." / ".$model->hora_entrega." hrs";
                 },
-            ],
+            ],*/
             //'hora_entrega',
             [
                 'attribute'=>'id_proyecto',
@@ -48,6 +48,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     $proyecto = Proyecto::findOne(['id' => $model['id_proyecto']]);
                     return $proyecto->nombre;
                 },
+            ],
+            [
+                'label'=>'Fecha entrega',
+                'value'=> function ($model) {
+                    return $model->fecha_entrega;
+                },
+                'format'=>'date',
+                //'label'=>'YiiLib.com',
+                //'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                //'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+  
+            [
+                'label'=>'Hora entrega',
+                'value'=>function ($model) { return $model->hora_entrega." hrs"; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                //'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                //'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
             [
                 'label'  => 'Estudiantes',
@@ -128,9 +148,10 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+<div align="right"> 
+<a class="btn btn-primary" href="archivos/<?=$model->evidencia ?>" target="_blank">Ver adjunto </a></div>
 
-
-<?= GridView::widget([
+<!--<?= GridView::widget([
         'dataProvider' => $modelhito,
         'columns' => [
             
@@ -151,7 +172,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
             
         ],
-    ]); ?>
+    ]); ?>-->
 
 
 

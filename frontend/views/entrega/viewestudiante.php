@@ -22,8 +22,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             //'id',
             'evidencia',
-            'fecha_entrega',
-            'hora_entrega',
+            //'fecha_entrega',
+            //'hora_entrega',
+            [
+                'label'=>'Fecha entrega',
+                'value'=> function ($model) {
+                    return $model->fecha_entrega;
+                },
+                'format'=>'date',
+                //'label'=>'YiiLib.com',
+                //'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                //'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+  
+            [
+                'label'=>'Hora entrega',
+                'value'=>function ($model) { return $model->hora_entrega." hrs"; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                //'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                //'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
             'comentarios',
             //'id_proyecto',
             //'id_hito',

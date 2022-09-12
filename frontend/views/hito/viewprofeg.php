@@ -31,11 +31,63 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->nombre;
                 },
             ],
-            'descripcion',
-            'fecha_habilitacion',
-            'hora_habilitacion',
-            'fecha_limite',
-            'hora_limite',
+            //'descripcion',
+            //'fecha_habilitacion',
+            //'hora_habilitacion',
+            //'fecha_limite',
+            //'hora_limite',
+
+            [
+                'attribute'=>'descripcion',
+                'value'=>function ($model) { return $model->descripcion; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                //'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                //'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+            //'fecha_habilitacion:date',
+            [
+                'label'=>'Fecha habilitación',
+                'value'=>function ($model) { return $model['fecha_habilitacion']; },
+                //'filter'=>false,
+                'format'=>'date',
+                //'label'=>'YiiLib.com',
+                //'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                //'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+            ],
+           // 'hora_habilitacion',
+            [
+                'label'=>'Hora habilitación',
+                'value'=>function ($model) { return $model['hora_habilitacion']." hrs"; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                //'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                //'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+            ],
+            //'fecha_limite:date',
+            //'hora_limite',
+
+            [
+                'label'=>'Fecha límite',
+                'value'=>function ($model) { return $model['fecha_limite']; },
+                //'filter'=>false,
+                'format'=>'date',
+                //'label'=>'YiiLib.com',
+                //'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                //'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+            ],
+
+            [
+                'label'=>'Hora límite',
+                'value'=>function ($model) { return $model['hora_limite']." hrs"; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                //'headerOptions' => ['width' => '300px;','style'=>'text-align: left !important;'],
+                //'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+            ],
            // 'tipo_hito',
             [
                 'label'  => 'Tipo de hito',
@@ -88,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             [
-                'header'=>"Evidencia",
+                'header'=>"Archivo",
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{link}',
                 'buttons' => [
@@ -114,7 +166,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'fecha_entrega',
                 'value'=>function ($model) { return $model['fecha_entrega']; },
                 //'filter'=>false,
-                'format'=>'raw',
+                'format'=>'date',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
@@ -122,7 +174,7 @@ $this->params['breadcrumbs'][] = $this->title;
   
             [
                 'attribute'=>'hora_entrega',
-                'value'=>function ($model) { return $model['hora_entrega']; },
+                'value'=>function ($model) { return $model['hora_entrega']." hrs"; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',

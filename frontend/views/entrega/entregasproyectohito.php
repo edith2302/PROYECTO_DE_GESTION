@@ -28,7 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             [
-
+                'header'=>"Archivo adjunto",
+                'headerOptions' => ['width' => '105px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:5px 0px 0px 0px;text-align: center;'],
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{link}',
                 'buttons' => [
@@ -43,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Fecha entrega',
                 'value'=>function ($model) { return $model['fecha_entrega']; },
                 //'filter'=>false,
-                'format'=>'raw',
+                'format'=>'date',
                 //'label'=>'YiiLib.com',
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
@@ -51,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
   
             [
                 'label'=>'Hora entrega',
-                'value'=>function ($model) { return $model['hora_entrega']; },
+                'value'=>function ($model) { return $model['hora_entrega']." hrs"; },
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',

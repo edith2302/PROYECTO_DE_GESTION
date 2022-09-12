@@ -36,15 +36,34 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             
-            'fecha_entrega',
-            'hora_entrega',
+            //'fecha_entrega',
+            //'hora_entrega',
             //'comentarios',
             //'id_proyecto',
+            [
+                'label'=>'Fecha entrega',
+                'value'=>function ($model) { return $model->fecha_entrega; },
+                //'filter'=>false,
+                'format'=>'date',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
+  
+            [
+                'label'=>'Hora entrega',
+                'value'=>function ($model) { return $model->hora_entrega." hrs"; },
+                //'filter'=>false,
+                'format'=>'raw',
+                //'label'=>'YiiLib.com',
+                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
+            ],
             
             'comentarios',
             //'id_hito',
             [
-                'label'  => 'evidencia',
+                'label'  => 'Archivo adjunto',
                 'value'  => function ($model) {
                     return (($model->evidencia != '') ? Html::a('     <img src="images/iconos/archivos.png" width="32" height="32">', $model->evidencia, ['target' => '_blank']) : '');
                 },
