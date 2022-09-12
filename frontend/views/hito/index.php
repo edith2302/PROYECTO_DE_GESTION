@@ -166,6 +166,12 @@ $this->params['breadcrumbs'][] = $this->title;
                
                 'urlCreator' => function ($action, Hito $model, $key, $index, $column) {
                    // return Url::toRoute([$action, 'id' => $model->id]);
+                    if($action =='view'){
+                        if($model['tipo_hito'] == '3'){
+                            return 'index.php?r=hito%2Fviewinformefinal&id='.$model['id'];
+                        }
+                        
+                    }
                     if($action =='update'){
                         return 'index.php?r=hito%2Fviewmodificar&id='.$model['id'];
                     }

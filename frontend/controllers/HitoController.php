@@ -298,6 +298,99 @@ class HitoController extends Controller
     
     }
 
+    /**
+     * Displays a single Hito model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionViewinformefinal($id)
+    {
+        $modelhito = new SqlDataProvider([
+            'sql' => "select * from entrega 
+            where id_hito = ' $id'",
+        ]);
+
+        //-------------------------validación evaluador--------------------------------------
+
+       /* $hito = Hito::findOne(['id'=>$id]);
+        $usuario = Yii::$app->user->identity->id_usuarioo;
+        $user = User::findOne(['id_usuarioo'=>$usuario]);
+
+        $evaluador = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>$user->role]);
+        //$evaluacion = Evaluar::findOne(['id_entrega'=>$id, 'id_usuario'=>$usuario]);
+
+        $comision = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>4]);
+        $profe_guia = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>5]);
+        $profe_asignatura = Evaluador::findOne(['id_hito'=>$hito->id, 'rol'=>1]);
+
+        $modelhito = new SqlDataProvider([
+            'sql' => 'select * from entrega 
+            where id_hito = ' .$id,
+        ]);
+
+
+            //si el rol del usuario logueado es (1) profe asignatura y esta autorizado para evaluar, pasa
+            if($profe_asignatura != null){
+                if($user->role == 1){
+                    return $this->render('viewpev', [
+                        'model' => $this->findModel($id),
+                        'modelhito' => $modelhito,
+                    ]);
+    
+                }
+            }
+
+
+            //si el rol del usuario logueado está autorizado para evaluar, le aparece la opción evaluar
+            if($evaluador!=null){
+                return $this->render('viewev', [
+                    'model' => $this->findModel($id),
+                    'modelhito' => $modelhito,
+                ]);
+
+            }
+
+            //si el rol autorizado para evaluar es la comisión (4), entonces revisa que el rol del usuario logueado sea profesor ICINF(3)
+            if($comision !=null){
+                if($user->role == 3){
+                    return $this->render('viewev', [
+                        'model' => $this->findModel($id),
+                        'modelhito' => $modelhito,
+                    ]);
+                }
+            }
+
+
+            //si el rol autorizado para evaluar es el profe guía, entonces pregunta si el id del usuario logueado es el mismo del profe ICINF asignado como profe guia 
+
+            //$profguia = Profesoricinf::findOne(['id'=>$proyecto->id_profe_guia]);
+            if($profe_guia != null){
+                return $this->redirect(['viewevprofeg', 'id' => $id]);
+                /*if($profguia->id_usuario == $usuario){
+                    return $this->render('viewev', [
+                        'model' => $this->findModel($id),
+                        'modelhito' => $modelhito,
+                    ]);
+                }*/
+            //} 
+        
+        
+        //---------------------------fin validación--------------------------------------
+       /* $rolUser = $user->role;
+        if($rolUser == 1){
+            return $this->render('viewpa', [
+                'model' => $this->findModel($id),
+                'modelhito' => $modelhito,
+            ]);
+        }*/
+        return $this->render('viewinformefinal', [
+            'model' => $this->findModel($id),
+            'modelhito' => $modelhito,
+        ]);
+    
+    }
+
 
     public function actionViewentregapg($id, $idp)
     {  //id: id hito     idp: id proyeto

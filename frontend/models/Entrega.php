@@ -17,6 +17,7 @@ use Yii;
  * @property float $nota
  * @property Hito $hito
  * @property Proyecto $proyecto
+ * @property Evaluadorf[] $evaluadores
  */
 class Entrega extends \yii\db\ActiveRecord
 {
@@ -80,5 +81,16 @@ class Entrega extends \yii\db\ActiveRecord
     public function getProyecto()
     {
         return $this->hasOne(Proyecto::className(), ['id' => 'id_proyecto']);
+    }
+
+
+    /**
+     * Gets query for [[Evaluadores]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEvaluadores()
+    {
+        return $this->hasMany(Evaluadorf::className(), ['id_entrega' => 'id']);
     }
 }

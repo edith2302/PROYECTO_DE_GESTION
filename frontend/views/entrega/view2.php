@@ -134,6 +134,10 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div align="right"> 
 <a class="btn btn-primary" href="archivos/<?=$model->evidencia ?>" target="_blank">Ver adjunto </a></div>
+
+<p align="right">
+    <?= Html::a('Evaluar', ['entrega/evaluadorfinal','id' => $model->id], ['class' => 'btn btn-primary']) ?>
+</p>
 <!--<?= GridView::widget([
         'dataProvider' => $modelhito,
         'columns' => [

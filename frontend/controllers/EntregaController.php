@@ -19,9 +19,15 @@ use yii2mod\alert\Alert;
 use yii\data\SqlDataProvider;
 use app\models\Hito;
 use app\models\Evaluador;
+use app\models\Evaluadorf;
 use app\models\User;
 use app\models\Profesoricinf;
 use app\models\Profesorguia;
+
+
+use app\models\Model;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 use app\models\Usuario;
 
@@ -409,6 +415,92 @@ where estudiante.id_usuario = 6107)
         return $this->redirect(['view2', 'id' => $entrega->id] );  
     }
 
+    public function actionEvaluadorfinal($id)
+    {
+        $modelsEvaluador = [new Evaluadorf];
+        $modelEntrega = $this->findModel($id);
+
+
+        if ($modelEntrega->load(Yii::$app->request->post(),'')) {
+        //if (false) {
+
+            $modelsEvaluador = Model::createMultiple(Evaluadorf::classname());
+            Model::loadMultiple($modelsEvaluador, Yii::$app->request->post());
+
+
+            //$valid = $modelEntrega->validate();
+            //return "pasó aquí 3";
+            $valid = Model::validateMultiple($modelsEvaluador);
+
+
+            //return "pasó aquí 3";
+            if ($valid) {
+                //return "pasó aquí 2";
+                $transaction = \Yii::$app->db->beginTransaction();
+                //return "pasó aquí 2";
+                try {
+                    if ($flag = $modelEntrega->save(false)) {
+                        //return "pasó aquí 2";
+                        foreach ($modelsEvaluador as $modelEvaluador) {
+                            //return "pasó aquí 3";
+                            $modelEvaluador->id_entrega = $modelEntrega->id;
+                            if (! ($flag = $modelEvaluador->save(false))) {
+                                //return "pasó aquí 4";
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($flag) {
+                        $transaction->commit();
+                        Yii:: $app->session->setFlash('success','El profesor evaluador fue asignado con éxito');
+                        return $this->redirect(['viewef', 'id' => $id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+        
+
+        return $this->render('evaluadorfinal', [
+            'modelEntrega' => $modelEntrega,
+            'modelsEvaluador' => (empty($modelsEvaluador)) ? [new Evaluadorf] : $modelsEvaluador
+        ]);
+    }
+
+        /**
+     * Displays a single Rubrica model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+   /* public function actionViewf($id)
+    {
+        $model = $this->findModel($id);
+        //$items = $model->items;
+        //$items = Item::find()->where(['id_rubrica' => $id]);
+        $evaluadores = new SqlDataProvider([
+            'sql' => "select * from evaluadorf where id_entrega = '$id' ",
+           
+        ]);
+
+        return $this->render('viewf', [
+            'model' => $model,
+            'evaluadores' => $evaluadores,
+
+        ]);
+
+    
+    }*/
+
+    public function actionViewef($id)
+    {
+        return $this->render('viewef', [
+            'model' => $this->findModel($id),
+        ]);
+    }
     /**
      * Updates an existing Entrega model.
      * If update is successful, the browser will be redirected to the 'view' page.
