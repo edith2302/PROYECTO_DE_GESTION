@@ -90,7 +90,7 @@ class EntregaController extends Controller
                     ],
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'view', 'index','view3','view2' ],
+                        'actions' => ['logout', 'view', 'index','view3','view2',  'index','index2','evaluadorfinal' ],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados

@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'comentarios', 
-            [
+            /*[
                 'attribute'=>'nota',
                 'value'=>function ($model) {
                     if($model->nota == null){
@@ -96,9 +96,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     return $model->nota;
                 },
-            ],
+            ],*/
 
-            [
+            /*[
                 'label'  => 'Comentarios de la evaluación',
                 'value'=>function ($model) {
                     //-----------------conexion bdd----------------------
@@ -126,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     //-------------------------------------------------------------------
                     return $comentario;
                 },
-            ],
+            ],*/
             
         ],
     ]) ?>
@@ -135,9 +135,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div align="right"> 
 <a class="btn btn-primary" href="archivos/<?=$model->evidencia ?>" target="_blank">Ver adjunto </a></div>
 
-<p align="right">
+<!--<p align="right">
     <?= Html::a('Evaluar', ['entrega/evaluadorfinal','id' => $model->id], ['class' => 'btn btn-primary']) ?>
-</p>
+</p>-->
 <!--<?= GridView::widget([
         'dataProvider' => $modelhito,
         'columns' => [

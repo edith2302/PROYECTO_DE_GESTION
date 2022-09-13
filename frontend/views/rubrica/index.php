@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'filter'=>false,
                 'format'=>'raw',
                 //'label'=>'YiiLib.com',
-                'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
+                'headerOptions' => ['width' => '400px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:0px 0px 0px 30px;text-align: center;'],
             ],
 
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'header'=>"Acciones",
-                'headerOptions' => ['width' => '80px;','style'=>'text-align: center !important;'],
+                'headerOptions' => ['width' => '120px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:15px 0px 0px 0px;text-align: center;'],
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Rubrica $model, $key, $index, $column) {

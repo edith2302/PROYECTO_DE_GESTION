@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ], 
             [
                 //'attribute'=>'puntajeobtenido',
-                'label' => 'Puntaje ontenido',
+                'label' => 'Puntaje obtenido',
                 'value'=>function ($model) { 
 
                     return $model['puntaje_obtenido'];

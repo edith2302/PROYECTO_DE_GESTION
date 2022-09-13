@@ -78,7 +78,7 @@ class ProyectoController extends Controller
                     ],
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'create','view', 'index','indexprofeguia','indexpropuestas','viewprofeguia','viewentregapg' ],
+                        'actions' => ['logout', 'create','view', 'index','indexprofeguia','indexpropuestas','viewprofeguia','viewentregapg', 'indexprofesor','viewprofesor' ],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -486,7 +486,7 @@ class ProyectoController extends Controller
         if ($this->request->isPost) {
             if ($model->load(Yii:: $app->request->post()) && $model->save()) {
 
-                Yii:: $app->session->setFlash('success','La propuesta de proyecto ha sido agragada con éxito');
+                Yii:: $app->session->setFlash('success','La propuesta de proyecto fue ingresada con éxito');
                 return $this->redirect(['view2', 'id' => $model->id]);
             }
         } else {

@@ -84,7 +84,7 @@ class HitoController extends Controller
                     ],
                     [
                         //El profesor ICINF tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'index','view','indexproficiev','viewev',],
+                        'actions' => ['logout', 'index','view','indexproficiev','viewev'],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados
@@ -98,7 +98,7 @@ class HitoController extends Controller
                     ],
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'view', 'index','viewestudianteprofeg','indexprofeguia','viewprofeg','viewevprofeg','viewprofegev' ],
+                        'actions' => ['logout', 'view', 'index','viewestudianteprofeg','indexprofeguia','viewprofeg','viewevprofeg','viewprofegev','indexproficiev','viewev' ],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados

@@ -17,19 +17,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-   
+   <br>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             //'id',
-            'archivo',
+            //'archivo',
             'descripcion',
             //'id_profesor',
         ],
     ]) ?>
 
-    <p align="right">
+    <!--<p align="right">
             <?= Html::a('Modificar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
@@ -38,5 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'method' => 'post',
                 ],
             ]) ?>
-    </p>
+    </p>-->
 </div>
+
+<div align="right"> 
+<a class="btn btn-primary" href="modulos/<?=$model->archivo ?>" target="_blank">Ver adjunto </a></div>

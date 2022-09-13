@@ -82,7 +82,7 @@ class RubricaController extends Controller
                     ],
                     [
                         //El administrador tiene permisos sobre las siguientes acciones
-                        'actions' => ['logout', 'view', 'index','viewevalucion','viewevaluacionenviada' ],
+                        'actions' => ['logout', 'view', 'index','viewevalucion','viewevaluacionenviada','evaluar' ],
                         //Esta propiedad establece que tiene permisos
                         'allow' => true,
                         //Usuarios autenticados, el signo ? es para invitados

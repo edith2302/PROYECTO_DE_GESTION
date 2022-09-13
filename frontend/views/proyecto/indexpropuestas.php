@@ -36,15 +36,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
 
             //'id',
             //'nombre',
-            //'descripcion',
-            //'num_integrantes',
-            //'tipo',
-            //'area',
-            //'estado',
-            //'disponibilidad',
-            //'id_profe_guia',
-            //'id_autor',
-
             [
                 'label'=>'Nombre proyecto',
                 
@@ -56,6 +47,36 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
                 'headerOptions' => ['width' => '300px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
+            //'descripcion',
+            //'num_integrantes',
+            //'tipo',
+            //'area',
+            //'estado',
+            [
+                'label'=>'Estado',
+                
+                'value'=>function ($modelproyectos) { 
+                    if($modelproyectos['estado'] == 1){
+                        return "Aprobado";
+                    }
+                    if($modelproyectos['estado'] == 2){
+                        return "Rechazado";
+                    }
+                    if($modelproyectos['estado'] == 3){
+                        return "Pendiente";
+                    }
+                    return ;
+                },
+  
+                'format'=>'raw',
+                'headerOptions' => ['width' => '180px;','style'=>'text-align: center !important;'],
+                'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
+            ],
+            //'disponibilidad',
+            //'id_profe_guia',
+            //'id_autor',
+
+            
 
 
             [
@@ -65,7 +86,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Proyectos', 'url' => ['indexestudi
                 },
                 
                 'format'=>'raw',
-                'headerOptions' => ['width' => '200px;','style'=>'text-align: center !important;'],
+                'headerOptions' => ['width' => '150px;','style'=>'text-align: center !important;'],
                 'contentOptions' => ['style'=>'padding:10px 0px 0px 0px;text-align: center;'],
             ],
 

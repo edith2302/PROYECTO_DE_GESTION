@@ -29,7 +29,7 @@ use app\models\Profesoricinf;
     </div>
     
     <p align="right">
-        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-primaryy']) ?>
 
     <p>
 

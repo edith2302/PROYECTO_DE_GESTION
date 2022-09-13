@@ -106,12 +106,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?php 
+<!--<?php 
     if( $porcentajee == 100){ ?>
         <h3><?= "Promedio: ".$promedioo ?></h3>
         <?php   
     }
-?>
+?>-->
 
 
 
